@@ -1,0 +1,2171 @@
+(
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Temperature class";
+	tag="Assign temperature value in one scale and you have it available in others as respective attributes. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286226/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Rating class with mapping interface";
+	tag="Rating with items sorted by value and accessed by key or rating index.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/265879/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/deque collection class";
+	tag="Pure python drop in replacement for collections.deque() from Py2.4.  See documentation at:  ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/259179/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Getting items in batches";
+	tag="You want to get the items from a sequence (or other iterable) a batch at a time.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303279/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Binary search in one line.";
+	tag="This is an implementation of the binary search algorithm in (almost) one line. Given a number 'n' ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/267398/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Binary ordered tree";
+	tag="A simple example demonstrating the construction of binary trees.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286239/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Simple XOR keyword Encryption";
+	tag="A very simple keyword encryption algorithm. Produces an encrypted string the same size as the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/266586/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Thread-safe caching object with file and HTTP implementations";
+	tag="Implementation of an abstract, thread-safe cache with minimal locking, plus two concrete ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302997/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/winnowing data with a heap.";
+	tag="The winnow class uses a heap for finding the best few out 
+of several items.  At this it is ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/299058/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Optimising Regression Testing on COmpute Farms";
+	tag="Collects statistics on different algorithms for grouping thousands of tests for execution on a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/280030/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Generating combinations of objects from multiple sequences";
+	tag="The function combine takes multiple sequences and creates a list in which each item is constructed ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302478/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Floating Point Simulator";
+	tag="Explore the mysteries of floating point arithmetic.  This class readily reproduces textbook ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/265894/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Groupby";
+	tag="Guido inspired SQL-like GROUPBY class that also encapsulates the logic in a Unix-like \"sort | ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/259173/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Handling Deeply Nested%2fRecursive Data";
+	tag="Common python services such as pickle, deepcopy and comparison tests either fail entirely or do not ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302535/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Random samples without replacement";
+	tag="Sample generator using only r calls to random.random().";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/272884/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/More accurate sum";
+	tag="Built-in \"sum\" function, as well as add.reduce functions in Numeric/numarray introduce a large ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/298339/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/sample with replacement";
+	tag="For taking k random samples (with replacement) from a population, where k may be greater than ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/273085/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Group a list into sequential n-tuples";
+	tag="This function returns a list of n-tuples from a single \"flat\" list.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303060/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/CRC64 - Calculate the cyclic redundancy check.";
+	tag="The algorithm to compute the CRC is described in the ISO 3309 standard.  The generator polynomial ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/259177/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Algorithms/Two-pass Pairing Heap with Multipass Auxiliary List";
+	tag="Pairing heap refinement for fewer comparisons.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/277553/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/CGI%20Programming/Efficient and Comfortable HTML-Template Macro";
+	tag="This module is the Template Macro module. It preprocesses a web template in which variables and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/231512/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/CGI%20Programming/Traceback that does'nt output on sys.stderr";
+	tag="For CGI programmers it's important to display tracebacks in the HTML pages to debug their scripts, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65332/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/CGI%20Programming/Handling URLs within a CGI script";
+	tag="The following are some useful functions to build URLs within a CGI script, for example to send a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52287/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/CGI%20Programming/The Simplest CGI Program";
+	tag="The simplest CGI program. This script displays the
+current version of Python and the environment ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52220/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/CGI%20Programming/Text Based Guest Book";
+	tag="A guest book for your web page that demonstrates CGI, and file access.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/123894/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/CGI%20Programming/Py Tic Tac Toe";
+	tag="A web-based Tic Tac Toe game in Python.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/275150/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/CGI%20Programming/http - Exploring Headers and Cookies from Servers";
+	tag="This CGI script allows you to specify a URL. It fetches the URL and displays all the headers sent ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/298336/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/CGI%20Programming/cgi-shell";
+	tag="Run an arbitrary string on the server as a shell command. Mimics a very basic shell environment on ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286217/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/CGI%20Programming/cgi-shell";
+	tag="Run an arbitrary string on the server as a shell command. Mimics a very basic shell environment on ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286216/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/CGI%20Programming/Check web page exists";
+	tag="For when you need to check a web page is still working.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/101276/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/CGI%20Programming/Using a simple dictionary for CGI parameters";
+	tag="Rather than using Python's cgi.FieldStorage class, a simple dictionary is enough for 99% of CGI ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/81547/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/CGI%20Programming/HTML Templates";
+	tag="This recipe consists of two classes usable for managing html templates, applicable to output from a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/146460/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Python DAO interface class";
+	tag="This is a simple base class that can be used to quickly get connected to any database that has DAO ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303349/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/python metakit example for safe reading and writing";
+	tag="Metakit is a reliable/lightweight/fast database library that python can use.
+Metakit has an extend ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252494/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Efficient database trees";
+	tag="Sometimes it can be hard to work out a way of efficiently representing a tree in the database. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/280653/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Yet another way to use fields for databases";
+	tag="A lightweight method to access the field names from a database.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/223610/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/MySQL and accessing database results by field";
+	tag="Accessing database results by field name rather than field number is easy. I prefer standard, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/171463/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Storing binary data in SQLite";
+	tag="This script demonstrates how to store binary data (aka BLOB or BINARY fields) in SQLite using the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252531/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Using Berkeley DB Database";
+	tag="Berkeley DB is an open source database. Its most important advantages are its simplicity to use and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/189060/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Use generators for fetching large db record sets";
+	tag="When using the python DB API, it's tempting to always use a cursor's fetchall() method so that you ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/137270/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/GUID";
+	tag="A globally unique identifier that combines ip, time, and random bits.  Since the time is listed ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/163604/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/resultset.py";
+	tag="I created this class and related functions because I like accessing database results by field name ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/163605/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Using the MySQLdb interface";
+	tag="A simple example showing how to use the MySQLdb interface to function with your MySQL database.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65235/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Modifying (upgrading) pickles without instantiating real app objects";
+	tag="The following code loads arbitrary pickles (well, there are probably some that it won't load, like ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286203/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/ohmysqldump";
+	tag="A wrapper script for mysqldump that allows to dump a database excluding some tables.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286223/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Pretty Printing of Database Cursor Contents";
+	tag="One of the problems of dealing with databases is presenting the result of a query when you may not ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/81189/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Oracle SQL describe (based on DCOracle2)";
+	tag="\"desc.py scott/tiger order \" will list the column info for table \"order\".
+\"desc.py ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/144837/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Single parameters style for DB API modules";
+	tag="This recipe allows to code SQL queries the same way independent on paramstyle of used DB module.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/278612/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/MS SQL Server log monitor";
+	tag="A script to gather errors, warnings, and failures from Micrsoft SQL Servers and SQL Server Agents. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286189/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Simple Universally Unique ID (UUID or GUID)";
+	tag="This is a short & sweet UUID function. Uniqueness is based on network address, time, and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/213761/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/using classmethods for ORMs (Object Relational Mappings)";
+	tag="My script shows one use for class methods, i.e. to map Relational tables and rows to objects in ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/229076/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Databases/Python Database Interface for MS SQL Server";
+	tag="This DBI implements the Cursor and Connection objects. It is functional: 
+you can create ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/144183/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Live Object Browser";
+	tag="Given an object, this tool throws up a gtk tree widget that maps all the references found. It ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/300304/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Reloading all modules";
+	tag="When you create a Python module, you can use a test script wich import your module. But you ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/81731/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/HOW TO DEBUG PYTHON EXTENSIONS ON WINDOWS WITH OPEN SOURCE TOOLS";
+	tag="I've decided to sum up my recent experiences on this issue in a short HOWTO
+document. There are ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/82826/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Logpyl - basic logfile objects for Python";
+	tag="Provides a class for creating and manipulating plain-text logfiles.  MD5 checksums are used to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/66452/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/prompt - simple multiline interactive interpreter";
+	tag="The prompt module is a simple embedded multiline python interpreter built around raw_input(). The ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/285214/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Helper subclass for win32pdhquery";
+	tag="One of the few perks one can have when developing on Windows (at least NT or newer) is the use of ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303338/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/linenum.py";
+	tag="Prints the current line number, function name and some text. Useful for debugging.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/279155/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Print an expression and its value, along with filename and linenumber";
+	tag="The function printexpr() takes a Python expression, and prints it's value, and the filename and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52278/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Variant assertion";
+	tag="Eiffel like loop variant assertion";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/200566/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Allowing the Python profiler to profile C modules";
+	tag="This recipe lets you take into account time spent in C modules when profiling your Python code.  ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/81535/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Trace expressions and comments in debug mode.";
+	tag="Can't use a stepping debugger to diagnose and fix your programs?  Use these functions to log state ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52314/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Print Hook";
+	tag="Hook on stdout and stderr so that we can handle
+printing of text,error differently
+e.g in GUI ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/119404/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Dump all the attributes of an object";
+	tag="Print a nicely formatted overview of an object, including _everything_ in the object's `dir'. This ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/137951/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Debug with garbage collection";
+	tag="You now that there is garbage in your program but you don't know what exactly. In this piece of ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65333/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Assertion that all base class initializers get called (metaclass solution)";
+	tag="This code can be used in debugging phase to notice errors sooner. It is usually always desirable to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/224980/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/include function name and line number automatically in debug statements";
+	tag="This recipe allows a user to place debug messages, error messages and standard messages throughout ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/144838/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Howto add a method to an instance at runtime for debugging";
+	tag="This recipe demonstrates the runtime addition of a __str__ method to a class instance. This can ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52194/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Determining the current functions name (at the time it is called)";
+	tag="whoaminow() can be used inside a function to determine, at the time it is called, the name under ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/200892/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Debugging/Automatically start the debugger on an exception";
+	tag="When Python runs a script and an uncatched exception is raised, a traceback is printed and the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65287/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Distributed/Distributed request%2freply middleware architecture.";
+	tag="Simple example of setting up a distributed message oriented request/reply architecture. Shows ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/81615/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Distributed/Implement a CORBA client and server";
+	tag="CORBA has a reputation for being hard to use, but it is really very easy, expecially if you use ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/81254/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Distributed/XML-RPC with Medusa";
+	tag="This section demonstrates remote method calls between two
+machines (or processes) using the XML-RPC ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52226/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Distributed/Message Passing With Socket Datagrams";
+	tag="Sending short text messages with socket datagrams is simple 
+to implement and provides a very ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52218/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Distributed/Distributed publish%2fsubscribe middleware architecture.";
+	tag="Simple example of setting up a distributed publish/subscribe system. Shows creation of a central ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/81614/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/Use good old INI files for configuration";
+	tag="Many people use Python modules as config files, but this way your program may be manipulated or an ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65334/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/Debug dynamically loaded C extensions with gdb";
+	tag="If a dynamically loaded C/C++ extension is causing Python to core dump, 
+here's a technique to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/66510/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/help in debugging memory problems";
+	tag="When developing C extensions and running into memory problems, I find
+the typical problem is ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/67112/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/How to define multiple initializers for a class, with different arguments";
+	tag="Sometimes your class design warrants the definition of multiple construction methods for a class, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/223611/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/Ordered Dictionary";
+	tag="This dictionary class extends UserDict to record the order in which items are added. Calling ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/107747/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/Implementing C function callbacks using Python";
+	tag="Lets say you have a function in C or C++ that takes a function callback as an argument. You want to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65210/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/Package %2f Module Versioning Bootstrap Loader &amp; Manager";
+	tag="These two scripts together allow packages to be migrated into a versioned directory structure, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/285215/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/Barebones VC++ code: invoking Python COM factory and factory-made COM object";
+	tag="Two items:
+
+1. Python script that defines and registers a factory COM class and another COM class ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/141602/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/Heap (Priority Queue) extension type in Python 2.2";
+	tag="A simple example of a heap data structure as a C extension.  This data structure can store and sort ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252496/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/ use modules generated with SWIG in a multi-thread environment";
+	tag="To use multiple threads, you must release the Python thread-lock.
+The simplest way with SWIG is to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52294/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/Windows Dll (with pointers parameters) calling with ctypes and calldll";
+	tag="Code to call a Windows Dll \"\"\"void FAR PASCAL hllapi(int FAR *, char FAR *, int FAR *, int FAR ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/181063/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/To 'return None' from your Python-callable C function";
+	tag="Often a function written in C for Python needs to return nothing in particular -- a \"return None\" ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52309/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/A simple extension type for Python";
+	tag="C-coded Python extension types have an aura of mystery and difficulty they don't really deserve.  ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/66509/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Extending/Defining Python class methods in C";
+	tag="This recipe shows how to define a new Python class from a C extension module.  The class methods ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/54352/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Python robocopier - Advanced Directory Synchronization module";
+	tag="This program is an advanced directory synchronization
+and update tool. It can be used to update ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/231501/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Another relative filepath script";
+	tag="Another version of the relative path script already posted on the cookbook website. This one is ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302594/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Simple File Splitter%2fCombiner module";
+	tag="This module can be used to split any file, text or binary
+to equal sized chunks. It can also ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/224800/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Simple file hashing";
+	tag="Returns the hash code (as an hex string) for a given file.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/259109/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/tree.py - graphically displays the directory structure of a specified path";
+	tag="The following program displays the directory structure of a specified path using ASCII characters. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/217212/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Win32 registry file";
+	tag="Open key in Win32 registry base like a file. All commands supported by StringIO are available.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/163969/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/File Unzip";
+	tag="A Python class to extract zip files.
+It's also written for easy use as a standalone script from ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252508/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Converting Word documents to text";
+	tag="Here's a script to save all Word documents in and below a given directory to text.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/279003/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Using Import for Reading Configuration Files";
+	tag="Here's a snippet using import for reading Python-based configuration files that are specified at ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/283531/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/iterating through large file-like objects";
+	tag="This function provides a simple iterator for the lines of a file-like object. (It also provides a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/217117/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Bzipped Tar Files";
+	tag="I was working on a backup utility to compress files and folders into a .tar.bz2 file and found the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/299412/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/gentleman's locking (simple cross thread and process locking)";
+	tag="Cross-platform locking that works across multiple threads and processes can be complicated. A ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252495/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Parsing out EDI messages";
+	tag="A parser I designed to work with HIPAA EDI files.  It reads in files and spits out the individual ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/299485/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/FSList ";
+	tag="A subclass of the list object for managing files system objects (files, directories, etc.)";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/259147/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Counting pages of PDF documents on Mac OS X.";
+	tag="Given that PDF is a \"native\" data format on Mac OS X, it is very easy to get access to some ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286219/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Compute relative path from one directory to another";
+	tag="Suppose your application needs to know the relative path from one path to another (say because you ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/208993/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Watching a directory tree on Unix";
+	tag="The watch_directories() function takes a list of paths and a callable object, and then repeatedly ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/215418/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Handling of command line arguments: options, arguments, file(s) content iterator";
+	tag="Handles arguments for small scripts that need to:
+- read some command line options
+- read some ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302262/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/Simple md5 sum utility";
+	tag="I'm used to having the md5sum utility on Linux systems, so I was surprised that Mac OS-X doesn't ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/266486/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Files/dir_lower";
+	tag="lowers the case of all the items found in a specified directory";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/226409/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/Generate thumbnail image";
+	tag="On the web and various purpose, we want to thumbnail images.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/180670/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/Display an Image from a specified file";
+	tag="Reads an image file from the filename specified as the 1st parameter on the command line and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/227575/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/RPN Stack class";
+	tag="This is an example of how to write a stack and then employ that stack to have a stack for use in an ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/59884/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/Convert Image Format";
+	tag="Simple GUI to allow converting images from one format to another.
+Available formats are: .gif .jpg ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/180801/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/Image extractor";
+	tag="Extract images (jpeg/gif) from screensaver files, webshots collection files 
+,powerpoints, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/189862/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/sparse: A dictionary based sparse matrix class";
+	tag="'sparse' is a matrix class based on a dictionary to store data using 2-element tuples (i,j)
+ as ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52275/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/wxPython Graphics - Drawing rubberbands over a canvas";
+	tag="This recipe talks about how to implement rubberbanding code for canvas
+objects in a wxPython ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/189744/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/HTML colors to%2ffrom RGB tuples";
+	tag="You have colors in a number of formats (html-style #RRGGBB, rgb-tuples (r, g, b), and PIL-style ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/266466/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/colormap: Returns an RGB tuple on a 0 to 255 scale for graphical packages";
+	tag="These functions, when given a magnitude 'mag' between cmin and cmax, return
+a colour tuple (red, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52273/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/vector: A list based vector class supporting elementwise operations";
+	tag="This vector class stores elements in a list and hence allows the 'vector' to grow 
+dynamically. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52272/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/Geometrical-oriented image search";
+	tag="A find command is able to size-oriented search files. This script is searching image files by ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/181424/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/Converting DOT graphs to SVG";
+	tag="Convert graphs in the DOT format to SVG on Windows.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/229471/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/Accepting Four Points in 2-space";
+	tag="Photographic document images are often rotated, if only slightly. This code mediates an input of a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/273592/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/Towers of Hanoi for wxPython";
+	tag="A simple Towers of Hanoi demo using wxPython.
+This sits with my Koch snowflake demo and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/259149/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/Convert PDF to TIFF on Mac OS X";
+	tag="This is a very short code snippet illustrating how to convert individual pages of PDF documents to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/223320/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Image/Povray for python";
+	tag="Here is a relatively simple framework for making povray files from your favourite programming ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/205451/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Jython/Using ODBC for extracting data from MS Excel";
+	tag="This article discusses how to use jython to connect to an MS Excel file via ODBC using the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/228010/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Jython/A generic jython taglib for tomcat";
+	tag="These java classes implement a jython taglib which can be used to embed jython code into jsp pages. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252132/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Jython/Pickle objects under jython";
+	tag="Using the pickle module under jython is a rather slow method for storing data. Using the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252131/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Jython/Write a plugin for ImageJ";
+	tag="ImageJ (http://rsb.info.nih.gov/ij/) is a very good image processing program which can be extended ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252130/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Jython/A simple jython servlet";
+	tag="A simple jython servlet.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/54158/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Jython/Use jython to access an LDAP server";
+	tag="This snippet shows how to use of jython to create an interactive environment for querying an LDAP ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/230342/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Jython/View an image URL with Jython and Swing";
+	tag="The simple Jython function below accepts a url string for an image and displays it in a Swing ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252144/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Jython/Simple JSP Custom Tag in Jython";
+	tag="A simple example which shows how to implement your own JSP custom tag with the help of Jython.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/117239/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Jython/Using the  Apache XPath API from Jython";
+	tag="Using the Apache XPath API from Jython.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/274905/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/Network Ping Pong using Twisted Prespective Broker";
+	tag="A simple program using Twisted Perspective Broker and showing 
+use of Twisted Deferreds and other ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/181905/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/simplest useful HTTPS with basic proxy authentication";
+	tag="This is just about the most simple snippet of how to do proxy authentication with SSL using python. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/301740/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/Quick implementation of DIP (Dynamic IP) protocol using Twisted";
+	tag="Command line prototype to update a Dynamic DNS Service that
+accepts the GnuDIP protocol (like ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286257/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/simple ldap with python";
+	tag="The ldap library at http://python-ldap.sourceforge.net wraps the Openldap C api.
+It can talk to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303336/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/Use email module to bundle contents of current directory";
+	tag="An example of using the email module to create a multipart MIME message.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/86674/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/Connect to an IRC server and store messages into a file";
+	tag="You want to connect to an IRC server, join a channel and store private message into a file on your ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/299411/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/Threaded FTP Client";
+	tag="Script to download multiple directories from remote FTP servers and             copy these to local ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302592/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/Root access required to run a script";
+	tag="You don't want that a user can run a particular script, just add this two lines at the beginning of ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/299410/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/Extract (Kill) mail attachments";
+	tag="This receipe is a very handy utility to extract the attachments from your mail. Suppose you receive ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252173/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/wx twisted support using threads";
+	tag="This script allows using twisted with wxPython at the same time without them stepping on each ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286201/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/httpExists - find out whether an http reference is valid";
+	tag="Quickly find out whether a web file exists.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286225/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/PyHeartbeat - detecting inactive computers";
+	tag="PyHeartbeat detects inactive computers by sending and receveing \"heartbeats\" as UDP packets on the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52302/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/Fix up a message returned by Python 2.4's email module's feed parser";
+	tag="For good reasons, the email module's new feed parser can return a message that's internally ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303227/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/popPeek,py";
+	tag="A simple script that shows the headers from messages in a popbox and allows the user to delete ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/266480/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/Python portscanners";
+	tag="Those are a couple of multithreaded portscanners, the second one use the Queue module.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286240/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/FedEX Tracking Information";
+	tag="This short script allows a user to track the current status of a package sent through FedEx.  It is ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/259097/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/Strip attachments from an email message";
+	tag="This recipe shows a simple approach to using the Python email package to strip out attachments and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302086/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/Authenticate users through a third party POP-server";
+	tag="Here's an example of how an existing POP-mail account can be used to provide authentication to a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/203610/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Network/HTTP Based Network Check for Windows boxes. ";
+	tag="A demonstration of how the Python HTTP server classes can be used.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/203612/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Memento design pattern in python";
+	tag="You need to cache instances based on what arguments are passed to them.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286132/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Transactionable Objects";
+	tag="This simple class allows sub-classes to commit changes to an instance to a history, and rollback to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/284677/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Automatically initializing instance variables from __init__ parameters";
+	tag="This recipe assigns each parameter to an instance variable of the same name, automating a common ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286185/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/IsChangedMixin - have the contents of an instance been modified?";
+	tag="The IsChangedMixin can be added to any class and queried to determine if the class instance ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302742/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Generic cacheable value objects superclass";
+	tag="Superclass for cache value objects by its constructor arguments (see the Date class for example).";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302699/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/ObjectMerger";
+	tag="The ObjectMerger class dynamically merges two given objects, making one a subclass of the other. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/272810/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Hierarchical data objects";
+	tag="In order to structure data, it makes sense to use hierarchical schemes, as for example filesystems ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286150/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/handler stack";
+	tag="Design pattern that is highly reusable.  Simple handlers implement one specific task from a complex ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302422/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Unit-safe measured quantities";
+	tag="Programs that deal with measured quantities usually make an implicit assumption of the measurement ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/270589/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Constructing DAGs to Avoid Redundancy in Trees";
+	tag="An example showing how Python's features can be used to optimize the construction of tree-like data ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303415/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Get configured!";
+	tag="In recipe http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52308 Alex Martelli showed how a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303347/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/How to implement state-dependent behavior - State-Pattern";
+	tag="An object in a program frequently has an internal \"state\", and the behavior of the object needs to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/277752/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Improved autosuper";
+	tag="Use self.super(*p, **kw) instead of super(cls, self).func(*p, **kw).
+
+Latest version (with docs, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286195/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Caching and aliasing with descriptors";
+	tag="A few simple discriptor classes to compute and cache attribute value on demand and to define ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/276643/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/NamedShare -- Quasi-Singleton Metaclass";
+	tag="NamedShare is a variation on the Singleton pattern (see ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286206/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Overriding __new__ for attribute initialization";
+	tag="Whenever a superclass implements a __init__ method to initialize its attributes, subclasses derived ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303059/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/event driven programming";
+	tag="This small code demonstrates how state driven programming can be done in python.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286136/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/DoDefaultMixin";
+	tag="Simple recipe for making it easier to call superclass method code. Instead of ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/279604/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Ruby like syntactic sugar";
+	tag="Ruby offers very nice language constructs for loops or for iterating over lists like the following: ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/271669/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/OOP/Create objects from variable class names";
+	tag="I sometimes want to create objects from various classes based on some condition (without using ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/285262/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Function Decorators by Hacking Bytecodes";
+	tag="Wether or not PEP 318 makes it to Python 2.4, you can experiment with an alternative decorator ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286147/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Convert to something objects from string arguments";
+	tag="Usually, although they are a character sequence, all the arguments when starting a program are ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/194375/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/dependency generator for makefiles";
+	tag="This script scans .c files for \"#include\" statements and creates a list of
+dependencies, suitable ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/66541/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Controlling gzipped I%2fO";
+	tag="Using gzip and StringIO module, then controllable gzipped stream.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/148292/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Safe Expression Evaluation";
+	tag="Often, we might want to let (untrusted) users input simple Python expressions and evaluate them, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286134/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Bind Globals into Constants at compile time";
+	tag="Automatic code optimization.  If a global is known at compile time, replace it with a constant.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/277940/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/makeExe.py";
+	tag="Simple Python script to automate the creation of Python executables using py2exe.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/266471/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Enums for Python";
+	tag="I once tried to give Python something like C's enums, as described
+here: ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/67107/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/get_date wrapper to datetime module ";
+	tag="The datetime module only accepts inputs of time it understands. For example,
+the months given to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303441/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Using introspection to verify Eiffel like contracts ";
+	tag="This sample show how you can use intospection to create a function wraper that verify Eiffel like ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/81790/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Format warnings for Visual Studio";
+	tag="Visual Studio can be configured to invoke a Python script during your build process.  If you need ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/106294/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Modify class method in-place";
+	tag="Once in a while it becomes necessary to globally change the behaviour of classes in a third party ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/66543/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Behavior like a list object is carried out to an instance.";
+	tag="In order to change into a list, the length of
+an instance is investigated first.
+\"__len__()\" ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/148291/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Pythologic -- Prolog syntax in Python";
+	tag="Some of Python's powerful meta-programming features are used to enable writing Python functions ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303057/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/The End of Inheritance: Automatic Run-time Interface Building for Aggregated Objects";
+	tag="\"Design Patterns\" [GoF] prescribes two commandments to live by: 
+
+1) Program to an interface, not ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/149878/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Outlook Export";
+	tag="This class allows for the export of messages, Contacts and notes from Outlook to a ZODB filesystem ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/266625/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/MAPI Send";
+	tag="I needed a simple solution for sending MAPI mail within Python and at the cmd prompt. Here is a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/149461/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Ensuring a name definition in a module namespace";
+	tag="Ensure that a name exists in a target namespace. If it does not, make it available in the target ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/172431/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Reading the System information";
+	tag="Reading the System information and Softwares installed in Windows NT/XP/2000/9x";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/265858/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Programs/Improve dictionary lookup performance";
+	tag="Reduce average dictionary lookup time by making the internal tables more sparse.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/198157/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Just For Fun:  Quicksort in 3 Lines";
+	tag="OK, 4 lines if you count wrapped lines.  :^)  This is a rather naive implementation of quicksort ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/66473/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Slice equivalent for iterators.";
+	tag="This function allow to use a slice like protocol on iterators.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/164740/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Sort a string using numeric order";
+	tag="This recipe sorts a list of strings using the numeric order where possible.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/135435/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/extract email addresses from files";
+	tag="A quick way to find valid email addresses in text files using a regular expression search. It then ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/138889/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Decode in Python";
+	tag="This simple code act like conditional operator \"?:\" (or ternary) operator,
+which operates as in C ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/67676/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/guaranteed-stable sort with the decorate-sort-undecorate idiom (aka Schwartzian transform)";
+	tag="Python lists' .sort method is not guaranteed stable -- items that compare equal may or may not be ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52234/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Dialect for sort by... then by...";
+	tag="Here we use the properties of \"cmp()\" and \"or\" to produce a compact dialect for sorting a list.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52316/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Knuth-Morris-Pratt string matching";
+	tag="This is an implementation of the Knuth-Morris-Pratt algorithm for finding copies of a given pattern ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/117214/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/&quot;To sort a dictionary&quot;";
+	tag="Dictionaries can't be sorted -- a mapping has no ordering! -- so, when you feel the need to sort ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52306/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/The Auxiliary-Dictionary idiom for sequences with frequent 'in' tests";
+	tag="Python's \"in\" operator is extremely handy, but O(N) when applied to an N-item sequence; if a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52303/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Binary search and insert in Python";
+	tag="This demonstrates a simple binary search through sorted data.
+A binary search is a basic algorithm ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/54159/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Lazy sorting";
+	tag="This generator will sort only the requested part of a list. Useful for getting just the first few ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/280501/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Sort names and separate by last name initial";
+	tag="When you write a directory for a group of people, you want it grouped by last name initial and then ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303177/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Merging sorted sequences";
+	tag="How to merge several iterable sequences and keep things ordered.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/141934/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Patterns for using classes as dictionary keys.";
+	tag="This describes possible ways of using userdefined class instances as dictionary keys.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/83698/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Random selection of elements in a list, with no repeats";
+	tag="The simplest, direct way of consuming a list in a random fashion is painfully 
+slow for list with a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/59883/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Reorder a sequence (uses generators, and recursion!)";
+	tag="Small function to generate every permutation of a given sequence. Works for lists and strings";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252178/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Field Compare";
+	tag="A class that defines a compare function that can be used to sort lists of objects by any number of ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/123555/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Finding the index of an item in embedded sequences";
+	tag="This function will return a list containing the indices needed to reach an item in embedded ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65252/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Searching/Select the nth smallest element";
+	tag="O(n) quicksort style algorithm for looking up data based on rank order.    Useful for finding ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/269554/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/Dictionary of Function Parameters";
+	tag="This recipe is based on
+http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/157572.
+
+Calling ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/201195/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/A nicer syntax for super(cls,self)";
+	tag="Makes cooperative calls looks nicer: super.method instead of super(cls,self).method .";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/284528/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/Function for print numbers by parts";
+	tag="Some examples:
+
+>>> nprint(9876543210)
+'9 876 543 210'
+>>> nprint(987654321, period=1, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302035/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/Dictionary Tools";
+	tag="A collection of some dictionary tools";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/278259/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/A Generator That Helps Simplify Queue Consumers";
+	tag="My Queue usage typically involves a producer thread and a consumer thread. The producer calls ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252498/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/List Tools";
+	tag="A collection of some useful list-related functions.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/278258/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/Python prompt from explorer";
+	tag="If you use the command prompt here powertoy, you might find this useful.  Right click on any folder ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302547/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/Finding out the number of values the caller is expecting";
+	tag="Sometimes you might want to make a function behave differently if the caller is expecting one or ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/284742/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/return element of list if it exists";
+	tag="'.get()' functionality of mappings for sequences";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/269484/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/Some python style switches";
+	tag="Python style switches. Showing several ways of making a 'switch' in python.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/269708/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/Some python style switches";
+	tag="Python style switches. Showing several ways of making a 'switch' in python.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/269709/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/Find the common beginning in a list of strings";
+	tag="I came up with this when I tried to implement some autocompletion feature.
+The problem is to find ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252177/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/Exception Handling in an Expression";
+	tag="I use the following function to do extremely quick-and-dirty exception handling in an expression, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252530/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/Clean up __init__() methods that contain only attribute assignments.";
+	tag="Did you ever have to write an initializer whose body consisted of little more than a suite of ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/280381/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/multi-replace ";
+	tag="This class replaces characters until there are no offending ones left.
+
+You could you regex or ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/259100/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/one liner frequency count";
+	tag="You often see frequency counts done with dicts, requiring serveral lines of code.  Here is a way to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/277600/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/Dictionary Tools";
+	tag="A collection of some dictionary tools";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/278260/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Shortcuts/List Tools";
+	tag="A collection of some useful list-related functions.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/278257/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/Backup all your config files in once";
+	tag="You want to always keep a copy of your config files, just in case...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/299271/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/Get attributes of an object in MS Active Directory";
+	tag="Sometimes it is useful to know what attributes are available to you for an object in active ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303348/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/Check your Windows sound system";
+	tag="Find out if the sound hardware on your windows PC is working
+properly.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/206549/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/getting properties of an object in webdav%2fexchange  part 2";
+	tag="Webdav is useful to get information on something in exchange. Often you need to know what you can ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/298342/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/Discover exchange in active directory";
+	tag="Active directory is wordy and very detailed. It can be daunting to first figure out what you need ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/109357/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/Watching a directory tree under Linux";
+	tag="Inspired by another snippet here that watches a directory... Here is a directory watcher that only ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/217829/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/creating a share on windows with python";
+	tag="The following code is an example of how one would use python's win32net module to create a share on ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303341/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/getting process information on windows";
+	tag="To get process information for both NT and W2K (but not the 9x family) you can use the Performance ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303339/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/changing file attributes on  windows";
+	tag="The win32api module offers SetFileAttributes whiles allows you to make changes to a file in ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303343/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/Windows free drive space report";
+	tag="A simple script that reads a file containing a list of server names, drive identifiers, and volume ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52276/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/create an account in MS active directory";
+	tag="This is the basic code to create an account in active directory that shows how to do things like ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303345/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/converting windows 64 bit time to  python useable format";
+	tag="In Win32 often you'll find time stored in 100-nanosecond intervals since January 1, 1600 UTC. It is ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303344/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/SIGIO handler";
+	tag="On Linux, use this to manage objects that can cause a SIGIO to be generated. It calls all ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/217830/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/Using ctypes to manipulate Windows registry and to register DLLs";
+	tag="Indicates the essentials of creating keys, or otherwise manipulating the Windows registry, using ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286159/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/Memory usage.";
+	tag="This recipe provides a number of functions to get the memory usage of a Python application on Linux.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286222/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/Directory Iterator ";
+	tag="This iterator can bee used to walk through directories.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/184602/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/Parsing the command line";
+	tag="The module optparse was a great addition to Python 2.3, since it is much more 
+powerful and easier ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/278844/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/Generate Python Symbol Lists for a Programmer's Editor Syntax Coloring File";
+	tag="Use reflection to generate lists of Python symbols.  Use them to build a syntax coloring file for ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/200638/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/accessing MS exchange with webdav part 1";
+	tag="If you want to talk to a MS exchange server, webdav offers a convenient way to do so. The code ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/298338/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/System/Gather detailed system information on Mac OS X";
+	tag="This recipe uses the system_profiler application to retrieve detailed information about a Mac OS X ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303063/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Build section numbers for a table of contents";
+	tag="This recipe shows a way to generate section numbers for a nested document structure. It can be used ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302467/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Functional  style tab expansion";
+	tag="Python allows some degree of functional programming. Using the reduce() function and the lambda ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/267327/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/RE match and replace through operator overloading";
+	tag="This recipe demonstrates how you can do regular expression matching and replacing with operators.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302498/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Natural string sorting";
+	tag="Sorts strings in a way that seems natural to humans.  If the
+strings contain integers, then the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/285264/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Check that a string represents an integer number";
+	tag="Many times I needed to check if a string represented a number or not. This is a very short recipe ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303495/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Extract verbatim texts from LaTeX file";
+	tag="This script extracts contents of all verbatim environments from the LaTeX file specified on command ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286243/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Word wrapping generator";
+	tag="A simple generator function to return an input string in fragments, each broken at spaces in the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286129/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/OpenOffice to xml and%2for text (oo2txt)";
+	tag="OpenOffice is very popular. Some people may be interested in indexing the contents of their ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302633/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/getnum";
+	tag="Converts numbers in to their english equivelents. It can spell out any integer between ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/285100/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Simple Wrapper for string.translate";
+	tag="It seems like every time I want to use string.maketrans and str.translate, I have to stop for a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303342/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Parsing a UK postcode";
+	tag="This function will split and (optionally) validate UK postcodes.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/279004/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Python text to pdf converter";
+	tag="Python port of a very popular implementation of
+text2pdf in the C programming language. I ported ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/189858/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/htmltotext converter w%2f tty support for bold%2funderline";
+	tag="This is a complete program that reads an html doc and converts it to
+plain ASCII text.  In the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52297/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Formatting plain text into columns";
+	tag="This code formats a number of columns of text into fixed widths. Each column may also be aligned ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302380/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Find and replace string in all files in a directory";
+	tag="A friend of mine needed to change the IP address in his DNS hosting bind  configuration. Here is a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/277753/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Table indentation";
+	tag="A function for pretty-printing a table.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/267662/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Shell-like data processing";
+	tag="This module introduces an alternative syntax a-la shell pipes for sequence-oriented functions, such ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/276960/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Email address leech";
+	tag="A regular expression just-for-fun recipe for leeching email addresses.. even
+some of those that ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/275366/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Spawning an editor from a script.";
+	tag="This is a very basic example of how to launch an editor from inside a program. 
+ NOTE: a real ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286238/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Text/Remove control character ^M from opened html files";
+	tag="I used a URLOpener to get the HTML file from some web-sites for some parsing. However, the returned ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286229/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Generic throttling for string%2fsequence functions";
+	tag="This call wrapper class enables throttling of function calls. You can control how many characters ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/168638/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/ThreadedContext";
+	tag="Expands the idea from Thread-specific storage (by John E.Barham). 
+ThreadedContext is like a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/102114/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Thread-specific storage";
+	tag="The get_thread_storage() function described below returns a thread-specific storage dictionary.  ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/66429/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/A generic programming thread pool";
+	tag="A thread pool class that takes arbitrary callables as work units, and supports callbacks when the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/203871/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Flexible Win32 message pump using MsgWaitForMultipleObjects";
+	tag="In win32, as in other event-driven systems, you must process messages or bad things happen. 
+(Or ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/82236/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Capturing the output and error streams from a unix shell command";
+	tag="This recipe shows how to execute a unix shell command and capture the
+output and error streams in ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52296/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Fork a daemon process on Unix";
+	tag="Forking a daemon on Unix requires a certain sequence of system calls. Since Python exposes a full ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/66012/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Threads, Tkinter and asynchronous I%2fO";
+	tag="This recipe shows the easiest way of handling access to sockets, serial ports
+and other ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/82965/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Use Candygram to communicate among threads.";
+	tag="With the Candygram package [ http://candygram.sourceforge.net ], developers can send and receive ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302323/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/ReadWriteLock";
+	tag="A lock object that allows many simultaneous \"read-locks\", but only one \"write-lock\".";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/66426/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/scheduler";
+	tag="A simple multi-threaded scheduler that enables
+tasks to be run at specified intervals.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/114644/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Execute a function on multiple argument sets in parallel using a thread pool.";
+	tag="The MultiThread module provides a simple abstraction to execute a function on many sets of ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/196618/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Cooperative multithreading with generators and signal handling";
+	tag="Here is an implementation of cooperative multithreading using generators that handles signals ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/162764/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Managing thread lifetime";
+	tag="If you're familiar with thread programming, Python is reasonably straightforward to work with, once ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/82235/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Creating a daemon the Python way";
+	tag="The Python way to detach a process from the controlling terminal and run it in the
+background as a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/278731/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/thread local storage in Python 2.4";
+	tag="Python 2.4 introduces a new threading.local() type - a thread local storage. This is a simple ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302088/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Generator Attributes";
+	tag="Function to enable attribute access for generator instances. Simplifies data sharing for advanced ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/164044/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Thread Control Idiom";
+	tag="This is a basic idiom I use on almost every thread I write.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65448/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/Easy threading with Futures";
+	tag="Although Python's thread syntax is nicer than in many languages, it can still be a pain if all one ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/84317/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Threads/thread pool example #2 -- easy_pool class";
+	tag="Building on the recipe in http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302746
+here is a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303108/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/Using a wxPython &quot;Notebook&quot; with panels";
+	tag="wxPython provides a powerul functionality that allows you to use a \"Notebook\" user interface with ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65249/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/Extending ConfigParser for reading and writing options from Windows Registry";
+	tag="This class extends ConfigParser class to make it able to read and write configuration settings from ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/138944/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/MultiListbox Tkinter widget";
+	tag="This is a compound widget that gangs multiple Tk Listboxes to a single
+scrollbar to achieve a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52266/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/Building GTK GUIs interactively";
+	tag="One of pythons greatest strengths is the ability to try things interactively at the interpreter.  ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65109/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/A simple Tkinter notebook-like widget";
+	tag="You have some single-toplevel Tkinter apps that you want to organize in a notebook-like fashion, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/188537/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/Entering accented characters in Tkinter widgets";
+	tag="This module provides two standard TkInter widgets, Entry and ScrolledText, modified for text ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286155/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/hash a string (preferably your name) to an alter ego description";
+	tag="What is your Viking name?  This script will tell you.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/83206/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/Tkinter Drag'n'drop list";
+	tag="A Tkinter listbox which supports drag'n'drop reordering of the list.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286202/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/linecount.py";
+	tag="Displays the total number of code lines in a single source file or for all the files of the same ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/125532/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/Stopwatch in Tkinter";
+	tag="This is a small implementation of a stopwatch widget in Tkinter. The widget displays a label with ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/124894/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/Use try%2fexcept to handle unexpected input from raw_input.";
+	tag="Minesweeper expects the user to enter properly bounded integers for
+moves.  Should the user enter ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/101853/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/Tkinter : moving geometry methods ";
+	tag="A common way to create new compound widgets is to inherit Frame, create everything you need inside ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/202052/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/Inline GIF's with Tkinter";
+	tag="This recipe will let you embed GIF images inside of your source code
+for use in Tkinter buttons, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52264/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/IronPython fade-in window";
+	tag="This recipe describes how to create a fade-in window using IronPython. Several applications use ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303062/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/User/Startup.py";
+	tag="r'''Initialize the Python runtime environment when the interpreter starts.
+
+Local modules are ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/87274/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/Watch That Post";
+	tag="This is a simple Python script to watch a post.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/282085/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/Data transfer from Python to Javascript";
+	tag="withdrawn";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/285099/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/How to Connect to an Already Running Instance of Internet Explorer";
+	tag="Various sources (but principally Hammond and Robinson) show how to instantiate Internet Explorer in ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/269345/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/Rss aggregator with twisted";
+	tag="This is a fully featured Rss aggregator with parsing included.
+
+It's scalable too very high ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/277099/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/cookielib Example";
+	tag="cookielib is a library new to Python 2.4
+Prior to Python 2.4 it existed as ClientCookie, but it's ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302930/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/Grab a document with images from the web";
+	tag="This is a way to grab a web page containing images
+and save this page and selected images to the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302700/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/Browser Automation tool - py class file";
+	tag="This is an tool for automating the browser via shellwindows. 
+This class file will allow a user to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302324/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/A Python script to test download mirrors";
+	tag="Bandwidth testing is easy with Python's built-in web access, HTML parsing, and threading ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/284631/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/HTML Page Scraping (of the Quick and Dirty Variety)";
+	tag="This recipe is really about using previously identified information in a web page--ie, state ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/259143/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/Foregin Exchange Rate Alert ($CAN&lt;-&gt;$US)";
+	tag="I add this Python script as daily crontab or windows scheduled task to watch the foregin exchange ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252546/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/Pulling stuff out of the internet archive (wayback machine)";
+	tag="I used this when trying to retrieve a site I could not access via the wayback machine ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286224/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/digest authentication";
+	tag="(Incomplete) Python implementation of Digest Authentication 
+
+Update: It works now (with IE as ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302378/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/Using pycurl to automate filling out web forms";
+	tag="I wanted to get the list of rss feeds from AmphetaDesk (my desktop news aggregator ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/267255/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/Minimal http upload cgi";
+	tag="This is a bare-bones cgi file upload. It will display an upload form and save the uploaded files to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/273844/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/pyAlbum.py";
+	tag="This is a simple command-line based, template driven, lightweight Python script to create an image ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/271246/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/Text Fader";
+	tag="This script could be used when you want to generate a text fading effect for your web pages. The ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/252529/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/HTML Scraper";
+	tag="A simple HTML 'parser' that will 'read' through an HTML file and call functions on data and tags ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286269/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/Rendering arbitrary objects with Nevow";
+	tag="This example is a simplified version of the irenderer example inside Nevow distrib by Matt Goodall ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286260/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/urllib2 for actions depending on http response codes";
+	tag="I wanted to touch a particular web page (in order to open/close a database connection inside of ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/267197/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/Web/Very basic example of nevow capabilities";
+	tag="Here you can find a very basic example of how nevow (twisted's new web toolkit) works. As you see ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/286210/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/Parsing Excel XML";
+	tag="This script parses an MS-Excel spreadsheet saved as XML.
+
+The spreadsheet:
+a1, b1
+a2, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/192914/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/Merging XBEL Bookmark files";
+	tag="This recipe uses DOM (precisely, cDomlette or the minidom variant in 4Suite) to merge two files ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/135131/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/xmlgettext.py";
+	tag="extract the texts from an XML-file and write it into an *.pot";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/212728/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/SAX to DOM Chunker";
+	tag="This module is similar to pulldom in that it takes a stream of SAX objects and breaks it down into ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/298343/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/Breaking large XML documents into chunks to speed processing";
+	tag="One of the few problems with using Python to process XML is the speed -- if the XML becomes ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/84515/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/xml2obj";
+	tag="A generic script using expat to convert xml into objects";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/149368/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/xml2obj II";
+	tag="I updated John Bair's xml2obj to allow better support of actually parsing xml files.  Some of the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/298721/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/Converting a list of equal length lists into XML";
+	tag="This module takes a list of equal length lists and converts it into XML.
+
+If the first sublist is ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/66003/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/turn the structure of a XML-document into a combination of dictionaries and lists";
+	tag="I decided not to customize the xml-parser to fit the structure of a xml-document, but to make a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/116539/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/Bind wxPython and XML-RPC server together";
+	tag="Make a wxPython application also acting as a XML-RPC server, listening to a dedicated port.
+For ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/298985/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/Lightweight XML constructor and reader";
+	tag="XML is a wonderful buzzword, so clients often like to have exports of data in that format. But as a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/157358/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/A SAX filter for normalizing text events";
+	tag="A SAX parser can report contiguous text using multiple characters events.  This is often unexpected ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/265881/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/Validating XML with External DTDs using xmlproc";
+	tag="PyXML is a useful package for parsing XML. The xmlval and xmldtd modules let you validate XML docs ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/220472/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/XYAPTU: Lightweight XML%2fHTML Document Template Engine for Python";
+	tag="Xyaptu builts on Alex Martelli's generic and elegant module, YAPTU (Yet Another Python Template ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/162292/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/Colorize xml source using the sax ContentHandler, LexicalHandler and Declhandler interfaces";
+	tag="This recipe take an xml file as input and output a colorized version of this file, using html or ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/102109/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/Extract text from XML document, II";
+	tag="Alternative way of extracting text from a WF XML source.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/275370/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/ljopml.py";
+	tag="This is a Python script to generate the OPML feed of your LiveJournal (http://www.livejournal.com/) ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/276961/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/Filtering out elements%2fattributes from a given namespace";
+	tag="This recipe shows a simple way to filter out elements and attributes 
+belonging to a particular ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/149284/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/Remove whitespace-only text nodes from an XML DOM";
+	tag="XML parsers consider several conditions when deciding which whitespace-only text nodes should be ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/303061/index_txt";
+},
+{
+	language="Python";
+	title="Python Cookbook/XML/Using the SAX2 LexicalHandler Interface";
+	tag="This code show how to use the relatively unknown LexicalHandler
+interface, which is an extension ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/84516/index_txt";
+},
+)

@@ -1,0 +1,173 @@
+/*
+ *  IDEKit_TextColors.mm
+ *  IDEKit
+ *
+ *  Created by Glenn Andreas on Wed May 21 2003.
+ *  Copyright (c) 2003, 2004 by Glenn Andreas
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Library General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2 of the License, or (at your option) any later version.
+ *  
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Library General Public License for more details.
+ *  
+ *  You should have received a copy of the GNU Library General Public
+ *  License along with this library; if not, write to the Free
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
+
+#import "IDEKit_TextColors.h"
+#import "IDEKit_UserSettings.h"
+
+static NSColor *IDEKit_PrimativeColorForColor(int color)
+{
+    switch (color) {
+	case IDEKit_kLangColor_Background:
+	    return [NSColor whiteColor];
+	case IDEKit_kLangColor_NormalText:
+	    return [NSColor blackColor];
+	case IDEKit_kLangColor_Invisibles:
+	    return [NSColor whiteColor];
+	case IDEKit_kLangColor_Adorners:
+	    return [NSColor blackColor];
+	case IDEKit_kLangColor_Errors:
+	    return [NSColor blackColor];
+	case IDEKit_kLangColor_OtherInternal2:
+	case IDEKit_kLangColor_OtherInternal3:
+	case IDEKit_kLangColor_OtherInternal4:
+	    return [NSColor whiteColor];
+	    // first the browser symbol coloring
+	case IDEKit_kLangColor_Classes:
+	    return [NSColor magentaColor];
+	case IDEKit_kLangColor_Constants:
+	case IDEKit_kLangColor_Enums:
+	case IDEKit_kLangColor_Functions:
+	    return [NSColor purpleColor];
+	case IDEKit_kLangColor_Globals:
+	    return [NSColor magentaColor];
+	case IDEKit_kLangColor_Macros:
+	case IDEKit_kLangColor_Templates:
+	    return [NSColor redColor];
+	case IDEKit_kLangColor_Typedefs:
+	    return [NSColor greenColor];
+	case IDEKit_kLangColor_OtherSymbol1:
+	case IDEKit_kLangColor_OtherSymbol2:
+	case IDEKit_kLangColor_OtherSymbol3:
+	case IDEKit_kLangColor_OtherSymbol4:
+	    return [NSColor blackColor];
+	    // more syntax coloring
+	case IDEKit_kLangColor_Comments:
+	case IDEKit_kLangColor_DocKeywords:
+	    return [NSColor brownColor];
+	case IDEKit_kLangColor_Keywords:
+	case IDEKit_kLangColor_AltKeywords:
+	case IDEKit_kLangColor_Preprocessor:
+	    return [NSColor blueColor];
+	case IDEKit_kLangColor_Strings:
+	    return [NSColor darkGrayColor];
+	case IDEKit_kLangColor_FieldsBG: // for background completion templates
+	    return [NSColor yellowColor];
+	case IDEKit_kLangColor_Characters:
+	    return [NSColor darkGrayColor];
+	case IDEKit_kLangColor_Numbers:
+	    return [NSColor blackColor];
+	case IDEKit_kLangColor_OtherSyntax6:
+	case IDEKit_kLangColor_OtherSyntax7:
+	case IDEKit_kLangColor_OtherSyntax8:
+	    return [NSColor blackColor];
+	case IDEKit_kLangColor_UserKeyword1:
+	case IDEKit_kLangColor_UserKeyword2:
+	case IDEKit_kLangColor_UserKeyword3:
+	case IDEKit_kLangColor_UserKeyword4:
+	    return [NSColor blackColor];
+	case IDEKit_kLangColor_End:
+	    return [NSColor blackColor];
+    }
+    return [NSColor blackColor];
+}
+NSString *IDEKit_NameForColor(int color)
+{
+    switch (color) {
+	case IDEKit_kLangColor_Background:
+	    return @"Background";
+	case IDEKit_kLangColor_NormalText:
+	    return @"Normal Text";
+	case IDEKit_kLangColor_Invisibles:
+	    return @"Invlsible Text";
+	case IDEKit_kLangColor_Adorners:
+	    return @"Adorners";
+	case IDEKit_kLangColor_Errors:
+	    return @"Errors";
+	    // first the browser symbol coloring
+	case IDEKit_kLangColor_Classes:
+	    return @"Classes";
+	case IDEKit_kLangColor_Constants: return @"Constants";
+	case IDEKit_kLangColor_Enums: return @"Enums";
+	case IDEKit_kLangColor_Functions: return @"Functions";
+	case IDEKit_kLangColor_Globals: return @"Globals";
+	case IDEKit_kLangColor_Macros: return @"Macros";
+	case IDEKit_kLangColor_Templates: return @"Templates";
+	case IDEKit_kLangColor_Typedefs: return @"Typedefs";
+	    // more syntax coloring
+	case IDEKit_kLangColor_Comments: return @"Comments";
+	case IDEKit_kLangColor_Keywords: return @"Keywords";
+	case IDEKit_kLangColor_Preprocessor: return @"Preprocessor";
+	case IDEKit_kLangColor_AltKeywords: return @"AltKeywords";
+	case IDEKit_kLangColor_DocKeywords: return @"DocKeywords";
+	case IDEKit_kLangColor_Strings: return @"Strings";
+	case IDEKit_kLangColor_FieldsBG: return @"Field Background";
+	case IDEKit_kLangColor_Characters: return @"Characters";
+	case IDEKit_kLangColor_Numbers: return @"Numbers";
+	case IDEKit_kLangColor_UserKeyword1: return @"User 1";
+	case IDEKit_kLangColor_UserKeyword2: return @"User 2";
+	case IDEKit_kLangColor_UserKeyword3: return @"User 3";
+	case IDEKit_kLangColor_UserKeyword4: return @"User 4";
+    }
+    return nil;
+}
+NSColor *IDEKit_TextColorForColor(int color)
+{
+    id colorObject = [[[NSUserDefaults standardUserDefaults] dictionaryForKey: IDEKit_TextColorsPrefKey] objectForKey: IDEKit_NameForColor(color)];
+    if (colorObject) {
+	return [NSColor colorWithHTML: colorObject]; // better be a color
+    } else {
+	return IDEKit_PrimativeColorForColor(color);
+    }
+}
+
+
+
+@implementation NSColor(IDEKit_StringToColors)
++ (NSColor *)colorWithHTML: (NSString *)hex
+{
+    // for example, string should be "#ffffff"
+    NSScanner *scanner = [NSScanner scannerWithString: hex];
+    [scanner setCharactersToBeSkipped: [NSCharacterSet characterSetWithCharactersInString: @" #,$"]];
+    [scanner setCaseSensitive: NO];
+    unsigned int value;
+    if ([scanner scanHexInt: &value] == NO) value = 0;
+    return [NSColor colorWithCalibratedRed: float((value >> 16) & 0xff) / 255.0 green: float((value >> 8) & 0xff) / 255.0 blue: float((value) & 0xff) / 255.0 alpha: 1.0];
+}
++ (NSColor *)colorWithRGB: (NSString *)triplet
+{
+    NSScanner *scanner = [NSScanner scannerWithString: triplet];
+    [scanner setCharactersToBeSkipped: [NSCharacterSet characterSetWithCharactersInString: @" ()#,$"]];
+    [scanner setCaseSensitive: NO];
+    unsigned int red,green,blue,alpha;
+    if ([scanner scanInt: &red] == NO) red = 0;
+    if ([scanner scanInt: &green] == NO) green = 0;
+    if ([scanner scanInt: &blue] == NO) blue = 0;
+    if ([scanner scanInt: &alpha] == NO) alpha = 255;
+    return [NSColor colorWithCalibratedRed: float(red) / 255.0 green: float(green) / 255.0 blue: float(blue) / 255.0 alpha: float(alpha) / 255.0];
+}
+- (NSString *)htmlString
+{
+    id rgb = [self colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
+    return [NSString stringWithFormat: @"#%.2X%.2X%.2X", (NSInteger)([rgb redComponent] * 255.0),(NSInteger)([rgb greenComponent] * 255.0),(NSInteger)([rgb blueComponent] * 255.0)];
+}
+@end

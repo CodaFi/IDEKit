@@ -1,0 +1,1067 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8469FC561616C1CD002AFC0D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8469FC551616C1CD002AFC0D /* Cocoa.framework */; };
+		8469FC601616C1CD002AFC0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC5E1616C1CD002AFC0D /* InfoPlist.strings */; };
+		8469FD0F1616C1E4002AFC0D /* IDEKit_Autocompletion.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC6B1616C1E4002AFC0D /* IDEKit_Autocompletion.h */; };
+		8469FD101616C1E4002AFC0D /* IDEKit_Autocompletion.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC6C1616C1E4002AFC0D /* IDEKit_Autocompletion.mm */; };
+		8469FD111616C1E4002AFC0D /* IDEKit_Console.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC6D1616C1E4002AFC0D /* IDEKit_Console.h */; };
+		8469FD121616C1E4002AFC0D /* IDEKit_Console.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC6E1616C1E4002AFC0D /* IDEKit_Console.mm */; };
+		8469FD131616C1E4002AFC0D /* IDEKit_FindPaletteController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC6F1616C1E4002AFC0D /* IDEKit_FindPaletteController.h */; };
+		8469FD141616C1E4002AFC0D /* IDEKit_FindPaletteController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC701616C1E4002AFC0D /* IDEKit_FindPaletteController.mm */; };
+		8469FD151616C1E4002AFC0D /* IDEKit_LineCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC711616C1E4002AFC0D /* IDEKit_LineCache.h */; };
+		8469FD161616C1E4002AFC0D /* IDEKit_LineCache.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC721616C1E4002AFC0D /* IDEKit_LineCache.mm */; };
+		8469FD171616C1E4002AFC0D /* IDEKit_RTFViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC731616C1E4002AFC0D /* IDEKit_RTFViewer.h */; };
+		8469FD181616C1E4002AFC0D /* IDEKit_RTFViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC741616C1E4002AFC0D /* IDEKit_RTFViewer.m */; };
+		8469FD191616C1E4002AFC0D /* IDEKit_Snippets.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC751616C1E4002AFC0D /* IDEKit_Snippets.h */; };
+		8469FD1A1616C1E4002AFC0D /* IDEKit_Snippets.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC761616C1E4002AFC0D /* IDEKit_Snippets.mm */; };
+		8469FD1B1616C1E4002AFC0D /* IDEKit_SrcDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC771616C1E4002AFC0D /* IDEKit_SrcDocument.h */; };
+		8469FD1C1616C1E4002AFC0D /* IDEKit_SrcDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC781616C1E4002AFC0D /* IDEKit_SrcDocument.mm */; };
+		8469FD1D1616C1E4002AFC0D /* IDEKit_SrcEditView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC791616C1E4002AFC0D /* IDEKit_SrcEditView.h */; };
+		8469FD1E1616C1E4002AFC0D /* IDEKit_SrcEditView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC7A1616C1E4002AFC0D /* IDEKit_SrcEditView.mm */; };
+		8469FD1F1616C1E4002AFC0D /* IDEKit_SrcEditViewBreakpoints.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC7B1616C1E4002AFC0D /* IDEKit_SrcEditViewBreakpoints.h */; };
+		8469FD201616C1E4002AFC0D /* IDEKit_SrcEditViewBreakpoints.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC7C1616C1E4002AFC0D /* IDEKit_SrcEditViewBreakpoints.mm */; };
+		8469FD211616C1E4002AFC0D /* IDEKit_SrcEditViewExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC7D1616C1E4002AFC0D /* IDEKit_SrcEditViewExtensions.h */; };
+		8469FD221616C1E4002AFC0D /* IDEKit_SrcEditViewExtensions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC7E1616C1E4002AFC0D /* IDEKit_SrcEditViewExtensions.mm */; };
+		8469FD231616C1E4002AFC0D /* IDEKit_SrcEditViewFolding.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC7F1616C1E4002AFC0D /* IDEKit_SrcEditViewFolding.h */; };
+		8469FD241616C1E4002AFC0D /* IDEKit_SrcEditViewFolding.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC801616C1E4002AFC0D /* IDEKit_SrcEditViewFolding.mm */; };
+		8469FD251616C1E4002AFC0D /* IDEKit_SrcEditViewPrinting.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC811616C1E4002AFC0D /* IDEKit_SrcEditViewPrinting.h */; };
+		8469FD261616C1E4002AFC0D /* IDEKit_SrcEditViewPrinting.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC821616C1E4002AFC0D /* IDEKit_SrcEditViewPrinting.mm */; };
+		8469FD271616C1E4002AFC0D /* IDEKit_SrcEditViewStatusBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC831616C1E4002AFC0D /* IDEKit_SrcEditViewStatusBar.h */; };
+		8469FD281616C1E4002AFC0D /* IDEKit_SrcEditViewStatusBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC841616C1E4002AFC0D /* IDEKit_SrcEditViewStatusBar.mm */; };
+		8469FD291616C1E4002AFC0D /* IDEKit_SrcLayoutManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC851616C1E4002AFC0D /* IDEKit_SrcLayoutManager.h */; };
+		8469FD2A1616C1E4002AFC0D /* IDEKit_SrcLayoutManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC861616C1E4002AFC0D /* IDEKit_SrcLayoutManager.mm */; };
+		8469FD2B1616C1E4002AFC0D /* IDEKit_SrcScroller.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC871616C1E4002AFC0D /* IDEKit_SrcScroller.h */; };
+		8469FD2C1616C1E4002AFC0D /* IDEKit_SrcScroller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC881616C1E4002AFC0D /* IDEKit_SrcScroller.mm */; };
+		8469FD2D1616C1E4002AFC0D /* IDEKit_TextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC891616C1E4002AFC0D /* IDEKit_TextView.h */; };
+		8469FD2E1616C1E4002AFC0D /* IDEKit_TextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC8A1616C1E4002AFC0D /* IDEKit_TextView.mm */; };
+		8469FD2F1616C1E4002AFC0D /* IDEKit_TextViewExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC8B1616C1E4002AFC0D /* IDEKit_TextViewExtensions.h */; };
+		8469FD301616C1E4002AFC0D /* IDEKit_TextViewExtensions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC8C1616C1E4002AFC0D /* IDEKit_TextViewExtensions.mm */; };
+		8469FD311616C1E4002AFC0D /* Ada95.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC8F1616C1E4002AFC0D /* Ada95.plist */; };
+		8469FD321616C1E4002AFC0D /* AppleScript.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC901616C1E4002AFC0D /* AppleScript.plist */; };
+		8469FD331616C1E4002AFC0D /* BourneShell.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC911616C1E4002AFC0D /* BourneShell.plist */; };
+		8469FD341616C1E4002AFC0D /* CShell.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC921616C1E4002AFC0D /* CShell.plist */; };
+		8469FD351616C1E4002AFC0D /* Fortran.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC931616C1E4002AFC0D /* Fortran.plist */; };
+		8469FD361616C1E4002AFC0D /* GenericShell.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC941616C1E4002AFC0D /* GenericShell.plist */; };
+		8469FD371616C1E4002AFC0D /* Java.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC951616C1E4002AFC0D /* Java.plist */; };
+		8469FD381616C1E4002AFC0D /* Pascal.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC961616C1E4002AFC0D /* Pascal.plist */; };
+		8469FD391616C1E4002AFC0D /* Perl.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC971616C1E4002AFC0D /* Perl.plist */; };
+		8469FD3A1616C1E4002AFC0D /* php.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC981616C1E4002AFC0D /* php.plist */; };
+		8469FD3B1616C1E4002AFC0D /* ppd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC991616C1E4002AFC0D /* ppd.plist */; };
+		8469FD3C1616C1E4002AFC0D /* Rez.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC9A1616C1E4002AFC0D /* Rez.plist */; };
+		8469FD3D1616C1E4002AFC0D /* Ruby.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC9B1616C1E4002AFC0D /* Ruby.plist */; };
+		8469FD3E1616C1E4002AFC0D /* GrabCookbook.py in Resources */ = {isa = PBXBuildFile; fileRef = 8469FC9C1616C1E4002AFC0D /* GrabCookbook.py */; };
+		8469FD3F1616C1E4002AFC0D /* IDEKit_CLanguagePlugins.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC9D1616C1E4002AFC0D /* IDEKit_CLanguagePlugins.h */; };
+		8469FD401616C1E4002AFC0D /* IDEKit_CLanguagePlugins.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FC9E1616C1E4002AFC0D /* IDEKit_CLanguagePlugins.mm */; };
+		8469FD411616C1E4002AFC0D /* IDEKit_GenericPlugIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FC9F1616C1E4002AFC0D /* IDEKit_GenericPlugIn.h */; };
+		8469FD421616C1E4002AFC0D /* IDEKit_GenericPlugIn.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCA01616C1E4002AFC0D /* IDEKit_GenericPlugIn.mm */; };
+		8469FD431616C1E4002AFC0D /* IDEKit_HTMLPlugIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCA11616C1E4002AFC0D /* IDEKit_HTMLPlugIn.h */; };
+		8469FD441616C1E4002AFC0D /* IDEKit_HTMLPlugIn.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCA21616C1E4002AFC0D /* IDEKit_HTMLPlugIn.mm */; };
+		8469FD451616C1E4002AFC0D /* IDEKit_LanguagePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCA31616C1E4002AFC0D /* IDEKit_LanguagePlugin.h */; };
+		8469FD461616C1E4002AFC0D /* IDEKit_LanguagePlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCA41616C1E4002AFC0D /* IDEKit_LanguagePlugin.mm */; };
+		8469FD471616C1E4002AFC0D /* IDEKit_LexParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCA51616C1E4002AFC0D /* IDEKit_LexParser.h */; };
+		8469FD481616C1E4002AFC0D /* IDEKit_LexParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCA61616C1E4002AFC0D /* IDEKit_LexParser.mm */; };
+		8469FD491616C1E4002AFC0D /* IDEKit_LexParserUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCA71616C1E4002AFC0D /* IDEKit_LexParserUtils.h */; };
+		8469FD4A1616C1E4002AFC0D /* IDEKit_LexParserUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCA81616C1E4002AFC0D /* IDEKit_LexParserUtils.mm */; };
+		8469FD4B1616C1E4002AFC0D /* IDEKit_LuaPlugIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCA91616C1E4002AFC0D /* IDEKit_LuaPlugIn.h */; };
+		8469FD4C1616C1E4002AFC0D /* IDEKit_LuaPlugIn.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCAA1616C1E4002AFC0D /* IDEKit_LuaPlugIn.mm */; };
+		8469FD4D1616C1E4002AFC0D /* IDEKit_PlainTextPlugins.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCAB1616C1E4002AFC0D /* IDEKit_PlainTextPlugins.h */; };
+		8469FD4E1616C1E5002AFC0D /* IDEKit_PlainTextPlugins.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCAC1616C1E4002AFC0D /* IDEKit_PlainTextPlugins.mm */; };
+		8469FD4F1616C1E5002AFC0D /* IDEKit_plistPlugIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCAD1616C1E4002AFC0D /* IDEKit_plistPlugIn.h */; };
+		8469FD501616C1E5002AFC0D /* IDEKit_plistPlugIn.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCAE1616C1E4002AFC0D /* IDEKit_plistPlugIn.mm */; };
+		8469FD511616C1E5002AFC0D /* IDEKit_PythonPlugIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCAF1616C1E4002AFC0D /* IDEKit_PythonPlugIn.h */; };
+		8469FD521616C1E5002AFC0D /* IDEKit_PythonPlugIn.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCB01616C1E4002AFC0D /* IDEKit_PythonPlugIn.mm */; };
+		8469FD531616C1E5002AFC0D /* IDEKit_RSSPlugIn.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCB11616C1E4002AFC0D /* IDEKit_RSSPlugIn.h */; };
+		8469FD541616C1E5002AFC0D /* IDEKit_RSSPlugIn.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCB21616C1E4002AFC0D /* IDEKit_RSSPlugIn.mm */; };
+		8469FD551616C1E5002AFC0D /* IDEKit_TextFunctionMarkers.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCB31616C1E4002AFC0D /* IDEKit_TextFunctionMarkers.h */; };
+		8469FD561616C1E5002AFC0D /* IDEKit_TextFunctionMarkers.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCB41616C1E4002AFC0D /* IDEKit_TextFunctionMarkers.mm */; };
+		8469FD571616C1E5002AFC0D /* phpCookbook.iksnip in Resources */ = {isa = PBXBuildFile; fileRef = 8469FCB51616C1E4002AFC0D /* phpCookbook.iksnip */; };
+		8469FD581616C1E5002AFC0D /* pyCookbook.iksnip in Resources */ = {isa = PBXBuildFile; fileRef = 8469FCB61616C1E4002AFC0D /* pyCookbook.iksnip */; };
+		8469FD591616C1E5002AFC0D /* RSS templates.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FCB71616C1E4002AFC0D /* RSS templates.plist */; };
+		8469FD5A1616C1E5002AFC0D /* rxCookbook.iksnip in Resources */ = {isa = PBXBuildFile; fileRef = 8469FCB81616C1E4002AFC0D /* rxCookbook.iksnip */; };
+		8469FD5B1616C1E5002AFC0D /* tclCookbook.iksnip in Resources */ = {isa = PBXBuildFile; fileRef = 8469FCB91616C1E4002AFC0D /* tclCookbook.iksnip */; };
+		8469FD5C1616C1E5002AFC0D /* IDEKit_PreferenceController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCBB1616C1E4002AFC0D /* IDEKit_PreferenceController.h */; };
+		8469FD5D1616C1E5002AFC0D /* IDEKit_PreferenceController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCBC1616C1E4002AFC0D /* IDEKit_PreferenceController.mm */; };
+		8469FD5E1616C1E5002AFC0D /* IDEKit_PreferencePane.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCBD1616C1E4002AFC0D /* IDEKit_PreferencePane.h */; };
+		8469FD5F1616C1E5002AFC0D /* IDEKit_PreferencePane.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCBE1616C1E4002AFC0D /* IDEKit_PreferencePane.mm */; };
+		8469FD601616C1E5002AFC0D /* IDEKit_UserSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCBF1616C1E4002AFC0D /* IDEKit_UserSettings.h */; };
+		8469FD611616C1E5002AFC0D /* IDEKit_UserSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCC01616C1E4002AFC0D /* IDEKit_UserSettings.mm */; };
+		8469FD621616C1E5002AFC0D /* InfoPListPrefsPane.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCC11616C1E4002AFC0D /* InfoPListPrefsPane.h */; };
+		8469FD631616C1E5002AFC0D /* InfoPListPrefsPane.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCC21616C1E4002AFC0D /* InfoPListPrefsPane.mm */; };
+		8469FD641616C1E5002AFC0D /* KeyBindingList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FCC31616C1E4002AFC0D /* KeyBindingList.plist */; };
+		8469FD651616C1E5002AFC0D /* KeyBindingsPrefsPane.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCC41616C1E4002AFC0D /* KeyBindingsPrefsPane.h */; };
+		8469FD661616C1E5002AFC0D /* KeyBindingsPrefsPane.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCC51616C1E4002AFC0D /* KeyBindingsPrefsPane.mm */; };
+		8469FD671616C1E5002AFC0D /* TextColorPrefsPane.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCC61616C1E4002AFC0D /* TextColorPrefsPane.h */; };
+		8469FD681616C1E5002AFC0D /* TextColorPrefsPane.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCC71616C1E4002AFC0D /* TextColorPrefsPane.mm */; };
+		8469FD691616C1E5002AFC0D /* TextTabPrefsPane.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCC81616C1E4002AFC0D /* TextTabPrefsPane.h */; };
+		8469FD6A1616C1E5002AFC0D /* TextTabPrefsPane.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCC91616C1E4002AFC0D /* TextTabPrefsPane.mm */; };
+		8469FD6B1616C1E5002AFC0D /* IDEKit_ProjDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCCB1616C1E4002AFC0D /* IDEKit_ProjDocument.h */; };
+		8469FD6C1616C1E5002AFC0D /* IDEKit_ProjDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCCC1616C1E4002AFC0D /* IDEKit_ProjDocument.mm */; };
+		8469FD6D1616C1E5002AFC0D /* IDEKit_ProjDocumentInfoPList.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCCD1616C1E4002AFC0D /* IDEKit_ProjDocumentInfoPList.h */; };
+		8469FD6E1616C1E5002AFC0D /* IDEKit_ProjDocumentInfoPList.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCCE1616C1E4002AFC0D /* IDEKit_ProjDocumentInfoPList.mm */; };
+		8469FD6F1616C1E5002AFC0D /* IDEKit_ProjDocumentPaths.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCCF1616C1E4002AFC0D /* IDEKit_ProjDocumentPaths.h */; };
+		8469FD701616C1E5002AFC0D /* IDEKit_ProjDocumentPaths.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCD01616C1E4002AFC0D /* IDEKit_ProjDocumentPaths.mm */; };
+		8469FD711616C1E5002AFC0D /* IDEKit_ProjDocumentUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCD11616C1E4002AFC0D /* IDEKit_ProjDocumentUI.h */; };
+		8469FD721616C1E5002AFC0D /* IDEKit_ProjDocumentUI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCD21616C1E4002AFC0D /* IDEKit_ProjDocumentUI.mm */; };
+		8469FD731616C1E5002AFC0D /* IDEKit_ProjSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCD31616C1E4002AFC0D /* IDEKit_ProjSettings.h */; };
+		8469FD741616C1E5002AFC0D /* IDEKit_ProjSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCD41616C1E4002AFC0D /* IDEKit_ProjSettings.mm */; };
+		8469FD751616C1E5002AFC0D /* IDEKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCD61616C1E4002AFC0D /* IDEKit.h */; };
+		8469FD761616C1E5002AFC0D /* NSString102.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCD91616C1E4002AFC0D /* NSString102.h */; };
+		8469FD771616C1E5002AFC0D /* NSString102.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCDA1616C1E4002AFC0D /* NSString102.mm */; };
+		8469FD781616C1E5002AFC0D /* FakeTCLBridge.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCDB1616C1E4002AFC0D /* FakeTCLBridge.c */; };
+		8469FD791616C1E5002AFC0D /* FakeTCLBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCDC1616C1E4002AFC0D /* FakeTCLBridge.h */; };
+		8469FD7A1616C1E5002AFC0D /* IDEKit_Breakpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCDD1616C1E4002AFC0D /* IDEKit_Breakpoint.h */; };
+		8469FD7B1616C1E5002AFC0D /* IDEKit_Breakpoint.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCDE1616C1E4002AFC0D /* IDEKit_Breakpoint.mm */; };
+		8469FD7C1616C1E5002AFC0D /* IDEKit_BreakpointInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCDF1616C1E4002AFC0D /* IDEKit_BreakpointInspector.h */; };
+		8469FD7D1616C1E5002AFC0D /* IDEKit_BreakpointInspector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCE01616C1E4002AFC0D /* IDEKit_BreakpointInspector.mm */; };
+		8469FD7E1616C1E5002AFC0D /* IDEKit_BreakpointManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCE11616C1E4002AFC0D /* IDEKit_BreakpointManager.h */; };
+		8469FD7F1616C1E5002AFC0D /* IDEKit_BreakpointManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCE21616C1E4002AFC0D /* IDEKit_BreakpointManager.mm */; };
+		8469FD801616C1E5002AFC0D /* IDEKit_Delegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCE31616C1E4002AFC0D /* IDEKit_Delegate.h */; };
+		8469FD811616C1E5002AFC0D /* IDEKit_Delegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCE41616C1E4002AFC0D /* IDEKit_Delegate.mm */; };
+		8469FD821616C1E5002AFC0D /* IDEKit_DialogController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCE51616C1E4002AFC0D /* IDEKit_DialogController.h */; };
+		8469FD831616C1E5002AFC0D /* IDEKit_DialogController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCE61616C1E4002AFC0D /* IDEKit_DialogController.mm */; };
+		8469FD841616C1E5002AFC0D /* IDEKit_FileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCE71616C1E4002AFC0D /* IDEKit_FileManager.h */; };
+		8469FD851616C1E5002AFC0D /* IDEKit_FileManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCE81616C1E4002AFC0D /* IDEKit_FileManager.mm */; };
+		8469FD861616C1E5002AFC0D /* IDEKit_Globals.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCE91616C1E4002AFC0D /* IDEKit_Globals.h */; };
+		8469FD871616C1E5002AFC0D /* IDEKit_Globals.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCEA1616C1E4002AFC0D /* IDEKit_Globals.mm */; };
+		8469FD881616C1E5002AFC0D /* IDEKit_LayeredDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCEB1616C1E4002AFC0D /* IDEKit_LayeredDefaults.h */; };
+		8469FD891616C1E5002AFC0D /* IDEKit_LayeredDefaults.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCEC1616C1E4002AFC0D /* IDEKit_LayeredDefaults.mm */; };
+		8469FD8A1616C1E5002AFC0D /* IDEKit_MultiFileResults.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCED1616C1E4002AFC0D /* IDEKit_MultiFileResults.h */; };
+		8469FD8B1616C1E5002AFC0D /* IDEKit_MultiFileResults.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCEE1616C1E4002AFC0D /* IDEKit_MultiFileResults.mm */; };
+		8469FD8C1616C1E5002AFC0D /* IDEKit_NamedFlattener.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCEF1616C1E4002AFC0D /* IDEKit_NamedFlattener.h */; };
+		8469FD8D1616C1E5002AFC0D /* IDEKit_NamedFlattener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCF01616C1E4002AFC0D /* IDEKit_NamedFlattener.mm */; };
+		8469FD8E1616C1E5002AFC0D /* IDEKit_OpenQuicklyController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCF11616C1E4002AFC0D /* IDEKit_OpenQuicklyController.h */; };
+		8469FD8F1616C1E5002AFC0D /* IDEKit_OpenQuicklyController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCF21616C1E4002AFC0D /* IDEKit_OpenQuicklyController.mm */; };
+		8469FD901616C1E5002AFC0D /* IDEKit_PathUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCF31616C1E4002AFC0D /* IDEKit_PathUtils.h */; };
+		8469FD911616C1E5002AFC0D /* IDEKit_PathUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCF41616C1E4002AFC0D /* IDEKit_PathUtils.mm */; };
+		8469FD921616C1E5002AFC0D /* IDEKit_Resources.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCF51616C1E4002AFC0D /* IDEKit_Resources.h */; };
+		8469FD931616C1E5002AFC0D /* IDEKit_Resources.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCF61616C1E4002AFC0D /* IDEKit_Resources.mm */; };
+		8469FD941616C1E5002AFC0D /* IDEKit_SnapshotFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCF71616C1E4002AFC0D /* IDEKit_SnapshotFile.h */; };
+		8469FD951616C1E5002AFC0D /* IDEKit_SnapshotFile.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCF81616C1E4002AFC0D /* IDEKit_SnapshotFile.mm */; };
+		8469FD961616C1E5002AFC0D /* IDEKit_SourceFingerprint.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCF91616C1E4002AFC0D /* IDEKit_SourceFingerprint.h */; };
+		8469FD971616C1E5002AFC0D /* IDEKit_SourceFingerprint.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCFA1616C1E4002AFC0D /* IDEKit_SourceFingerprint.mm */; };
+		8469FD981616C1E5002AFC0D /* IDEKit_TextColors.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCFB1616C1E4002AFC0D /* IDEKit_TextColors.h */; };
+		8469FD991616C1E5002AFC0D /* IDEKit_TextColors.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCFC1616C1E4002AFC0D /* IDEKit_TextColors.mm */; };
+		8469FD9A1616C1E5002AFC0D /* IDEKit_UniqueFileIDManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCFD1616C1E4002AFC0D /* IDEKit_UniqueFileIDManager.h */; };
+		8469FD9B1616C1E5002AFC0D /* IDEKit_UniqueFileIDManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCFE1616C1E4002AFC0D /* IDEKit_UniqueFileIDManager.mm */; };
+		8469FD9C1616C1E5002AFC0D /* regc_color.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD001616C1E4002AFC0D /* regc_color.c */; };
+		8469FD9D1616C1E5002AFC0D /* regc_cvec.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD011616C1E4002AFC0D /* regc_cvec.c */; };
+		8469FD9E1616C1E5002AFC0D /* regc_lex.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD021616C1E4002AFC0D /* regc_lex.c */; };
+		8469FD9F1616C1E5002AFC0D /* regc_locale.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD031616C1E4002AFC0D /* regc_locale.c */; };
+		8469FDA01616C1E5002AFC0D /* regc_nfa.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD041616C1E4002AFC0D /* regc_nfa.c */; };
+		8469FDA11616C1E5002AFC0D /* regcomp.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD051616C1E4002AFC0D /* regcomp.c */; };
+		8469FDA21616C1E5002AFC0D /* regcustom.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FD061616C1E4002AFC0D /* regcustom.h */; };
+		8469FDA31616C1E5002AFC0D /* rege_dfa.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD071616C1E4002AFC0D /* rege_dfa.c */; };
+		8469FDA41616C1E5002AFC0D /* regerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD081616C1E4002AFC0D /* regerror.c */; };
+		8469FDA51616C1E5002AFC0D /* regerrs.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FD091616C1E4002AFC0D /* regerrs.h */; };
+		8469FDA61616C1E5002AFC0D /* regex.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FD0A1616C1E4002AFC0D /* regex.h */; };
+		8469FDA71616C1E5002AFC0D /* regexec.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD0B1616C1E4002AFC0D /* regexec.c */; };
+		8469FDA81616C1E5002AFC0D /* regfree.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD0C1616C1E4002AFC0D /* regfree.c */; };
+		8469FDA91616C1E5002AFC0D /* regfronts.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD0D1616C1E4002AFC0D /* regfronts.c */; };
+		8469FDAA1616C1E5002AFC0D /* regguts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FD0E1616C1E4002AFC0D /* regguts.h */; };
+		8469FDBD1616C1EF002AFC0D /* CollapseMarker.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDAC1616C1EF002AFC0D /* CollapseMarker.tiff */; };
+		8469FDBE1616C1EF002AFC0D /* Info-CPlugIn__Upgraded_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDAD1616C1EF002AFC0D /* Info-CPlugIn__Upgraded_.plist */; };
+		8469FDBF1616C1EF002AFC0D /* Info-GenericPlugIn__Upgraded.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDAE1616C1EF002AFC0D /* Info-GenericPlugIn__Upgraded.plist */; };
+		8469FDC01616C1EF002AFC0D /* Info-HTMLPlugIn__Upgraded_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDAF1616C1EF002AFC0D /* Info-HTMLPlugIn__Upgraded_.plist */; };
+		8469FDC11616C1EF002AFC0D /* Info-IDEKit__Upgraded_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDB01616C1EF002AFC0D /* Info-IDEKit__Upgraded_.plist */; };
+		8469FDC21616C1EF002AFC0D /* Info-InfoPListPreference.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDB11616C1EF002AFC0D /* Info-InfoPListPreference.plist */; };
+		8469FDC31616C1EF002AFC0D /* Info-KeyBindingsPreference__Upgraded_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDB21616C1EF002AFC0D /* Info-KeyBindingsPreference__Upgraded_.plist */; };
+		8469FDC41616C1EF002AFC0D /* Info-LuaPlugIn__Upgraded_ copy.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDB31616C1EF002AFC0D /* Info-LuaPlugIn__Upgraded_ copy.plist */; };
+		8469FDC51616C1EF002AFC0D /* Info-LuaPlugIn__Upgraded_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDB41616C1EF002AFC0D /* Info-LuaPlugIn__Upgraded_.plist */; };
+		8469FDC61616C1EF002AFC0D /* Info-PlistPlugIn__Upgraded_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDB51616C1EF002AFC0D /* Info-PlistPlugIn__Upgraded_.plist */; };
+		8469FDC71616C1EF002AFC0D /* Info-PythonPlugIn__Upgraded_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDB61616C1EF002AFC0D /* Info-PythonPlugIn__Upgraded_.plist */; };
+		8469FDC81616C1EF002AFC0D /* Info-RSSPlugIn__Upgraded_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDB71616C1EF002AFC0D /* Info-RSSPlugIn__Upgraded_.plist */; };
+		8469FDC91616C1EF002AFC0D /* Info-TextColorsPreference__Upgraded_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDB81616C1EF002AFC0D /* Info-TextColorsPreference__Upgraded_.plist */; };
+		8469FDCA1616C1EF002AFC0D /* Info-TextTabPreference__Upgraded_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDB91616C1EF002AFC0D /* Info-TextTabPreference__Upgraded_.plist */; };
+		8469FDCB1616C1EF002AFC0D /* Lesser.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDBA1616C1EF002AFC0D /* Lesser.txt */; };
+		8469FDCC1616C1EF002AFC0D /* Licensing IDEKit.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDBB1616C1EF002AFC0D /* Licensing IDEKit.rtf */; };
+		8469FDCD1616C1EF002AFC0D /* ReadMe.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDBC1616C1EF002AFC0D /* ReadMe.rtf */; };
+		8469FDCF1616C832002AFC0D /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8469FDCE1616C832002AFC0D /* libobjc.A.dylib */; };
+		8469FDD11616CFA3002AFC0D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8469FDD01616CFA3002AFC0D /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8469FC521616C1CD002AFC0D /* IDEKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IDEKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8469FC551616C1CD002AFC0D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		8469FC581616C1CD002AFC0D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		8469FC591616C1CD002AFC0D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		8469FC5A1616C1CD002AFC0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8469FC5D1616C1CD002AFC0D /* IDEKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IDEKit-Info.plist"; sourceTree = "<group>"; };
+		8469FC5F1616C1CD002AFC0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8469FC611616C1CD002AFC0D /* IDEKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IDEKit-Prefix.pch"; sourceTree = "<group>"; };
+		8469FC6B1616C1E4002AFC0D /* IDEKit_Autocompletion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_Autocompletion.h; sourceTree = "<group>"; };
+		8469FC6C1616C1E4002AFC0D /* IDEKit_Autocompletion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_Autocompletion.mm; sourceTree = "<group>"; };
+		8469FC6D1616C1E4002AFC0D /* IDEKit_Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_Console.h; sourceTree = "<group>"; };
+		8469FC6E1616C1E4002AFC0D /* IDEKit_Console.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_Console.mm; sourceTree = "<group>"; };
+		8469FC6F1616C1E4002AFC0D /* IDEKit_FindPaletteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_FindPaletteController.h; sourceTree = "<group>"; };
+		8469FC701616C1E4002AFC0D /* IDEKit_FindPaletteController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_FindPaletteController.mm; sourceTree = "<group>"; };
+		8469FC711616C1E4002AFC0D /* IDEKit_LineCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_LineCache.h; sourceTree = "<group>"; };
+		8469FC721616C1E4002AFC0D /* IDEKit_LineCache.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_LineCache.mm; sourceTree = "<group>"; };
+		8469FC731616C1E4002AFC0D /* IDEKit_RTFViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_RTFViewer.h; sourceTree = "<group>"; };
+		8469FC741616C1E4002AFC0D /* IDEKit_RTFViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDEKit_RTFViewer.m; sourceTree = "<group>"; };
+		8469FC751616C1E4002AFC0D /* IDEKit_Snippets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_Snippets.h; sourceTree = "<group>"; };
+		8469FC761616C1E4002AFC0D /* IDEKit_Snippets.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_Snippets.mm; sourceTree = "<group>"; };
+		8469FC771616C1E4002AFC0D /* IDEKit_SrcDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_SrcDocument.h; sourceTree = "<group>"; };
+		8469FC781616C1E4002AFC0D /* IDEKit_SrcDocument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_SrcDocument.mm; sourceTree = "<group>"; };
+		8469FC791616C1E4002AFC0D /* IDEKit_SrcEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_SrcEditView.h; sourceTree = "<group>"; };
+		8469FC7A1616C1E4002AFC0D /* IDEKit_SrcEditView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_SrcEditView.mm; sourceTree = "<group>"; };
+		8469FC7B1616C1E4002AFC0D /* IDEKit_SrcEditViewBreakpoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_SrcEditViewBreakpoints.h; sourceTree = "<group>"; };
+		8469FC7C1616C1E4002AFC0D /* IDEKit_SrcEditViewBreakpoints.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_SrcEditViewBreakpoints.mm; sourceTree = "<group>"; };
+		8469FC7D1616C1E4002AFC0D /* IDEKit_SrcEditViewExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_SrcEditViewExtensions.h; sourceTree = "<group>"; };
+		8469FC7E1616C1E4002AFC0D /* IDEKit_SrcEditViewExtensions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_SrcEditViewExtensions.mm; sourceTree = "<group>"; };
+		8469FC7F1616C1E4002AFC0D /* IDEKit_SrcEditViewFolding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_SrcEditViewFolding.h; sourceTree = "<group>"; };
+		8469FC801616C1E4002AFC0D /* IDEKit_SrcEditViewFolding.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_SrcEditViewFolding.mm; sourceTree = "<group>"; };
+		8469FC811616C1E4002AFC0D /* IDEKit_SrcEditViewPrinting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_SrcEditViewPrinting.h; sourceTree = "<group>"; };
+		8469FC821616C1E4002AFC0D /* IDEKit_SrcEditViewPrinting.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_SrcEditViewPrinting.mm; sourceTree = "<group>"; };
+		8469FC831616C1E4002AFC0D /* IDEKit_SrcEditViewStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_SrcEditViewStatusBar.h; sourceTree = "<group>"; };
+		8469FC841616C1E4002AFC0D /* IDEKit_SrcEditViewStatusBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_SrcEditViewStatusBar.mm; sourceTree = "<group>"; };
+		8469FC851616C1E4002AFC0D /* IDEKit_SrcLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_SrcLayoutManager.h; sourceTree = "<group>"; };
+		8469FC861616C1E4002AFC0D /* IDEKit_SrcLayoutManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_SrcLayoutManager.mm; sourceTree = "<group>"; };
+		8469FC871616C1E4002AFC0D /* IDEKit_SrcScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_SrcScroller.h; sourceTree = "<group>"; };
+		8469FC881616C1E4002AFC0D /* IDEKit_SrcScroller.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_SrcScroller.mm; sourceTree = "<group>"; };
+		8469FC891616C1E4002AFC0D /* IDEKit_TextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_TextView.h; sourceTree = "<group>"; };
+		8469FC8A1616C1E4002AFC0D /* IDEKit_TextView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_TextView.mm; sourceTree = "<group>"; };
+		8469FC8B1616C1E4002AFC0D /* IDEKit_TextViewExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_TextViewExtensions.h; sourceTree = "<group>"; };
+		8469FC8C1616C1E4002AFC0D /* IDEKit_TextViewExtensions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_TextViewExtensions.mm; sourceTree = "<group>"; };
+		8469FC8F1616C1E4002AFC0D /* Ada95.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Ada95.plist; sourceTree = "<group>"; };
+		8469FC901616C1E4002AFC0D /* AppleScript.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = AppleScript.plist; sourceTree = "<group>"; };
+		8469FC911616C1E4002AFC0D /* BourneShell.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = BourneShell.plist; sourceTree = "<group>"; };
+		8469FC921616C1E4002AFC0D /* CShell.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = CShell.plist; sourceTree = "<group>"; };
+		8469FC931616C1E4002AFC0D /* Fortran.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Fortran.plist; sourceTree = "<group>"; };
+		8469FC941616C1E4002AFC0D /* GenericShell.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = GenericShell.plist; sourceTree = "<group>"; };
+		8469FC951616C1E4002AFC0D /* Java.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Java.plist; sourceTree = "<group>"; };
+		8469FC961616C1E4002AFC0D /* Pascal.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Pascal.plist; sourceTree = "<group>"; };
+		8469FC971616C1E4002AFC0D /* Perl.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Perl.plist; sourceTree = "<group>"; };
+		8469FC981616C1E4002AFC0D /* php.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = php.plist; sourceTree = "<group>"; };
+		8469FC991616C1E4002AFC0D /* ppd.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = ppd.plist; sourceTree = "<group>"; };
+		8469FC9A1616C1E4002AFC0D /* Rez.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Rez.plist; sourceTree = "<group>"; };
+		8469FC9B1616C1E4002AFC0D /* Ruby.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Ruby.plist; sourceTree = "<group>"; };
+		8469FC9C1616C1E4002AFC0D /* GrabCookbook.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = GrabCookbook.py; sourceTree = "<group>"; };
+		8469FC9D1616C1E4002AFC0D /* IDEKit_CLanguagePlugins.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_CLanguagePlugins.h; sourceTree = "<group>"; };
+		8469FC9E1616C1E4002AFC0D /* IDEKit_CLanguagePlugins.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_CLanguagePlugins.mm; sourceTree = "<group>"; };
+		8469FC9F1616C1E4002AFC0D /* IDEKit_GenericPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_GenericPlugIn.h; sourceTree = "<group>"; };
+		8469FCA01616C1E4002AFC0D /* IDEKit_GenericPlugIn.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_GenericPlugIn.mm; sourceTree = "<group>"; };
+		8469FCA11616C1E4002AFC0D /* IDEKit_HTMLPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_HTMLPlugIn.h; sourceTree = "<group>"; };
+		8469FCA21616C1E4002AFC0D /* IDEKit_HTMLPlugIn.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_HTMLPlugIn.mm; sourceTree = "<group>"; };
+		8469FCA31616C1E4002AFC0D /* IDEKit_LanguagePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_LanguagePlugin.h; sourceTree = "<group>"; };
+		8469FCA41616C1E4002AFC0D /* IDEKit_LanguagePlugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_LanguagePlugin.mm; sourceTree = "<group>"; };
+		8469FCA51616C1E4002AFC0D /* IDEKit_LexParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_LexParser.h; sourceTree = "<group>"; };
+		8469FCA61616C1E4002AFC0D /* IDEKit_LexParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_LexParser.mm; sourceTree = "<group>"; };
+		8469FCA71616C1E4002AFC0D /* IDEKit_LexParserUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_LexParserUtils.h; sourceTree = "<group>"; };
+		8469FCA81616C1E4002AFC0D /* IDEKit_LexParserUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_LexParserUtils.mm; sourceTree = "<group>"; };
+		8469FCA91616C1E4002AFC0D /* IDEKit_LuaPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_LuaPlugIn.h; sourceTree = "<group>"; };
+		8469FCAA1616C1E4002AFC0D /* IDEKit_LuaPlugIn.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_LuaPlugIn.mm; sourceTree = "<group>"; };
+		8469FCAB1616C1E4002AFC0D /* IDEKit_PlainTextPlugins.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_PlainTextPlugins.h; sourceTree = "<group>"; };
+		8469FCAC1616C1E4002AFC0D /* IDEKit_PlainTextPlugins.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_PlainTextPlugins.mm; sourceTree = "<group>"; };
+		8469FCAD1616C1E4002AFC0D /* IDEKit_plistPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_plistPlugIn.h; sourceTree = "<group>"; };
+		8469FCAE1616C1E4002AFC0D /* IDEKit_plistPlugIn.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_plistPlugIn.mm; sourceTree = "<group>"; };
+		8469FCAF1616C1E4002AFC0D /* IDEKit_PythonPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_PythonPlugIn.h; sourceTree = "<group>"; };
+		8469FCB01616C1E4002AFC0D /* IDEKit_PythonPlugIn.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_PythonPlugIn.mm; sourceTree = "<group>"; };
+		8469FCB11616C1E4002AFC0D /* IDEKit_RSSPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_RSSPlugIn.h; sourceTree = "<group>"; };
+		8469FCB21616C1E4002AFC0D /* IDEKit_RSSPlugIn.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_RSSPlugIn.mm; sourceTree = "<group>"; };
+		8469FCB31616C1E4002AFC0D /* IDEKit_TextFunctionMarkers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_TextFunctionMarkers.h; sourceTree = "<group>"; };
+		8469FCB41616C1E4002AFC0D /* IDEKit_TextFunctionMarkers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_TextFunctionMarkers.mm; sourceTree = "<group>"; };
+		8469FCB51616C1E4002AFC0D /* phpCookbook.iksnip */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = phpCookbook.iksnip; sourceTree = "<group>"; };
+		8469FCB61616C1E4002AFC0D /* pyCookbook.iksnip */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pyCookbook.iksnip; sourceTree = "<group>"; };
+		8469FCB71616C1E4002AFC0D /* RSS templates.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RSS templates.plist"; sourceTree = "<group>"; };
+		8469FCB81616C1E4002AFC0D /* rxCookbook.iksnip */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rxCookbook.iksnip; sourceTree = "<group>"; };
+		8469FCB91616C1E4002AFC0D /* tclCookbook.iksnip */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tclCookbook.iksnip; sourceTree = "<group>"; };
+		8469FCBB1616C1E4002AFC0D /* IDEKit_PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_PreferenceController.h; sourceTree = "<group>"; };
+		8469FCBC1616C1E4002AFC0D /* IDEKit_PreferenceController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_PreferenceController.mm; sourceTree = "<group>"; };
+		8469FCBD1616C1E4002AFC0D /* IDEKit_PreferencePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_PreferencePane.h; sourceTree = "<group>"; };
+		8469FCBE1616C1E4002AFC0D /* IDEKit_PreferencePane.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_PreferencePane.mm; sourceTree = "<group>"; };
+		8469FCBF1616C1E4002AFC0D /* IDEKit_UserSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_UserSettings.h; sourceTree = "<group>"; };
+		8469FCC01616C1E4002AFC0D /* IDEKit_UserSettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_UserSettings.mm; sourceTree = "<group>"; };
+		8469FCC11616C1E4002AFC0D /* InfoPListPrefsPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPListPrefsPane.h; sourceTree = "<group>"; };
+		8469FCC21616C1E4002AFC0D /* InfoPListPrefsPane.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InfoPListPrefsPane.mm; sourceTree = "<group>"; };
+		8469FCC31616C1E4002AFC0D /* KeyBindingList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = KeyBindingList.plist; sourceTree = "<group>"; };
+		8469FCC41616C1E4002AFC0D /* KeyBindingsPrefsPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyBindingsPrefsPane.h; sourceTree = "<group>"; };
+		8469FCC51616C1E4002AFC0D /* KeyBindingsPrefsPane.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KeyBindingsPrefsPane.mm; sourceTree = "<group>"; };
+		8469FCC61616C1E4002AFC0D /* TextColorPrefsPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextColorPrefsPane.h; sourceTree = "<group>"; };
+		8469FCC71616C1E4002AFC0D /* TextColorPrefsPane.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TextColorPrefsPane.mm; sourceTree = "<group>"; };
+		8469FCC81616C1E4002AFC0D /* TextTabPrefsPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextTabPrefsPane.h; sourceTree = "<group>"; };
+		8469FCC91616C1E4002AFC0D /* TextTabPrefsPane.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TextTabPrefsPane.mm; sourceTree = "<group>"; };
+		8469FCCB1616C1E4002AFC0D /* IDEKit_ProjDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_ProjDocument.h; sourceTree = "<group>"; };
+		8469FCCC1616C1E4002AFC0D /* IDEKit_ProjDocument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_ProjDocument.mm; sourceTree = "<group>"; };
+		8469FCCD1616C1E4002AFC0D /* IDEKit_ProjDocumentInfoPList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_ProjDocumentInfoPList.h; sourceTree = "<group>"; };
+		8469FCCE1616C1E4002AFC0D /* IDEKit_ProjDocumentInfoPList.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_ProjDocumentInfoPList.mm; sourceTree = "<group>"; };
+		8469FCCF1616C1E4002AFC0D /* IDEKit_ProjDocumentPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_ProjDocumentPaths.h; sourceTree = "<group>"; };
+		8469FCD01616C1E4002AFC0D /* IDEKit_ProjDocumentPaths.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_ProjDocumentPaths.mm; sourceTree = "<group>"; };
+		8469FCD11616C1E4002AFC0D /* IDEKit_ProjDocumentUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_ProjDocumentUI.h; sourceTree = "<group>"; };
+		8469FCD21616C1E4002AFC0D /* IDEKit_ProjDocumentUI.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_ProjDocumentUI.mm; sourceTree = "<group>"; };
+		8469FCD31616C1E4002AFC0D /* IDEKit_ProjSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_ProjSettings.h; sourceTree = "<group>"; };
+		8469FCD41616C1E4002AFC0D /* IDEKit_ProjSettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_ProjSettings.mm; sourceTree = "<group>"; };
+		8469FCD61616C1E4002AFC0D /* IDEKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit.h; sourceTree = "<group>"; };
+		8469FCD91616C1E4002AFC0D /* NSString102.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString102.h; sourceTree = "<group>"; };
+		8469FCDA1616C1E4002AFC0D /* NSString102.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSString102.mm; sourceTree = "<group>"; };
+		8469FCDB1616C1E4002AFC0D /* FakeTCLBridge.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FakeTCLBridge.c; sourceTree = "<group>"; };
+		8469FCDC1616C1E4002AFC0D /* FakeTCLBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeTCLBridge.h; sourceTree = "<group>"; };
+		8469FCDD1616C1E4002AFC0D /* IDEKit_Breakpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_Breakpoint.h; sourceTree = "<group>"; };
+		8469FCDE1616C1E4002AFC0D /* IDEKit_Breakpoint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_Breakpoint.mm; sourceTree = "<group>"; };
+		8469FCDF1616C1E4002AFC0D /* IDEKit_BreakpointInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_BreakpointInspector.h; sourceTree = "<group>"; };
+		8469FCE01616C1E4002AFC0D /* IDEKit_BreakpointInspector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_BreakpointInspector.mm; sourceTree = "<group>"; };
+		8469FCE11616C1E4002AFC0D /* IDEKit_BreakpointManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_BreakpointManager.h; sourceTree = "<group>"; };
+		8469FCE21616C1E4002AFC0D /* IDEKit_BreakpointManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_BreakpointManager.mm; sourceTree = "<group>"; };
+		8469FCE31616C1E4002AFC0D /* IDEKit_Delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_Delegate.h; sourceTree = "<group>"; };
+		8469FCE41616C1E4002AFC0D /* IDEKit_Delegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_Delegate.mm; sourceTree = "<group>"; };
+		8469FCE51616C1E4002AFC0D /* IDEKit_DialogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_DialogController.h; sourceTree = "<group>"; };
+		8469FCE61616C1E4002AFC0D /* IDEKit_DialogController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_DialogController.mm; sourceTree = "<group>"; };
+		8469FCE71616C1E4002AFC0D /* IDEKit_FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_FileManager.h; sourceTree = "<group>"; };
+		8469FCE81616C1E4002AFC0D /* IDEKit_FileManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_FileManager.mm; sourceTree = "<group>"; };
+		8469FCE91616C1E4002AFC0D /* IDEKit_Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_Globals.h; sourceTree = "<group>"; };
+		8469FCEA1616C1E4002AFC0D /* IDEKit_Globals.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_Globals.mm; sourceTree = "<group>"; };
+		8469FCEB1616C1E4002AFC0D /* IDEKit_LayeredDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_LayeredDefaults.h; sourceTree = "<group>"; };
+		8469FCEC1616C1E4002AFC0D /* IDEKit_LayeredDefaults.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_LayeredDefaults.mm; sourceTree = "<group>"; };
+		8469FCED1616C1E4002AFC0D /* IDEKit_MultiFileResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_MultiFileResults.h; sourceTree = "<group>"; };
+		8469FCEE1616C1E4002AFC0D /* IDEKit_MultiFileResults.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_MultiFileResults.mm; sourceTree = "<group>"; };
+		8469FCEF1616C1E4002AFC0D /* IDEKit_NamedFlattener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_NamedFlattener.h; sourceTree = "<group>"; };
+		8469FCF01616C1E4002AFC0D /* IDEKit_NamedFlattener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_NamedFlattener.mm; sourceTree = "<group>"; };
+		8469FCF11616C1E4002AFC0D /* IDEKit_OpenQuicklyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_OpenQuicklyController.h; sourceTree = "<group>"; };
+		8469FCF21616C1E4002AFC0D /* IDEKit_OpenQuicklyController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_OpenQuicklyController.mm; sourceTree = "<group>"; };
+		8469FCF31616C1E4002AFC0D /* IDEKit_PathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_PathUtils.h; sourceTree = "<group>"; };
+		8469FCF41616C1E4002AFC0D /* IDEKit_PathUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_PathUtils.mm; sourceTree = "<group>"; };
+		8469FCF51616C1E4002AFC0D /* IDEKit_Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_Resources.h; sourceTree = "<group>"; };
+		8469FCF61616C1E4002AFC0D /* IDEKit_Resources.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_Resources.mm; sourceTree = "<group>"; };
+		8469FCF71616C1E4002AFC0D /* IDEKit_SnapshotFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_SnapshotFile.h; sourceTree = "<group>"; };
+		8469FCF81616C1E4002AFC0D /* IDEKit_SnapshotFile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_SnapshotFile.mm; sourceTree = "<group>"; };
+		8469FCF91616C1E4002AFC0D /* IDEKit_SourceFingerprint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_SourceFingerprint.h; sourceTree = "<group>"; };
+		8469FCFA1616C1E4002AFC0D /* IDEKit_SourceFingerprint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_SourceFingerprint.mm; sourceTree = "<group>"; };
+		8469FCFB1616C1E4002AFC0D /* IDEKit_TextColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_TextColors.h; sourceTree = "<group>"; };
+		8469FCFC1616C1E4002AFC0D /* IDEKit_TextColors.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_TextColors.mm; sourceTree = "<group>"; };
+		8469FCFD1616C1E4002AFC0D /* IDEKit_UniqueFileIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_UniqueFileIDManager.h; sourceTree = "<group>"; };
+		8469FCFE1616C1E4002AFC0D /* IDEKit_UniqueFileIDManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_UniqueFileIDManager.mm; sourceTree = "<group>"; };
+		8469FD001616C1E4002AFC0D /* regc_color.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regc_color.c; sourceTree = "<group>"; };
+		8469FD011616C1E4002AFC0D /* regc_cvec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regc_cvec.c; sourceTree = "<group>"; };
+		8469FD021616C1E4002AFC0D /* regc_lex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regc_lex.c; sourceTree = "<group>"; };
+		8469FD031616C1E4002AFC0D /* regc_locale.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regc_locale.c; sourceTree = "<group>"; };
+		8469FD041616C1E4002AFC0D /* regc_nfa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regc_nfa.c; sourceTree = "<group>"; };
+		8469FD051616C1E4002AFC0D /* regcomp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regcomp.c; sourceTree = "<group>"; };
+		8469FD061616C1E4002AFC0D /* regcustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regcustom.h; sourceTree = "<group>"; };
+		8469FD071616C1E4002AFC0D /* rege_dfa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rege_dfa.c; sourceTree = "<group>"; };
+		8469FD081616C1E4002AFC0D /* regerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regerror.c; sourceTree = "<group>"; };
+		8469FD091616C1E4002AFC0D /* regerrs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regerrs.h; sourceTree = "<group>"; };
+		8469FD0A1616C1E4002AFC0D /* regex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regex.h; sourceTree = "<group>"; };
+		8469FD0B1616C1E4002AFC0D /* regexec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regexec.c; sourceTree = "<group>"; };
+		8469FD0C1616C1E4002AFC0D /* regfree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regfree.c; sourceTree = "<group>"; };
+		8469FD0D1616C1E4002AFC0D /* regfronts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regfronts.c; sourceTree = "<group>"; };
+		8469FD0E1616C1E4002AFC0D /* regguts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regguts.h; sourceTree = "<group>"; };
+		8469FDAC1616C1EF002AFC0D /* CollapseMarker.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapseMarker.tiff; sourceTree = "<group>"; };
+		8469FDAD1616C1EF002AFC0D /* Info-CPlugIn__Upgraded_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-CPlugIn__Upgraded_.plist"; sourceTree = "<group>"; };
+		8469FDAE1616C1EF002AFC0D /* Info-GenericPlugIn__Upgraded.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-GenericPlugIn__Upgraded.plist"; sourceTree = "<group>"; };
+		8469FDAF1616C1EF002AFC0D /* Info-HTMLPlugIn__Upgraded_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-HTMLPlugIn__Upgraded_.plist"; sourceTree = "<group>"; };
+		8469FDB01616C1EF002AFC0D /* Info-IDEKit__Upgraded_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-IDEKit__Upgraded_.plist"; sourceTree = "<group>"; };
+		8469FDB11616C1EF002AFC0D /* Info-InfoPListPreference.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-InfoPListPreference.plist"; sourceTree = "<group>"; };
+		8469FDB21616C1EF002AFC0D /* Info-KeyBindingsPreference__Upgraded_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-KeyBindingsPreference__Upgraded_.plist"; sourceTree = "<group>"; };
+		8469FDB31616C1EF002AFC0D /* Info-LuaPlugIn__Upgraded_ copy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-LuaPlugIn__Upgraded_ copy.plist"; sourceTree = "<group>"; };
+		8469FDB41616C1EF002AFC0D /* Info-LuaPlugIn__Upgraded_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-LuaPlugIn__Upgraded_.plist"; sourceTree = "<group>"; };
+		8469FDB51616C1EF002AFC0D /* Info-PlistPlugIn__Upgraded_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-PlistPlugIn__Upgraded_.plist"; sourceTree = "<group>"; };
+		8469FDB61616C1EF002AFC0D /* Info-PythonPlugIn__Upgraded_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-PythonPlugIn__Upgraded_.plist"; sourceTree = "<group>"; };
+		8469FDB71616C1EF002AFC0D /* Info-RSSPlugIn__Upgraded_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-RSSPlugIn__Upgraded_.plist"; sourceTree = "<group>"; };
+		8469FDB81616C1EF002AFC0D /* Info-TextColorsPreference__Upgraded_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-TextColorsPreference__Upgraded_.plist"; sourceTree = "<group>"; };
+		8469FDB91616C1EF002AFC0D /* Info-TextTabPreference__Upgraded_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-TextTabPreference__Upgraded_.plist"; sourceTree = "<group>"; };
+		8469FDBA1616C1EF002AFC0D /* Lesser.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Lesser.txt; sourceTree = "<group>"; };
+		8469FDBB1616C1EF002AFC0D /* Licensing IDEKit.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Licensing IDEKit.rtf"; sourceTree = "<group>"; };
+		8469FDBC1616C1EF002AFC0D /* ReadMe.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ReadMe.rtf; sourceTree = "<group>"; };
+		8469FDCE1616C832002AFC0D /* libobjc.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjc.A.dylib; path = usr/lib/libobjc.A.dylib; sourceTree = SDKROOT; };
+		8469FDD01616CFA3002AFC0D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8469FC4E1616C1CD002AFC0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8469FDD11616CFA3002AFC0D /* QuartzCore.framework in Frameworks */,
+				8469FDCF1616C832002AFC0D /* libobjc.A.dylib in Frameworks */,
+				8469FC561616C1CD002AFC0D /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8469FC461616C1CD002AFC0D = {
+			isa = PBXGroup;
+			children = (
+				8469FDD01616CFA3002AFC0D /* QuartzCore.framework */,
+				8469FDCE1616C832002AFC0D /* libobjc.A.dylib */,
+				8469FC5B1616C1CD002AFC0D /* IDEKit */,
+				8469FC541616C1CD002AFC0D /* Frameworks */,
+				8469FC531616C1CD002AFC0D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8469FC531616C1CD002AFC0D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8469FC521616C1CD002AFC0D /* IDEKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8469FC541616C1CD002AFC0D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8469FC551616C1CD002AFC0D /* Cocoa.framework */,
+				8469FC571616C1CD002AFC0D /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8469FC571616C1CD002AFC0D /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8469FC581616C1CD002AFC0D /* AppKit.framework */,
+				8469FC591616C1CD002AFC0D /* CoreData.framework */,
+				8469FC5A1616C1CD002AFC0D /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		8469FC5B1616C1CD002AFC0D /* IDEKit */ = {
+			isa = PBXGroup;
+			children = (
+				8469FC6A1616C1E4002AFC0D /* Editors */,
+				8469FC8D1616C1E4002AFC0D /* Languages */,
+				8469FCBA1616C1E4002AFC0D /* Preferences */,
+				8469FCCA1616C1E4002AFC0D /* Projects */,
+				8469FCD51616C1E4002AFC0D /* Source */,
+				8469FCD71616C1E4002AFC0D /* Support */,
+				8469FC5C1616C1CD002AFC0D /* Supporting Files */,
+			);
+			path = IDEKit;
+			sourceTree = "<group>";
+		};
+		8469FC5C1616C1CD002AFC0D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8469FDAB1616C1EF002AFC0D /* Images */,
+				8469FDAD1616C1EF002AFC0D /* Info-CPlugIn__Upgraded_.plist */,
+				8469FDAE1616C1EF002AFC0D /* Info-GenericPlugIn__Upgraded.plist */,
+				8469FDAF1616C1EF002AFC0D /* Info-HTMLPlugIn__Upgraded_.plist */,
+				8469FDB01616C1EF002AFC0D /* Info-IDEKit__Upgraded_.plist */,
+				8469FDB11616C1EF002AFC0D /* Info-InfoPListPreference.plist */,
+				8469FDB21616C1EF002AFC0D /* Info-KeyBindingsPreference__Upgraded_.plist */,
+				8469FDB31616C1EF002AFC0D /* Info-LuaPlugIn__Upgraded_ copy.plist */,
+				8469FDB41616C1EF002AFC0D /* Info-LuaPlugIn__Upgraded_.plist */,
+				8469FDB51616C1EF002AFC0D /* Info-PlistPlugIn__Upgraded_.plist */,
+				8469FDB61616C1EF002AFC0D /* Info-PythonPlugIn__Upgraded_.plist */,
+				8469FDB71616C1EF002AFC0D /* Info-RSSPlugIn__Upgraded_.plist */,
+				8469FDB81616C1EF002AFC0D /* Info-TextColorsPreference__Upgraded_.plist */,
+				8469FDB91616C1EF002AFC0D /* Info-TextTabPreference__Upgraded_.plist */,
+				8469FDBA1616C1EF002AFC0D /* Lesser.txt */,
+				8469FDBB1616C1EF002AFC0D /* Licensing IDEKit.rtf */,
+				8469FDBC1616C1EF002AFC0D /* ReadMe.rtf */,
+				8469FC5D1616C1CD002AFC0D /* IDEKit-Info.plist */,
+				8469FC5E1616C1CD002AFC0D /* InfoPlist.strings */,
+				8469FC611616C1CD002AFC0D /* IDEKit-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8469FC6A1616C1E4002AFC0D /* Editors */ = {
+			isa = PBXGroup;
+			children = (
+				8469FC6B1616C1E4002AFC0D /* IDEKit_Autocompletion.h */,
+				8469FC6C1616C1E4002AFC0D /* IDEKit_Autocompletion.mm */,
+				8469FC6D1616C1E4002AFC0D /* IDEKit_Console.h */,
+				8469FC6E1616C1E4002AFC0D /* IDEKit_Console.mm */,
+				8469FC6F1616C1E4002AFC0D /* IDEKit_FindPaletteController.h */,
+				8469FC701616C1E4002AFC0D /* IDEKit_FindPaletteController.mm */,
+				8469FC711616C1E4002AFC0D /* IDEKit_LineCache.h */,
+				8469FC721616C1E4002AFC0D /* IDEKit_LineCache.mm */,
+				8469FC731616C1E4002AFC0D /* IDEKit_RTFViewer.h */,
+				8469FC741616C1E4002AFC0D /* IDEKit_RTFViewer.m */,
+				8469FC751616C1E4002AFC0D /* IDEKit_Snippets.h */,
+				8469FC761616C1E4002AFC0D /* IDEKit_Snippets.mm */,
+				8469FC771616C1E4002AFC0D /* IDEKit_SrcDocument.h */,
+				8469FC781616C1E4002AFC0D /* IDEKit_SrcDocument.mm */,
+				8469FC791616C1E4002AFC0D /* IDEKit_SrcEditView.h */,
+				8469FC7A1616C1E4002AFC0D /* IDEKit_SrcEditView.mm */,
+				8469FC7B1616C1E4002AFC0D /* IDEKit_SrcEditViewBreakpoints.h */,
+				8469FC7C1616C1E4002AFC0D /* IDEKit_SrcEditViewBreakpoints.mm */,
+				8469FC7D1616C1E4002AFC0D /* IDEKit_SrcEditViewExtensions.h */,
+				8469FC7E1616C1E4002AFC0D /* IDEKit_SrcEditViewExtensions.mm */,
+				8469FC7F1616C1E4002AFC0D /* IDEKit_SrcEditViewFolding.h */,
+				8469FC801616C1E4002AFC0D /* IDEKit_SrcEditViewFolding.mm */,
+				8469FC811616C1E4002AFC0D /* IDEKit_SrcEditViewPrinting.h */,
+				8469FC821616C1E4002AFC0D /* IDEKit_SrcEditViewPrinting.mm */,
+				8469FC831616C1E4002AFC0D /* IDEKit_SrcEditViewStatusBar.h */,
+				8469FC841616C1E4002AFC0D /* IDEKit_SrcEditViewStatusBar.mm */,
+				8469FC851616C1E4002AFC0D /* IDEKit_SrcLayoutManager.h */,
+				8469FC861616C1E4002AFC0D /* IDEKit_SrcLayoutManager.mm */,
+				8469FC871616C1E4002AFC0D /* IDEKit_SrcScroller.h */,
+				8469FC881616C1E4002AFC0D /* IDEKit_SrcScroller.mm */,
+				8469FC891616C1E4002AFC0D /* IDEKit_TextView.h */,
+				8469FC8A1616C1E4002AFC0D /* IDEKit_TextView.mm */,
+				8469FC8B1616C1E4002AFC0D /* IDEKit_TextViewExtensions.h */,
+				8469FC8C1616C1E4002AFC0D /* IDEKit_TextViewExtensions.mm */,
+			);
+			path = Editors;
+			sourceTree = "<group>";
+		};
+		8469FC8D1616C1E4002AFC0D /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				8469FC8E1616C1E4002AFC0D /* GenericLanguages */,
+				8469FC9C1616C1E4002AFC0D /* GrabCookbook.py */,
+				8469FC9D1616C1E4002AFC0D /* IDEKit_CLanguagePlugins.h */,
+				8469FC9E1616C1E4002AFC0D /* IDEKit_CLanguagePlugins.mm */,
+				8469FC9F1616C1E4002AFC0D /* IDEKit_GenericPlugIn.h */,
+				8469FCA01616C1E4002AFC0D /* IDEKit_GenericPlugIn.mm */,
+				8469FCA11616C1E4002AFC0D /* IDEKit_HTMLPlugIn.h */,
+				8469FCA21616C1E4002AFC0D /* IDEKit_HTMLPlugIn.mm */,
+				8469FCA31616C1E4002AFC0D /* IDEKit_LanguagePlugin.h */,
+				8469FCA41616C1E4002AFC0D /* IDEKit_LanguagePlugin.mm */,
+				8469FCA51616C1E4002AFC0D /* IDEKit_LexParser.h */,
+				8469FCA61616C1E4002AFC0D /* IDEKit_LexParser.mm */,
+				8469FCA71616C1E4002AFC0D /* IDEKit_LexParserUtils.h */,
+				8469FCA81616C1E4002AFC0D /* IDEKit_LexParserUtils.mm */,
+				8469FCA91616C1E4002AFC0D /* IDEKit_LuaPlugIn.h */,
+				8469FCAA1616C1E4002AFC0D /* IDEKit_LuaPlugIn.mm */,
+				8469FCAB1616C1E4002AFC0D /* IDEKit_PlainTextPlugins.h */,
+				8469FCAC1616C1E4002AFC0D /* IDEKit_PlainTextPlugins.mm */,
+				8469FCAD1616C1E4002AFC0D /* IDEKit_plistPlugIn.h */,
+				8469FCAE1616C1E4002AFC0D /* IDEKit_plistPlugIn.mm */,
+				8469FCAF1616C1E4002AFC0D /* IDEKit_PythonPlugIn.h */,
+				8469FCB01616C1E4002AFC0D /* IDEKit_PythonPlugIn.mm */,
+				8469FCB11616C1E4002AFC0D /* IDEKit_RSSPlugIn.h */,
+				8469FCB21616C1E4002AFC0D /* IDEKit_RSSPlugIn.mm */,
+				8469FCB31616C1E4002AFC0D /* IDEKit_TextFunctionMarkers.h */,
+				8469FCB41616C1E4002AFC0D /* IDEKit_TextFunctionMarkers.mm */,
+				8469FCB51616C1E4002AFC0D /* phpCookbook.iksnip */,
+				8469FCB61616C1E4002AFC0D /* pyCookbook.iksnip */,
+				8469FCB71616C1E4002AFC0D /* RSS templates.plist */,
+				8469FCB81616C1E4002AFC0D /* rxCookbook.iksnip */,
+				8469FCB91616C1E4002AFC0D /* tclCookbook.iksnip */,
+			);
+			path = Languages;
+			sourceTree = "<group>";
+		};
+		8469FC8E1616C1E4002AFC0D /* GenericLanguages */ = {
+			isa = PBXGroup;
+			children = (
+				8469FC8F1616C1E4002AFC0D /* Ada95.plist */,
+				8469FC901616C1E4002AFC0D /* AppleScript.plist */,
+				8469FC911616C1E4002AFC0D /* BourneShell.plist */,
+				8469FC921616C1E4002AFC0D /* CShell.plist */,
+				8469FC931616C1E4002AFC0D /* Fortran.plist */,
+				8469FC941616C1E4002AFC0D /* GenericShell.plist */,
+				8469FC951616C1E4002AFC0D /* Java.plist */,
+				8469FC961616C1E4002AFC0D /* Pascal.plist */,
+				8469FC971616C1E4002AFC0D /* Perl.plist */,
+				8469FC981616C1E4002AFC0D /* php.plist */,
+				8469FC991616C1E4002AFC0D /* ppd.plist */,
+				8469FC9A1616C1E4002AFC0D /* Rez.plist */,
+				8469FC9B1616C1E4002AFC0D /* Ruby.plist */,
+			);
+			path = GenericLanguages;
+			sourceTree = "<group>";
+		};
+		8469FCBA1616C1E4002AFC0D /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				8469FCBB1616C1E4002AFC0D /* IDEKit_PreferenceController.h */,
+				8469FCBC1616C1E4002AFC0D /* IDEKit_PreferenceController.mm */,
+				8469FCBD1616C1E4002AFC0D /* IDEKit_PreferencePane.h */,
+				8469FCBE1616C1E4002AFC0D /* IDEKit_PreferencePane.mm */,
+				8469FCBF1616C1E4002AFC0D /* IDEKit_UserSettings.h */,
+				8469FCC01616C1E4002AFC0D /* IDEKit_UserSettings.mm */,
+				8469FCC11616C1E4002AFC0D /* InfoPListPrefsPane.h */,
+				8469FCC21616C1E4002AFC0D /* InfoPListPrefsPane.mm */,
+				8469FCC31616C1E4002AFC0D /* KeyBindingList.plist */,
+				8469FCC41616C1E4002AFC0D /* KeyBindingsPrefsPane.h */,
+				8469FCC51616C1E4002AFC0D /* KeyBindingsPrefsPane.mm */,
+				8469FCC61616C1E4002AFC0D /* TextColorPrefsPane.h */,
+				8469FCC71616C1E4002AFC0D /* TextColorPrefsPane.mm */,
+				8469FCC81616C1E4002AFC0D /* TextTabPrefsPane.h */,
+				8469FCC91616C1E4002AFC0D /* TextTabPrefsPane.mm */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		8469FCCA1616C1E4002AFC0D /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				8469FCCB1616C1E4002AFC0D /* IDEKit_ProjDocument.h */,
+				8469FCCC1616C1E4002AFC0D /* IDEKit_ProjDocument.mm */,
+				8469FCCD1616C1E4002AFC0D /* IDEKit_ProjDocumentInfoPList.h */,
+				8469FCCE1616C1E4002AFC0D /* IDEKit_ProjDocumentInfoPList.mm */,
+				8469FCCF1616C1E4002AFC0D /* IDEKit_ProjDocumentPaths.h */,
+				8469FCD01616C1E4002AFC0D /* IDEKit_ProjDocumentPaths.mm */,
+				8469FCD11616C1E4002AFC0D /* IDEKit_ProjDocumentUI.h */,
+				8469FCD21616C1E4002AFC0D /* IDEKit_ProjDocumentUI.mm */,
+				8469FCD31616C1E4002AFC0D /* IDEKit_ProjSettings.h */,
+				8469FCD41616C1E4002AFC0D /* IDEKit_ProjSettings.mm */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		8469FCD51616C1E4002AFC0D /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				8469FCD61616C1E4002AFC0D /* IDEKit.h */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		8469FCD71616C1E4002AFC0D /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				8469FCD81616C1E4002AFC0D /* 102Compatibility */,
+				8469FCDB1616C1E4002AFC0D /* FakeTCLBridge.c */,
+				8469FCDC1616C1E4002AFC0D /* FakeTCLBridge.h */,
+				8469FCDD1616C1E4002AFC0D /* IDEKit_Breakpoint.h */,
+				8469FCDE1616C1E4002AFC0D /* IDEKit_Breakpoint.mm */,
+				8469FCDF1616C1E4002AFC0D /* IDEKit_BreakpointInspector.h */,
+				8469FCE01616C1E4002AFC0D /* IDEKit_BreakpointInspector.mm */,
+				8469FCE11616C1E4002AFC0D /* IDEKit_BreakpointManager.h */,
+				8469FCE21616C1E4002AFC0D /* IDEKit_BreakpointManager.mm */,
+				8469FCE31616C1E4002AFC0D /* IDEKit_Delegate.h */,
+				8469FCE41616C1E4002AFC0D /* IDEKit_Delegate.mm */,
+				8469FCE51616C1E4002AFC0D /* IDEKit_DialogController.h */,
+				8469FCE61616C1E4002AFC0D /* IDEKit_DialogController.mm */,
+				8469FCE71616C1E4002AFC0D /* IDEKit_FileManager.h */,
+				8469FCE81616C1E4002AFC0D /* IDEKit_FileManager.mm */,
+				8469FCE91616C1E4002AFC0D /* IDEKit_Globals.h */,
+				8469FCEA1616C1E4002AFC0D /* IDEKit_Globals.mm */,
+				8469FCEB1616C1E4002AFC0D /* IDEKit_LayeredDefaults.h */,
+				8469FCEC1616C1E4002AFC0D /* IDEKit_LayeredDefaults.mm */,
+				8469FCED1616C1E4002AFC0D /* IDEKit_MultiFileResults.h */,
+				8469FCEE1616C1E4002AFC0D /* IDEKit_MultiFileResults.mm */,
+				8469FCEF1616C1E4002AFC0D /* IDEKit_NamedFlattener.h */,
+				8469FCF01616C1E4002AFC0D /* IDEKit_NamedFlattener.mm */,
+				8469FCF11616C1E4002AFC0D /* IDEKit_OpenQuicklyController.h */,
+				8469FCF21616C1E4002AFC0D /* IDEKit_OpenQuicklyController.mm */,
+				8469FCF31616C1E4002AFC0D /* IDEKit_PathUtils.h */,
+				8469FCF41616C1E4002AFC0D /* IDEKit_PathUtils.mm */,
+				8469FCF51616C1E4002AFC0D /* IDEKit_Resources.h */,
+				8469FCF61616C1E4002AFC0D /* IDEKit_Resources.mm */,
+				8469FCF71616C1E4002AFC0D /* IDEKit_SnapshotFile.h */,
+				8469FCF81616C1E4002AFC0D /* IDEKit_SnapshotFile.mm */,
+				8469FCF91616C1E4002AFC0D /* IDEKit_SourceFingerprint.h */,
+				8469FCFA1616C1E4002AFC0D /* IDEKit_SourceFingerprint.mm */,
+				8469FCFB1616C1E4002AFC0D /* IDEKit_TextColors.h */,
+				8469FCFC1616C1E4002AFC0D /* IDEKit_TextColors.mm */,
+				8469FCFD1616C1E4002AFC0D /* IDEKit_UniqueFileIDManager.h */,
+				8469FCFE1616C1E4002AFC0D /* IDEKit_UniqueFileIDManager.mm */,
+				8469FCFF1616C1E4002AFC0D /* regex */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		8469FCD81616C1E4002AFC0D /* 102Compatibility */ = {
+			isa = PBXGroup;
+			children = (
+				8469FCD91616C1E4002AFC0D /* NSString102.h */,
+				8469FCDA1616C1E4002AFC0D /* NSString102.mm */,
+			);
+			path = 102Compatibility;
+			sourceTree = "<group>";
+		};
+		8469FCFF1616C1E4002AFC0D /* regex */ = {
+			isa = PBXGroup;
+			children = (
+				8469FD001616C1E4002AFC0D /* regc_color.c */,
+				8469FD011616C1E4002AFC0D /* regc_cvec.c */,
+				8469FD021616C1E4002AFC0D /* regc_lex.c */,
+				8469FD031616C1E4002AFC0D /* regc_locale.c */,
+				8469FD041616C1E4002AFC0D /* regc_nfa.c */,
+				8469FD051616C1E4002AFC0D /* regcomp.c */,
+				8469FD061616C1E4002AFC0D /* regcustom.h */,
+				8469FD071616C1E4002AFC0D /* rege_dfa.c */,
+				8469FD081616C1E4002AFC0D /* regerror.c */,
+				8469FD091616C1E4002AFC0D /* regerrs.h */,
+				8469FD0A1616C1E4002AFC0D /* regex.h */,
+				8469FD0B1616C1E4002AFC0D /* regexec.c */,
+				8469FD0C1616C1E4002AFC0D /* regfree.c */,
+				8469FD0D1616C1E4002AFC0D /* regfronts.c */,
+				8469FD0E1616C1E4002AFC0D /* regguts.h */,
+			);
+			path = regex;
+			sourceTree = "<group>";
+		};
+		8469FDAB1616C1EF002AFC0D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8469FDAC1616C1EF002AFC0D /* CollapseMarker.tiff */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8469FC4F1616C1CD002AFC0D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8469FD0F1616C1E4002AFC0D /* IDEKit_Autocompletion.h in Headers */,
+				8469FD111616C1E4002AFC0D /* IDEKit_Console.h in Headers */,
+				8469FD131616C1E4002AFC0D /* IDEKit_FindPaletteController.h in Headers */,
+				8469FD151616C1E4002AFC0D /* IDEKit_LineCache.h in Headers */,
+				8469FD171616C1E4002AFC0D /* IDEKit_RTFViewer.h in Headers */,
+				8469FD191616C1E4002AFC0D /* IDEKit_Snippets.h in Headers */,
+				8469FD1B1616C1E4002AFC0D /* IDEKit_SrcDocument.h in Headers */,
+				8469FD1D1616C1E4002AFC0D /* IDEKit_SrcEditView.h in Headers */,
+				8469FD1F1616C1E4002AFC0D /* IDEKit_SrcEditViewBreakpoints.h in Headers */,
+				8469FD211616C1E4002AFC0D /* IDEKit_SrcEditViewExtensions.h in Headers */,
+				8469FD231616C1E4002AFC0D /* IDEKit_SrcEditViewFolding.h in Headers */,
+				8469FD251616C1E4002AFC0D /* IDEKit_SrcEditViewPrinting.h in Headers */,
+				8469FD271616C1E4002AFC0D /* IDEKit_SrcEditViewStatusBar.h in Headers */,
+				8469FD291616C1E4002AFC0D /* IDEKit_SrcLayoutManager.h in Headers */,
+				8469FD2B1616C1E4002AFC0D /* IDEKit_SrcScroller.h in Headers */,
+				8469FD2D1616C1E4002AFC0D /* IDEKit_TextView.h in Headers */,
+				8469FD2F1616C1E4002AFC0D /* IDEKit_TextViewExtensions.h in Headers */,
+				8469FD3F1616C1E4002AFC0D /* IDEKit_CLanguagePlugins.h in Headers */,
+				8469FD411616C1E4002AFC0D /* IDEKit_GenericPlugIn.h in Headers */,
+				8469FD431616C1E4002AFC0D /* IDEKit_HTMLPlugIn.h in Headers */,
+				8469FD451616C1E4002AFC0D /* IDEKit_LanguagePlugin.h in Headers */,
+				8469FD471616C1E4002AFC0D /* IDEKit_LexParser.h in Headers */,
+				8469FD491616C1E4002AFC0D /* IDEKit_LexParserUtils.h in Headers */,
+				8469FD4B1616C1E4002AFC0D /* IDEKit_LuaPlugIn.h in Headers */,
+				8469FD4D1616C1E4002AFC0D /* IDEKit_PlainTextPlugins.h in Headers */,
+				8469FD4F1616C1E5002AFC0D /* IDEKit_plistPlugIn.h in Headers */,
+				8469FD511616C1E5002AFC0D /* IDEKit_PythonPlugIn.h in Headers */,
+				8469FD531616C1E5002AFC0D /* IDEKit_RSSPlugIn.h in Headers */,
+				8469FD551616C1E5002AFC0D /* IDEKit_TextFunctionMarkers.h in Headers */,
+				8469FD5C1616C1E5002AFC0D /* IDEKit_PreferenceController.h in Headers */,
+				8469FD5E1616C1E5002AFC0D /* IDEKit_PreferencePane.h in Headers */,
+				8469FD601616C1E5002AFC0D /* IDEKit_UserSettings.h in Headers */,
+				8469FD621616C1E5002AFC0D /* InfoPListPrefsPane.h in Headers */,
+				8469FD651616C1E5002AFC0D /* KeyBindingsPrefsPane.h in Headers */,
+				8469FD671616C1E5002AFC0D /* TextColorPrefsPane.h in Headers */,
+				8469FD691616C1E5002AFC0D /* TextTabPrefsPane.h in Headers */,
+				8469FD6B1616C1E5002AFC0D /* IDEKit_ProjDocument.h in Headers */,
+				8469FD6D1616C1E5002AFC0D /* IDEKit_ProjDocumentInfoPList.h in Headers */,
+				8469FD6F1616C1E5002AFC0D /* IDEKit_ProjDocumentPaths.h in Headers */,
+				8469FD711616C1E5002AFC0D /* IDEKit_ProjDocumentUI.h in Headers */,
+				8469FD731616C1E5002AFC0D /* IDEKit_ProjSettings.h in Headers */,
+				8469FD751616C1E5002AFC0D /* IDEKit.h in Headers */,
+				8469FD761616C1E5002AFC0D /* NSString102.h in Headers */,
+				8469FD791616C1E5002AFC0D /* FakeTCLBridge.h in Headers */,
+				8469FD7A1616C1E5002AFC0D /* IDEKit_Breakpoint.h in Headers */,
+				8469FD7C1616C1E5002AFC0D /* IDEKit_BreakpointInspector.h in Headers */,
+				8469FD7E1616C1E5002AFC0D /* IDEKit_BreakpointManager.h in Headers */,
+				8469FD801616C1E5002AFC0D /* IDEKit_Delegate.h in Headers */,
+				8469FD821616C1E5002AFC0D /* IDEKit_DialogController.h in Headers */,
+				8469FD841616C1E5002AFC0D /* IDEKit_FileManager.h in Headers */,
+				8469FD861616C1E5002AFC0D /* IDEKit_Globals.h in Headers */,
+				8469FD881616C1E5002AFC0D /* IDEKit_LayeredDefaults.h in Headers */,
+				8469FD8A1616C1E5002AFC0D /* IDEKit_MultiFileResults.h in Headers */,
+				8469FD8C1616C1E5002AFC0D /* IDEKit_NamedFlattener.h in Headers */,
+				8469FD8E1616C1E5002AFC0D /* IDEKit_OpenQuicklyController.h in Headers */,
+				8469FD901616C1E5002AFC0D /* IDEKit_PathUtils.h in Headers */,
+				8469FD921616C1E5002AFC0D /* IDEKit_Resources.h in Headers */,
+				8469FD941616C1E5002AFC0D /* IDEKit_SnapshotFile.h in Headers */,
+				8469FD961616C1E5002AFC0D /* IDEKit_SourceFingerprint.h in Headers */,
+				8469FD981616C1E5002AFC0D /* IDEKit_TextColors.h in Headers */,
+				8469FD9A1616C1E5002AFC0D /* IDEKit_UniqueFileIDManager.h in Headers */,
+				8469FDA21616C1E5002AFC0D /* regcustom.h in Headers */,
+				8469FDA51616C1E5002AFC0D /* regerrs.h in Headers */,
+				8469FDA61616C1E5002AFC0D /* regex.h in Headers */,
+				8469FDAA1616C1E5002AFC0D /* regguts.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8469FC511616C1CD002AFC0D /* IDEKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8469FC671616C1CD002AFC0D /* Build configuration list for PBXNativeTarget "IDEKit" */;
+			buildPhases = (
+				8469FC4D1616C1CD002AFC0D /* Sources */,
+				8469FC4E1616C1CD002AFC0D /* Frameworks */,
+				8469FC4F1616C1CD002AFC0D /* Headers */,
+				8469FC501616C1CD002AFC0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IDEKit;
+			productName = IDEKit;
+			productReference = 8469FC521616C1CD002AFC0D /* IDEKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8469FC481616C1CD002AFC0D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Glenn Andreas";
+			};
+			buildConfigurationList = 8469FC4B1616C1CD002AFC0D /* Build configuration list for PBXProject "IDEKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8469FC461616C1CD002AFC0D;
+			productRefGroup = 8469FC531616C1CD002AFC0D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8469FC511616C1CD002AFC0D /* IDEKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8469FC501616C1CD002AFC0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8469FC601616C1CD002AFC0D /* InfoPlist.strings in Resources */,
+				8469FD311616C1E4002AFC0D /* Ada95.plist in Resources */,
+				8469FD321616C1E4002AFC0D /* AppleScript.plist in Resources */,
+				8469FD331616C1E4002AFC0D /* BourneShell.plist in Resources */,
+				8469FD341616C1E4002AFC0D /* CShell.plist in Resources */,
+				8469FD351616C1E4002AFC0D /* Fortran.plist in Resources */,
+				8469FD361616C1E4002AFC0D /* GenericShell.plist in Resources */,
+				8469FD371616C1E4002AFC0D /* Java.plist in Resources */,
+				8469FD381616C1E4002AFC0D /* Pascal.plist in Resources */,
+				8469FD391616C1E4002AFC0D /* Perl.plist in Resources */,
+				8469FD3A1616C1E4002AFC0D /* php.plist in Resources */,
+				8469FD3B1616C1E4002AFC0D /* ppd.plist in Resources */,
+				8469FD3C1616C1E4002AFC0D /* Rez.plist in Resources */,
+				8469FD3D1616C1E4002AFC0D /* Ruby.plist in Resources */,
+				8469FD3E1616C1E4002AFC0D /* GrabCookbook.py in Resources */,
+				8469FD571616C1E5002AFC0D /* phpCookbook.iksnip in Resources */,
+				8469FD581616C1E5002AFC0D /* pyCookbook.iksnip in Resources */,
+				8469FD591616C1E5002AFC0D /* RSS templates.plist in Resources */,
+				8469FD5A1616C1E5002AFC0D /* rxCookbook.iksnip in Resources */,
+				8469FD5B1616C1E5002AFC0D /* tclCookbook.iksnip in Resources */,
+				8469FD641616C1E5002AFC0D /* KeyBindingList.plist in Resources */,
+				8469FDBD1616C1EF002AFC0D /* CollapseMarker.tiff in Resources */,
+				8469FDBE1616C1EF002AFC0D /* Info-CPlugIn__Upgraded_.plist in Resources */,
+				8469FDBF1616C1EF002AFC0D /* Info-GenericPlugIn__Upgraded.plist in Resources */,
+				8469FDC01616C1EF002AFC0D /* Info-HTMLPlugIn__Upgraded_.plist in Resources */,
+				8469FDC11616C1EF002AFC0D /* Info-IDEKit__Upgraded_.plist in Resources */,
+				8469FDC21616C1EF002AFC0D /* Info-InfoPListPreference.plist in Resources */,
+				8469FDC31616C1EF002AFC0D /* Info-KeyBindingsPreference__Upgraded_.plist in Resources */,
+				8469FDC41616C1EF002AFC0D /* Info-LuaPlugIn__Upgraded_ copy.plist in Resources */,
+				8469FDC51616C1EF002AFC0D /* Info-LuaPlugIn__Upgraded_.plist in Resources */,
+				8469FDC61616C1EF002AFC0D /* Info-PlistPlugIn__Upgraded_.plist in Resources */,
+				8469FDC71616C1EF002AFC0D /* Info-PythonPlugIn__Upgraded_.plist in Resources */,
+				8469FDC81616C1EF002AFC0D /* Info-RSSPlugIn__Upgraded_.plist in Resources */,
+				8469FDC91616C1EF002AFC0D /* Info-TextColorsPreference__Upgraded_.plist in Resources */,
+				8469FDCA1616C1EF002AFC0D /* Info-TextTabPreference__Upgraded_.plist in Resources */,
+				8469FDCB1616C1EF002AFC0D /* Lesser.txt in Resources */,
+				8469FDCC1616C1EF002AFC0D /* Licensing IDEKit.rtf in Resources */,
+				8469FDCD1616C1EF002AFC0D /* ReadMe.rtf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8469FC4D1616C1CD002AFC0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8469FD101616C1E4002AFC0D /* IDEKit_Autocompletion.mm in Sources */,
+				8469FD121616C1E4002AFC0D /* IDEKit_Console.mm in Sources */,
+				8469FD141616C1E4002AFC0D /* IDEKit_FindPaletteController.mm in Sources */,
+				8469FD161616C1E4002AFC0D /* IDEKit_LineCache.mm in Sources */,
+				8469FD181616C1E4002AFC0D /* IDEKit_RTFViewer.m in Sources */,
+				8469FD1A1616C1E4002AFC0D /* IDEKit_Snippets.mm in Sources */,
+				8469FD1C1616C1E4002AFC0D /* IDEKit_SrcDocument.mm in Sources */,
+				8469FD1E1616C1E4002AFC0D /* IDEKit_SrcEditView.mm in Sources */,
+				8469FD201616C1E4002AFC0D /* IDEKit_SrcEditViewBreakpoints.mm in Sources */,
+				8469FD221616C1E4002AFC0D /* IDEKit_SrcEditViewExtensions.mm in Sources */,
+				8469FD241616C1E4002AFC0D /* IDEKit_SrcEditViewFolding.mm in Sources */,
+				8469FD261616C1E4002AFC0D /* IDEKit_SrcEditViewPrinting.mm in Sources */,
+				8469FD281616C1E4002AFC0D /* IDEKit_SrcEditViewStatusBar.mm in Sources */,
+				8469FD2A1616C1E4002AFC0D /* IDEKit_SrcLayoutManager.mm in Sources */,
+				8469FD2C1616C1E4002AFC0D /* IDEKit_SrcScroller.mm in Sources */,
+				8469FD2E1616C1E4002AFC0D /* IDEKit_TextView.mm in Sources */,
+				8469FD301616C1E4002AFC0D /* IDEKit_TextViewExtensions.mm in Sources */,
+				8469FD401616C1E4002AFC0D /* IDEKit_CLanguagePlugins.mm in Sources */,
+				8469FD421616C1E4002AFC0D /* IDEKit_GenericPlugIn.mm in Sources */,
+				8469FD441616C1E4002AFC0D /* IDEKit_HTMLPlugIn.mm in Sources */,
+				8469FD461616C1E4002AFC0D /* IDEKit_LanguagePlugin.mm in Sources */,
+				8469FD481616C1E4002AFC0D /* IDEKit_LexParser.mm in Sources */,
+				8469FD4A1616C1E4002AFC0D /* IDEKit_LexParserUtils.mm in Sources */,
+				8469FD4C1616C1E4002AFC0D /* IDEKit_LuaPlugIn.mm in Sources */,
+				8469FD4E1616C1E5002AFC0D /* IDEKit_PlainTextPlugins.mm in Sources */,
+				8469FD501616C1E5002AFC0D /* IDEKit_plistPlugIn.mm in Sources */,
+				8469FD521616C1E5002AFC0D /* IDEKit_PythonPlugIn.mm in Sources */,
+				8469FD541616C1E5002AFC0D /* IDEKit_RSSPlugIn.mm in Sources */,
+				8469FD561616C1E5002AFC0D /* IDEKit_TextFunctionMarkers.mm in Sources */,
+				8469FD5D1616C1E5002AFC0D /* IDEKit_PreferenceController.mm in Sources */,
+				8469FD5F1616C1E5002AFC0D /* IDEKit_PreferencePane.mm in Sources */,
+				8469FD611616C1E5002AFC0D /* IDEKit_UserSettings.mm in Sources */,
+				8469FD631616C1E5002AFC0D /* InfoPListPrefsPane.mm in Sources */,
+				8469FD661616C1E5002AFC0D /* KeyBindingsPrefsPane.mm in Sources */,
+				8469FD681616C1E5002AFC0D /* TextColorPrefsPane.mm in Sources */,
+				8469FD6A1616C1E5002AFC0D /* TextTabPrefsPane.mm in Sources */,
+				8469FD6C1616C1E5002AFC0D /* IDEKit_ProjDocument.mm in Sources */,
+				8469FD6E1616C1E5002AFC0D /* IDEKit_ProjDocumentInfoPList.mm in Sources */,
+				8469FD701616C1E5002AFC0D /* IDEKit_ProjDocumentPaths.mm in Sources */,
+				8469FD721616C1E5002AFC0D /* IDEKit_ProjDocumentUI.mm in Sources */,
+				8469FD741616C1E5002AFC0D /* IDEKit_ProjSettings.mm in Sources */,
+				8469FD771616C1E5002AFC0D /* NSString102.mm in Sources */,
+				8469FD781616C1E5002AFC0D /* FakeTCLBridge.c in Sources */,
+				8469FD7B1616C1E5002AFC0D /* IDEKit_Breakpoint.mm in Sources */,
+				8469FD7D1616C1E5002AFC0D /* IDEKit_BreakpointInspector.mm in Sources */,
+				8469FD7F1616C1E5002AFC0D /* IDEKit_BreakpointManager.mm in Sources */,
+				8469FD811616C1E5002AFC0D /* IDEKit_Delegate.mm in Sources */,
+				8469FD831616C1E5002AFC0D /* IDEKit_DialogController.mm in Sources */,
+				8469FD851616C1E5002AFC0D /* IDEKit_FileManager.mm in Sources */,
+				8469FD871616C1E5002AFC0D /* IDEKit_Globals.mm in Sources */,
+				8469FD891616C1E5002AFC0D /* IDEKit_LayeredDefaults.mm in Sources */,
+				8469FD8B1616C1E5002AFC0D /* IDEKit_MultiFileResults.mm in Sources */,
+				8469FD8D1616C1E5002AFC0D /* IDEKit_NamedFlattener.mm in Sources */,
+				8469FD8F1616C1E5002AFC0D /* IDEKit_OpenQuicklyController.mm in Sources */,
+				8469FD911616C1E5002AFC0D /* IDEKit_PathUtils.mm in Sources */,
+				8469FD931616C1E5002AFC0D /* IDEKit_Resources.mm in Sources */,
+				8469FD951616C1E5002AFC0D /* IDEKit_SnapshotFile.mm in Sources */,
+				8469FD971616C1E5002AFC0D /* IDEKit_SourceFingerprint.mm in Sources */,
+				8469FD991616C1E5002AFC0D /* IDEKit_TextColors.mm in Sources */,
+				8469FD9B1616C1E5002AFC0D /* IDEKit_UniqueFileIDManager.mm in Sources */,
+				8469FD9C1616C1E5002AFC0D /* regc_color.c in Sources */,
+				8469FD9D1616C1E5002AFC0D /* regc_cvec.c in Sources */,
+				8469FD9E1616C1E5002AFC0D /* regc_lex.c in Sources */,
+				8469FD9F1616C1E5002AFC0D /* regc_locale.c in Sources */,
+				8469FDA01616C1E5002AFC0D /* regc_nfa.c in Sources */,
+				8469FDA11616C1E5002AFC0D /* regcomp.c in Sources */,
+				8469FDA31616C1E5002AFC0D /* rege_dfa.c in Sources */,
+				8469FDA41616C1E5002AFC0D /* regerror.c in Sources */,
+				8469FDA71616C1E5002AFC0D /* regexec.c in Sources */,
+				8469FDA81616C1E5002AFC0D /* regfree.c in Sources */,
+				8469FDA91616C1E5002AFC0D /* regfronts.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8469FC5E1616C1CD002AFC0D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8469FC5F1616C1CD002AFC0D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8469FC651616C1CD002AFC0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8469FC661616C1CD002AFC0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		8469FC681616C1CD002AFC0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IDEKit/IDEKit-Prefix.pch";
+				INFOPLIST_FILE = "IDEKit/IDEKit-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		8469FC691616C1CD002AFC0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IDEKit/IDEKit-Prefix.pch";
+				INFOPLIST_FILE = "IDEKit/IDEKit-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8469FC4B1616C1CD002AFC0D /* Build configuration list for PBXProject "IDEKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8469FC651616C1CD002AFC0D /* Debug */,
+				8469FC661616C1CD002AFC0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8469FC671616C1CD002AFC0D /* Build configuration list for PBXNativeTarget "IDEKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8469FC681616C1CD002AFC0D /* Debug */,
+				8469FC691616C1CD002AFC0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8469FC481616C1CD002AFC0D /* Project object */;
+}

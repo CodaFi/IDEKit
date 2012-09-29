@@ -1,0 +1,91 @@
+{
+    Name = "PPD";
+    Extensions = ( "ppd" );
+    SingleLineComment = ( "%" );
+    String = (
+	( "\"", "\"" )
+    );
+    Character = (
+	( "'", "'" )
+    );
+    EscapeCharacter = "\\";
+    IdentifierStartChars = "*";
+    Keywords = (
+	"*PPD-Adobe",
+	"*FormatVersion",
+	"*FileVersion",
+	"*PCFileName",
+	"*Product",
+	"*Manufacturer",
+	"*ModelName",
+	"*ShortNickName",
+	"*NickName",
+	"*LanguageEncoding",
+	"*LanguageVersion",
+	"*ScreenFreq",
+	"*ScreenAngle",
+	"*DefaultScreenProc",
+	"*ScreenProc",
+	"*DefaultTransfer",
+	"*Transfer",
+	"*ColorDevice",
+	"*DefaultColorSpace",
+	"*AccurateScreensSupport",
+	"*SuggestedJobTimeOut",
+	"*SuggestedWaitTimeOut",
+	"*TTRasterizer",
+	"*LandscapeOrientation",
+	"*VariablePaperSize",
+	"*FileSystem",
+	"*Throughput",
+	"*OpenGroup",
+	"*CloseGroup",
+	"*OpenUI",
+	"*CloseUI",
+	"*DefaultOptionalBin",
+	"*OptionalBin",
+	"*DefaultOptionalduplexer",
+	"*Optionalduplexer",
+	"*UIConstraints",
+	"*OrderDependency",
+	"*DefaultPageSize",
+	"*PageSize",
+	"*MaxMediaWidth",
+	"*UseHWMargins",
+	"*DefaultUseHWMargins",
+	"*HWMargins",
+	"*LeadingEdge",
+	"*DefaultLeadingEdge",
+	"*NonUIOrderDependency",
+	"*ParamCustomPageSize",
+	"*CustomPageSize",
+	"*DefaultPageRegion",
+	"*PageRegion",
+	"*DefaultImageableArea",
+	"*ImagableArea",
+	"*DefaultPaperDimension",
+	"*PaperDimension",
+	"*DefaultDuplex",
+	"*Duplex",
+	"*DefaultResolution",
+	"*Resolution",
+	"*DefaultMediaType",
+	"*MediaType",
+	"*DefaultColorModel",
+	"*ColorModel",
+	"*DefaultInputSlot",
+	"*InputSlot",
+	"*DefaultColorRenderDict",
+	"*ColorRenderDict",
+	"*DefaultFont",
+	"*Font"
+    );
+    AltKeywords = (
+	"*cupsVersion",
+	"*cupsManualCopies",
+	"*cupsFilter",
+	"*cupsModelNumber",
+	"*cupsFlipDuplex"
+	);
+    FunctionRegexs = ( "\\*OpenGroup:[[:space:]]*(.*)","\\*OpenUI[[:space:]]*([^:]*):" );
+}

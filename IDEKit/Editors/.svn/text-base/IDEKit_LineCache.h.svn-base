@@ -1,0 +1,77 @@
+//
+//  IDEKit_LineCache.h
+//  IDEKit
+//
+//  Created by Glenn Andreas on Sun Feb 08 2004.
+//  Copyright (c) 2003, 2004 by Glenn Andreas
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//  
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//  
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+//
+#include <Foundation/Foundation.h>
+#include <deque>
+// IDEKit_LineCache isn't declared a class because we want to reference it from Objective-C
+// headers - while we compile IDEKit as ObjectiveC++, we don't want to force that on all of our
+// clients
+typedef struct IDEKit_LineCache {
+public:
+    IDEKit_LineCache();
+    ~IDEKit_LineCache();
+    void RebuildFromString(NSString *string);
+    // queury the information
+    int FoldedLineNumberFromOffset(unsigned int offset);
+    NSRange FoldedNthLineRange(int n);
+    int FoldedLineCount();
+    int UnfoldedLineNumberFromOffset(unsigned int offset);
+    NSRange UnfoldedNthLineRange(int n);
+    int  UnfoldedLineCount();
+    // conversion
+    unsigned int UnfoldedLocation(unsigned int offset); // convert from unfolded to folded location
+    unsigned int FoldedLocation(unsigned int offset); // convert from folded to unfolded
+    NSRange FoldedRange(NSRange range);
+    NSRange UnfoldedRange(NSRange range);
+    
+    NSMutableDictionary *UnfoldedLineData(int lineNum, bool create = NO);
+    NSDictionary *GetLineData();
+    void SetLineData(NSDictionary *data);
+    bool ValidLineNum(int lineNum); // these are 1 based
+    // update our cache, expressed with folded coordinate space
+    void ReplaceRangeWithString(NSRange src, NSString *string);
+    // folding information
+    void FoldRange(NSRange fold);
+    void UnfoldLocation(unsigned int offset);
+    
+    // for debugging
+    void DumpLineCache();
+protected:
+    std::deque<unsigned int> fUnfoldedLineStarts;
+    std::deque<NSMutableDictionary *> fUnfoldedLineData;
+    std::deque<unsigned int> fFoldedLineStarts;
+    unsigned int fTotalUnfoldedSize;
+    unsigned int fTotalFoldedSize;
+    typedef struct FoldingInfo {
+	unsigned int foldingStart;
+	unsigned int contentsSize; // the contents, unfolded
+	bool operator < (const FoldingInfo &other) const;
+    };
+    std::deque<FoldingInfo> fFoldingInfo;
+    
+    void RemoveRange(NSRange src);
+    void InsertString(unsigned int offset, NSString *string);
+    void RebuildFoldedFromUnfolded();
+    void NextTopLevelFold(std::deque<FoldingInfo>::iterator &i);
+    void MoveFoldings(NSRange src, int replaceSize);
+    void ReleaseLineData();
+};

@@ -1,0 +1,190 @@
+(
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Dates%20and%20Times/Matching Time Strings in 24-hour Format       ";
+	tag="This regular expression matches simple time strings in 24-hour format; it will automatically ignore ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59818/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Dates%20and%20Times/Month Names   ";
+	tag="This algorithm matches the English names of the twelve months of the Gregorian Calendar in full and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59819/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Miscellaneous/Matching Royal Mail Postal Codes";
+	tag="This regular expression matches valid postal codes as defined by the Royal Mail
+(the UK's postal ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/65254/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Miscellaneous/Capture HTML form data into a usable hash... (CGI)";
+	tag="I developed this technique as an alternative to having to specifically cast name-value pairs into ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/167537/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Miscellaneous/Extract the Korean language (Hangul) codes";
+	tag="This regular expression extracts hangul (Korean Language) codes from web pages.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59869/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Miscellaneous/CDRW Detection under Linux";
+	tag="A simple yet effective way to parse the output of
+cdrecord -scanbus and cdrecord -checkdrive to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/148060/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Miscellaneous/Profanity    ";
+	tag="Damian Conway's Regexp::Common module provides an excellent regular expression which matches words ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59810/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Miscellaneous/Removing C Comments in Source Code";
+	tag="It's often useful to search through large volumes of source code looking for particular text within ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59811/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Miscellaneous/Escaping non-printable characters   ";
+	tag="This regular expression matches non-printable characters, backslashes, and single quotes.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59813/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Miscellaneous/buffgrep";
+	tag="Buffgrep is a grep-like utility that operates on text blocks, rather than on single lines as in the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/252499/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Validating email addresses with Mail::CheckUser";
+	tag="The only way to really know whether an email address is valid is to try
+sending mail to it. i.e., ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/65255/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/e-mail address validator";
+	tag="This regex checks e-mail addres validation. Can check almost all typical errors (double @ char and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59886/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Validate Domain Names";
+	tag="Here's the one-line regex that will validate a domain label. It enforces the strict rules that a ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59868/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Finding URLs in text -- the COMPLETE way";
+	tag="This substitution expression, posted by Abigail to comp.lang.perl.misc on 08/14/2000,
+matches URLs ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59864/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Parsing HTML using HTML::Parser";
+	tag="HTML is best matched using a custom parsing module, such as HTML::Parser, as described in this ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59814/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Breaking down a URI into its component parts";
+	tag="Appendix B of IETF RFC 2396 provides this regular expression, which breaks down
+a Uniform Resource ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59863/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/&quot;show files&quot; vulnerability with perl null bite bug.";
+	tag="If your CGI aceepts some args from web and it is directly using args. Hacker can see files and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59871/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Extracting HTML URL Links";
+	tag="This regular expression is not very accurate, but it's fast and adequate for many situations.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59821/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Removing HTML from a file";
+	tag="When writing CGI scripts which suck in textual content from users (such as discussion threads, for ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59820/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Removing Multiple Reply Tags in an Email Subject Line    ";
+	tag="Use this regular expression to get rid of or condense down multiple \"Re:\"s in  email subject line. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59817/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Decimal IP Addresses    ";
+	tag="This regular expression matches IP addresses expressed in dotted-decimal form, such as 192.168.3.2. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59809/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Remove any HTML";
+	tag="This RegExp removes any pure HTML and decoded HTML to filter out content only.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/66459/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/How to make life easier with URL text highlighting.";
+	tag="I've used it for Web-board script, to colorify e-mail URLs, make HTTP/FTP URLs
+from a text, and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/65123/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Match an IP address";
+	tag="This regex matches IP addresses in the dotted quad form. It comes courtesy of Jeffrey Friedl's ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/230446/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Extensible Markup Language (XML)   ";
+	tag="The Extensible Markup Language (XML) is a universal format for structured documents. XML is ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59816/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Networking/Matching HTML Entities";
+	tag="HTML entities are special character sequences which let you encode otherwise illegal characters in ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59815/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Numbers/Convert fractions to decimal";
+	tag="Searches through a text for almost any number, even fractions
+constructed using the ASCII slash. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59849/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Security/Removing dangerous characters from CGI forms";
+	tag="When you write a CGI script, you should be conscious of the content of any
+user-supplied data your ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/65124/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Security/&quot;show files&quot; vulnerability with perl null bite bug.";
+	tag="If your CGI aceepts some args from web and it is directly using args. Hacker can see files and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59871/index_txt";
+},
+{
+	language="perl";
+	title="perl Regular Expression Cookbook/Telecommunications/North American Telephone Numbers   ";
+	tag="This regular expression matches North American telephone numbers, such as 604-555-4301 or 555-1201.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Rx/Recipe/59812/index_txt";
+},
+)

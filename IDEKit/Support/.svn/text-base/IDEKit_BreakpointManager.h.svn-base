@@ -1,0 +1,130 @@
+//
+//  IDEKit_BreakpointManager.h
+//  IDEKit
+//
+//  Created by Glenn Andreas on 9/17/04.
+//  Copyright 2004 by Glenn Andreas.
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//  
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//  
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+#import <Cocoa/Cocoa.h>
+
+/*
+ The breakpoint manager "owns" all the breakpoint information - even though the breakpoints
+ may live in various views, this is they place that tracks all the breakpoints.
+
+ Breakpoints are fugly, but this is better than they were.
+ 
+ Breakpoints can either live 
+    in the file (in the case of a simple single file script)
+    in the project (for project based things - each project/target/file is a set of bps)
+    in the app (similar to "in the file" but with a generic persistent pseudo-project)
+ 
+ The first case and last cases are very similar, but with a completely different result.
+ The second is the cleanest - the breakpoints live in the project data.  The first would
+ result in them living in the file's persistent data (tagged for the specific app).
+ 
+ The whole problem is "library files".  So if a script includes another (standard library) file,
+ how, in the non-project based model, do you handle this?  You could try to store the library file
+ persistent data (but this will be bad when the persistent data/uuid is shadowed in the resource fork).
+ 
+ That is where the third case comes in - the app's breakpoint info can overlay the library.
+ 
+ So when a new breakpoint is set, it is marked as being in the application pseudo-project (it is up
+ to the app to determine if this is persistent or not).  When a file is saved (since persistent data is
+ written anyway at that point) we remove that file's breakpoints from the app pseudo-project.
+ 
+ This also separates breakpoints from other persistent data (such as cursor position) in that it can
+ exist after the file is closed.
+ 
+ The bigger issue is exactly what happens when a breakpoint is set, and when it is needed.
+ 
+ When the user clicks in the ruler on the side of the view, the ruler asks the view what to do - it handles
+ the cases of not being a valid area for a breakpoint, tricky things like the menu, etc...  but ultimately
+ comes down to setting/clearing a breakpoint.
+ 
+ The view's line cache has line data associated with it for the breakpoint (which automatically moves as the
+ file is edited).  This stores the current breakpoint associated with that line (if any) and any associated
+ data (again, if any).  It does not, however, know what line number this is (since that will be constantly moving).
+  
+ When you save the file, it will go through the current breakpoints found in the view, and produce a dictionary that
+ contains that information (we use to use a set since all we kept was what line number it was, but that isn't
+ enough when we have different kinds of breakpoints and optional data).  That information is stored in the persistent
+ storage, and the breakpoints are removed from the application pseudo project. (this is in the non-project case).
+ [ why is this done?  Wouldn't the application pseudo project be good enough? ]
+ 
+ So what happens if there is a debugger running?  Obviously if we are editing something that is in the debugger
+ there is going to be problems.  But if you set a breakpoint in one view, you'd expect it to be in the other
+ one as well (but if one of them is edited?).  So, you either you can't edit a file while in the debugger (ugh) or
+ we have a "split view" - you can edit a file, but the debugger view is for the "original" version (and thus
+ not editable).   To do this, the breakpoint manager has the concept of a "shadow".  When you start debugging
+ the app needs to be able to maintain the files required in their "original" form (for a project it is simple to 
+ store this in the project file, non-project stuff needs it's own thing).  The debugger, then, shows this copy of the
+ original form (which will have it's own unique id).  However, the debug manager knows that this is a shadow of
+ the real file, and as such, will keep the two insync - adding or deleting a breakpoint from either is mirrored
+ in the other.  However, the instant that the origial file is different, this stops working (we can use checksums
+ on the files to tell).
+ [ this need not be true once we get source line maps working ]
+ 
+ Shadowing is a bit more complicated - the idea is that there is a single "real" file ID, and one or more
+ "virtual" file IDs (which can be temporary files, or not even have a valid existance in the file system).   Multiple
+ virtual files would occur when you have multiple debuggers, for example.  Still, one, and only one, file is the
+ the "real" file.
+ 
+ So the breakpoint manager asks half ways between a cache, a proxy, and a general "clearing house" for
+ all things breakpoint related.  If you want to know what breakpoints are for any given file, ask the breakpoint
+ manager - it either knows, or will ask.  If you change a breakpoint, you best tell the breakpoint manager, since
+ it will let everything related to that know.
+ 
+ 
+ */
+@class IDEKit_PersistentFileData;
+@class IDEKit_UniqueID;
+@class IDEKit_Breakpoint;
+
+#define IDEKit_AppBreakpointProject NULL
+
+@interface IDEKit_BreakpointManager : NSObject {
+    NSMutableDictionary *mySingleFiles;
+    NSMutableDictionary *myProjects;
+#ifdef nomore
+    NSMutableDictionary *myShadowMapping; // mapping from real file to a set of virtual files
+    NSMutableDictionary *myVirtualToRealMapping; // maps from a single virtual file to the single real file it shadows
+#endif
+}
++ (IDEKit_BreakpointManager *) sharedBreakpointManager;
+
+// note that the use of persistent data for the breakpoints seems to be a bad idea (really should pull these)
+-(void) savePersistentData: (IDEKit_PersistentFileData *)data forFile: (IDEKit_UniqueID *)file;
+-(void) loadPersistentData: (IDEKit_PersistentFileData *)data forFile: (IDEKit_UniqueID *)file;
+
+- (NSDictionary *) getBreakPointsForFile: (IDEKit_UniqueID *)file; // for no project
+- (void) setBreakPoints: (NSDictionary *)bps forFile: (IDEKit_UniqueID *)file; // for no project
+
+- (NSDictionary *) getBreakPointsForFile: (IDEKit_UniqueID *)file project: (IDEKit_UniqueID *)project target: (NSString *)target;
+
+#ifdef nomore
+// *Ugh* Shadow files must go!!  IDEKit_SnapshotFile is the "right" tool for the job
+- (void) file: (IDEKit_UniqueID *)virtualView shadowsFile: (IDEKit_UniqueID *)realSource;
+- (void) notifyChangedBreakPointsForFile: (IDEKit_UniqueID *)file atLine: (int) line;
+#endif
+- (void) addBreakpoint: (IDEKit_Breakpoint *)breakpoint toFiles: (IDEKit_UniqueID *) file atLine: (int) line;
+- (IDEKit_Breakpoint *) createBreakpointToFiles: (IDEKit_UniqueID *) file atLine: (int) line;
+- (void) removeBreakpoint: (IDEKit_Breakpoint *)breakpoint fromFiles: (IDEKit_UniqueID *) file;
+- (void) redrawBreakpoint: (IDEKit_Breakpoint *)breakpoint;
+// subclasses can replace this
+- (NSDictionary *) loadSavedDataForFile: (IDEKit_UniqueID *)file project: (IDEKit_UniqueID *)project target: (NSString *)target; // need to know what the breakpoints for this file are and it isn't loaded (so we can't ask the view)
+@end

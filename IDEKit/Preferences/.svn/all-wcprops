@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences
+END
+KeyBindingsPrefsPane.mm
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/KeyBindingsPrefsPane.mm
+END
+InfoPListPrefsPane.mm
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/InfoPListPrefsPane.mm
+END
+IDEKit_PreferencePane.mm
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/IDEKit_PreferencePane.mm
+END
+IDEKit_PreferenceController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/IDEKit_PreferenceController.mm
+END
+TextTabPrefsPane.mm
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/TextTabPrefsPane.mm
+END
+TextColorPrefsPane.mm
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/TextColorPrefsPane.mm
+END
+KeyBindingsPrefsPane.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/KeyBindingsPrefsPane.h
+END
+IDEKit_UserSettings.mm
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/IDEKit_UserSettings.mm
+END
+InfoPListPrefsPane.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/InfoPListPrefsPane.h
+END
+IDEKit_PreferencePane.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/IDEKit_PreferencePane.h
+END
+IDEKit_PreferenceController.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/IDEKit_PreferenceController.h
+END
+TextTabPrefsPane.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/TextTabPrefsPane.h
+END
+KeyBindingList.plist
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/KeyBindingList.plist
+END
+TextColorPrefsPane.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/TextColorPrefsPane.h
+END
+IDEKit_UserSettings.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Preferences/IDEKit_UserSettings.h
+END
