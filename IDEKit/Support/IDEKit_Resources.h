@@ -27,8 +27,8 @@
     short myRefNum;
 }
 // Assumes an existing file already
-+ (IDEKit_Resources *) resourceFork: (NSString *)path forWriting: (BOOL) writable;
-- (id) initWithPath: (NSString *)path forWriting: (BOOL) writable;
-- (NSData *) getResourceType: (long) resType resID: (short)resID;
-- (void) writeResource: (NSData *)data type: (long) resType resID: (short)resID;
++ (IDEKit_Resources *) resourceFork:(NSString *)path forWriting:(BOOL) writable;
+- (id) initWithPath:(NSString *)path forWriting:(BOOL)writable;
+- (NSData *) getResourceType:(unsigned int)resType resID:(short)resID;
+- (void) writeResource:(NSData *)data type:(unsigned int)resType resID:(short)resID;
 @end

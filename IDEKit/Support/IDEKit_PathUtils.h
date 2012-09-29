@@ -34,7 +34,7 @@ enum {
 };
 
 @interface NSString(IDEKit_FindFolder)
-+ (NSString *) findFolder: (NSInteger) folderType forDomain: (NSInteger) domain;
++ (NSString *) findFolder: (OSType) folderType forDomain: (NSInteger) domain;
 + (NSString *) userPrefFolderPath;
 + (NSString *) userAppSupportFolderPath;
 + (NSString *) userScratchFolderPath; // "chewable" - temp and will be deleted at reboot

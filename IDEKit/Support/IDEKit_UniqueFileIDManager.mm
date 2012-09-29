@@ -326,11 +326,11 @@ static NSMutableDictionary *gUniqueObjects;
     NSString *path = [NSString userPrefFolderPath];
     path = [path stringByAppendingPathComponent: @"IDEKit"];
     if (forWriting) {
-		[[NSFileManager defaultManager] createDirectoryAtPath: path attributes:NULL];
+		[[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:NULL error:nil];
     }
     path = [path stringByAppendingPathComponent: @"PersistentFileInfo"];
     if (forWriting) {
-		[[NSFileManager defaultManager] createDirectoryAtPath: path attributes:NULL];
+		[[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:NULL error:nil];
     }
     return path;
 }

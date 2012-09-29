@@ -23,7 +23,7 @@
 #import "IDEKit_SourceFingerprint.h"
 #import "IDEKit_LineCache.h"
 
-unsigned short IDEKit_Fingerprint(const unsigned char * data, int length) // simple crc-16
+unsigned short IDEKit_Fingerprint(const unsigned char * data, NSInteger length) // simple crc-16
 {
     static unsigned short table[256] = {
 	0x0000, 0x1189, 0x2312, 0x329B, 0x4624, 0x57AD, 0x6536, 0x74BF,
@@ -66,7 +66,7 @@ unsigned short IDEKit_Fingerprint(const unsigned char * data, int length) // sim
     return retval;
 }
 
-unsigned short IDEKit_FingerprintText(const unichar * data, int length) // will white-strip head & tail
+unsigned short IDEKit_FingerprintText(const unichar * data, NSInteger length) // will white-strip head & tail
 {
     NSCharacterSet *ws = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     // strip leading
@@ -88,7 +88,7 @@ unsigned short IDEKit_FingerprintText(const unichar * data, int length) // will 
 @implementation NSString(Fingerprint)
 - (unsigned short) fingerprint
 {
-    int length = [self length];
+    NSInteger length = [self length];
     unichar *buffer = (unichar *)malloc(length * sizeof(unichar));
     [self getCharacters:buffer];
     unsigned short retval = IDEKit_Fingerprint((const unsigned char *)buffer, length * sizeof(unichar));
@@ -109,7 +109,7 @@ unsigned short IDEKit_FingerprintText(const unichar * data, int length) // will 
 @implementation IDEKit_SrcEditView(Fingerprint)
 - (NSData *)fingerprint
 {
-    int numLines = myLineCache->UnfoldedLineCount();
+    NSInteger numLines = myLineCache->UnfoldedLineCount();
     NSMutableData *retval = [NSMutableData dataWithLength: sizeof(unsigned short) * (numLines + 1)];
     // we make an array of crcs for each line (with a crc for the entire data at the start)
     unsigned short *buffer = (unsigned short *)[retval mutableBytes];

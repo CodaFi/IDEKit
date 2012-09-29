@@ -27,13 +27,11 @@
 
 #define qIDEKIT_UseCache
 
-#ifdef qIDEKIT_UseCache
 #ifdef __cplusplus
 // try desparately to not have C++ code in the headers
-typedef struct IDEKit_LineCache;
+struct IDEKit_LineCache;
 #else
-typedef void *IDEKit_LineCache;
-#endif
+void *IDEKit_LineCache;
 #endif
 
 @class IDEKit_SrcEditView;
@@ -80,6 +78,8 @@ typedef void *IDEKit_LineCache;
 		IDEKit_UniqueID *myUniqueID;
 }
 
+@property (nonatomic, copy) NSString *string;
+
 - (void) setContext: (id<IDEKit_SrcEditContext>) aContext;
 - (id<IDEKit_SrcEditContext>) context;
 - (void) setUniqueFileID: (IDEKit_UniqueID *)fileID;
@@ -107,7 +107,6 @@ typedef void *IDEKit_LineCache;
 // additional editing commands (useful to be bound to key shortcuts)
 
 - (void) setFont: (NSFont *) font;
-- (NSString *)string;
 // if we are split (or not) we can have multiple views - this gets them all
 - (NSArray *) allScrollViews;
 - (NSArray *) allTextViews;
@@ -139,7 +138,6 @@ typedef void *IDEKit_LineCache;
 - (BOOL) canEditForSrcEditView: (IDEKit_SrcEditView *) view;
 - (void) srcEditView: (IDEKit_SrcEditView *) view specialDoubleClick: (NSInteger) modifiers selection: (NSString *) selection;
 - (NSArray *) srcEditView: (IDEKit_SrcEditView *) view autoCompleteIdentifier: (NSString *) name max: (NSInteger) max;
-- (NSDictionary *) getBreakPointsForSrcEditView: (IDEKit_SrcEditView *) view;	// get the breakpoints for this one file
 - (void) srcEditView: (IDEKit_SrcEditView *) view setBreakPoints: (NSDictionary *)breakPoints;	// set the breakpoints for this one file
 - (NSMenu *) srcEditView: (IDEKit_SrcEditView *) view breakpointMenuForLine: (NSInteger) line;
 - (NSUserDefaults *) defaultsForSrcEditView: (IDEKit_SrcEditView *) view;

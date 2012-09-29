@@ -25,8 +25,8 @@
 
 // This is how we map between files that may have changed - we "fingerprint" the file (take a crc of
 // each line) and then we can compare them "easily".
-unsigned short IDEKit_Fingerprint(const unsigned char * data, int length); // generate a CRC for this
-unsigned short IDEKit_FingerprintText(const unichar * data, int length); // will white-strip head & tail
+unsigned short IDEKit_Fingerprint(const unsigned char * data, NSInteger length); // generate a CRC for this
+unsigned short IDEKit_FingerprintText(const unichar * data, NSInteger length); // will white-strip head & tail
 
 @interface IDEKit_SrcEditView(Fingerprint)
 - (NSData *)fingerprint;

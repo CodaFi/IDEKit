@@ -81,9 +81,7 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 		[self addSubview: myScrollView];
 		[myScrollView setFrame: [self frame]];
 		[myScrollView setShowFlags: IDEKit_kShowNavPopup | IDEKit_kShowFmtPopup | IDEKit_kShowSplitter | IDEKit_kShowUnsplitter | IDEKit_kShowBreakpoints];
-#ifdef qIDEKIT_UseCache
 		myLineCache = new IDEKit_LineCache;
-#endif
 		myUniqueID = [[IDEKit_UniqueFileIDManager sharedFileIDManager] newUniqueFileID]; // so we've at least got something
 		[myUniqueID setRepresentedObject:self forKey: @"IDEKit_SrcEditView"];
     }
@@ -246,7 +244,7 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 //    }
 }
 
-- (void) setString: (NSString *) string
+- (void)setString:(NSString *)string
 {
     [myTextView setSelectedRange: NSMakeRange(0,0)];
 #ifdef qIDEKIT_UseCache
@@ -451,7 +449,6 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 - (IBAction) redent: (id) sender
 {
 }
-
 
 #pragma mark AutoComplete
 

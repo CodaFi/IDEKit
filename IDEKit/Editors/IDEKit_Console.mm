@@ -23,6 +23,12 @@
 
 #import "IDEKit_Console.h"
 #import "IDEKit_TextViewExtensions.h"
+#import "IDEKit_SrcEditView.h"
+#import "IDEKit_TextView.h"
+
+@interface IDEKit_Console () <IDEKit_NSTextViewExtendedDelegate>
+
+@end
 
 @implementation IDEKit_Console
 
@@ -34,11 +40,10 @@
     myLastStreamOutput = [NSMutableDictionary dictionary];
     myGotCommand = NO;
     myOutputStart = myInputStart = mySelStart = 0;
-    [myEditText setDelegate: NULL];
     [myEditText insertText: [self commandPrompt]];
     mySelStart = [[myEditText string] length]; // and sel starts after prompt
-    [myEditText setDelegate: self];
-    myTypingAttributes = [[myEditText typingAttributes] copy];
+    [myEditText->myTextView setDelegate: self];
+    myTypingAttributes = [[myEditText->myTextView typingAttributes] copy];
     //NSLog(@"Typing attributes %@",myTypingAttributes);
     myCurHistoryIndex = 0;
     myInputSoFar = [NSMutableString string];
@@ -66,8 +71,8 @@
 
 - (void) redisplayLastOutput
 {
-    [myEditText setDelegate: NULL]; // we don't need to be asked about what we are doing
-    NSTextStorage *storage = [myEditText textStorage];
+    [myEditText->myTextView setDelegate: NULL]; // we don't need to be asked about what we are doing
+    NSTextStorage *storage = [myEditText->myTextView textStorage];
     NSMutableAttributedString *newOutput = [[NSMutableAttributedString alloc] init];
     NSEnumerator *e = [myStreamNames objectEnumerator];
     NSString *streamName = [e nextObject];
@@ -97,7 +102,7 @@
     myInputStart += outputDeltaLen; // our input now starts here
     mySelStart += outputDeltaLen;
     //NSLog(@"My input %d, my sel %d, new len %d",myInputStart,mySelStart,[storage length]);
-    [myEditText setDelegate: self];
+    [myEditText->myTextView setDelegate: self];
 }
 
 - (void) restartOutput
@@ -136,10 +141,10 @@
     NSString *prompted = [NSString stringWithFormat: @"%@%@", [self commandPrompt],[components componentsJoinedByString: [NSString stringWithFormat: @"\n%@",[self multiLinePrompt]]]];
     NSAttributedString *newPrompt = [[ NSAttributedString alloc] initWithString: prompted attributes: myTypingAttributes]; // make sure typing attributes are correct
     // replace old input with this
-    [myEditText setDelegate: NULL];
-    NSTextStorage *storage = [myEditText textStorage];
+    [myEditText->myTextView setDelegate: NULL];
+    NSTextStorage *storage = [myEditText->myTextView textStorage];
     [storage replaceCharactersInRange: NSMakeRange(myInputStart,[storage length] - myInputStart) withAttributedString: newPrompt];
-    [myEditText setSelectedRange:NSMakeRange([storage length],0)]; // move to end
+    [myEditText->myTextView setSelectedRange:NSMakeRange([storage length],0)]; // move to end
     // now the tricky part is fixing mySelStart
     [myInputSoFar setString: command];
     if ([components count]) {
@@ -150,7 +155,7 @@
 		// empty line
 		mySelStart = [storage length];
     }
-    [myEditText setDelegate: self];
+    [myEditText->myTextView setDelegate: self];
 }
 
 - (void) promptChanged // dynamic prompt changed
@@ -203,7 +208,7 @@
     //NSLog(@"Complete completion with %@",value);
     // since we didn't have the concept of "completion subrange" we just
     // remove the overlap between string and the selection
-    NSUInteger start = [myEditText selectedRange].location;
+    NSUInteger start = [myEditText->myTextView selectedRange].location;
     NSUInteger overlap = [value length]; // start with full overlap
     if (overlap > start) overlap = start;
     while (overlap > 0) {
@@ -212,11 +217,11 @@
 			break; // found it!
 		overlap--;
     }
-    [myEditText setDelegate: NULL];
+    [myEditText->myTextView setDelegate: NULL];
     [myEditText insertText: [value substringFromIndex:overlap]];
     //[myEditText setSelectedRange:NSMakeRange(start-overlap,[value length])]; // select all of what we entered
-    [myEditText setSelectedRange:NSMakeRange(start-overlap + [value length],0)]; // select at end
-    [myEditText setDelegate: self];
+    [myEditText->myTextView setSelectedRange:NSMakeRange(start-overlap + [value length],0)]; // select at end
+    [myEditText->myTextView setDelegate: self];
 }
 - (IBAction) doCompletion: (id) sender
 {
@@ -232,7 +237,7 @@
 		if ([autoComplete count] == 1) {
 			[self completeCompletionWith: autoComplete[0]];
 		} else {
-			id completion = [myEditText popupCompletionAtInsertion: autoComplete];
+			id completion = [myEditText->myTextView popupCompletionAtInsertion: autoComplete];
 			if (completion) {
 				[self completeCompletionWith: completion];
 			}
@@ -259,7 +264,7 @@
     }
     if (aSelector == @selector(moveToBeginningOfLine:)) {
 		// move to after prompt
-		[myEditText setSelectedRange:NSMakeRange(mySelStart,0)];
+		[myEditText->myTextView setSelectedRange:NSMakeRange(mySelStart,0)];
 		return YES;
     }
     if (aSelector == @selector(complete:)) {
@@ -269,7 +274,7 @@
     }
     if (aSelector == @selector(insertNewline:)) {
 		myGotCommand = YES;
-		[myEditText setSelectedRange:NSMakeRange([[myEditText textStorage] length],0)];
+		[myEditText->myTextView setSelectedRange:NSMakeRange([[myEditText->myTextView textStorage] length],0)];
 		return NO; // perform it like normal now that we are in the right place
     }
     return NO;
@@ -305,15 +310,15 @@
 			[myInputSoFar appendString: @"\n"]; // add back trailing newline
 			// put out our secondary prompt
 			mySelStart = [[myEditText string] length]; // we start after the secondary prompt
-			[myEditText setDelegate: NULL];
-			[myEditText setSelectedRange:NSMakeRange(mySelStart,0)];
-			[myEditText setTypingAttributes: myTypingAttributes];
+			[myEditText->myTextView setDelegate: NULL];
+			[myEditText->myTextView setSelectedRange:NSMakeRange(mySelStart,0)];
+			[myEditText->myTextView setTypingAttributes: myTypingAttributes];
 			[myEditText insertText: [self multiLinePrompt]]; // put out next prompt
-			[myEditText setDelegate: self];
+			[myEditText->myTextView setDelegate: self];
 			mySelStart = [[myEditText string] length]; // we start after the secondary prompt
 			// then keep going
 		} else {
-			[myEditText setDelegate: NULL];
+			[myEditText->myTextView setDelegate: NULL];
 			// we are now at the end of the text
 			myOutputStart = [[myEditText string] length];
 			myInputStart = myOutputStart; // for now
@@ -327,10 +332,10 @@
 			[self performCommand: command];
 			// if there is any output, it will be handled above, and inputStart will be adjusted accordingly
 			// go to end
-			[myEditText setSelectedRange:NSMakeRange(myInputStart,0)];
-			[myEditText setTypingAttributes: myTypingAttributes];
+			[myEditText->myTextView setSelectedRange:NSMakeRange(myInputStart,0)];
+			[myEditText->myTextView setTypingAttributes: myTypingAttributes];
 			[myEditText insertText: [self commandPrompt]]; // put out next prompt
-			[myEditText setDelegate: self];
+			[myEditText->myTextView setDelegate: self];
 			mySelStart = [[myEditText string] length]; // we start after the prompt
 		}
     }
@@ -339,13 +344,13 @@
 
 - (IBAction)clearConsoleOutput:(id)sender
 {
-    [myEditText setDelegate: NULL];
+    [myEditText->myTextView setDelegate: NULL];
     [myEditText selectAll: sender];
-    [myEditText delete: sender];
+    [myEditText->myTextView delete:sender];
     myOutputStart = 0;
     myInputStart = 0;
     [self setCurrentCommand: @""];
-    [myEditText setDelegate: self];
+    [myEditText->myTextView setDelegate: self];
 }
 
 
@@ -378,6 +383,11 @@
 - (NSString *) toolTipForCommand: (NSString *)command
 {
     return NULL;
+}
+
+- (BOOL)textView:(NSTextView *)textView shouldInterpretKeyEvents: (NSArray *)eventArray
+{
+    return YES;
 }
 
 @end

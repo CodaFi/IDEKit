@@ -25,7 +25,7 @@
 // IDEKit_LineCache isn't declared a class because we want to reference it from Objective-C
 // headers - while we compile IDEKit as ObjectiveC++, we don't want to force that on all of our
 // clients
-typedef struct IDEKit_LineCache {
+struct IDEKit_LineCache {
 public:
     IDEKit_LineCache();
     ~IDEKit_LineCache();
@@ -61,7 +61,7 @@ protected:
     std::deque<NSUInteger> fFoldedLineStarts;
     NSUInteger fTotalUnfoldedSize;
     NSUInteger fTotalFoldedSize;
-    typedef struct FoldingInfo {
+	struct FoldingInfo {
 		NSUInteger foldingStart;
 		NSUInteger contentsSize; // the contents, unfolded
 		bool operator < (const FoldingInfo &other) const;

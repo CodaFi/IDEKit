@@ -66,7 +66,7 @@
 		CloseResFile(myRefNum);
     }
 }
-- (NSData *) getResourceType: (long) resType resID: (short)resID
+- (NSData *) getResourceType:(unsigned int)resType resID: (short)resID
 {
     short curResFile = CurResFile();
     UseResFile(myRefNum);
@@ -80,7 +80,7 @@
     UseResFile(curResFile); // set back the way it was
     return retval;
 }
-- (void) writeResource: (NSData *)data type: (long) resType resID: (short)resID
+- (void) writeResource: (NSData *)data type: (unsigned int) resType resID: (short)resID
 {
     Handle h = NewHandle([data length]);
     [data getBytes:*h];

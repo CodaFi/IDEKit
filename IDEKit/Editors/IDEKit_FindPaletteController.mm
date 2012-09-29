@@ -333,7 +333,7 @@ extern "C" {
 		if (firstOccurence.length > 0) {
 			@autoreleasepool {
 				NSString *targetString = [self findString];
-				NSString *replaceString = [self fullReplaceString];
+				NSString *__replaceString = [self fullReplaceString];
 				NSMutableAttributedString *temp;	/* This is the temporary work string in which we will do the replacements... */
 				NSRange rangeInOriginalString;	/* Range in the original string where we do the searches */
 				// Find the last occurence of the string and union it with the first occurence to compute the tightest range...
@@ -376,7 +376,7 @@ extern "C" {
 						else {
 							NSRange rangeToCopy = NSMakeRange(rangeInOriginalString.location, foundRange.location - rangeInOriginalString.location + 1);	// Copy upto the start of the found range plus one char (to maintain attributes with the overlap)...
 							[temp appendAttributedString:[textStorage attributedSubstringFromRange:rangeToCopy]];
-							[temp replaceCharactersInRange:NSMakeRange([temp length] - 1, 1) withString:[replaceString makeReplacementString: regexGroups]];
+							[temp replaceCharactersInRange:NSMakeRange([temp length] - 1, 1) withString:[__replaceString makeReplacementString: regexGroups]];
 							rangeInOriginalString.length -= NSMaxRange(foundRange) - rangeInOriginalString.location;
 							rangeInOriginalString.location = NSMaxRange(foundRange);
 							replaced++;

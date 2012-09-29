@@ -9,6 +9,9 @@
 #import "IDEKit_DialogController.h"
 #import "IDEKit_PathUtils.h"
 
+//Shut CLANG up about the selector being unknwon
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 @implementation IDEKit_DialogController
 + (IDEKit_DialogController *) dialogControllerForNib: (NSString *)nibName
 {
@@ -109,4 +112,7 @@
     NSLog(@"SetMyGoto %@",value);
     [self setValue: value forKey: @"myGoto"];
 }
+
 @end
+#pragma clang diagnostic pop
+

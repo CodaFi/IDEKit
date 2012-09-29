@@ -24,7 +24,7 @@
 #import "IDEKit_TextColors.h"
 #import "IDEKit_UserSettings.h"
 
-static NSColor *IDEKit_PrimativeColorForColor(int color)
+static NSColor *IDEKit_PrimativeColorForColor(NSInteger color)
 {
     switch (color) {
 	case IDEKit_kLangColor_Background:
@@ -168,6 +168,6 @@ NSColor *IDEKit_TextColorForColor(NSInteger color)
 - (NSString *)htmlString
 {
     id rgb = [self colorUsingColorSpaceName: NSCalibratedRGBColorSpace];
-    return [NSString stringWithFormat: @"#%.2X%.2X%.2X", (NSInteger)([rgb redComponent] * 255.0),(NSInteger)([rgb greenComponent] * 255.0),(NSInteger)([rgb blueComponent] * 255.0)];
+    return [NSString stringWithFormat: @"#%.2lX%.2lX%.2lX", (NSInteger)([rgb redComponent] * 255.0),(NSInteger)([rgb greenComponent] * 255.0),(NSInteger)([rgb blueComponent] * 255.0)];
 }
 @end

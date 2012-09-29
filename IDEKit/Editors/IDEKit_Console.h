@@ -52,8 +52,10 @@
 // into previous lines (which don't change) and current line (which does)
 //
 
+@class IDEKit_SrcEditView;
+
 @interface IDEKit_Console : NSDocument {
-    IBOutlet id myEditText;
+    IBOutlet IDEKit_SrcEditView *myEditText;
     NSMutableArray *myHistory;
     NSMutableDictionary *myStreamAttributes; // contains typing attributes
     NSMutableArray *myStreamNames;

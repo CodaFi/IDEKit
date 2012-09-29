@@ -424,7 +424,7 @@
 
 @implementation NSString(IDEKit_FindFolder)
 
-+ (NSString *) findFolder: (NSInteger) folderType forDomain: (NSInteger) domain
++ (NSString *) findFolder:(OSType)folderType forDomain:(NSInteger)domain
 {
     NSString *retval = NULL;
     FSRef folder;

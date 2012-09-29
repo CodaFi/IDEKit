@@ -39,23 +39,6 @@
 	return _sharedObject;
 }
 
-- (id) init
-{
-    self = [super init];
-    if (self) {
-		// load any compatibility libraries (is there a better place for this?)
-		if (NSAppKitVersionNumber <= 663.6) { // 663.6 NSAppKitVersionNumber10_2_3 when we dont have 10_3 enabled
-			NSObjectFileImage objectFileImage;
-			NSString *compatLib = [[NSBundle bundleForClass:[IDEKit_Delegate class]] pathForResource:@"102Compatibility" ofType:@"dylib"];
-			NSObjectFileImageReturnCode err = NSCreateObjectFileImageFromFile([compatLib fileSystemRepresentation], &objectFileImage);
-			if (err == NSObjectFileImageSuccess) {
-				NSModule module = NSLinkModule(objectFileImage, "102Compatibility", /*NSLINKMODULE_OPTION_BINDNOW |*/NSLINKMODULE_OPTION_RETURN_ON_ERROR);
-			}
-		}
-    }
-    return self;
-}
-
 - (NSString *) appPathName	// @"{App}"
 {
     return @"{IDE}";
