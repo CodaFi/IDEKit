@@ -23,13 +23,12 @@ static IDEKit_FileManager *gFileManager = NULL;
 - (id) init
 {
     if (gFileManager) {
-	[self release];
 	return gFileManager;
     }
     self = [super init];
     if (self) {
-	myShadows = [[NSMutableDictionary dictionary] retain];
-	gFileManager = [self retain];
+	myShadows = [NSMutableDictionary dictionary];
+	gFileManager = self;
     }
     return self;
 }
@@ -58,17 +57,17 @@ static IDEKit_FileManager *gFileManager = NULL;
 {
     // just to be safe
     [self unregisterSnapshot:snapshot];
-    NSMutableSet *shadows = [myShadows objectForKey: fileID];
+    NSMutableSet *shadows = myShadows[fileID];
     if (!shadows) {
 	shadows = [NSMutableSet set];
-	[myShadows setObject: shadows forKey: fileID];
+	myShadows[fileID] = shadows;
     }
     [shadows addObject: [snapshot uniqueID]]; // keep the unique id, not the snapshot
 }
 - (void) unregisterSnapshot: (IDEKit_SnapshotFile *) snapshot
 {
     IDEKit_UniqueID *masterFile = [snapshot masterID];
-    NSMutableSet *shadows = [myShadows objectForKey: masterFile];
+    NSMutableSet *shadows = myShadows[masterFile];
     [shadows removeObject: [snapshot uniqueID]];
     if ([shadows count] == 0) {
 	[myShadows removeObjectForKey: masterFile]; // remove the set as well, it's empty
@@ -78,12 +77,12 @@ static IDEKit_FileManager *gFileManager = NULL;
 {
     IDEKit_SnapshotFile *snapshot = [IDEKit_SnapshotFile snapshotFileAssociatedWith: fileID];
     if (snapshot) {
-	NSMutableSet *retval = [[myShadows objectForKey: [snapshot masterID]] mutableCopy]; // start with it's master's shadows
+	NSMutableSet *retval = [myShadows[[snapshot masterID]] mutableCopy]; // start with it's master's shadows
 	[retval removeObject: fileID]; // remove this one
 	[retval addObject: [snapshot masterID]]; // add the master
 	return retval;
     } else {
-	return [myShadows objectForKey: fileID]; // return whatever we've got
+	return myShadows[fileID]; // return whatever we've got
     }
 }
 

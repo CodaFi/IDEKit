@@ -28,16 +28,14 @@
 @implementation IDEKit_ProjDocument(InfoPList)
 - (NSDictionary *) currentTargetDefaultInfoPList // generate a "new" one based on default values
 {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-	@"6.0", @"CFBundleInfoDictionaryVersion",
-	@"English", @"CFBundleDevelopmentRegion",
-	@"????",  @"CFBundleSignature",
-	[NSString stringWithFormat: @"com.example.%@",[[[self fileName] lastPathComponent] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]], @"CFBundleIdentifier",
-	@"1.0", @"CFBundleVersion",
-	[[self currentTarget] objectForKey: IDEKit_TargetInfoPList], @"CFBundleExecutable",
-	@"NSApplication", @"NSPrincipalClass",
-	@"MainMenu", @"NSMainNibFile",
-	NULL];
+    return @{@"CFBundleInfoDictionaryVersion": @"6.0",
+	@"CFBundleDevelopmentRegion": @"English",
+	@"CFBundleSignature": @"????",
+	@"CFBundleIdentifier": [NSString stringWithFormat: @"com.example.%@",[[[[self fileURL] absoluteString] lastPathComponent] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]],
+	@"CFBundleVersion": @"1.0",
+	@"CFBundleExecutable": [self currentTarget][IDEKit_TargetInfoPList],
+	@"NSPrincipalClass": @"NSApplication",
+	@"NSMainNibFile": @"MainMenu"};
 }
 - (NSDictionary *) currentTargetInfoPList
 {
@@ -48,23 +46,23 @@
 }
 - (void) setCurrentTargetInfoPList: (NSDictionary *)infoPList
 {
-    [myCurrentTarget setObject:infoPList forKey:IDEKit_TargetInfoPList];
+    myCurrentTarget[IDEKit_TargetInfoPList] = infoPList;
     [self liveSaveTarget];
 }
 
 - (id) currentTargetInfoPListObjectForKey: (NSString *)key
 {
-    return [[self currentTargetInfoPList] objectForKey: key];
+    return [self currentTargetInfoPList][key];
 }
-- (id) setCurrentTargetInfoPListObject: (id) object forKey: (NSString *)key
+- (void) setCurrentTargetInfoPListObject: (id) object forKey: (NSString *)key
 {
     NSMutableDictionary *infoPlist = [[self currentTargetInfoPList] mutableCopy];
-    [infoPlist setObject: [[object copy] autorelease] forKey: key];
-    [self setCurrentTargetInfoPList:[infoPlist autorelease]];
+    infoPlist[key] = [object copy];
+    [self setCurrentTargetInfoPList:infoPlist];
 }
 - (NSArray *) currentTargetInfoPListDocuments
 {
-    return [[self currentTargetInfoPList] objectForKey: @"CFBundleDocumentTypes"];
+    return [self currentTargetInfoPList][@"CFBundleDocumentTypes"];
 }
 
 @end

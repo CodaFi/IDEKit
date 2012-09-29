@@ -10,7 +10,7 @@
 #include <Carbon/Carbon.h>
 
 // This provides a bridge between the Tcl routines that regex uses and CF/NS routines
-typedef NSUInteger short unichar;
+typedef unsigned short unichar;
 #import <limits.h>
 #import <stdarg.h>
 #include <sys/types.h>

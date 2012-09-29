@@ -211,11 +211,11 @@ NSString *IDEKit_ConvertFilesPBoardType = @"IDEKit_ConvertFilesPBoardType";
     if ([[pboard types] containsObject: NSFilenamesPboardType] && ![[pboard types] containsObject: NSStringPboardType]) {
 		// this is a bit ugly - changing the drag info to be something that we've got that has a string
 		id files = [pboard propertyListForType:NSFilenamesPboardType]; // since it could go away
-		[pboard declareTypes: [NSArray arrayWithObjects:NSStringPboardType, IDEKit_ConvertFilesPBoardType, NULL] owner: self];
+		[pboard declareTypes: @[NSStringPboardType, IDEKit_ConvertFilesPBoardType] owner: self];
 		//[pboard addTypes: [NSArray arrayWithObject:NSStringPboardType] owner: self];
 		[pboard setString: @"<IDEKit soon to be files>" forType: NSStringPboardType];
 		[pboard setPropertyList: files forType: IDEKit_ConvertFilesPBoardType]; // use our own type here
-		[files release]; // new pboard has them
+		 // new pboard has them
 		//NSLog(@"Changed pboard %@(%@)",[pboard description], [[pboard types] description]);
     }
     NSDragOperation retval = [super draggingEntered: info];

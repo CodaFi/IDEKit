@@ -27,11 +27,11 @@
 @implementation IDEKit_TextFunctionMarkers
 + (IDEKit_TextFunctionMarkers *)markWithName: (NSString *)name decl: (NSRange) decl body: (NSRange) body
 {
-    return [[[IDEKit_TextFunctionMarkers alloc] initWithName: name decl: decl body: body image: NULL] autorelease];
+    return [[IDEKit_TextFunctionMarkers alloc] initWithName: name decl: decl body: body image: NULL];
 }
 + (IDEKit_TextFunctionMarkers *)markWithName: (NSString *)name decl: (NSRange) decl body: (NSRange) body image: (NSString *)imageName
 {
-    return [[[IDEKit_TextFunctionMarkers alloc] initWithName: name decl: decl body: body image: imageName] autorelease];
+    return [[IDEKit_TextFunctionMarkers alloc] initWithName: name decl: decl body: body image: imageName];
 }
 
 + (NSMutableArray *) makeAllMarks: (NSString *) source inArray: (NSMutableArray *)array fromRegex: (regex_t *)regex withNameIn: (NSInteger) grouping
@@ -39,15 +39,14 @@
     if (!regex)
 	return array;
     if (array == nil)
-	array = [[[NSMutableArray alloc] initWithCapacity: 0] autorelease];
+	array = [[NSMutableArray alloc] initWithCapacity: 0];
     regmatch_t pmatch[9];
-    int length = [source length];
+    NSInteger length = [source length];
     pmatch[0].rm_so = 0;
     pmatch[0].rm_eo = length;
-#ifdef oldregex
-    const char *srcCString = [source lossyCString];
+    const char *srcCString = [source cStringUsingEncoding:NSUTF8StringEncoding];
     while 
-	(regexec(regex,srcCString,grouping+1,pmatch,REG_STARTEND) == 0 && pmatch[0].rm_eo != pmatch[0].rm_so) 
+	(regexec(regex,srcCString,grouping+1,pmatch,REG_STARTEND) == 0 && pmatch[0].rm_eo != pmatch[0].rm_so)
     {
 	// found something
 	NSRange foundRange = NSMakeRange(pmatch[grouping].rm_so,pmatch[grouping].rm_eo - pmatch[grouping].rm_so);
@@ -56,23 +55,11 @@
 	pmatch[0].rm_so = pmatch[0].rm_eo;
 	pmatch[0].rm_eo = length;
     }
-#else
-    NSData *stringData = [source dataUsingEncoding: NSUnicodeStringEncoding];
-    int start = 0;
-    while (re_uniexec(regex,(unichar *)[stringData bytes]+1 + start,length,NULL,grouping+1,pmatch,REG_STARTEND) == 0 && pmatch[0].rm_eo != pmatch[0].rm_so) {
-	// found something
-	NSRange foundRange = NSMakeRange(pmatch[grouping].rm_so + start,pmatch[grouping].rm_eo - pmatch[grouping].rm_so);
-	//NSLog(@"Found at %d:%d (%@)",foundRange.location,foundRange.length,[source substringWithRange: foundRange]);
-	[array addObject: [IDEKit_TextFunctionMarkers markWithName: [source substringWithRange: foundRange] decl: foundRange body: foundRange]];
-	start += pmatch[0].rm_eo;
-	length -= pmatch[0].rm_eo;
-    }
-#endif
     //	NSLog(@"Returning %@",retval);
     return array;
 }
 
-+ (BOOL) pattern: (int *)pattern matchesTokens: (int *)tokens andRanges: (NSRangePointer) ranges forRange: (NSRangePointer) foundRange asCategory: (int *)cat;
++ (BOOL) pattern: (int *)pattern matchesTokens: (NSInteger *)tokens andRanges: (NSRangePointer) ranges forRange: (NSRangePointer) foundRange asCategory: (NSInteger *)cat;
 {
     NSRange startRange = *ranges;
     NSRange endRange = {0,0};
@@ -160,7 +147,7 @@
 }
 + (NSInteger) getTokenConvertingBOL: (NSRangePointer) range withLex: (IDEKit_LexParser *)lex
 {
-    int retval = IDEKit_kLexEOF;
+    NSInteger retval = IDEKit_kLexEOF;
     while (1) {
 	retval = [lex parseOneToken: range ignoreWhiteSpace: NO];
 	if (retval == IDEKit_kLexEOL) {
@@ -188,10 +175,10 @@
 + (NSMutableArray *) makeAllMarks: (NSString *) source inArray: (NSMutableArray *)array fromPattern: (int *)pattern withLex: (IDEKit_LexParser *)lex
 {
     if (array == nil)
-	array = [[[NSMutableArray alloc] initWithCapacity: 0] autorelease];
+	array = [[NSMutableArray alloc] initWithCapacity: 0];
 
     [lex startParsingString: source range: NSMakeRange(0,[source length])];
-    int lastNTokens[IDEKit_kMarkerPatternSize+2];
+    NSInteger lastNTokens[IDEKit_kMarkerPatternSize+2];
     NSRange lastNRanges[IDEKit_kMarkerPatternSize+2];
     // fill up buffer
     lastNTokens[0] = IDEKit_kMarkerBOL;
@@ -206,12 +193,12 @@
 	for (int i=0;pattern[i] != IDEKit_kMarkerEndList;i++) {
 	    if (pattern[i] == IDEKit_kMarkerBeginPattern) {
 		NSRange foundRange;
-		int category = 0;
+		NSInteger category = 0;
 		if ([self pattern: pattern+i+1 matchesTokens: lastNTokens andRanges: lastNRanges forRange: &foundRange asCategory: &category]) {
 		    // we've found a marker of something!
 		    //NSLog(@"Found pattern at %d,%d",foundRange.location,foundRange.length);
 		    if (category) {
-			[array addObject: [IDEKit_TextFunctionMarkers markWithName: [source substringWithRange: foundRange] decl: foundRange body: foundRange image: [NSString stringWithFormat: @"IDEKit_MarkerCategory%c", category]]];
+			[array addObject: [IDEKit_TextFunctionMarkers markWithName: [source substringWithRange: foundRange] decl: foundRange body: foundRange image: [NSString stringWithFormat: @"IDEKit_MarkerCategory%ld", category]]];
 		    } else {
 			[array addObject: [IDEKit_TextFunctionMarkers markWithName: [source substringWithRange: foundRange] decl: foundRange body: foundRange]];
 		    }
@@ -231,17 +218,12 @@
     return array;
 }
 
-- (void) dealloc
-{
-    [mName release];
-    [mImage release];
-}
 - (id)initWithName: (NSString *)name decl: (NSRange) decl body: (NSRange) body image: (NSString *)imageName
 {
     self = [super init];
     if (!self)
 	return nil;
-    mImage = [imageName retain];
+    mImage = imageName;
     mName = [name mutableCopy];
     // replace leading tabs with 3 em spaces
     unichar nbs[3] = {0x2003,0x2003,0x2003}; // up to 3 em space

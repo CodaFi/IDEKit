@@ -76,12 +76,12 @@
 {
     self = [super initWithWindow: nil];
     if (self) {
-	myCompletions = [[completions sortedUniqueArray] retain]; // make sure we are sorted & unique
+	myCompletions = [completions sortedUniqueArray]; // make sure we are sorted & unique
 	if ([completions count]) {
-	    myCommonPrefix = [[completions objectAtIndex: 0] mutableCopy];
+	    myCommonPrefix = [completions[0] mutableCopy];
 	    for (NSUInteger i=1;i<[completions count];i++) {
 		//NSLog(@"Common prefix %@",myCommonPrefix);
-		NSString *next = [completions objectAtIndex: i];
+		NSString *next = completions[i];
 		if ([next hasPrefix:myCommonPrefix]) {
 		    // good to keep going
 		    continue;
@@ -107,13 +107,10 @@
 {
     [myList setDataSource: NULL];
     [myList setDelegate: NULL];
-    [myView release]; // release the top level named object in the NIB since we loaded it
+     // release the top level named object in the NIB since we loaded it
 //    [myTextView release];
 //    [myScrollView release];
 //    [myList release];
-    [myCompletions release];
-    [myCommonPrefix release];
-    [myCurrentTypeAhead release];
 }
 - (void)awakeFromNib
 {
@@ -135,7 +132,7 @@
 	return;
     }
     for (NSUInteger i=0;i<[myCompletions count];i++) {
-	if ([[myCompletions objectAtIndex: i] hasPrefix:myCurrentTypeAhead]) {
+	if ([myCompletions[i] hasPrefix:myCurrentTypeAhead]) {
 	    [myList selectRow:i byExtendingSelection:false];
 	    [myList scrollRowToVisible: i];
 	    return;
@@ -179,17 +176,17 @@
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row;
 {
-    return [myCompletions objectAtIndex: row];
+    return myCompletions[row];
 }
 
 - (id)popupAssistantAt: (NSPoint)where forView: (NSTextView *)view
 {
     if ([myCompletions count] == 0) {
-	[view popupHelpTagAtInsertion: [[[NSAttributedString alloc] initWithString: @"No completions"] autorelease]];
+	[view popupHelpTagAtInsertion: [[NSAttributedString alloc] initWithString: @"No completions"]];
 	return NULL; // nothing possible
     }
     if ([myCompletions count] == 1) {
-	return [myCompletions objectAtIndex: 0]; // only one choice
+	return myCompletions[0]; // only one choice
     }
     //NSLog(@"Creating window at %g,%g",where.x,where.y);
     NSRect bounds = [myView frame];
@@ -208,13 +205,13 @@
     [w makeKeyWindow];
     //NSLog(@"My window %@, my view %@",w,myView);
 
-    int result = [NSApp runModalForWindow:w];
+    NSInteger result = [NSApp runModalForWindow:w];
     id retval;
     if (result == NSRunStoppedResponse) {
 	if ([myList selectedRow] == -1) {
 	    retval = myCurrentTypeAhead; // use whatever we typed
 	} else {
-	    retval = [myCompletions objectAtIndex: [myList selectedRow]];
+	    retval = myCompletions[[myList selectedRow]];
 	}
     } else {
 	retval = NULL;

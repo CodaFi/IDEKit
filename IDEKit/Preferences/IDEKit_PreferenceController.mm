@@ -7,12 +7,12 @@
 //  modify it under the terms of the GNU Library General Public
 //  License as published by the Free Software Foundation; either
 //  version 2 of the License, or (at your option) any later version.
-//  
+//
 //  This library is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //  Library General Public License for more details.
-//  
+//
 //  You should have received a copy of the GNU Library General Public
 //  License along with this library; if not, write to the Free
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -30,7 +30,7 @@
 {
     static IDEKit_PreferenceController *gAppPrefs = NULL;
     if (!gAppPrefs) {
-	gAppPrefs = [[IDEKit_AppPreferenceController alloc] initWithDefaults: [NSUserDefaults standardUserDefaults]];
+		gAppPrefs = [[IDEKit_AppPreferenceController alloc] initWithDefaults: [NSUserDefaults standardUserDefaults]];
     }
     return gAppPrefs;
 }
@@ -40,26 +40,26 @@
     NSArray *array = [[NSBundle mainBundle] pathsForResourcesOfType: @"prefPane" inDirectory: @"PreferencePanes"];
     // and for now, just blindly add it
     for (NSUInteger i=0;i<[array count];i++) {
-	NSBundle *prefBundle = [NSBundle bundleWithPath: [array objectAtIndex: i]];
-	//NSLog(@"Examinging %@ info %@",prefBundle,[prefBundle infoDictionary]);
-	NSString *category = [self categoryKeyFromBundle: prefBundle];
-	if (!category) continue; // don't show this one
-	[myPanels addObject: prefBundle];
-	if (![myCategories containsObject: category]) {
-	    [myCategories addObject: category];
-	    [myCategoryMap setObject: [NSMutableArray arrayWithCapacity: 1] forKey: category];
-	}
-	[[myCategoryMap objectForKey: category] addObject: prefBundle];
+		NSBundle *prefBundle = [NSBundle bundleWithPath: array[i]];
+		//NSLog(@"Examinging %@ info %@",prefBundle,[prefBundle infoDictionary]);
+		NSString *category = [self categoryKeyFromBundle: prefBundle];
+		if (!category) continue; // don't show this one
+		[myPanels addObject: prefBundle];
+		if (![myCategories containsObject: category]) {
+			[myCategories addObject: category];
+			myCategoryMap[category] = [NSMutableArray arrayWithCapacity: 1];
+		}
+		[myCategoryMap[category] addObject: prefBundle];
     }
 }
 - (NSString *)categoryKeyFromBundle: (NSBundle *) prefBundle
 {
-    return [[prefBundle infoDictionary] objectForKey: @"IDEKit_PreferenceCategory"];
+    return [prefBundle infoDictionary][@"IDEKit_PreferenceCategory"];
 }
 
 - (NSString *)nameKeyFromBundle: (NSBundle *) prefBundle
 {
-    return [[prefBundle infoDictionary] objectForKey: @"IDEKit_PreferenceName"];
+    return [prefBundle infoDictionary][@"IDEKit_PreferenceName"];
 }
 
 - (NSString *)nibName
@@ -73,45 +73,40 @@
 {
     self = [super init];
     if (self) {
-	myPanels = [[NSMutableArray arrayWithCapacity: 0] retain];
-	myCategories = [[NSMutableArray arrayWithCapacity: 0] retain];
-	myCategoryMap = [[NSMutableDictionary dictionaryWithCapacity: 0] retain];
-	myDefaults = [defaults retain];
+		myPanels = [NSMutableArray arrayWithCapacity: 0];
+		myCategories = [NSMutableArray arrayWithCapacity: 0];
+		myCategoryMap = [NSMutableDictionary dictionaryWithCapacity: 0];
+		myDefaults = defaults;
     }
     return self;
 }
 - (void) dealloc
 {
-    [myPanels release];
-    [myCategories release];
-    [myCategoryMap release];
     [myPreferenceWindow close];
-    [myDefaults release];
-    [super dealloc];
 }
 
 - (BOOL) loadUI
 {
     if (!myPreferenceWindow) {
-	if (![NSBundle loadOverridenNibNamed:[self nibName] owner:self])  {
-	    NSLog(@"Failed to load %@.nib",[self nibName]);
-	    NSBeep();
-	    return NO;
-	}
-	[myPreferenceHeader setCell: [[NSTableHeaderCell alloc] initTextCell: @""]];
-	[self buildPanelList];
-	[myPreferenceList reloadData];
-	//[myPreferenceList expandItem: NULL expandChildren: YES];
-	NSUInteger i = 0;
-	while (i < [myPreferenceList numberOfRows]) {
-	    id item = [myPreferenceList itemAtRow: i];
-	    if ([myPreferenceList isExpandable: item]) {
-		[myPreferenceList expandItem: item expandChildren: YES];
-	    }
-	    i++;
-	}
+		if (![NSBundle loadOverridenNibNamed:[self nibName] owner:self])  {
+			NSLog(@"Failed to load %@.nib",[self nibName]);
+			NSBeep();
+			return NO;
+		}
+		[myPreferenceHeader setCell: [[NSTableHeaderCell alloc] initTextCell: @""]];
+		[self buildPanelList];
+		[myPreferenceList reloadData];
+		//[myPreferenceList expandItem: NULL expandChildren: YES];
+		NSUInteger i = 0;
+		while (i < [myPreferenceList numberOfRows]) {
+			id item = [myPreferenceList itemAtRow: i];
+			if ([myPreferenceList isExpandable: item]) {
+				[myPreferenceList expandItem: item expandChildren: YES];
+			}
+			i++;
+		}
     }
-    int firstItem = [myPreferenceList numberOfRows] - 1;
+    NSInteger firstItem = [myPreferenceList numberOfRows] - 1;
     if (firstItem > 1) firstItem = 1;
     [myPreferenceList selectRow: firstItem byExtendingSelection: NO];
     [self switchPanel: myPreferenceList];
@@ -139,11 +134,11 @@
     NSArray *properties = [myCurrentPreferencePanel editedProperties];
     
     for (NSUInteger i=0;i<[properties count];i++) {
-	id propertyName = [properties objectAtIndex: i];
-	id defaultValue = [defaults objectForKey: propertyName];
-	if (defaultValue) {
-	    [myDefaults setObject: defaultValue forKey: propertyName];
-	}
+		id propertyName = properties[i];
+		id defaultValue = defaults[propertyName];
+		if (defaultValue) {
+			[myDefaults setObject: defaultValue forKey: propertyName];
+		}
     }
     [myCurrentPreferencePanel setMyDefaults: myDefaults]; // make sure we are using the current defaults (just in case)
     [myCurrentPreferencePanel didSelect]; // resend the select message to reload
@@ -154,13 +149,13 @@
     NSSavePanel *panel = [NSSavePanel savePanel];
     [panel setPrompt: @"Export"];
     [panel setTitle: @"Export panel settings"];
-    [panel setRequiredFileType: @"plist"];
+	[panel setAllowedFileTypes:@[@"plist"]];
     if ([panel runModal] == NSOKButton) {
-	NSString *path = [panel filename];
-	NSDictionary *data = [myCurrentPreferencePanel exportPanel];
-	if (data) {
-	    [data writeToFile: path atomically: NO];
-	}
+		NSString *path = [[panel URL] absoluteString];
+		NSDictionary *data = [myCurrentPreferencePanel exportPanel];
+		if (data) {
+			[data writeToFile: path atomically: NO];
+		}
     }
 }
 
@@ -169,12 +164,16 @@
     NSOpenPanel *panel = [NSOpenPanel openPanel];
     [panel setTitle: @"Import panel settings"];
     [panel setPrompt: @"Import"];
-    if ([panel runModalForTypes: [NSArray arrayWithObject: @"plist"]] == NSOKButton) {
-	NSString *path = [[panel filenames] objectAtIndex: 0];
-	NSDictionary *data = [NSDictionary dictionaryWithContentsOfFile: path];
-	if (data) {
-	    [myCurrentPreferencePanel importPanel: data];
-	}
+	[panel setCanChooseDirectories:NO];
+	[panel setCanChooseFiles:YES];
+	[panel setAllowedFileTypes:@[@"plist"]];
+	
+    if ([panel runModal] == NSOKButton) {
+		NSString *path = [(NSURL*)[panel URLs][0] absoluteString];
+		NSDictionary *data = [NSDictionary dictionaryWithContentsOfFile: path];
+		if (data) {
+			[myCurrentPreferencePanel importPanel: data];
+		}
     }
 }
 
@@ -183,22 +182,22 @@
     //NSLog(@"Done with preference");
     if (![myPreferenceWindow makeFirstResponder: NULL]) {
         //NSLog(@"Couldn't make firstResponder NULL");
-	return;
+		return;
     }
     //[myDefaults synchronize];
     if (isSheet) {
         //NSLog(@"Trying to close sheet");
-	if ([myCurrentPreferencePanel shouldUnselect] == NSUnselectCancel) {
-	    //NSLog(@"Couldn't unselect");
-	    return;
-	}
-	//NSLog(@"EndSheet");
-	[NSApp endSheet: myPreferenceWindow];
-	[myPreferenceWindow orderOut: self];
-	//[myPreferenceWindow release];
+		if ([myCurrentPreferencePanel shouldUnselect] == NSUnselectCancel) {
+			//NSLog(@"Couldn't unselect");
+			return;
+		}
+		//NSLog(@"EndSheet");
+		[NSApp endSheet: myPreferenceWindow];
+		[myPreferenceWindow orderOut: self];
+		//[myPreferenceWindow release];
     } else {
         //NSLog(@"Trying to close window");
-	//[myPreferenceWindow performClose: self]; // without the close button, this doesn't work
+		//[myPreferenceWindow performClose: self]; // without the close button, this doesn't work
         if ([self windowShouldClose: myPreferenceWindow]) {
             [myPreferenceWindow close];
         }
@@ -211,79 +210,77 @@
         //NSLog(@"windowShouldClose myPreferenceWindow");
         if ([myCurrentPreferencePanel shouldUnselect] == NSUnselectCancel) {
             //NSLog(@"can't unselect");
-	    return NO;
+			return NO;
         }
-	[[myCurrentPreferencePanel mainView] removeFromSuperview]; /* Remove view from window */
-	[myCurrentPreferencePanel release];
-	myCurrentPreferencePanel = NULL;
-	//[myPreferenceWindow orderOut: self];
+		[[myCurrentPreferencePanel mainView] removeFromSuperview]; /* Remove view from window */
+		myCurrentPreferencePanel = NULL;
+		//[myPreferenceWindow orderOut: self];
     }
     return YES;
 }
 - (void) switchPanel: (id) sender
 {
     if ([myPreferenceList numberOfSelectedRows] == 0)
-	return;
+		return;
     NSBundle *prefBundle = [myPreferenceList itemAtRow: [myPreferenceList selectedRow]];
     if (![prefBundle isLoaded]) {
-	//NSLog(@"Loading bundle %@",prefBundle);
-	if (![prefBundle load]) {
-	    NSLog(@"Problems loading bundle %@/%@/%@???",prefBundle,[prefBundle principalClass],[[prefBundle infoDictionary] description]);
-	    return;
-	}
+		//NSLog(@"Loading bundle %@",prefBundle);
+		if (![prefBundle load]) {
+			NSLog(@"Problems loading bundle %@/%@/%@???",prefBundle,[prefBundle principalClass],[[prefBundle infoDictionary] description]);
+			return;
+		}
     }
     Class prefPaneClass = [prefBundle principalClass];
     //NSLog(@"Switching to pane of class %@ in %@",prefPaneClass,prefBundle);
     if (myCurrentPreferencePanel) { // is something already up?
-	if (![myPreferenceWindow makeFirstResponder: NULL])
-	    return;
-	if ([myCurrentPreferencePanel isMemberOfClass: prefPaneClass])
-	    return; // we're already there
-	if ([myCurrentPreferencePanel shouldUnselect] == NSUnselectCancel)
-	    return; // can't leave current panel (not quite right)
-	[[myCurrentPreferencePanel mainView] removeFromSuperview]; /* Remove view from window */
-	[myCurrentPreferencePanel release];
-	myCurrentPreferencePanel = NULL;
+		if (![myPreferenceWindow makeFirstResponder: NULL])
+			return;
+		if ([myCurrentPreferencePanel isMemberOfClass: prefPaneClass])
+			return; // we're already there
+		if ([myCurrentPreferencePanel shouldUnselect] == NSUnselectCancel)
+			return; // can't leave current panel (not quite right)
+		[[myCurrentPreferencePanel mainView] removeFromSuperview]; /* Remove view from window */
+		myCurrentPreferencePanel = NULL;
     }
     [myPreferenceHeader setStringValue: [self nameKeyFromBundle: prefBundle]];
-
+	
     myCurrentPreferencePanel = [[prefPaneClass alloc]
-            initWithBundle:prefBundle];
+								initWithBundle:prefBundle];
     //NSLog(@"About to set panel with defaults %@",myDefaults);
     if ([myCurrentPreferencePanel respondsToSelector: @selector(setMyDefaults:)]) {// and it should, since PeROXIDEPrefsPane does
-	[myCurrentPreferencePanel setMyDefaults: myDefaults]; // use the defaults accordingly
-	[myCurrentPreferencePanel setPathVars: [self getPathVars]];
+		[myCurrentPreferencePanel setMyDefaults: myDefaults]; // use the defaults accordingly
+		[myCurrentPreferencePanel setPathVars: [self getPathVars]];
     } else {
-	NSLog(@"%@ doesn't respond to setMyDefaults:????",myCurrentPreferencePanel);
-	//[myCurrentPreferencePanel setMyDefaults: myDefaults]; // do it anyway
+		NSLog(@"%@ doesn't respond to setMyDefaults:????",myCurrentPreferencePanel);
+		//[myCurrentPreferencePanel setMyDefaults: myDefaults]; // do it anyway
     }
     NSView *prefView;
     if ( [myCurrentPreferencePanel loadMainView] ) {
-	[myCurrentPreferencePanel willSelect];
-	prefView = [myCurrentPreferencePanel mainView];
-	[myPreferencePane addSubview: prefView]; /* Add view to window */
-	[myCurrentPreferencePanel didSelect];
+		[myCurrentPreferencePanel willSelect];
+		prefView = [myCurrentPreferencePanel mainView];
+		[myPreferencePane addSubview: prefView]; /* Add view to window */
+		[myCurrentPreferencePanel didSelect];
     } else {
-	/* loadMainView failed -- handle error */
-	NSBeep();
-	return;
+		/* loadMainView failed -- handle error */
+		NSBeep();
+		return;
     }
 }
 
 - (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
     if (item == NULL) {
-	return [myCategories objectAtIndex: index];
+		return myCategories[index];
     } else {
-	return [[myCategoryMap objectForKey: item] objectAtIndex: index];
+		return myCategoryMap[item][index];
     }
 }
 - (id) outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
     if ([item isKindOfClass: [NSBundle class]])
-	return [self nameKeyFromBundle: item];
+		return [self nameKeyFromBundle: item];
     else
-	return item; // which is already a string
+		return item; // which is already a string
 }
 - (BOOL) outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
@@ -292,16 +289,16 @@
 - (NSInteger) outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
     if (item == NULL) {
-	return [myCategories count];
+		return [myCategories count];
     } else {
-	return [[myCategoryMap objectForKey: item] count];
+		return [myCategoryMap[item] count];
     }
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
 {
     if ([outlineView isExpandable: item])
-	return NO;
+		return NO;
     return YES;
 }
 
@@ -312,8 +309,8 @@
     id userPaths = [[NSUserDefaults standardUserDefaults] objectForKey: IDEKit_UserPathsKey];
     id retval = [[IDEKit predefinedPathsVars] mutableCopy];
     for (NSUInteger i=0;i<[userPaths count];i++) {
-	id entry = [userPaths  objectAtIndex: i];
-	[retval setObject: [entry objectAtIndex: 1] forKey: [entry objectAtIndex: 0]];
+		id entry = userPaths[i];
+		retval[entry[0]] = entry[1];
     }
     return retval;
 }
@@ -333,12 +330,12 @@
 @implementation IDEKit_AppPreferenceController
 - (NSString *)categoryKeyFromBundle: (NSBundle *) prefBundle
 {
-    return [[prefBundle infoDictionary] objectForKey:@"IDEKit_AppPrefCategory"];
+    return [prefBundle infoDictionary][@"IDEKit_AppPrefCategory"];
 }
 
 - (NSString *)nameKeyFromBundle: (NSBundle *) prefBundle
 {
-    return [[prefBundle infoDictionary] objectForKey: @"IDEKit_AppPrefName"];
+    return [prefBundle infoDictionary][@"IDEKit_AppPrefName"];
 }
 @end
 @implementation IDEKit_LayeredPreferenceController
@@ -348,10 +345,10 @@
     // we want to revert to what was under our layer (so we will revert to the application preference defined font,
     // instead of the factory defined font).
     NSArray *properties = [myCurrentPreferencePanel editedProperties];
-
+	
     for (NSUInteger i=0;i<[properties count];i++) {
-	id propertyName = [properties objectAtIndex: i];
-	[myDefaults removeObjectForKey: propertyName]; // this make us remove the settings that overshadow our current preferences
+		id propertyName = properties[i];
+		[myDefaults removeObjectForKey: propertyName]; // this make us remove the settings that overshadow our current preferences
     }
     [myCurrentPreferencePanel setMyDefaults: myDefaults]; // make sure we are using the current defaults (just in case)
     [myCurrentPreferencePanel didSelect]; // resend the select message to reload
@@ -360,12 +357,12 @@
 @implementation IDEKit_SrcPreferenceController
 - (NSString *)categoryKeyFromBundle: (NSBundle *) prefBundle
 {
-    return [[prefBundle infoDictionary] objectForKey:@"IDEKit_SrcPrefCategory"];
+    return [prefBundle infoDictionary][@"IDEKit_SrcPrefCategory"];
 }
 
 - (NSString *)nameKeyFromBundle: (NSBundle *) prefBundle
 {
-    return [[prefBundle infoDictionary] objectForKey: @"IDEKit_SrcPrefName"];
+    return [prefBundle infoDictionary][@"IDEKit_SrcPrefName"];
 }
 
 
@@ -375,14 +372,9 @@
 {
     self = [super initWithDefaults: defaults];
     if (self) {
-	myProject = [project retain];
+		myProject = project;
     }
     return self;
-}
-- (void) dealloc
-{
-    [myProject release];
-    [super dealloc];
 }
 
 - (NSDictionary *)getPathVars
@@ -393,11 +385,11 @@
 
 - (NSString *)categoryKeyFromBundle: (NSBundle *) prefBundle
 {
-    return [[prefBundle infoDictionary] objectForKey: @"IDEKit_ProjPrefCategory"];
+    return [prefBundle infoDictionary][@"IDEKit_ProjPrefCategory"];
 }
 
 - (NSString *)nameKeyFromBundle: (NSBundle *) prefBundle
 {
-    return [[prefBundle infoDictionary] objectForKey: @"IDEKit_ProjPrefName"];
+    return [prefBundle infoDictionary][@"IDEKit_ProjPrefName"];
 }
 @end

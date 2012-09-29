@@ -90,9 +90,9 @@
     NSMutableArray *newComponents = [NSMutableArray arrayWithCapacity:[components count]];
     BOOL sub = NO;
     for (NSUInteger i=0;i<[components count];i++) {
-		NSString *component = [components objectAtIndex: i];
-		if ([vars objectForKey: component]) { // we could check if component is of the form "{...}"
-			component = [vars objectForKey: component]; // substitute
+		NSString *component = components[i];
+		if (vars[component]) { // we could check if component is of the form "{...}"
+			component = vars[component]; // substitute
 			sub = YES;
 		}
 		[newComponents addObject: component];
@@ -117,7 +117,7 @@
     NSArray *relParts = [path pathComponents];
     NSUInteger i=0;
     while (i < [ourParts count] && i < [relParts count]) {
-		if ([[ourParts objectAtIndex: i] isEqualToString: [relParts objectAtIndex: i]] == NO)
+		if ([ourParts[i] isEqualToString: relParts[i]] == NO)
 			break;
 		i++;
     }
@@ -131,7 +131,7 @@
 		return (flags & IDEKit_kPathRelReturnSelfOnErr) ? self : NULL; // don't allow ".."
     if (parCount == [relParts count] && (flags & IDEKit_kPathRelDontGoToRoot)) // would remove all of relative parts
 		return (flags & IDEKit_kPathRelReturnSelfOnErr) ? self : NULL; // don't allow going to root
-    if (parCount == [relParts count] - 1 && [[relParts objectAtIndex: 0] isEqualToString: @"Volumes"]  && (flags & IDEKit_kPathRelDontGoToRoot)) {
+    if (parCount == [relParts count] - 1 && [relParts[0] isEqualToString: @"Volumes"]  && (flags & IDEKit_kPathRelDontGoToRoot)) {
 		// not quite root, but close enough
 		return (flags & IDEKit_kPathRelReturnSelfOnErr) ? self : NULL; // don't allow going to root
     }
@@ -141,7 +141,7 @@
     }
     // this will take us from wherever "relParts" is, and bring us to the base of "ourParts"
     for (NSUInteger j=i;j<[ourParts count];j++) {
-		[retParts addObject: [ourParts objectAtIndex: j]];
+		[retParts addObject: ourParts[j]];
     }
     // and we've made it all the way - tack on the name, and bail
     return [name stringByAppendingPathComponent: [NSString pathWithComponents: retParts]];
@@ -170,10 +170,9 @@
 - (void) writeStringWithFormat: (NSString *)format,...
 {
     va_list myArgs;
-    va_start(myArgs,&format);
+    va_start(myArgs,format);
     NSString *string = [[NSString alloc] initWithFormat: format arguments: myArgs];
     [self writeString: string];
-    [string release];
     va_end(myArgs);
 }
 
@@ -184,9 +183,7 @@
 + (BOOL) loadOverridenNibNamed: (NSString *)nibName owner: (id) owner
 {
     // try the main bundle first
-    NSDictionary *nameTable = [NSDictionary dictionaryWithObjectsAndKeys:
-							   owner, @"NSOwner",
-							   NULL];
+    NSDictionary *nameTable = @{@"NSOwner": owner};
     if ([[NSBundle mainBundle] loadNibFile: nibName externalNameTable: nameTable withZone: NSDefaultMallocZone()])
 		return YES; // we were loaded there
     // then do where the class was
@@ -200,9 +197,9 @@
 - (NSString *) convertTabsFrom: (NSInteger) tabWidth to: (NSInteger) indentWidth removeTrailing: (BOOL) removeTrailing;
 {
     // this may not be the fastest way to do it, but as long as it works correctly...
-    int srcCol = 0;
-    int dstCol = 0;
-    int curPos = 0;
+    NSInteger srcCol = 0;
+    NSInteger dstCol = 0;
+    NSInteger curPos = 0;
     if (tabWidth == 0) tabWidth = 1; // convert tab to a single space from input if none given
     NSMutableString *retval = [NSMutableString stringWithCapacity: [self length]]; // give a good guess at it
     while (curPos < [self length]) {
@@ -281,10 +278,10 @@
 			eol = @"\r\n";
 			break;
 		case IDEKit_kUnicodeEOL:
-			eol = [NSString stringWithFormat: @"%C",0x2028];
+			eol = [NSString stringWithFormat: @"%d",0x2028];
 			break;
 		case IDEKit_kUnicodeEOP:
-			eol = [NSString stringWithFormat: @"%C",0x2029];
+			eol = [NSString stringWithFormat: @"%d",0x2029];
 			break;
     }
     while (curPos < [self length]) {
@@ -331,7 +328,7 @@
 {
     if ([self rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"&<>'\""]].location == NSNotFound)
 		return self; // contain nothing that needs to be escaped
-    NSMutableString *retval = [[self mutableCopy] autorelease];
+    NSMutableString *retval = [self mutableCopy];
     // '&' must be first (since the rest create such things)
     [retval replaceOccurrencesOfString:@"&" withString:@"&amp;" options:NSLiteralSearch range:NSMakeRange(0,[retval length])];
     [retval replaceOccurrencesOfString:@"<" withString:@"&lt;" options:NSLiteralSearch range:NSMakeRange(0,[retval length])];
@@ -344,7 +341,7 @@
 {
     if ([self rangeOfString:@"&"].location == NSNotFound)
 		return self; // we contain no "&" so we have nothing that was escaped
-    NSMutableString *retval = [[self mutableCopy] autorelease];
+    NSMutableString *retval = [self mutableCopy];
     [retval replaceOccurrencesOfString:@"&quot;" withString:@"\"" options:NSLiteralSearch range:NSMakeRange(0,[retval length])];
     [retval replaceOccurrencesOfString:@"&apos;" withString:@"'" options:NSLiteralSearch range:NSMakeRange(0,[retval length])];
     [retval replaceOccurrencesOfString:@"&lt;" withString:@"<" options:NSLiteralSearch range:NSMakeRange(0,[retval length])];
@@ -470,7 +467,7 @@
 		pattern = [@"/" stringByAppendingString:pattern]; // make sure starts with / to not glob leading edge
     if (!extensions && [[pattern pathExtension] length]) {
 		// convert "foo.bar" to "foo",["bar"]
-		extensions = [NSArray arrayWithObject:[pattern pathExtension]];
+		extensions = @[[pattern pathExtension]];
 		pattern = [pattern stringByDeletingPathExtension];
     }
     NSMutableArray *retval = [NSMutableArray  array];

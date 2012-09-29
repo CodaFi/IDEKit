@@ -79,8 +79,8 @@ enum {
     NSString *mImage;
     NSRange mDecl;
     NSRange mBody;
-    int mIndent;
-    int mColor;
+    NSInteger mIndent;
+    NSInteger mColor;
 }
 + (IDEKit_TextFunctionMarkers *)markWithName: (NSString *)name decl: (NSRange) decl body: (NSRange) body;
 + (IDEKit_TextFunctionMarkers *)markWithName: (NSString *)name decl: (NSRange) decl body: (NSRange) body image: (NSString *)imageName;

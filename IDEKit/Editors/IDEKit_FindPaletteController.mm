@@ -14,7 +14,7 @@
  terms.  If you do not agree with these terms, please do not use, install, modify or
  redistribute this Apple software.
  In consideration of your agreement to abide by the following terms, and subject to these
- terms, Apple grants you a personal, non-exclusive license, under AppleÕs copyrights in
+ terms, Apple grants you a personal, non-exclusive license, under Appleâ€™s copyrights in
  this original Apple software (the "Apple Software"), to use, reproduce, modify and
  redistribute the Apple Software, with or without modifications, in source and/or binary
  forms; provided that if you redistribute the Apple Software in its entirety and without
@@ -38,14 +38,10 @@
  */
 #import <Cocoa/Cocoa.h>
 #import "IDEKit_FindPaletteController.h"
-#ifdef nomore
 extern "C" {
 #import <sys/types.h>
 #import <regex.h>
 };
-#else
-#import "regex.h"
-#endif
 #import "IDEKit_PathUtils.h"
 #import "IDEKit_TextView.h"
 #import "IDEKit_MultiFileResults.h"
@@ -87,7 +83,7 @@ extern "C" {
 }
 - (void)loadFindStringToPasteboard {
     NSPasteboard *pasteboard = [NSPasteboard pasteboardWithName:NSFindPboard];
-    [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+    [pasteboard declareTypes:@[NSStringPboardType] owner:nil];
     [pasteboard setString:[self findString] forType:NSStringPboardType];
 }
 
@@ -101,9 +97,6 @@ extern "C" {
     }
     [findTextField setStringValue:[self findString]];
     if ([self replaceString]) [replaceTextField setStringValue:[self replaceString]];
-}
-- (void)dealloc {
-
 }
 - (NSString *)findString
 {
@@ -160,8 +153,7 @@ extern "C" {
 		[[NSUserDefaults standardUserDefaults] setObject:pastFinds forKey:@"IDEKit_recentFinds"];
 		[findTextField reloadData];
     }
-    [findString autorelease];
-    findString = [string copyWithZone:[self zone]];
+    findString = [string copyWithZone:nil];
     if (findTextField) {
         [findTextField setStringValue:string];
         [findTextField selectText:nil];
@@ -172,6 +164,7 @@ extern "C" {
 {
     return replaceString;
 }
+
 - (NSString *)fullReplaceString // including regex
 {
     return replaceString;
@@ -193,8 +186,7 @@ extern "C" {
 		[[NSUserDefaults standardUserDefaults] setObject:pastReplace forKey:@"IDEKit_recentReplaces"];
 		[replaceTextField reloadData];
     }
-    [replaceString autorelease];
-    replaceString = [string copyWithZone:[self zone]];
+    replaceString = [string copyWithZone:nil];
     if (replaceTextField) {
         [replaceTextField setStringValue:string];
         [replaceTextField selectText:nil];
@@ -239,7 +231,6 @@ extern "C" {
 				range = [textContents findExpression:[self findRegex] selectedRange:[text selectedRange] options:options wrap:wrap groups: &regexGroups];
 				if (regexGroups) {
 					regexGroupRange = range;
-					[regexGroups retain];
 				} else {
 					regexGroupRange = NSMakeRange(0, NSNotFound);
 				}
@@ -361,7 +352,6 @@ extern "C" {
 						NSRange foundRange;
 						if (regexGroups) {
 							regexGroupRange = NSMakeRange(0, NSNotFound);
-							[regexGroups release];
 							regexGroups = NULL;
 						}
 						if ([regularExpressionButton state]) {
@@ -369,7 +359,6 @@ extern "C" {
 							foundRange = [textContents rangeOfExpression:[self findRegex] options: searchOption range: rangeInOriginalString groups: &regexGroups];
 							if (regexGroups) {
 								regexGroupRange = foundRange;
-								[regexGroups retain];
 							}
 							else {
 								regexGroupRange = NSMakeRange(0, NSNotFound);
@@ -407,7 +396,6 @@ extern "C" {
 				} else {	// For some reason the string didn't want to be modified. Bizarre...
 					replaced = 0;
 				}
-				[temp release];
 			}
 			if (replaced == 0) {
 				NSBeep();
@@ -434,7 +422,6 @@ extern "C" {
 		NSString *selection = [[textView string] substringWithRange:[textView selectedRange]];
 		[self setReplaceString:selection];
 		if (regexGroups) {
-			[regexGroups release];
 			regexGroupRange = NSMakeRange(0, NSNotFound);
 			regexGroups = NULL;
 		}
@@ -458,9 +445,9 @@ extern "C" {
 - (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index
 {
 	if (aComboBox == findTextField) {
-		return [[[NSUserDefaults standardUserDefaults]  objectForKey:@"IDEKit_recentFinds"] objectAtIndex: index];
+		return [[NSUserDefaults standardUserDefaults]  objectForKey:@"IDEKit_recentFinds"][index];
 	} else if (aComboBox == replaceTextField) {
-		return [[[NSUserDefaults standardUserDefaults]  objectForKey:@"IDEKit_recentReplaces"] objectAtIndex: index];
+		return [[NSUserDefaults standardUserDefaults]  objectForKey:@"IDEKit_recentReplaces"][index];
 	}
 	return NULL;
 }
@@ -486,7 +473,6 @@ extern "C" {
 					range = [textContents findExpression:[self findRegex] selectedRange:NSMakeRange(fullRange.location,0) options:options wrap:NO groups: &regexGroups];
 					if (regexGroups) {
 						regexGroupRange = range;
-						[regexGroups retain];
 					} else {
 						regexGroupRange = NSMakeRange(0, NSNotFound);
 					}
@@ -496,11 +482,9 @@ extern "C" {
 				if (range.length) {
 					fullRange.location = range.location + range.length;
 					fullRange.length = textLength - fullRange.location;
-					[results addObject: [NSDictionary dictionaryWithObjectsAndKeys:
-										 [[(IDEKit_SrcEditView *) text uniqueFileID] stringValue],IDEKit_MultiFileResultID,
-										 [NSValue valueWithRange:range],IDEKit_MultiFileResultRange,
-										 [NSNumber numberWithInt: [textContents lineNumberFromOffset: range.location]],IDEKit_MultiFileResultLine,
-										 NULL]];
+					[results addObject: @{IDEKit_MultiFileResultID: [[(IDEKit_SrcEditView *) text uniqueFileID] stringValue],
+										 IDEKit_MultiFileResultRange: [NSValue valueWithRange:range],
+										 IDEKit_MultiFileResultLine: @([textContents lineNumberFromOffset: range.location])}];
 				} else {
 					break;
 				}
@@ -610,29 +594,13 @@ extern "C" {
 {
 	regex_t preg;
 	static regmatch_t pmatch[99];
-	int numMatches = 1;
+	NSInteger numMatches = 1;
 	NSRange range = NSMakeRange(0,0);
-	int cflags = REG_EXTENDED|REG_NLSTOP|REG_NEWLINE /*| REG_PROGRESS | REG_DUMP*/;
+	int cflags = REG_EXTENDED|REG_NEWLINE /*| REG_PROGRESS | REG_DUMP*/;
 	if (mask & NSCaseInsensitiveSearch)
 		cflags |= REG_ICASE;
-#ifdef oldregex
-	if (regcomp(&preg, [aString lossyCString], cflags))
+	if (regcomp(&preg, [aString cStringUsingEncoding:NSUTF8StringEncoding], cflags))
 		return range;
-#else
-	NSData *stringData = [aString dataUsingEncoding: NSUnicodeStringEncoding];
-	if (!stringData) return range;
-	NSData *selfData = [self dataUsingEncoding: NSUnicodeStringEncoding];
-	int err = re_unicomp(&preg, ((unichar *)[stringData bytes])+1, [aString length], cflags); // skip BOM
-	if (err != REG_OKAY) {
-		char buf[1024];
-		regerror(err, &preg, buf, 1024);
-		NSRunAlertPanel(@"Regex Error",[NSString stringWithFormat:@"There is an error in the regular expression: %s (%d)",buf,err],@"OK",NULL,NULL);
-	}
-	if (err != REG_OKAY) { // skip BOM
-		return range;
-	}
-	static rm_detail_t detail[99];
-#endif
 	numMatches = preg.re_nsub + 1;
 	if (numMatches > 99)
 		numMatches = 99;
@@ -642,59 +610,31 @@ extern "C" {
 		// this is trickier (and slower) - need to start with the end and make it larger until we find it
 		BOOL found = NO;
 		for (int i=1;i<=searchRange.length;i++) {
-#ifdef oldregex
 			pmatch[0].rm_so = searchRange.location + searchRange.length - i;
 			pmatch[0].rm_eo = searchRange.location + searchRange.length;
-			if (regexec(&preg,[self lossyCString],numMatches,pmatch,eflags))
+			if (regexec(&preg,[self cStringUsingEncoding:NSUTF8StringEncoding],numMatches,pmatch,eflags))
 			{
 				// found something
 				range = NSMakeRange(pmatch[0].rm_so,pmatch[0].rm_eo - pmatch[0].rm_so);
 				found = YES;
 				break;
 			}
-#else
-			int err;
-			if ((err = re_uniexec(&preg,((unichar *)[selfData bytes]) + 1 + searchRange.location + searchRange.length - i,searchRange.length - i,detail,numMatches,pmatch,eflags)) == 0) {
-				// found something
-				range = NSMakeRange(pmatch[0].rm_so + searchRange.location + searchRange.length - i,pmatch[0].rm_eo - pmatch[0].rm_so);
-				found = YES;
-				break;
-			} else if (err != REG_NOMATCH) {
-				char buf[1024];
-				regerror(err, &preg, buf, 1024);
-				NSRunAlertPanel(@"Regex Error",[NSString stringWithFormat:@"There is an error in the regular expression: %s (%d)",buf,err],@"OK",NULL,NULL);
-			}
-#endif
 			// need to keep backing up the start until we find something
 		}
 		if (!found) NSBeep();
 	} else {
-#ifdef oldregex
 		pmatch[0].rm_so = searchRange.location;
 		pmatch[0].rm_eo = searchRange.location + searchRange.length;
-		if (regexec(&preg,[self lossyCString],numMatches,pmatch,eflags)) {
+		if (regexec(&preg,[self cStringUsingEncoding:NSUTF8StringEncoding],numMatches,pmatch,eflags)) {
 			// found something
 			range = NSMakeRange(pmatch[0].rm_so,pmatch[0].rm_eo - pmatch[0].rm_so);
 		}
-#else
-		int err;
-		if ((err = re_uniexec(&preg,((unichar *)[selfData bytes]) + 1 + searchRange.location,searchRange.length,detail,numMatches,pmatch,eflags)) == REG_OKAY)  {
-			// found something
-			range = NSMakeRange(pmatch[0].rm_so + searchRange.location,pmatch[0].rm_eo - pmatch[0].rm_so);
-		} else if (err == REG_NOMATCH) {
-			NSBeep();
-		} else {
-			char buf[1024];
-			regerror(err, &preg, buf, 1024);
-			NSRunAlertPanel(@"Regex Error",[NSString stringWithFormat:@"There is an error in the regular expression: %s (%d)",buf,err],@"OK",NULL,NULL);
-		}
-#endif
 	}
 	if (range.length && groups) {
 		NSMutableArray *a = [NSMutableArray arrayWithCapacity: numMatches+1];
 		for (int i=0;i<=numMatches;i++) {
 			if (pmatch[i].rm_eo > pmatch[i].rm_so)
-				[a addObject: [NSString stringWithCString: [self lossyCString]+pmatch[i].rm_so + searchRange.location length: pmatch[i].rm_eo - pmatch[i].rm_so]];
+				[a addObject: @([self cStringUsingEncoding:NSUTF8StringEncoding]+pmatch[i].rm_so + searchRange.location)];
 		}
 		*groups = a;
 	} else {
@@ -792,7 +732,7 @@ extern "C" {
 			} else {
 				// end of one, start the next
 				if (numSoFar < [regexGroups count]) {
-					[retval appendString:[regexGroups objectAtIndex: numSoFar]];
+					[retval appendString:regexGroups[numSoFar]];
 				}
 				numSoFar = justEscape;
 			}
@@ -821,7 +761,7 @@ extern "C" {
 			} else if (numSoFar != noEscapeYet) {
 				// we end the numeric escape
 				if (numSoFar < [regexGroups count]) {
-					[retval appendString:[regexGroups objectAtIndex: numSoFar]];
+					[retval appendString:regexGroups[numSoFar]];
 				}
 				numSoFar = noEscapeYet; // and back to no escape
 			}
@@ -834,7 +774,7 @@ extern "C" {
 		if (numSoFar == justEscape) {
 			[retval appendString: @"\\"];
 		} else if (numSoFar < [regexGroups count]) {
-			[retval appendString:[regexGroups objectAtIndex: numSoFar]];
+			[retval appendString:regexGroups[numSoFar]];
 		}
 		numSoFar = noEscapeYet; // and back to no escape
 	}

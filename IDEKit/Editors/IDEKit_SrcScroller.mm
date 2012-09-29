@@ -67,14 +67,6 @@ static id gLastHit;
     }
     return self;
 }
-- (void) dealloc
-{
-    [myUnsplitter release];
-    [mySplitter release];
-    [myNavPopup release];
-    [myFmtPopup release];
-    [super dealloc];
-}
 - (void) awakeFromNib
 {
     [self setHasHorizontalScroller: YES];
@@ -89,22 +81,18 @@ static id gLastHit;
 	[self setRulersVisible: YES]; // we might later show line nums
     }
     // keep the unsplitter handy
-    [myUnsplitter retain];
     [myUnsplitter removeFromSuperview];
 
-    [myNavPopup retain];
     if (myShowFlags & IDEKit_kShowNavPopup) {
 	[self addSubview: myNavPopup];
     } else {
 	[myNavPopup removeFromSuperview];
     }
-    [myFmtPopup retain];
     if (myShowFlags & IDEKit_kShowFmtPopup) {
 	[self addSubview: myFmtPopup];
     } else {
 	[myFmtPopup removeFromSuperview];
     }
-    [mySplitter retain];
     if (myShowFlags & IDEKit_kShowSplitter) {
 	[self addSubview: mySplitter];
     } else {
@@ -235,17 +223,17 @@ static id gLastHit;
 
 - (void) setLine: (NSInteger) line col: (NSInteger) col
 {
-    [myLineButton setTitle: [NSString stringWithFormat: @"L:%d C:%d",line, col]];
+    [myLineButton setTitle: [NSString stringWithFormat: @"L:%ld C:%ld",line, col]];
 }
 - (void) setLineRange: (NSRange) lines colRange: (NSRange) cols;
 {
     if (lines.length <= 1) {
 	if (cols.length > 0)
-	    [myLineButton setTitle: [NSString stringWithFormat: @"L:%d C:%d(%d)",lines.location, cols.location,cols.length]];
+	    [myLineButton setTitle: [NSString stringWithFormat: @"L:%ld C:%ld(%ld)",lines.location, cols.location,cols.length]];
 	else
-	    [myLineButton setTitle: [NSString stringWithFormat: @"L:%d C:%d",lines.location, cols.location]];
+	    [myLineButton setTitle: [NSString stringWithFormat: @"L:%ld C:%ld",lines.location, cols.location]];
     } else {
-	[myLineButton setTitle: [NSString stringWithFormat: @"L:%d(%d) C:%d(%d)",lines.location,lines.length, cols.location,cols.length]];
+	[myLineButton setTitle: [NSString stringWithFormat: @"L:%ld(%ld) C:%ld(%ld)",lines.location,lines.length, cols.location,cols.length]];
     }
 }
 @end
@@ -263,15 +251,15 @@ static id gLastHit;
     return self;
 }
 
-- (float)requiredThickness
+- (CGFloat)requiredThickness
 {
     return [self ruleThickness];
 }
 
-- (float) ruleThickness
+- (CGFloat)ruleThickness
 {
     float thickness = 0.0;
-    int flags = [(IDEKit_SrcScroller *)[self scrollView] showFlags];
+    NSInteger flags = [(IDEKit_SrcScroller *)[self scrollView] showFlags];
     if (flags & IDEKit_kShowBreakpoints)
 	thickness += BreakPointThickness;
     if (flags & IDEKit_kShowLineNums)
@@ -285,7 +273,6 @@ static id gLastHit;
 - (void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver: self];
-    [super dealloc];
 }
 - (void) srcDidEdit: (NSNotification *)notification
 {
@@ -297,8 +284,8 @@ static id gLastHit;
 - (void) drawHashMarksAndLabelsInRect: (NSRect) aRect
 {
     //NSLog(@"drawHashMarksAndLabelsInRect %g,%g - %g,%g",aRect.origin.x,aRect.origin.y,aRect.size.width,aRect.size.height);
-    int flags = [(IDEKit_SrcScroller *)[self scrollView] showFlags];
-    if (flags & (IDEKit_kShowLineNums | IDEKit_kShowBreakpoints | IDEKit_kShowFolding) == 0)
+    NSInteger flags = [(IDEKit_SrcScroller *)[self scrollView] showFlags];
+    if ((flags & (IDEKit_kShowLineNums | IDEKit_kShowBreakpoints | IDEKit_kShowFolding)) == 0)
 	return; // nothing to draw
     NSRect lineNumColumn = aRect;
     NSRect breakColumn = aRect;
@@ -340,17 +327,17 @@ static id gLastHit;
     NSUInteger firstChar = [lm characterIndexForGlyphAtIndex: firstGlyph];
     NSUInteger lastChar = [lm characterIndexForGlyphAtIndex: lastGlyph];
     // these line numbers are in folded coordinates
-    int firstLine = [delegate foldedLineNumberFromOffset: firstChar];
-    int lastLine = [delegate foldedLineNumberFromOffset: lastChar]+1; // we need to draw the gutter below the visible area since it is shown where the scroll bar is, and if we don't, when we scroll, we never show that part
-    int previousUnfoldedLine = -1;
-    for (int lineNum = firstLine; lineNum <= lastLine; lineNum++) { // iterate through folded lines
+    NSInteger firstLine = [delegate foldedLineNumberFromOffset: firstChar];
+    NSInteger lastLine = [delegate foldedLineNumberFromOffset: lastChar]+1; // we need to draw the gutter below the visible area since it is shown where the scroll bar is, and if we don't, when we scroll, we never show that part
+    NSInteger previousUnfoldedLine = -1;
+    for (NSInteger lineNum = firstLine; lineNum <= lastLine; lineNum++) { // iterate through folded lines
 	if (lineNum < 0)
 	    continue;
 	NSRange lineRange = [delegate nthFoldedLineRange: lineNum];
 	if (lineRange.length == 0) {
 	    //continue; // blank line, or end
 	}
-	int unfoldedLineNum = [delegate lineNumberFromOffset: [delegate unfoldedLocation: lineRange.location]];
+	NSInteger unfoldedLineNum = [delegate lineNumberFromOffset: [delegate unfoldedLocation: lineRange.location]];
 	if (unfoldedLineNum == previousUnfoldedLine)
 	    continue; // we've already done this line (happens at the end when we draw more so we draw where the scrollbar is)
 	previousUnfoldedLine = unfoldedLineNum;
@@ -366,7 +353,7 @@ static id gLastHit;
 	    NSRect numRect = NSMakeRect(lineNumColumn.origin.x, fragment.origin.y, lineNumColumn.size.width, fragment.size.height);
 	    if (1 || numRect.size.height >= lineHeight) {
 		// now convert to folded line number
-		[[NSString stringWithFormat: @"%d", unfoldedLineNum] drawAtPoint: numRect.origin withAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [NSColor disabledControlTextColor],NSForegroundColorAttributeName, NULL]];
+		[[NSString stringWithFormat: @"%ld", unfoldedLineNum] drawAtPoint: numRect.origin withAttributes: @{NSForegroundColorAttributeName: [NSColor disabledControlTextColor]}];
 	    }
 	}
 	if (flags & IDEKit_kShowBreakpoints) {
@@ -396,7 +383,7 @@ static id gLastHit;
 	    if (foldable) {
 		NSRect iRect = NSMakeRect(foldColumn.origin.x, fragment.origin.y, foldColumn.size.width, fragment.size.height);
 		if (iRect.size.height >= lineHeight) {
-		    [[NSString stringWithCharacters:&foldable length:1] drawAtPoint: iRect.origin withAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [NSColor disabledControlTextColor],NSForegroundColorAttributeName, NULL]];
+		    [[NSString stringWithCharacters:&foldable length:1] drawAtPoint: iRect.origin withAttributes: @{NSForegroundColorAttributeName: [NSColor disabledControlTextColor]}];
 		}
 	    }
 	}
@@ -404,7 +391,7 @@ static id gLastHit;
     [[NSColor blackColor] set];
 }
 
-- (bool) findLine: (int *)lineNumFound andRange: (NSRange *)rangeFound forVerticalCoordinate: (float) y
+- (bool) findLine: (NSInteger *)lineNumFound andRange: (NSRange *)rangeFound forVerticalCoordinate: (float) y
 {
     id textView = [[self scrollView] documentView];
     NSLayoutManager *lm = [textView layoutManager];
@@ -424,9 +411,9 @@ static id gLastHit;
     NSUInteger lastChar = [lm characterIndexForGlyphAtIndex: lastGlyph];
     IDEKit_SrcEditView *delegate = [textView delegate];
 
-    int firstLine = [delegate lineNumberFromOffset: [delegate unfoldedLocation: firstChar]]-1;
-    int lastLine = [delegate lineNumberFromOffset: [delegate unfoldedLocation: lastChar]]+1;
-    for (int lineNum = firstLine; lineNum <= lastLine; lineNum++) {
+    NSInteger firstLine = [delegate lineNumberFromOffset: [delegate unfoldedLocation: firstChar]]-1;
+    NSInteger lastLine = [delegate lineNumberFromOffset: [delegate unfoldedLocation: lastChar]]+1;
+    for (NSInteger lineNum = firstLine; lineNum <= lastLine; lineNum++) {
 	NSRange lineRange = [delegate foldedRange: [delegate nthLineRange: lineNum]];
 	if (lineRange.length == 0)
 	    continue; // blank line, or end, or folded away
@@ -443,7 +430,7 @@ static id gLastHit;
     return NO;
 }
 
-- (BOOL) findFoldedLine: (int *)lineNumFound andFoldedRange: (NSRange *)rangeFound forVerticalCoordinate: (float) y
+- (BOOL) findFoldedLine: (NSInteger *)lineNumFound andFoldedRange: (NSRange *)rangeFound forVerticalCoordinate: (float) y
 {
     if (lineNumFound) *lineNumFound = 0;
     if (rangeFound) *rangeFound = NSMakeRange(0,NSNotFound);
@@ -477,7 +464,7 @@ static id gLastHit;
     // figure out the "column" we are in
     float right = 0.0;
     float left = 0.0;
-    int flags = [(IDEKit_SrcScroller *)[self scrollView] showFlags];
+    NSInteger flags = [(IDEKit_SrcScroller *)[self scrollView] showFlags];
     if (flags & IDEKit_kShowLineNums) {
 	left = right;
 	right +=  LineNumberThickness;
@@ -489,7 +476,7 @@ static id gLastHit;
 	left = right;
 	right += BreakPointThickness;
 	if (left <= where.x && where.x < right) {
-	    int lineNum;
+	    NSInteger lineNum;
 	    if ([self findLine: &lineNum andRange: NULL forVerticalCoordinate: where.y]) {
 		if ([theEvent type] == NSRightMouseDown)
 		    [[IDEKit_BreakpointInspector sharedBreakpointInspector] showWindow: self];
@@ -518,7 +505,7 @@ static id gLastHit;
 	right += FoldingThickness;
 	if (left <= where.x && where.x < right) {
 	    NSRange lineRange;
-	    int lineNum;
+	    NSInteger lineNum;
 	    if ([self findFoldedLine: &lineNum andFoldedRange: &lineRange forVerticalCoordinate: where.y]) {
 		// find the first attachement and expand that
 		NSUInteger foldOffset;

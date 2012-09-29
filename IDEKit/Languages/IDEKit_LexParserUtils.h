@@ -26,7 +26,7 @@
 @interface IDEKit_LexToken : NSObject {
     NSString *mySource;
     NSRange myRange;
-    int myKind;
+    NSInteger myKind;
 }
 - (NSString *) tokenStr;
 - (NSInteger) token;

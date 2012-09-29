@@ -75,9 +75,9 @@ enum {
     IDEKit_UniqueID *myFile; // what file does this come from
     IDEKit_UniqueID *myProj; // not yet supported
     NSString *myTarget; // not yet supported
-    int myBestLineNum; // where were we last seen in myFile (is this even worth holding onto?)
+    NSInteger myBestLineNum; // where were we last seen in myFile (is this even worth holding onto?)
     id myData; // whatever data is associated with us
-    int myKind; // includes the flags from above
+    NSInteger myKind; // includes the flags from above
 }
 + (IDEKit_Breakpoint *) breakpointAssociatedWith:(IDEKit_UniqueID *)bpID;
 + (IDEKit_Breakpoint *) breakpointFromPlist:(NSDictionary *)plist; // will return existing one if possible

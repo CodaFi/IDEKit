@@ -45,11 +45,11 @@ NSString *IDEKit_SrcDocument_VisibleRange = @"IDEKit_SrcDocument_VisibleRange";
 {
     self = [super init];
     if (self) {
-	myDefaults = [[IDEKit_LayeredDefaults layeredDefaultsWithDict: [NSMutableDictionary dictionary] layeredSettings: NULL] retain];
+	myDefaults = [IDEKit_LayeredDefaults layeredDefaultsWithDict: [NSMutableDictionary dictionary] layeredSettings: NULL];
 #ifdef nomore
 	myAuxDataProperties = [[NSMutableDictionary dictionary] retain]; // start with empty dictionary
 #endif
-	myUniqueID = [[[IDEKit_UniqueFileIDManager sharedFileIDManager] newUniqueFileID] retain]; // start with new file
+	myUniqueID = [[IDEKit_UniqueFileIDManager sharedFileIDManager] newUniqueFileID]; // start with new file
     }
     return self;
 }
@@ -72,23 +72,13 @@ NSString *IDEKit_SrcDocument_VisibleRange = @"IDEKit_SrcDocument_VisibleRange";
     [myTextView setUniqueFileID:myUniqueID]; // so it matches the document, or our new one
     if (myDataFromFile) {
 	[self loadDocWithData: myDataFromFile];
-	[myDataFromFile release];
 	myDataFromFile = NULL;
     } else {
-	[myTextView setCurrentLanguage: [[[[IDEKit defaultLanguage] alloc] init] autorelease]];
+	[myTextView setCurrentLanguage: [[[IDEKit defaultLanguage] alloc] init]];
     }
     //[self setupToolbar: [controller window]];
 }
 
-- (void) dealloc
-{
-#ifdef nomore
-    [myAuxDataProperties release];
-#endif
-    [myDefaults release];
-    [myUniqueID release];
-    [super dealloc];
-}
 
 -(NSStringEncoding) saveAsEncoding
 {
@@ -111,7 +101,7 @@ NSString *IDEKit_SrcDocument_VisibleRange = @"IDEKit_SrcDocument_VisibleRange";
     if (myTextView) {
 	[self loadDocWithData: data];
     } else {
-	myDataFromFile = [data retain];
+	myDataFromFile = data;
     }
     return YES;
 }
@@ -138,8 +128,7 @@ NSString *IDEKit_SrcDocument_VisibleRange = @"IDEKit_SrcDocument_VisibleRange";
 #else
     BOOL retval = [super readFromFile: fileName ofType: docType];
     if (retval) {
-	[myUniqueID release];
-	myUniqueID = [[[IDEKit_UniqueFileIDManager sharedFileIDManager] uniqueFileIDForFile: fileName] retain];
+	myUniqueID = [[IDEKit_UniqueFileIDManager sharedFileIDManager] uniqueFileIDForFile: fileName];
     }
     return retval;
 #endif
@@ -189,8 +178,7 @@ NSString *IDEKit_SrcDocument_VisibleRange = @"IDEKit_SrcDocument_VisibleRange";
 		IDEKit_PersistentFileData *fileData = [[IDEKit_UniqueFileIDManager sharedFileIDManager] persistentDataCopyForFileID: myUniqueID];
 		[fileData writeForFile: fullDocumentPath];
 		// and update our unique id as well
-		[myUniqueID release];
-		myUniqueID = [[fileData uniqueFileID] retain];
+		myUniqueID = [fileData uniqueFileID];
 		[myTextView setUniqueFileID:myUniqueID];
 		break;
 	    }
@@ -211,7 +199,7 @@ NSString *IDEKit_SrcDocument_VisibleRange = @"IDEKit_SrcDocument_VisibleRange";
     if (![self isDocumentEdited]) {
 	// Closing window with no changes (so we'll never save)
 	// make sure to at least update our breakpoints
-	if ([self fileName]) { // is it a real file?
+	if ([[self fileURL]absoluteString]) { // is it a real file?
 	    NSDictionary *bps = [myTextView breakpoints];
 	    [[IDEKit_BreakpointManager sharedBreakpointManager] setBreakPoints:bps forFile: myUniqueID];
 	    switch ([IDEKit breakpointStoragePolicy]) {
@@ -267,12 +255,12 @@ NSString *IDEKit_SrcDocument_VisibleRange = @"IDEKit_SrcDocument_VisibleRange";
 	    }
 	}
     }
-    NSString *srcString = [[[NSString alloc] initWithData: data encoding: encoding] autorelease];
+    NSString *srcString = [[NSString alloc] initWithData: data encoding: encoding];
     srcString = [srcString sanitizeLineFeeds: IDEKit_kUnixEOL];
     // figure out a good language, based on the contents
-    Class language = [IDEKit languageFromFileName: [self fileName] withContents: srcString];
+    Class language = [IDEKit languageFromFileName:[[self fileURL]absoluteString] withContents: srcString];
     if (language) {
-	[myTextView setCurrentLanguage: [[[language alloc] init] autorelease]];
+	[myTextView setCurrentLanguage: [[language alloc] init]];
     }
     srcString = [[myTextView currentLanguage] cleanUpStringFromFile: srcString];
     [myTextView setString: (NSString *)srcString];
@@ -367,7 +355,7 @@ NSString *IDEKit_SrcDocument_VisibleRange = @"IDEKit_SrcDocument_VisibleRange";
     switch ([IDEKit breakpointStoragePolicy]) {
 	case IDEKit_kStoreBreakpointsNone:
 	    // clear them
-	    [[IDEKit_BreakpointManager sharedBreakpointManager] setBreakPoints: [NSDictionary dictionary] forFile: myUniqueID];
+	    [[IDEKit_BreakpointManager sharedBreakpointManager] setBreakPoints: @{} forFile: myUniqueID];
 	    break;
 	case IDEKit_kStoreBreakpointsInFile:
 	    [[IDEKit_BreakpointManager sharedBreakpointManager] loadPersistentData:data forFile:myUniqueID];
@@ -395,12 +383,12 @@ NSString *IDEKit_SrcDocument_VisibleRange = @"IDEKit_SrcDocument_VisibleRange";
 #pragma mark IDEKit_SrcEditContext routines
 - (Class) currentLanguageClassForSrcEditView: (IDEKit_SrcEditView *) view;
 {
-    return [IDEKit languageFromFileName: [self fileName] withContents: [view string]];
+    return [IDEKit languageFromFileName:[[self fileURL]absoluteString] withContents: [view string]];
 }
 
 - (NSString *) fileNameForSrcEditView: (IDEKit_SrcEditView *) view;
 {
-    return [self fileName];
+    return [[self fileURL]absoluteString];
 }
 
 - (id) owningProjectForSrcEditView: (IDEKit_SrcEditView *) view
@@ -454,7 +442,7 @@ NSString *IDEKit_SrcDocument_VisibleRange = @"IDEKit_SrcDocument_VisibleRange";
     NSDocumentController *controller = [NSDocumentController sharedDocumentController];
     NSArray *allDocuments = [controller documents];
     for (NSUInteger i=0;i<[allDocuments count];i++) {
-	IDEKit_SrcDocument *doc = [allDocuments objectAtIndex: i];
+	IDEKit_SrcDocument *doc = allDocuments[i];
 	if ([doc respondsToSelector:@selector(defaultAutocompleteForIdentifier:)]) {
 	    [retval addObjectsFromArray:[doc defaultAutocompleteForIdentifier: ident]];
 	}

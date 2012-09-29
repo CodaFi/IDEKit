@@ -179,7 +179,7 @@ enum {
     [lex addCommentStart: @"!--" end: @"--"]; // hm, how to handle comments
     [lex setIdentifierChars: [NSCharacterSet characterSetWithCharactersInString: @"_"]];
 
-    return [lex autorelease];
+    return lex;
 }
 - (NSString *) getLinePrefixComment
 {

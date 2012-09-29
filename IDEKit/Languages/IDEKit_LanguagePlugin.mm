@@ -65,7 +65,7 @@ NSMutableArray *IDEKit_GetLanguagePlugIns()
 	    path = [[NSBundle bundleForClass: [self class] ] pathForResource: templateName ofType: @"plist"];
 	}
 	if (path) {
-	    myTemplates = [[NSDictionary dictionaryWithContentsOfFile:path] retain];
+	    myTemplates = [NSDictionary dictionaryWithContentsOfFile:path];
 	}
     }
     return myTemplates;
@@ -86,16 +86,11 @@ NSMutableArray *IDEKit_GetLanguagePlugIns()
     return [self isYourFile: name];
 }
 
-- (void) dealloc
-{
-    [myParser release];
-    [myTemplates release];
-}
 
 - (IDEKit_LexParser *)lexParser
 {
     if (!myParser) {
-	myParser = [[[self class] makeLexParser] retain];
+	myParser = [[self class] makeLexParser];
     }
     return myParser;
 }
@@ -105,7 +100,7 @@ NSMutableArray *IDEKit_GetLanguagePlugIns()
     // plain text parse does something simple at least
     IDEKit_LexParser *lex = [[IDEKit_LexParser alloc] init];
     [lex addStringStart: @"\"" end: @"\""];
-    return [lex autorelease];
+    return lex;
 }
 
 - (BOOL)wantsBreakpoints

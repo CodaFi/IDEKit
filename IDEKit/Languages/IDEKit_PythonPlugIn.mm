@@ -9,12 +9,12 @@
 //  modify it under the terms of the GNU Library General Public
 //  License as published by the Free Software Foundation; either
 //  version 2 of the License, or (at your option) any later version.
-//  
+//
 //  This library is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //  Library General Public License for more details.
-//  
+//
 //  You should have received a copy of the GNU Library General Public
 //  License along with this library; if not, write to the Free
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -257,8 +257,8 @@ enum {
     [lex addStringStart: @"'" end: @"'"];
     [lex addSingleComment: @"#"];
     [lex setIdentifierChars: [NSCharacterSet characterSetWithCharactersInString: @"_"]];
-
-    return [lex autorelease];
+	
+    return lex;
 }
 - (NSString *) getLinePrefixComment
 {
@@ -268,7 +268,7 @@ enum {
 + (BOOL)isYourFile: (NSString *)name
 {
     if ([[name pathExtension] isEqualToString: @"py"])
-	return YES;
+		return YES;
     return NO;
 }
 - (BOOL)wantsBreakpoints
@@ -279,7 +279,7 @@ enum {
 - (NSInteger) autoIndentLine: (NSString *)thisList last: (NSString *)lastLine
 {
     if ([[lastLine stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]] hasSuffix: @":"]) {
-	return IDEKit_kIndentAction_Indent;
+		return IDEKit_kIndentAction_Indent;
     }
     return IDEKit_kIndentAction_None;
 }
@@ -287,11 +287,11 @@ enum {
 - (NSArray *)functionList: (NSString *)source // for popup funcs - return a list of TextFunctionMarkers
 {
     int pattern[] = {
-	IDEKit_kMarkerBeginPattern, IDEKit_kMarkerIsMethod, IDEKit_kMarkerBOL,IDEKit_kLexKindKeyword|kPython_def,IDEKit_kLexIdentifier,IDEKit_kMarkerTextEnd,'(',IDEKit_kMarkerEndPattern,
-	IDEKit_kMarkerBeginPattern, IDEKit_kMarkerIsMethod, IDEKit_kMarkerBOL,IDEKit_kLexKindKeyword|kPython_def,IDEKit_kLexKindKeyword|kPython_altKeyword,IDEKit_kMarkerTextEnd,'(',IDEKit_kMarkerEndPattern,
-	IDEKit_kMarkerBeginPattern, IDEKit_kMarkerIsClass, IDEKit_kMarkerBOL,IDEKit_kLexKindKeyword|kPython_class,IDEKit_kLexIdentifier,IDEKit_kMarkerTextEnd,'(',IDEKit_kMarkerEndPattern,
-	IDEKit_kMarkerBeginPattern, IDEKit_kMarkerIsClass, IDEKit_kMarkerBOL,IDEKit_kLexKindKeyword|kPython_class,IDEKit_kLexIdentifier,IDEKit_kMarkerTextEnd,':',IDEKit_kMarkerEndPattern,
-	IDEKit_kMarkerEndList
+		IDEKit_kMarkerBeginPattern, IDEKit_kMarkerIsMethod, IDEKit_kMarkerBOL,IDEKit_kLexKindKeyword|kPython_def,IDEKit_kLexIdentifier,IDEKit_kMarkerTextEnd,'(',IDEKit_kMarkerEndPattern,
+		IDEKit_kMarkerBeginPattern, IDEKit_kMarkerIsMethod, IDEKit_kMarkerBOL,IDEKit_kLexKindKeyword|kPython_def,IDEKit_kLexKindKeyword|kPython_altKeyword,IDEKit_kMarkerTextEnd,'(',IDEKit_kMarkerEndPattern,
+		IDEKit_kMarkerBeginPattern, IDEKit_kMarkerIsClass, IDEKit_kMarkerBOL,IDEKit_kLexKindKeyword|kPython_class,IDEKit_kLexIdentifier,IDEKit_kMarkerTextEnd,'(',IDEKit_kMarkerEndPattern,
+		IDEKit_kMarkerBeginPattern, IDEKit_kMarkerIsClass, IDEKit_kMarkerBOL,IDEKit_kLexKindKeyword|kPython_class,IDEKit_kLexIdentifier,IDEKit_kMarkerTextEnd,':',IDEKit_kMarkerEndPattern,
+		IDEKit_kMarkerEndList
     };
     return [IDEKit_TextFunctionMarkers makeAllMarks: source inArray: nil fromPattern: pattern withLex: myParser];
 }
@@ -299,36 +299,36 @@ enum {
 - (NSDictionary *)headersList: (NSString *)source
 {
     int pattern[] = {
-	IDEKit_kMarkerBeginPattern, IDEKit_kMarkerBOL, IDEKit_kLexKindKeyword|kPython_import, IDEKit_kMarkerTextStart,IDEKit_kLexIdentifier, IDEKit_kMarkerTextEnd,IDEKit_kMarkerEndPattern,
-	IDEKit_kMarkerBeginPattern, IDEKit_kMarkerBOL, IDEKit_kLexKindKeyword|kPython_from, IDEKit_kMarkerTextStart,IDEKit_kLexIdentifier, IDEKit_kMarkerTextEnd,IDEKit_kLexKindKeyword|kPython_import,IDEKit_kMarkerEndPattern,
-	IDEKit_kMarkerEndList
+		IDEKit_kMarkerBeginPattern, IDEKit_kMarkerBOL, IDEKit_kLexKindKeyword|kPython_import, IDEKit_kMarkerTextStart,IDEKit_kLexIdentifier, IDEKit_kMarkerTextEnd,IDEKit_kMarkerEndPattern,
+		IDEKit_kMarkerBeginPattern, IDEKit_kMarkerBOL, IDEKit_kLexKindKeyword|kPython_from, IDEKit_kMarkerTextStart,IDEKit_kLexIdentifier, IDEKit_kMarkerTextEnd,IDEKit_kLexKindKeyword|kPython_import,IDEKit_kMarkerEndPattern,
+		IDEKit_kMarkerEndList
     };
     NSArray *marks = [IDEKit_TextFunctionMarkers makeAllMarks: source inArray: nil fromPattern: pattern withLex: myParser];
     if ([marks count] == 0)
-	return NULL;
+		return NULL;
     NSEnumerator *e = [marks objectEnumerator];
     NSMutableDictionary *retval = [NSMutableDictionary dictionary];
     IDEKit_TextFunctionMarkers *mark;
     while ((mark = [e nextObject]) != NULL) {
-	[retval setObject: [mark name] forKey: [mark name]];
+		retval[[mark name]] = [mark name];
     }
     return retval;
 }
 - (NSArray *)includedFileSuffixCandidates // if we have "import foo", foo might be foo.bar or foo.inc
 {
-    return [NSArray arrayWithObjects:@"py",@"PY",NULL];
+    return @[@"py",@"PY"];
 }
 
 - (NSString *) complete: (NSString *)name withParams: (NSArray *)array
 {
     if ([name isEqualToString: @"if"]) {
-	return @"if $<condition$>:$+$<#true block$>$-";
+		return @"if $<condition$>:$+$<#true block$>$-";
     } else if ([name isEqualToString: @"ife"]) {
-	return @"if $<condition$>:$+$<#true block$>$- else: $+$<#true block$>$-";
+		return @"if $<condition$>:$+$<#true block$>$- else: $+$<#true block$>$-";
     } else if ([name isEqualToString: @"while"]) {
-	return @"while $<condition$>:$+$<# loop block$>$-";
+		return @"while $<condition$>:$+$<# loop block$>$-";
     } else if ([name isEqualToString: @"for"]) {
-	return @"for $<variable$> in $<value$>:$+$<#loop block$>$-";
+		return @"for $<variable$> in $<value$>:$+$<#loop block$>$-";
     }
     return nil;
 }
@@ -337,9 +337,9 @@ enum {
 {
     static NSMutableCharacterSet *set = NULL;
     if (!set) {
-	set = [[NSMutableCharacterSet alloc] init];
-	[set formUnionWithCharacterSet: [NSCharacterSet alphanumericCharacterSet]];
-	[set addCharactersInString: @"_."];
+		set = [[NSMutableCharacterSet alloc] init];
+		[set formUnionWithCharacterSet: [NSCharacterSet alphanumericCharacterSet]];
+		[set addCharactersInString: @"_."];
     }
     return set;
 }
@@ -356,97 +356,97 @@ enum {
     //NSString *retabbed = [string convertTabsFrom: [defaults integerForKey: IDEKit_TabSizeKey] to: [defaults integerForKey: IDEKit_TabIndentSizeKey] removeTrailing: YES];
     NSArray *lines = [[source sanitizeLineFeeds: IDEKit_kUnixEOL] componentsSeparatedByString: @"\n"];
     NSMutableString *retval = [NSMutableString stringWithCapacity: [source length]];
-    int indent = 0;
-    int indstack[kMAXINDENT];	/* Stack of indents */
+    NSInteger indent = 0;
+    NSInteger indstack[kMAXINDENT];	/* Stack of indents */
     indstack[0] = 0;
-    int altindstack[kMAXINDENT];	/* Stack of alternate indents */
+    NSInteger altindstack[kMAXINDENT];	/* Stack of alternate indents */
     altindstack[0] = 0;
-    int alttabsize = kALTTABSIZE;
-    int tabsize = kTABSIZE;
-    int usertabsize = [defaults integerForKey: IDEKit_TabSizeKey];
+    NSInteger alttabsize = kALTTABSIZE;
+    NSInteger tabsize = kTABSIZE;
+    NSInteger usertabsize = [defaults integerForKey: IDEKit_TabSizeKey];
     NSUInteger indentSize = [defaults integerForKey: IDEKit_TabIndentSizeKey];
     if (indentSize < 2) indentSize = 4; // use the cannonical indentation
     NSMutableString *indentString = [NSMutableString stringWithCapacity: indentSize];
     for (NSUInteger i=0;i<indentSize;i++) {
-	[indentString appendString: @" "];
+		[indentString appendString: @" "];
     }
     for (NSUInteger i=0;i<[lines count];i++) {
-	NSString *line = [lines objectAtIndex: i];
-	int col = 0;
-	int altcol = 0;
-	int usercol = 0;
-	BOOL isBlank = YES;
-	BOOL isComment = NO;
-	NSUInteger j = 0; // need to keep first NWS character found
-	for (;j<[line length];j++) {
-	    unichar c = [line characterAtIndex: j];
-	    if (c == ' ') {
-		col++;
-		altcol++;
-		usercol++;
-	    } else if (c == '\t') {
-		col = (col/tabsize + 1) * tabsize;
-		altcol = (altcol/alttabsize + 1) * alttabsize;
-		usercol = (usercol/usertabsize + 1) * usercol;
-	    } else if (c == '#') {
-		isComment = YES;
-		break;
-	    } else {
-		isBlank = NO;
-		break;
-	    }
-	}
-	// blank lines don't impact indentation, so need to treat special (Python ignores them)
-	// We indent them like the would appear, but we don't actually change the current indentation level
-	// Comments are similar
-	if (isComment || isBlank) {
-	    // need to treat special, since it may be different, but that isn't an error (and instead, we rely on usercol if needed)
-	    int tempIndent = indent;
-	    if (col == indstack[indent]) {
-		// it is the same, this is good
-	    } else if (col > indstack[indent]) {
-		// we are indented by some amount
-		tempIndent++;
-	    } else {
-		// we need to dendent - see how far
-		while (tempIndent > 0 && col < indstack[tempIndent]) {
-		    tempIndent--;
+		NSString *line = lines[i];
+		NSInteger col = 0;
+		NSInteger altcol = 0;
+		NSInteger usercol = 0;
+		BOOL isBlank = YES;
+		BOOL isComment = NO;
+		NSUInteger j = 0; // need to keep first NWS character found
+		for (;j<[line length];j++) {
+			unichar c = [line characterAtIndex: j];
+			if (c == ' ') {
+				col++;
+				altcol++;
+				usercol++;
+			} else if (c == '\t') {
+				col = (col/tabsize + 1) * tabsize;
+				altcol = (altcol/alttabsize + 1) * alttabsize;
+				usercol = (usercol/usertabsize + 1) * usercol;
+			} else if (c == '#') {
+				isComment = YES;
+				break;
+			} else {
+				isBlank = NO;
+				break;
+			}
 		}
-	    }
-	    // put in the indent
-	    for (int k = 0;k<tempIndent;k++) {
-		[retval appendString: indentString];
-	    }
-	    if (isComment) {
-		[retval appendString: [line substringFromIndex: j]]; // add the rest of the string
-	    }
-	    [retval appendString: @"\n"]; // and the end of line
-	} else {
-	    if (col == indstack[indent]) {
-		// no change (and we don't worry about inconsistent errors yet)
-	    } else if (col > indstack[indent]) {
-		// indent by one
-		indent++;
-		indstack[indent] = col;
-		altindstack[indent] = altcol;
-	    } else {
-		// dedent
-		while (indent > 0 && col < indstack[indent]) {
-		    indent--;
+		// blank lines don't impact indentation, so need to treat special (Python ignores them)
+		// We indent them like the would appear, but we don't actually change the current indentation level
+		// Comments are similar
+		if (isComment || isBlank) {
+			// need to treat special, since it may be different, but that isn't an error (and instead, we rely on usercol if needed)
+			NSInteger tempIndent = indent;
+			if (col == indstack[indent]) {
+				// it is the same, this is good
+			} else if (col > indstack[indent]) {
+				// we are indented by some amount
+				tempIndent++;
+			} else {
+				// we need to dendent - see how far
+				while (tempIndent > 0 && col < indstack[tempIndent]) {
+					tempIndent--;
+				}
+			}
+			// put in the indent
+			for (int k = 0;k<tempIndent;k++) {
+				[retval appendString: indentString];
+			}
+			if (isComment) {
+				[retval appendString: [line substringFromIndex: j]]; // add the rest of the string
+			}
+			[retval appendString: @"\n"]; // and the end of line
+		} else {
+			if (col == indstack[indent]) {
+				// no change (and we don't worry about inconsistent errors yet)
+			} else if (col > indstack[indent]) {
+				// indent by one
+				indent++;
+				indstack[indent] = col;
+				altindstack[indent] = altcol;
+			} else {
+				// dedent
+				while (indent > 0 && col < indstack[indent]) {
+					indent--;
+				}
+				// if we didn't exactly line up, that should be an error, btw
+			}
+			// put in the indent
+			for (int k = 0;k<indent;k++) {
+				[retval appendString: indentString];
+			}
+			[retval appendString: [line substringFromIndex: j]]; // add the rest of the string
+			[retval appendString: @"\n"]; // and the end of line
 		}
-		// if we didn't exactly line up, that should be an error, btw
-	    }
-	    // put in the indent
-	    for (int k = 0;k<indent;k++) {
-		[retval appendString: indentString];
-	    }
-	    [retval appendString: [line substringFromIndex: j]]; // add the rest of the string
-	    [retval appendString: @"\n"]; // and the end of line
-	}
     }
     // at this point, all the indentation that was at the start of the line has been cleaned up, but there are still potentially tabs
     // in the rest of the line
-    return [retval convertTabsFrom: [defaults integerForKey: IDEKit_TabSizeKey] to: indentSize removeTrailing: YES];    
+    return [retval convertTabsFrom: [defaults integerForKey: IDEKit_TabSizeKey] to: indentSize removeTrailing: YES];
 }
 
 @end

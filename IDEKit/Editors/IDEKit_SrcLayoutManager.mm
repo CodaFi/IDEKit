@@ -82,7 +82,7 @@
 	    where.y = /*containerOrigin.y +*/ fragment.origin.y; //- fragment.size.height;
 	    NSDictionary *attributes = [[self textStorage] attributesAtIndex: index effectiveRange: NULL];
 	    // 0x2025 - two dot leader
-	    [[NSString stringWithFormat: @"%C",0x2025] drawAtPoint: where withAttributes: attributes];
+	    [[NSString stringWithFormat: @"%d",0x2025] drawAtPoint: where withAttributes: attributes];
 	}
 	index = totalRange.location + totalRange.length + 1;
     }

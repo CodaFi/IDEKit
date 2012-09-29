@@ -41,7 +41,7 @@
 #import "IDEKit_SrcEditViewExtensions.h"
 #import "IDEKit_OpenQuicklyController.h"
 
-static NSInteger AdjustMarkerPoint(int location, NSRange range, int newLength)
+static NSInteger AdjustMarkerPoint(NSInteger location, NSRange range, int newLength)
 {
     if (NSEqualRanges(NSMakeRange(location,0),range)) {
 		// do nothing - don't move the range
@@ -84,7 +84,7 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 #ifdef qIDEKIT_UseCache
 		myLineCache = new IDEKit_LineCache;
 #endif
-		myUniqueID = [[[IDEKit_UniqueFileIDManager sharedFileIDManager] newUniqueFileID] retain]; // so we've at least got something
+		myUniqueID = [[IDEKit_UniqueFileIDManager sharedFileIDManager] newUniqueFileID]; // so we've at least got something
 		[myUniqueID setRepresentedObject:self forKey: @"IDEKit_SrcEditView"];
     }
     return self;
@@ -97,10 +97,8 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 #ifdef qIDEKIT_UseCache
     delete myLineCache;
 #endif
-    [myStatusBar dealloc]; // since we retained it regardless of it being shown or not
+     // since we retained it regardless of it being shown or not
     [myUniqueID setRepresentedObject:NULL forKey: @"IDEKit_SrcEditView"]; // remove us from the old one
-    [myUniqueID release];
-    [super dealloc];
 }
 
 - (void) awakeFromNib
@@ -112,11 +110,10 @@ static NSInteger SortMarkerByName(id first, id second, void *)
     IDEKit_TextStorage *storage = [[IDEKit_TextStorage alloc] init];
     [storage setAttributedString: [myTextView textStorage]];
 #endif
-    [myStatusBar retain];
     [myStatusBar removeFromSuperview];
     // try to replace with our subclass
     if ([myTextView isKindOfClass: [IDEKit_TextView class]] == NO) {
-		NSSize contentSize = [myScrollView contentSize];
+//unused		NSSize contentSize = [myScrollView contentSize];
 		IDEKit_TextView *subTextView = [[IDEKit_TextView alloc] initWithFrame: [myTextView frame]  textContainer: [myTextView textContainer]];
 		[subTextView setAllowsUndo:YES];
 		[subTextView setMinSize: [myTextView minSize]];
@@ -141,7 +138,6 @@ static NSInteger SortMarkerByName(id first, id second, void *)
     [layout replaceTextStorage:storage];
 #endif
     //NSLog(@"Layout %@ storage %.8X = %.8X?",layout,[myTextView textStorage], storage);
-    [layout release];
     [myTextView setUsesRuler: YES]; // this gets turned off when we replace layout manager
     [myTextView setRulerVisible: YES];
     // so we can update the ruler
@@ -274,8 +270,7 @@ static NSInteger SortMarkerByName(id first, id second, void *)
     if (mySplitView) {
 		NSArray *subViews = [mySplitView subviews];
 		for (NSUInteger i=0;i<[subViews count];i++) {
-			if ([[subViews objectAtIndex: i] documentView] == firstResponder) {
-				myTextView = firstResponder;
+			if ([subViews[i] documentView] == firstResponder) {
 				return myTextView;
 			}
 		}
@@ -341,7 +336,7 @@ static NSInteger SortMarkerByName(id first, id second, void *)
     // we really need to do _all_ of the layout managers in all the panes...
     NSArray *textViews = [self allTextViews];
     for (NSUInteger i=0;i<[textViews count];i++) {
-		[[[textViews objectAtIndex: i]layoutManager] setShowsInvisibleCharacters: myShowInvisibles];
+		[[textViews[i]layoutManager] setShowsInvisibleCharacters: myShowInvisibles];
     }
     //[[myTextView layoutManager] setShowsControlCharacters: myShowInvisibles];
     //NSString *string = [myTextView string];
@@ -356,13 +351,13 @@ static NSInteger SortMarkerByName(id first, id second, void *)
     // we really need to do _all_ of the layout managers in all the panes...
     NSArray *scrollViews = [self allScrollViews];
     for (NSUInteger i=0;i<[scrollViews count];i++) {
-		int flags = [[scrollViews objectAtIndex: i] showFlags];
+		NSInteger flags = [scrollViews[i] showFlags];
 		if (myShowLineNums) {
 			flags |= IDEKit_kShowLineNums;
 		} else {
 			flags &= ~IDEKit_kShowLineNums;
 		}
-		[[scrollViews objectAtIndex: i] setShowFlags: flags];
+		[scrollViews[i] setShowFlags: flags];
     }
 }
 - (IBAction) toggleShowFolding: (id) sender
@@ -373,13 +368,13 @@ static NSInteger SortMarkerByName(id first, id second, void *)
     // we really need to do _all_ of the layout managers in all the panes...
     NSArray *scrollViews = [self allScrollViews];
     for (NSUInteger i=0;i<[scrollViews count];i++) {
-		int flags = [[scrollViews objectAtIndex: i] showFlags];
+		NSInteger flags = [scrollViews[i] showFlags];
 		if (myShowFolding) {
 			flags |= IDEKit_kShowFolding;
 		} else {
 			flags &= ~IDEKit_kShowFolding;
 		}
-		[[scrollViews objectAtIndex: i] setShowFlags: flags];
+		[scrollViews[i] setShowFlags: flags];
     }
 }
 - (IBAction) toggleSyntaxColor: (id) sender
@@ -421,7 +416,7 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 	
     NSArray *textViews = [self allTextViews];
     for (NSUInteger i=0;i<[textViews count];i++) {
-		id aView = [textViews objectAtIndex: i];
+		id aView = textViews[i];
 		if (myWordWrap) {
 			//[myTextView setMinSize: NSMakeSize([myScrollView contentSize].width,0)];
 			[aView setFrameSize: NSMakeSize([myScrollView documentVisibleRect].size.width,[myTextView frame].size.height)];
@@ -479,7 +474,7 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 		// for now, just go to the first one
 		if ([completions count] == 1) {
 			[myTextView setSelectedRange:completeRange];
-			[myTextView insertText: [completions objectAtIndex: 0]];
+			[myTextView insertText: completions[0]];
 		} else {
 			id completion = [myTextView popupCompletionAtInsertion: completions];
 			if (completion) {
@@ -489,19 +484,18 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 			}
 		}
     } else {
-		[myTextView popupHelpTagAtInsertion: [[[NSAttributedString alloc] initWithString: @"No completions"] autorelease]];
+		[myTextView popupHelpTagAtInsertion: [[NSAttributedString alloc] initWithString: @"No completions"]];
     }
 }
 
-- (NSArray *)textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(int *)index
-{
+- (NSArray *)textView:(NSTextView *)textView completions:(NSArray *)words forPartialWordRange:(NSRange)charRange indexOfSelectedItem:(NSInteger *)index{
     NSArray *completions = [myContext srcEditView: self autoCompleteIdentifier: [[textView string] substringWithRange:charRange] max: 100];
     if ([completions count]) {
 		// add these to whatever it thinks is good
 		NSMutableArray *retval = [words mutableCopy];
 		BOOL setIndex = NO;
-		for (int i=0;i<[completions count];i++) {
-			id complete = [completions objectAtIndex: i];
+		for (NSInteger i=0;i<[completions count];i++) {
+			id complete = completions[i];
 			if (![retval containsObject: complete]) {
 				if (!setIndex) {// pick our first item by default
 					*index = [retval count];
@@ -575,7 +569,7 @@ static NSInteger SortMarkerByName(id first, id second, void *)
     [self removeTempBackgroundColor: NULL]; // if we have a temp hilite, remove it now
     // unclear how to handle multiple events correctly yet...
     for (NSUInteger i=0;i<[eventArray count];i++) {
-		NSEvent *event = [eventArray objectAtIndex: i];
+		NSEvent *event = eventArray[i];
 		NSUInteger modifiers = [event modifierFlags] & (NSShiftKeyMask | NSControlKeyMask | NSAlternateKeyMask | NSCommandKeyMask); // just the modifieres we look for
 		if (myAutoClose && myCurrentLanguage && (modifiers  | NSShiftKeyMask) == NSShiftKeyMask) { // only look at things that have at most a shift key
 			NSString *closer = [myCurrentLanguage getAutoCloseMatch: [event charactersIgnoringModifiers]];
@@ -600,8 +594,8 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 													  timestamp:1
 												   windowNumber:[[NSApp mainWindow] windowNumber]
 														context:[NSGraphicsContext currentContext]
-													 characters:[NSString stringWithFormat: @"%C",NSLeftArrowFunctionKey]
-									charactersIgnoringModifiers:[NSString stringWithFormat: @"%C",NSLeftArrowFunctionKey]
+													 characters:[NSString stringWithFormat: @"%c",NSLeftArrowFunctionKey]
+									charactersIgnoringModifiers:[NSString stringWithFormat: @"%c",NSLeftArrowFunctionKey]
 													  isARepeat:NO
 														keyCode: 0];
 				[NSApp postEvent:arrowEvent atStart: NO];
@@ -616,11 +610,11 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 			if ([closer isEqualToString: @"]"]) openner = @"[";
 			if ([closer isEqualToString: @"}"]) openner = @"{";
 			if (openner) {
-				int curloc = [myTextView selectedRange].location;
-				int openloc = [myTextView balanceBackwards: curloc startCharacter: [openner characterAtIndex: 0]];
+				NSInteger curloc = [myTextView selectedRange].location;
+				NSInteger openloc = [myTextView balanceBackwards: curloc startCharacter: [openner characterAtIndex: 0]];
 				if (openloc >= 0) {
 					NSRange hilite = NSMakeRange(openloc,1); //NSMakeRange(openloc+1,curloc - openloc -1);
-					[[myTextView layoutManager] addTemporaryAttributes:[NSDictionary dictionaryWithObject:[NSColor selectedTextBackgroundColor] forKey:NSBackgroundColorAttributeName] forCharacterRange: hilite];
+					[[myTextView layoutManager] addTemporaryAttributes:@{NSBackgroundColorAttributeName: [NSColor selectedTextBackgroundColor]} forCharacterRange: hilite];
 					[self display];
 					[self performSelector: @selector(removeTempBackgroundColor:) withObject: [NSValue valueWithRange:hilite] afterDelay: 0.5];
 				} else {
@@ -650,7 +644,7 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 		//NSLog(@"Trying bound key %@",key);
 		NSUserDefaults *defaults = myContext ? [myContext defaultsForSrcEditView: self] : [NSUserDefaults standardUserDefaults];
 		NSDictionary *keyBinds = [defaults dictionaryForKey: IDEKit_KeyBindingsKey];
-		NSString *selector = [keyBinds objectForKey: key];
+		NSString *selector = keyBinds[key];
 		if (selector) {
 			//NSLog(@"Corresponding selector %@",selector);
 			SEL sel = NSSelectorFromString(selector);
@@ -691,14 +685,14 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 {
     NSRange range = [[notification object] selectedRange];
     NSString *text = [[notification object] string];
-    int line = [myTextView lineNumberFromOffset: range.location];
-    int unfoldedLineNum = [self lineNumberFromOffset: [self unfoldedLocation:range.location]];
+    NSInteger line = [myTextView lineNumberFromOffset: range.location];
+    NSInteger unfoldedLineNum = [self lineNumberFromOffset: [self unfoldedLocation:range.location]];
     NSRange entireLine = [self nthLineRange: line];
-    int col = range.location - entireLine.location;
+    NSInteger col = range.location - entireLine.location;
     //NSLog(@"Changed selection to %d,%d",line,col);
     NSString *startString = [text substringWithRange: NSMakeRange(entireLine.location,col)];
     // figure out the width (including tabs) of this text
-    int realCols = 0;
+    NSInteger realCols = 0;
     for (NSUInteger i=0;i<col;i++) {
 		if ([startString characterAtIndex:i] == '\t') {
 			realCols = (realCols + 4) / 4 * 4; // round up to next tab stop
@@ -755,14 +749,14 @@ static NSInteger SortMarkerByName(id first, id second, void *)
     [self updatePseudoTooltipForView: [notification object]];
 }
 
-- (BOOL)textView:(NSTextView *)aTextView doCommandBySelector:(SEL)aSelector
+- (BOOL)textView:(IDEKit_TextView *)aTextView doCommandBySelector:(SEL)aSelector
 {
     // other useful selectors found in <NSResponder.h> in
     // 		@interface NSResponder (NSStandardKeyBindingMethods)
     myTextView = aTextView;
     if (aSelector == @selector(insertNewline:) && mySkipAutoIndent == NO) {
 		if (myTrySmartIndent) {
-			int action = IDEKit_kIndentAction_None;
+			NSInteger action = IDEKit_kIndentAction_None;
 			if (myCurrentLanguage) {
 				NSRange selectedRange = [myTextView selectedRange]; // figure out the start of this line
 				selectedRange.length = 0; // make sure that we work with the start of the range
@@ -889,7 +883,7 @@ static NSInteger SortMarkerByName(id first, id second, void *)
 - (void) changeLanguage: (id) sender
 {
     if ([sender representedObject] != [myCurrentLanguage class]) {
-		[self setCurrentLanguage: [[[[sender representedObject] alloc] init] autorelease]];
+		[self setCurrentLanguage: [[[sender representedObject] alloc] init]];
     }
 }
 - (void) buildLanguages: (id) sender
@@ -997,7 +991,6 @@ static id gPopupTextView;
 		gPopupTextView = [[IDEKit_SrcScroller lastHit] documentView];
 		//NSLog(@"buildPopUpFuncs validate from %@",menuItem);
 		// since we are going to remove it, make it go away "later"
-		[menuItem retain];
 		NSMenu *menu = [menuItem menu];
 		// remove the old things
 		while ([menu numberOfItems] > 1) {
@@ -1016,8 +1009,8 @@ static id gPopupTextView;
 		// sort them as appropriate
 		markers = [markers sortedArrayUsingFunction: SortMarkerByRange context: nil];
 		for (NSUInteger i=0;i<[markers count];i++) {
-			IDEKit_TextFunctionMarkers *marker = [markers objectAtIndex: i];
-			NSMenuItem *markerItem = [[[NSMenuItem alloc] initWithTitle:[marker name] action: @selector(doPopUpFuncsMarker:) keyEquivalent:@""] autorelease];
+			IDEKit_TextFunctionMarkers *marker = markers[i];
+			NSMenuItem *markerItem = [[NSMenuItem alloc] initWithTitle:[marker name] action: @selector(doPopUpFuncsMarker:) keyEquivalent:@""];
 #ifdef notyet
 			NSString *imageName = [marker image];
 			if (imageName) {
@@ -1046,7 +1039,6 @@ static id gPopupTextView;
     }
     if ([menuItem action] == @selector(buildLanguages:)) {
         //NSLog(@"Building languages");
-        [menuItem retain];
         NSMenu *menu = [menuItem menu];
         // remove the old things
         while ([menu numberOfItems] > 0) {
@@ -1058,8 +1050,8 @@ static id gPopupTextView;
         NSArray *langs = [IDEKit_GetLanguagePlugIns() sortedArrayUsingSelector:@selector(languageNameCompare:)];
 		
         for (NSUInteger i=0;i<[langs count];i++) {
-            id lang = [langs objectAtIndex: i];
-            NSMenuItem *langItem = [[[NSMenuItem alloc] initWithTitle:[lang languageName] action: @selector(changeLanguage:) keyEquivalent:@""] autorelease];
+            id lang = langs[i];
+            NSMenuItem *langItem = [[NSMenuItem alloc] initWithTitle:[lang languageName] action: @selector(changeLanguage:) keyEquivalent:@""];
             [langItem setRepresentedObject: lang];
 			if ([myCurrentLanguage class] == lang)
 				[langItem setState: NSOnState];
@@ -1070,7 +1062,6 @@ static id gPopupTextView;
     if ([menuItem action] == @selector(buildPopUpHeaders:) || ([menuItem action] == @selector(doPopUpHeader:) && [menuItem representedObject] == NULL)) {
 		// since we are going to remove it, make it go away "later"
 		//NSLog(@"Wanting to rebuild headers");
-		[menuItem retain];
 		NSMenu *menu = [menuItem menu];
 		// remove the old things
 		while ([menu numberOfItems] > 1) {
@@ -1100,8 +1091,8 @@ static id gPopupTextView;
 			NSEnumerator *e = [names objectEnumerator];
 			NSString *name;
 			while ((name = [e nextObject]) != NULL) {
-				NSMenuItem *markerItem = [[[NSMenuItem alloc] initWithTitle:name action: @selector(doPopUpHeader:) keyEquivalent:@""] autorelease];
-				[markerItem setRepresentedObject: [headers objectForKey: name]];
+				NSMenuItem *markerItem = [[NSMenuItem alloc] initWithTitle:name action: @selector(doPopUpHeader:) keyEquivalent:@""];
+				[markerItem setRepresentedObject: headers[name]];
 				[menu addItem: markerItem];
 			}
 		}
@@ -1136,19 +1127,12 @@ static id gPopupTextView;
 		pmatch[0].rm_so = startindex;
 		pmatch[0].rm_eo = endindex;
 		
-#ifndef oldregex
-		NSData *stringData = [text dataUsingEncoding: NSUnicodeStringEncoding];
-#endif
 #ifdef qPEROXIDE
 		PrXDocument *project = NULL; // look up identifiers in the project browser database
 		if (!color) project = [PrXDocument documentForFile: [myContext fileNameForSrcEditView: self]];
 #endif
 		while
-#ifdef oldregex
-			(regexec(pattern,[text lossyCString],1,pmatch,REG_STARTEND) == 0 && pmatch[0].rm_eo != pmatch[0].rm_so)
-#else
-			(re_uniexec(pattern,(unichar *)[stringData bytes],0,NULL,1,pmatch,REG_STARTEND) == 0 && pmatch[0].rm_eo != pmatch[0].rm_so)
-#endif
+			(regexec(pattern,[text cStringUsingEncoding:NSUTF8StringEncoding],1,pmatch,REG_STARTEND) == 0 && pmatch[0].rm_eo != pmatch[0].rm_so)
 		{
 			// found something
 			NSRange foundRange = NSMakeRange(pmatch[0].rm_so,pmatch[0].rm_eo - pmatch[0].rm_so);
@@ -1297,8 +1281,7 @@ static id gPopupTextView;
 {
     if (newLanguage == myCurrentLanguage)
 		return;
-    [myCurrentLanguage autorelease];
-    myCurrentLanguage = [newLanguage retain];
+    myCurrentLanguage = newLanguage;
     [myCurrentLanguage lexParser]; // make sure that the lex parser is made
     // should recolor everything
     NSString *string = [myTextView string];
@@ -1306,8 +1289,8 @@ static id gPopupTextView;
     // make sure breakpoints are shown/hidden accordingly
     NSArray *scrollers = [self allScrollViews];
     for (NSUInteger i=0;i<[scrollers count];i++) {
-		IDEKit_SrcScroller *scroller = [scrollers objectAtIndex: i];
-		int flags = [scroller showFlags];
+		IDEKit_SrcScroller *scroller = scrollers[i];
+		NSInteger flags = [scroller showFlags];
 		if ([myCurrentLanguage wantsBreakpoints]) {
 			flags |= IDEKit_kShowBreakpoints;
 		} else {
@@ -1333,7 +1316,7 @@ static id gPopupTextView;
     myContext = aContext;
     // has the language changed?
     if (1 || [aContext currentLanguageClassForSrcEditView: self] != [myCurrentLanguage class]) {
-		[self setCurrentLanguage: [[[[aContext currentLanguageClassForSrcEditView: self] alloc] init] autorelease]];
+		[self setCurrentLanguage: [[[aContext currentLanguageClassForSrcEditView: self] alloc] init]];
     }
     [self refreshSettingsFromPrefs: YES]; // this context will have different settings
     //[self updateBreakpointsFromProject];  // Caller must do this after it loads the source
@@ -1368,7 +1351,7 @@ static id gPopupTextView;
 {
     if (mySplitView == nil) {
 		// make the split view, inside us (with our old scroll view inside it)
-		mySplitView = [[[NSSplitView alloc] initWithFrame: [myScrollView frame]] autorelease];
+		mySplitView = [[NSSplitView alloc] initWithFrame: [myScrollView frame]];
 		[self addSubview: mySplitView];
 		[mySplitView setFrame: [self frame]];
 		[mySplitView addSubview: myScrollView];
@@ -1378,7 +1361,7 @@ static id gPopupTextView;
     frame.origin.y = frame.size.height;
     frame.size.height = frame.size.height / 2;
     // save off our current values
-    NSTextView *oldTextView = myTextView;
+    IDEKit_TextView *oldTextView = myTextView;
     IDEKit_SrcScroller *oldScrollView = myScrollView;
     // make us anew, so that everything points back to us
     [NSBundle loadOverridenNibNamed: @"IDEKit_SrcEditView" owner: self];
@@ -1397,7 +1380,7 @@ static id gPopupTextView;
     //[self makeRulersForView: newTextView inView: newScrollView];
     // here's the magic to have both view edit the same text
     NSTextStorage *masterStorage = [myTextView textStorage];
-    [masterStorage addLayoutManager: [[newTextView layoutManager] retain]];
+    [masterStorage addLayoutManager: [newTextView layoutManager]];
 	
 #ifdef nomore
     [masterStorage retain]; // this retain looks ugly, but it prevents problems when we close the split view
@@ -1461,7 +1444,7 @@ static id gPopupTextView;
     [sender removeFromSuperview];
     [mySplitView adjustSubviews];
     id subviews = [mySplitView subviews];
-    IDEKit_SrcScroller *lastScroller = [subviews objectAtIndex: 0];
+    IDEKit_SrcScroller *lastScroller = subviews[0];
     if (sender == myScrollView)
 		myScrollView = lastScroller; // that was myScrollView that went away
     if (myTextView == [sender contentView])
@@ -1475,7 +1458,7 @@ static id gPopupTextView;
     if (mySplitView) {
 		return [mySplitView subviews];
     } else {
-		return [NSArray arrayWithObject: myScrollView];
+		return @[myScrollView];
     }
 }
 
@@ -1485,11 +1468,11 @@ static id gPopupTextView;
 		id viewList = [mySplitView subviews];
 		NSMutableArray *retval = [NSMutableArray arrayWithCapacity: [viewList count]];
 		for (NSUInteger i=0;i<[viewList count];i++) {
-			[retval addObject: [[viewList objectAtIndex: i] documentView]];
+			[retval addObject: [viewList[i] documentView]];
 		}
 		return retval;
     } else {
-		return [NSArray arrayWithObject: myTextView];
+		return @[myTextView];
     }
 }
 
@@ -1515,8 +1498,7 @@ static id gPopupTextView;
 - (void) setUniqueFileID: (IDEKit_UniqueID *)fileID
 {
     [myUniqueID setRepresentedObject:NULL forKey: @"IDEKit_SrcEditView"]; // remove us from the old one
-    [myUniqueID release];
-    myUniqueID = [fileID retain];
+    myUniqueID = fileID;
     [myUniqueID setRepresentedObject:self forKey: @"IDEKit_SrcEditView"];
 }
 

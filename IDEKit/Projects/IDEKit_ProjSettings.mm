@@ -41,7 +41,7 @@ NSString *IDEKit_DependantOnTarget = @"IDEKit_DependantOnTarget";
 @implementation NSDictionary(IDEKit_UIEntry)
 - (NSInteger) uiKind
 {
-    return [[self objectForKey: IDEKit_ProjEntryKind] intValue];
+    return [self[IDEKit_ProjEntryKind] intValue];
 }
 @end;
 

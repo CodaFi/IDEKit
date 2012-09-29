@@ -38,7 +38,7 @@
     // get the current font
     NSFont *font;
     if ([[self textStorage] length] == 0)
-		font = [[self typingAttributes] objectForKey: NSFontAttributeName]; // Get the font of the typing attribute if no text
+		font = [self typingAttributes][NSFontAttributeName]; // Get the font of the typing attribute if no text
     else
 		font = [[self textStorage] attribute:NSFontAttributeName atIndex:0 effectiveRange:NULL];
     font = [[self layoutManager] substituteFontForFont:font]; // see if there is a substitute font
@@ -82,13 +82,13 @@
     // get the current font
     NSFont *font;
     if ([[self textStorage] length] == 0)
-		font = [[self typingAttributes] objectForKey: NSFontAttributeName]; // Get the font of the typing attribute if no text
+		font = [self typingAttributes][NSFontAttributeName]; // Get the font of the typing attribute if no text
     else
 		font = [[self textStorage] attribute:NSFontAttributeName atIndex:0 effectiveRange:NULL];
     font = [[self layoutManager] substituteFontForFont:font]; // see if there is a substitute font
     float spaceWidth = 0.0;
     // should we actually use spaces?  Or "n" spaces?
-    if ([font glyphIsEncoded:(NSGlyph)' ']) {
+    if ((NSGlyph)' ' < [font numberOfGlyphs]) {
 		spaceWidth = [font advancementForGlyph:(NSGlyph)' '].width;
     } else {
 		spaceWidth = [font maximumAdvancement].width;
@@ -120,7 +120,6 @@
     while (pos < 12.0 * 72.0) {
 		NSTextTab *tabStop = [[NSTextTab alloc] initWithType: NSLeftTabStopType location: pos];
 		[tabArray addObject:tabStop];
-		[tabStop release];
 		pos += tabStops;
     }
     //NSLog(@"style was %@",[m description]);
@@ -132,7 +131,7 @@
 							   value:m range:NSMakeRange(0, [[self textStorage] length])];
     // make sure we are typing with these attributes (handles blank documents as well)
     NSMutableDictionary *attributes = [[self typingAttributes] mutableCopy];
-    [attributes setObject: m forKey: NSParagraphStyleAttributeName];
+    attributes[NSParagraphStyleAttributeName] = m;
     //NSLog(@"typing attributes now %@",[attributes description]);
     [self setTypingAttributes:attributes];
     //NSLog(@"Text attributes changed to %@",[m description]);
@@ -281,9 +280,9 @@
     NSUInteger lineEndIndex;
     NSUInteger contentsEndIndex;
     [text getLineStart: &startIndex end: &lineEndIndex contentsEnd: &contentsEndIndex forRange: selectedRange];
-    int firstLine = [self lineNumberFromOffset: startIndex];
-    int lastLine = [self lineNumberFromOffset: contentsEndIndex];
-    for (int line=firstLine;line<=lastLine;line++) {
+    NSInteger firstLine = [self lineNumberFromOffset: startIndex];
+    NSInteger lastLine = [self lineNumberFromOffset: contentsEndIndex];
+    for (NSInteger line=firstLine;line<=lastLine;line++) {
 		NSRange lineRange = [self nthLineRange: line];
 		if (lineRange.length) {
 			unichar leadingChar = [text characterAtIndex: lineRange.location];
@@ -320,9 +319,9 @@
     NSUInteger lineEndIndex;
     NSUInteger contentsEndIndex;
     [text getLineStart: &startIndex end: &lineEndIndex contentsEnd: &contentsEndIndex forRange: selectedRange];
-    int firstLine = [self lineNumberFromOffset: startIndex];
-    int lastLine = [self lineNumberFromOffset: contentsEndIndex];
-    for (int line=firstLine;line<=lastLine;line++) {
+    NSInteger firstLine = [self lineNumberFromOffset: startIndex];
+    NSInteger lastLine = [self lineNumberFromOffset: contentsEndIndex];
+    for (NSInteger line=firstLine;line<=lastLine;line++) {
 		NSRange lineRange = [self nthLineRange: line];
 		if (lineRange.length) {
 			// nuke off up to four of them
@@ -396,8 +395,8 @@
 
 - (NSRange) balanceFrom: (NSInteger) location startCharacter: (unichar) lparen endCharacter: (unichar) rparen
 {
-    int start = [self balanceBackwards: location startCharacter: lparen];
-    int end = [self balanceForwards: location endCharacter: rparen];
+    NSInteger start = [self balanceBackwards: location startCharacter: lparen];
+    NSInteger end = [self balanceForwards: location endCharacter: rparen];
     if (start < 0 || end >= [(NSString*)[self string] length])
 		return NSMakeRange(location,0);
     return NSMakeRange(start,end - start + 1);
@@ -455,9 +454,9 @@
     NSUInteger lineEndIndex;
     NSUInteger contentsEndIndex;
     [text getLineStart: &startIndex end: &lineEndIndex contentsEnd: &contentsEndIndex forRange: selectedRange];
-    int firstLine = [self lineNumberFromOffset: startIndex];
-    int lastLine = [self lineNumberFromOffset: contentsEndIndex];
-    for (int line=firstLine;line<=lastLine;line++) {
+    NSInteger firstLine = [self lineNumberFromOffset: startIndex];
+    NSInteger lastLine = [self lineNumberFromOffset: contentsEndIndex];
+    for (NSInteger line=firstLine;line<=lastLine;line++) {
 		NSRange lineRange = [self nthLineRange: line];
 		if (lineRange.length == 0) // end of file, no newline on last line
 			break;
@@ -477,9 +476,9 @@
     NSUInteger lineEndIndex;
     NSUInteger contentsEndIndex;
     [text getLineStart: &startIndex end: &lineEndIndex contentsEnd: &contentsEndIndex forRange: selectedRange];
-    int firstLine = [self lineNumberFromOffset: startIndex];
-    int lastLine = [self lineNumberFromOffset: contentsEndIndex];
-    for (int line=firstLine;line<=lastLine;line++) {
+    NSInteger firstLine = [self lineNumberFromOffset: startIndex];
+    NSInteger lastLine = [self lineNumberFromOffset: contentsEndIndex];
+    for (NSInteger line=firstLine;line<=lastLine;line++) {
 		NSRange lineRange = [self nthLineRange: line];
 		if (lineRange.length == 0) // end of file, no newline on last line
 			break;
@@ -503,9 +502,9 @@
     NSUInteger lineEndIndex;
     NSUInteger contentsEndIndex;
     [text getLineStart: &startIndex end: &lineEndIndex contentsEnd: &contentsEndIndex forRange: selectedRange];
-    int firstLine = [self lineNumberFromOffset: startIndex];
-    int lastLine = [self lineNumberFromOffset: contentsEndIndex];
-    for (int line=firstLine;line<=lastLine;line++) {
+    NSInteger firstLine = [self lineNumberFromOffset: startIndex];
+    NSInteger lastLine = [self lineNumberFromOffset: contentsEndIndex];
+    for (NSInteger line=firstLine;line<=lastLine;line++) {
 		NSRange lineRange = [self nthLineRange: line];
 		if (lineRange.length == 0) // end of file, no newline on last line
 			break;
@@ -526,9 +525,9 @@
     NSUInteger lineEndIndex;
     NSUInteger contentsEndIndex;
     [text getLineStart: &startIndex end: &lineEndIndex contentsEnd: &contentsEndIndex forRange: selectedRange];
-    int firstLine = [self lineNumberFromOffset: startIndex];
-    int lastLine = [self lineNumberFromOffset: contentsEndIndex];
-    for (int line=firstLine;line<=lastLine;line++) {
+    NSInteger firstLine = [self lineNumberFromOffset: startIndex];
+    NSInteger lastLine = [self lineNumberFromOffset: contentsEndIndex];
+    for (NSInteger line=firstLine;line<=lastLine;line++) {
 		NSRange lineRange = [self nthLineRange: line];
 		if (lineRange.length == 0) // end of file, no newline on last line
 			break;
@@ -651,8 +650,7 @@
 - (id) popupCompletionAtInsertion: (NSArray *)completionList
 {
     IDEKit_Autocompletion *completer = [[IDEKit_Autocompletion alloc] initWithCompletions: completionList];
-    id retval = [[completer popupAssistantAt: [self insertionPointGlobalCoordinate] forView: self] retain];
-    [completer release];
-    return [retval autorelease];
+    id retval = [completer popupAssistantAt: [self insertionPointGlobalCoordinate] forView: self];
+    return retval;
 }
 @end

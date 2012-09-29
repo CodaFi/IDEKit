@@ -63,8 +63,8 @@ enum {
     IDEKit_kLangColor_UserKeyword4,
     IDEKit_kLangColor_End
 };
-extern NSColor *IDEKit_TextColorForColor(int color);
-extern NSString *IDEKit_NameForColor(int color);
+extern NSColor *IDEKit_TextColorForColor(NSInteger color);
+extern NSString *IDEKit_NameForColor(NSInteger color);
 
 @interface NSColor(IDEKit_StringToColors)
 + (NSColor *)colorWithHTML: (NSString *)hex;

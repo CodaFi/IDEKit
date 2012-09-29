@@ -108,11 +108,11 @@
 				NSEnumerator *e = [candidates objectEnumerator];
 				NSString *path;
 				while ((path = [e nextObject]) != NULL) {
-					[browserArray addObject: [NSDictionary dictionaryWithObject:path forKey:IDEKit_MultiFileResultPath]];
+					[browserArray addObject: @{IDEKit_MultiFileResultPath: path}];
 				}
 				[IDEKit_FileBrowser showResults: browserArray];
 			} else {
-				document = [self openDocumentWithContentsOfURL:[candidates objectAtIndex:0] display:YES error:nil];
+				document = [self openDocumentWithContentsOfURL:candidates[0] display:YES error:nil];
 			}
 		}
     }

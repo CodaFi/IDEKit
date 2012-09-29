@@ -45,7 +45,6 @@
 {
     if (myDataFromFile) {
 	[self loadDocWithData: myDataFromFile];
-	[myDataFromFile release];
 	myDataFromFile = NULL;
     } else {
     }
@@ -61,7 +60,7 @@
 	if (myTextView) {
 	    [self loadDocWithData: data];
 	} else {
-	    myDataFromFile = [data retain];
+	    myDataFromFile = data;
 	}
 	return YES;
     }

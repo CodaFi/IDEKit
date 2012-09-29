@@ -66,7 +66,7 @@ enum {
     [lex addCommentStart: @"!--" end: @"--"]; // hm, how to handle comments
     [lex setIdentifierChars: [NSCharacterSet characterSetWithCharactersInString: @"_"]];
 
-    return [lex autorelease];
+    return lex;
 }
 - (NSString *) getLinePrefixComment
 {
@@ -162,7 +162,7 @@ enum {
 
     [lex setIdentifierChars: [NSCharacterSet characterSetWithCharactersInString: @"_"]];
     
-    return [lex autorelease];
+    return lex;
 }  
 
 - (NSArray *)functionList: (NSString *)source // for popup funcs - return a list of TextFunctionMarkers

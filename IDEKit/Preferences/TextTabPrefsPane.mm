@@ -27,11 +27,10 @@
 @implementation TextTabPrefsPane
 - (NSArray *) editedProperties
 {
-    return [NSArray arrayWithObjects: IDEKit_TabStopKey,
+    return @[IDEKit_TabStopKey,
 	IDEKit_TabStopUnitKey,IDEKit_TabSavingKey,
 	IDEKit_TabSizeKey, IDEKit_TabIndentSizeKey,
-	IDEKit_TextFontNameKey, IDEKit_TextFontSizeKey,
-	NULL];
+	IDEKit_TextFontNameKey, IDEKit_TextFontSizeKey];
 }
 
 - (void) didSelect
@@ -57,25 +56,24 @@
 - (void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver: self];
-    [super dealloc];
 }
 -(IBAction) changeTabStopSize: (id) sender
 {
-    [myDefaults setObject: [NSNumber numberWithFloat: [sender floatValue]] forKey: IDEKit_TabStopKey];
+    [myDefaults setObject: @([sender floatValue]) forKey: IDEKit_TabStopKey];
     if ([[myTabStopsUnits selectedItem] tag] == -72) { // characters - keep in sync
 	[mySpacesPerIndent setIntValue: [sender intValue]];
-	[myDefaults setObject: [NSNumber numberWithInt: [sender intValue]] forKey: IDEKit_TabIndentSizeKey];
+	[myDefaults setObject: @([sender intValue]) forKey: IDEKit_TabIndentSizeKey];
     }
     [myTextSample setUniformTabStops: 72.0 * [myDefaults floatForKey:IDEKit_TabStopKey] / [myDefaults floatForKey:IDEKit_TabStopUnitKey]];
 }
 
 -(IBAction) changeTabStopUnits: (id) sender
 {
-    [myDefaults setObject: [NSNumber numberWithInt: [[sender selectedItem] tag]] forKey: IDEKit_TabStopUnitKey];
+    [myDefaults setObject: @([[sender selectedItem] tag]) forKey: IDEKit_TabStopUnitKey];
     if ([[sender selectedItem] tag] == -72) { // characters
 	[mySpacesPerIndent setEnabled: NO];
 	[mySpacesPerIndent setIntValue: [myTabStops intValue]];
-	[myDefaults setObject: [NSNumber numberWithInt: [myTabStops intValue]] forKey: IDEKit_TabIndentSizeKey];
+	[myDefaults setObject: @([myTabStops intValue]) forKey: IDEKit_TabIndentSizeKey];
     } else {
 	[mySpacesPerIndent setEnabled: YES];
     }
@@ -84,17 +82,17 @@
 
 -(IBAction) changeTabSaving: (id) sender
 {
-    [myDefaults setObject: [NSNumber numberWithInt: [[sender selectedCell] tag]] forKey: IDEKit_TabSavingKey];
+    [myDefaults setObject: @([[sender selectedCell] tag]) forKey: IDEKit_TabSavingKey];
 }
 
 -(IBAction) changeTabSpaces: (id) sender
 {
-    [myDefaults setObject: [NSNumber numberWithInt: [sender intValue]] forKey: IDEKit_TabSizeKey];
+    [myDefaults setObject: @([sender intValue]) forKey: IDEKit_TabSizeKey];
 }
 
 -(IBAction) changeIndentSpaces: (id) sender
 {
-    [myDefaults setObject: [NSNumber numberWithInt: [sender intValue]] forKey: IDEKit_TabIndentSizeKey];
+    [myDefaults setObject: @([sender intValue]) forKey: IDEKit_TabIndentSizeKey];
 }
 
 - (NSFont *)font;

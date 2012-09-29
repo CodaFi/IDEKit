@@ -21,7 +21,7 @@
 //
 
 #import "IDEKit_PreferencePane.h"
-
+#import <Cocoa/Cocoa.h>
 
 @interface KeyBindingsPrefsPane : IDEKit_PreferencePane {
     IBOutlet id myOutline;

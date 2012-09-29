@@ -29,6 +29,6 @@ extern NSString *IDEKit_ProjectInfoPListName;
 - (NSDictionary *) currentTargetInfoPList;
 - (void) setCurrentTargetInfoPList: (NSDictionary *)infoPList;
 - (id) currentTargetInfoPListObjectForKey: (NSString *)key;
-- (id) setCurrentTargetInfoPListObject: (id) object forKey: (NSString *)key;
+- (void) setCurrentTargetInfoPListObject: (id) object forKey: (NSString *)key;
 - (NSArray *) currentTargetInfoPListDocuments;
 @end

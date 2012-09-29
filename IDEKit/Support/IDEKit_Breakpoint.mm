@@ -41,7 +41,7 @@ NSString *IDEKit_BreakpointUUID = @"IDEKit_BreakpointUUID";
 }
 + (IDEKit_Breakpoint *) breakpointFromPlist:(NSDictionary *)plist // will return existing one if possible
 {
-    NSString *uid = [plist objectForKey: IDEKit_BreakpointUUID];
+    NSString *uid = plist[IDEKit_BreakpointUUID];
     if (uid) {
 	IDEKit_UniqueID *unique = [IDEKit_UniqueID uniqueIDFromString:uid];
 	IDEKit_Breakpoint *retval = [self breakpointAssociatedWith: unique];
@@ -49,21 +49,21 @@ NSString *IDEKit_BreakpointUUID = @"IDEKit_BreakpointUUID";
 	    return retval; // we already exist in some other file probably
 	}
     }
-    return [[[self alloc] initFromPlist: plist] autorelease];
+    return [[self alloc] initFromPlist: plist];
 }
 
 - (id) initFromPlist: (NSDictionary *)plist
 {
     self = [super init];
     if (self) {
-	myFile = [[IDEKit_UniqueID uniqueIDFromString: [plist objectForKey: IDEKit_BreakpointFile]] retain];
-	myProj = [[IDEKit_UniqueID uniqueIDFromString: [plist objectForKey: IDEKit_BreakpointProject]] retain];
-	myTarget = [[plist objectForKey: IDEKit_BreakpointTarget] retain];
-	myData = [plist objectForKey: IDEKit_BreakpointData];
-	myKind = [[plist objectForKey: IDEKit_BreakpointKind] intValue];
-	myUnique = [[IDEKit_UniqueID uniqueIDFromString: [plist objectForKey: IDEKit_BreakpointUUID]] retain];
+	myFile = [IDEKit_UniqueID uniqueIDFromString: plist[IDEKit_BreakpointFile]];
+	myProj = [IDEKit_UniqueID uniqueIDFromString: plist[IDEKit_BreakpointProject]];
+	myTarget = plist[IDEKit_BreakpointTarget];
+	myData = plist[IDEKit_BreakpointData];
+	myKind = [plist[IDEKit_BreakpointKind] intValue];
+	myUnique = [IDEKit_UniqueID uniqueIDFromString: plist[IDEKit_BreakpointUUID]];
 	if (!myUnique) // just to be safe
-	    myUnique = [[IDEKit_UniqueID uniqueID] retain];
+	    myUnique = [IDEKit_UniqueID uniqueID];
 	[myUnique setRepresentedObject:self forKey:@"IDEKit_Breakpoint"];
     }
     return self;
@@ -72,30 +72,24 @@ NSString *IDEKit_BreakpointUUID = @"IDEKit_BreakpointUUID";
 {
     if (myProj) {
 	if (myTarget) {
-	    return [NSDictionary dictionaryWithObjectsAndKeys:
-		[myUnique stringValue], IDEKit_BreakpointUUID,
-		[myFile stringValue], IDEKit_BreakpointFile,
-		myTarget, IDEKit_BreakpointTarget,
-		[myProj stringValue], IDEKit_BreakpointProject,
-		[NSNumber numberWithInt: myKind], IDEKit_BreakpointKind,
-		myData, IDEKit_BreakpointData, // could be null
-		NULL];
+	    return @{IDEKit_BreakpointUUID: [myUnique stringValue],
+		IDEKit_BreakpointFile: [myFile stringValue],
+		IDEKit_BreakpointTarget: myTarget,
+		IDEKit_BreakpointProject: [myProj stringValue],
+		IDEKit_BreakpointKind: @(myKind),
+		IDEKit_BreakpointData: myData};
 	} else {
-	    return [NSDictionary dictionaryWithObjectsAndKeys:
-		[myUnique stringValue], IDEKit_BreakpointUUID,
-		[myFile stringValue], IDEKit_BreakpointFile,
-		[myProj stringValue], IDEKit_BreakpointProject,
-		[NSNumber numberWithInt: myKind], IDEKit_BreakpointKind,
-		myData, IDEKit_BreakpointData, // could be null
-		NULL];
+	    return @{IDEKit_BreakpointUUID: [myUnique stringValue],
+		IDEKit_BreakpointFile: [myFile stringValue],
+		IDEKit_BreakpointProject: [myProj stringValue],
+		IDEKit_BreakpointKind: @(myKind),
+		IDEKit_BreakpointData: myData};
 	}
     } else {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-	    [myUnique stringValue], IDEKit_BreakpointUUID,
-	    [myFile stringValue], IDEKit_BreakpointFile,
-	    [NSNumber numberWithInt: myKind], IDEKit_BreakpointKind,
-	    myData, IDEKit_BreakpointData, // could be null
-	    NULL];
+	return @{IDEKit_BreakpointUUID: [myUnique stringValue],
+	    IDEKit_BreakpointFile: [myFile stringValue],
+	    IDEKit_BreakpointKind: @(myKind),
+	    IDEKit_BreakpointData: myData};
     }
 }
 
@@ -106,8 +100,8 @@ NSString *IDEKit_BreakpointUUID = @"IDEKit_BreakpointUUID";
 	myKind = kind;
 	myData = NULL;
 	myBestLineNum = line;
-	myFile = [fileID retain];
-	myUnique = [[IDEKit_UniqueID uniqueID] retain];
+	myFile = fileID;
+	myUnique = [IDEKit_UniqueID uniqueID];
 	[myUnique setRepresentedObject:self forKey:@"IDEKit_Breakpoint"];
     }
     return self;
@@ -115,13 +109,7 @@ NSString *IDEKit_BreakpointUUID = @"IDEKit_BreakpointUUID";
 
 - (void) dealloc
 {
-    [myProj release];
-    [myTarget release];
-    [myFile release];
-    [myData release];
     [myUnique setRepresentedObject:NULL forKey:@"IDEKit_Breakpoint"];
-    [myUnique release];
-    [super dealloc];
 }
 - (BOOL) disabled
 {
@@ -151,8 +139,7 @@ NSString *IDEKit_BreakpointUUID = @"IDEKit_BreakpointUUID";
 - (void) setData: (id) data
 {
     if (data != myData) {
-	[myData autorelease];
-	myData = [data retain];
+	myData = data;
     }
     [[IDEKit_BreakpointManager sharedBreakpointManager] redrawBreakpoint:self];
 }

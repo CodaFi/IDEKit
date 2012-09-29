@@ -9,12 +9,12 @@
 //  modify it under the terms of the GNU Library General Public
 //  License as published by the Free Software Foundation; either
 //  version 2 of the License, or (at your option) any later version.
-//  
+//
 //  This library is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //  Library General Public License for more details.
-//  
+//
 //  You should have received a copy of the GNU Library General Public
 //  License along with this library; if not, write to the Free
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -36,7 +36,7 @@ public:
     NSInteger FoldedLineCount();
     NSInteger UnfoldedLineNumberFromOffset(NSUInteger offset);
     NSRange UnfoldedNthLineRange(NSInteger n);
-    NSInteger  UnfoldedLineCount();
+    NSUInteger  UnfoldedLineCount();
     // conversion
     NSUInteger UnfoldedLocation(NSUInteger offset); // convert from unfolded to folded location
     NSUInteger FoldedLocation(NSUInteger offset); // convert from folded to unfolded
@@ -62,9 +62,9 @@ protected:
     NSUInteger fTotalUnfoldedSize;
     NSUInteger fTotalFoldedSize;
     typedef struct FoldingInfo {
-	NSUInteger foldingStart;
-	NSUInteger contentsSize; // the contents, unfolded
-	bool operator < (const FoldingInfo &other) const;
+		NSUInteger foldingStart;
+		NSUInteger contentsSize; // the contents, unfolded
+		bool operator < (const FoldingInfo &other) const;
     };
     std::deque<FoldingInfo> fFoldingInfo;
     

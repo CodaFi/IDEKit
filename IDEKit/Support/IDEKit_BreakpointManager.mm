@@ -41,17 +41,16 @@ static IDEKit_BreakpointManager *gSharedBreakpointManager = NULL;
 - (id) init
 {
     if (gSharedBreakpointManager) {
-	[self release];
 	return gSharedBreakpointManager;
     }
     self = [super init];
     if (self) {
-	mySingleFiles = [[NSMutableDictionary dictionary] retain];
-	myProjects = [[NSMutableDictionary dictionary] retain];
+	mySingleFiles = [NSMutableDictionary dictionary];
+	myProjects = [NSMutableDictionary dictionary];
 #ifdef nomore
 	myShadowMapping =  [[NSMutableDictionary dictionary] retain];
 #endif
-	gSharedBreakpointManager = [self retain];
+	gSharedBreakpointManager = self;
     }
     return self;
 }
@@ -102,7 +101,7 @@ static IDEKit_BreakpointManager *gSharedBreakpointManager = NULL;
 -(void) savePersistentData: (IDEKit_PersistentFileData *)data forFile: (IDEKit_UniqueID *)file
 {
     [self refreshDataFromViewForFile: file];
-    NSDictionary *bpsForFile = [mySingleFiles objectForKey: [file stringValue]];
+    NSDictionary *bpsForFile = mySingleFiles[[file stringValue]];
     [data setFileData: bpsForFile forApplication: [[NSBundle mainBundle] bundleIdentifier] key: @"IDEKit_Breakpoints"];
 }
 
@@ -110,24 +109,24 @@ static IDEKit_BreakpointManager *gSharedBreakpointManager = NULL;
 {
     NSDictionary  *bpsForFile = [data fileDataForApplication: [[NSBundle mainBundle] bundleIdentifier] key: @"IDEKit_Breakpoints"];
     if (!bpsForFile) {
-	[mySingleFiles setObject: [NSMutableDictionary dictionary] forKey: [file stringValue]];
+	mySingleFiles[[file stringValue]] = [NSMutableDictionary dictionary];
     } else {
 	// go deep to make mutable
 	NSMutableDictionary *bps = [bpsForFile mutableCopy];
 	NSEnumerator *e = [bps keyEnumerator];
 	id key;
 	while ((key = [e nextObject]) != NULL) {
-	    id obj = [bps objectForKey:key];
-	    [bps setObject: [obj mutableCopy] forKey: key];
+	    id obj = bps[key];
+	    bps[key] = [obj mutableCopy];
 	}
-	[mySingleFiles setObject: bps forKey: [file stringValue]];
+	mySingleFiles[[file stringValue]] = bps;
     }
 }
 
 - (NSDictionary *) getBreakPointsForFile: (IDEKit_UniqueID *)file; // for no project
 {
     [self refreshDataFromViewForFile: file];
-    return [mySingleFiles objectForKey: [file stringValue]];
+    return mySingleFiles[[file stringValue]];
 }
 
 - (NSDictionary *) getBreakPointsForFile: (IDEKit_UniqueID *)file project: (IDEKit_UniqueID *)project target: (NSString *)target;
@@ -139,9 +138,9 @@ static IDEKit_BreakpointManager *gSharedBreakpointManager = NULL;
 {
     //NSLog(@"Setting breakpoints for %@",file);
     if (bps) {
-	[mySingleFiles setObject: [bps mutableCopy] forKey: [file stringValue]];
+	mySingleFiles[[file stringValue]] = [bps mutableCopy];
     } else {
-	[mySingleFiles setObject: [NSMutableDictionary dictionary] forKey: [file stringValue]];
+	mySingleFiles[[file stringValue]] = [NSMutableDictionary dictionary];
     }
 }
 
@@ -231,7 +230,6 @@ static IDEKit_BreakpointManager *gSharedBreakpointManager = NULL;
 		fingerprint = [fm fingerprintForFile: file];
 	    IDEKit_SourceMapping *mapping = [[IDEKit_SourceMapping alloc] initMappingFrom: fingerprint to: [view fingerprint]];
 	    [view insertBreakpoint: breakpoint atLine: [mapping mapForward: line]];
-	    [mapping release];
 	}
     }
     // finally, put in main thing
@@ -240,7 +238,7 @@ static IDEKit_BreakpointManager *gSharedBreakpointManager = NULL;
 
 - (IDEKit_Breakpoint *) createBreakpointToFiles: (IDEKit_UniqueID *) file atLine: (NSInteger) line
 {
-    IDEKit_Breakpoint *	bp = [[[IDEKit_Breakpoint alloc] initWithKind: IDEKit_kBreakPoint file: file line: line] autorelease];
+    IDEKit_Breakpoint *	bp = [[IDEKit_Breakpoint alloc] initWithKind: IDEKit_kBreakPoint file: file line: line];
     [self addBreakpoint:bp toFiles:file atLine:line];
     return bp;
 }

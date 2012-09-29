@@ -81,12 +81,12 @@ enum {
     NSUInteger myCurState;
     NSUInteger mySubStart;
     NSString *myCloser;
-    int mySubColor;
-    int mySubLexID;
+    NSInteger mySubColor;
+    NSInteger mySubLexID;
     NSString *myString;
     BOOL doneWithToken;
     BOOL myCaseSensitive;
-    int myTempBackState;
+    NSInteger myTempBackState;
 }
 - (void) setCaseSensitive: (BOOL) sensitive;
 - (id) addKeyword: (NSString *)string color: (NSInteger) color lexID: (NSInteger) lexID;

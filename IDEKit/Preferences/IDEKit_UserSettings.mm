@@ -46,25 +46,21 @@ NSString *IDEKit_UserPathsKey = @"IDEKit_UserPathsKey";
 NSMutableDictionary *IDEKit_DefaultUserSettings()
 {
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:
-	[NSNumber numberWithInt: 1],IDEKit_TextColorDefaultStateKey,
-	[NSNumber numberWithFloat: 0.5],  IDEKit_TabStopKey, // 1/2
-	[NSNumber numberWithInt: 1],  IDEKit_TabStopUnitKey, // inch
-	[NSNumber numberWithInt: 1], IDEKit_TabSavingKey, // save tabs
-	[NSNumber numberWithInt: 8], IDEKit_TabSizeKey,	// 8 spaces per tab
-	[NSNumber numberWithInt: 4], IDEKit_TabIndentSizeKey,	// 4 spaces per indent
-	[NSNumber numberWithInt: 1],  IDEKit_TabAutoConvertKey, // convert multiple spaces to tab
-	[NSNumber numberWithFloat: 10.0], IDEKit_TextFontSizeKey,
+	@1,IDEKit_TextColorDefaultStateKey,
+	@0.5f,  IDEKit_TabStopKey, // 1/2
+	@1,  IDEKit_TabStopUnitKey, // inch
+	@1, IDEKit_TabSavingKey, // save tabs
+	@8, IDEKit_TabSizeKey,	// 8 spaces per tab
+	@4, IDEKit_TabIndentSizeKey,	// 4 spaces per indent
+	@1,  IDEKit_TabAutoConvertKey, // convert multiple spaces to tab
+	@10.0f, IDEKit_TextFontSizeKey,
 
-	[NSDictionary dictionaryWithObjectsAndKeys:
-	    @"Copyright $<_YEAR$>$!, $<_USER$>$!$=$|", @"copyright",
-	    NULL], IDEKit_TemplatesKey,
-	[NSDictionary dictionaryWithObjectsAndKeys:
-	    @"transposeParameters:",@"^$T",
-	    @"selectParameter:",@"^$P",
-	    @"selectNextParameter:",@"^${",
-	    @"selectPreviousParameter:",@"^$}",
-	    @"insertPageBreak:",[NSString stringWithFormat: @"^%c",3], // enter + control
-	    NULL], IDEKit_KeyBindingsKey,
+	@{@"copyright": @"Copyright $<_YEAR$>$!, $<_USER$>$!$=$|"}, IDEKit_TemplatesKey,
+	@{@"^$T": @"transposeParameters:",
+	    @"^$P": @"selectParameter:",
+	    @"^${": @"selectNextParameter:",
+	    @"^$}": @"selectPreviousParameter:",
+	    [NSString stringWithFormat: @"^%c",3]: @"insertPageBreak:"}, IDEKit_KeyBindingsKey,
 	NULL
 	];
 }

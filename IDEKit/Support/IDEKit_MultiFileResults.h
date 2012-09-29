@@ -22,6 +22,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "IDEKit_SrcEditView.h"
+
 @class IDEKit_SrcEditView;
 /* IDEKit_MultiFileResult is used to handle displaying something like multiple file find results or
     build results.  The idea is that there is an array which contains each row of the table.  There are several
@@ -48,7 +49,7 @@ extern NSString *IDEKit_MultiFileResultPath;
 extern NSString *IDEKit_MultiFileResultLine;
 extern NSString *IDEKit_MultiFileResultRange;
 
-@interface IDEKit_MultiFileResults : NSWindowController {
+@interface IDEKit_MultiFileResults : NSWindowController <IDEKit_SrcEditContext>{
     IBOutlet IDEKit_SrcEditView *myPreview;
     IBOutlet NSTableView *myTable;
     NSArray *myResults;

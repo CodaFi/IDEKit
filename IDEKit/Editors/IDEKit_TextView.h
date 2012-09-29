@@ -29,7 +29,7 @@
 @interface IDEKit_TextView : NSTextView {
 
 }
-@property (nonatomic, assign) id <IDEKit_NSTextViewExtendedDelegate> delegate;
+@property (nonatomic, unsafe_unretained) id <IDEKit_NSTextViewExtendedDelegate> delegate;
 
 - (NSInteger) foldableIndentOfRange: (NSRange) range hasFold: (BOOL *)fold atOffset: (NSUInteger *)offset;
 - (NSInteger) foldabilityAtOffset: (NSUInteger) offset foldedAtOffset: (NSUInteger *)foldOffset; // return 1 if already folded, -1 if can be folded, 0 if not

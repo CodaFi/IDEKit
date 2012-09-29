@@ -34,7 +34,7 @@ static NSMutableDictionary *gPathToSnapshot = NULL;
 {
     self = [super init];
     if (self) {
-	myUniqueID = [[IDEKit_UniqueID uniqueID] retain]; 
+	myUniqueID = [IDEKit_UniqueID uniqueID]; 
 	[myUniqueID setRepresentedObject: self forKey: @"IDEKit_SnapshotFile"];
     }
     return self;
@@ -43,12 +43,12 @@ static NSMutableDictionary *gPathToSnapshot = NULL;
 {
     self = [self init];
     if (self) {
-	myPath = [path retain];
+	myPath = path;
 	if (!gPathToSnapshot)
-	    gPathToSnapshot = [[NSMutableDictionary dictionary] retain];
-	[gPathToSnapshot setObject: [self uniqueID] forKey: myPath];
-	myMasterID = [[[IDEKit_UniqueFileIDManager sharedFileIDManager] uniqueFileIDForFile: path] retain];
-	mySource = [[NSString stringWithContentsOfFile:path] retain];
+	    gPathToSnapshot = [NSMutableDictionary dictionary];
+	gPathToSnapshot[myPath] = [self uniqueID];
+	myMasterID = [[IDEKit_UniqueFileIDManager sharedFileIDManager] uniqueFileIDForFile: path];
+	mySource = [NSString stringWithContentsOfFile:path];
 	[[IDEKit_FileManager sharedFileManager] registerSnapshot: self forFile: myMasterID];
     }
     return self;
@@ -57,7 +57,7 @@ static NSMutableDictionary *gPathToSnapshot = NULL;
 {
     self = [self init];
     if (self) {
-	myMasterID = [bufferID retain];
+	myMasterID = bufferID;
 	IDEKit_SrcEditView *view = [IDEKit_SrcEditView srcEditViewAssociatedWith:bufferID];
 	if (view) {
 	    mySource = [[[bufferID representedObjectForKey: @"IDEKit_SrcEditView"] string] copy]; // keep our own copy
@@ -65,9 +65,9 @@ static NSMutableDictionary *gPathToSnapshot = NULL;
 	    myBreakpoints = [[view breakpoints] copy];
 	} else {
 	    mySource = @"";
-	    NSUInteger short blanks[2] = {0,0};
-	    myFingerprint = [[NSData dataWithBytes:&blanks length:sizeof(blanks)] retain];
-	    myBreakpoints = [[NSDictionary dictionary] retain];
+	    unsigned short blanks[2] = {0,0};
+	    myFingerprint = [NSData dataWithBytes:&blanks length:sizeof(blanks)];
+	    myBreakpoints = @{};
 	}
 	[[IDEKit_FileManager sharedFileManager] registerSnapshot: self forFile: myMasterID];
     }
@@ -77,12 +77,12 @@ static NSMutableDictionary *gPathToSnapshot = NULL;
 {
     self = [self init];
     if (self) {
-	myPath = [path retain];
+	myPath = path;
 	if (!gPathToSnapshot)
-	    gPathToSnapshot = [[NSMutableDictionary dictionary] retain];
-	[gPathToSnapshot setObject: [self uniqueID] forKey: myPath];
-	myMasterID = [bufferID retain]; // retain the bufferID as our master, like initWithBufferID
-	mySource = [[NSString stringWithContentsOfFile:path] retain]; // but source from the path
+	    gPathToSnapshot = [NSMutableDictionary dictionary];
+	gPathToSnapshot[myPath] = [self uniqueID];
+	myMasterID = bufferID; // retain the bufferID as our master, like initWithBufferID
+	mySource = [NSString stringWithContentsOfFile:path]; // but source from the path
 	IDEKit_SrcEditView *view = [IDEKit_SrcEditView srcEditViewAssociatedWith:bufferID];
 	if (view) {
 	    myBreakpoints = [[view breakpoints] copy]; // get the breakpoints from the buffer(?)
@@ -96,14 +96,7 @@ static NSMutableDictionary *gPathToSnapshot = NULL;
 {
     [[IDEKit_FileManager sharedFileManager] unregisterSnapshot:self];
     if (myPath) [gPathToSnapshot removeObjectForKey: myPath];
-    [myPath release];
     [myUniqueID setRepresentedObject: NULL forKey: @"IDEKit_SnapshotFile"];
-    [myUniqueID release];
-    [myMasterID release];
-    [myFingerprint release];
-    [myPersistentData release];
-    [mySource release];
-    [myBreakpoints release];
 }
 - (IDEKit_UniqueID *) uniqueID
 {
@@ -136,23 +129,23 @@ static NSMutableDictionary *gPathToSnapshot = NULL;
 
 + (IDEKit_SnapshotFile *) snapshotFileWithExternalFile: (NSString *)path
 {
-    IDEKit_UniqueID *existingID = [gPathToSnapshot objectForKey: path];
+    IDEKit_UniqueID *existingID = gPathToSnapshot[path];
     if (existingID) {
 	return [self snapshotFileAssociatedWith: existingID];
     }
-    return [[[self alloc] initWithExternalFile: path] autorelease];
+    return [[self alloc] initWithExternalFile: path];
 }
 + (IDEKit_SnapshotFile *) snapshotFileWithBufferID: (IDEKit_UniqueID *)bufferID
 {
-    return [[[self alloc] initWithBufferID: bufferID] autorelease];
+    return [[self alloc] initWithBufferID: bufferID];
 }
 + (IDEKit_SnapshotFile *) snapshotFileWithExternalTemporaryFile: (NSString *)path copyOfBufferID: (IDEKit_UniqueID *)bufferID // take an external file
 {
-    IDEKit_UniqueID *existingID = [gPathToSnapshot objectForKey: path];
+    IDEKit_UniqueID *existingID = gPathToSnapshot[path];
     if (existingID) {
 	return [self snapshotFileAssociatedWith: existingID];
     }
-    return [[[self alloc] initWithExternalTemporaryFile: path copyOfBufferID: bufferID] autorelease];
+    return [[self alloc] initWithExternalTemporaryFile: path copyOfBufferID: bufferID];
 }
 + (IDEKit_SnapshotFile *) snapshotFileAssociatedWith:(IDEKit_UniqueID *)snapshotID
 {

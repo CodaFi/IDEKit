@@ -29,6 +29,8 @@
 #import "IDEKit_SourceFingerprint.h"
 #import "IDEKit_Delegate.h"
 #import "IDEKit_SrcScroller.h"
+#import <AppKit/AppKit.h>
+#import "IDEKit_TextView.h"
 
 NSString *IDEKit_MultiFileResultIcon = @"IDEKit_MultiFileResultIcon"; // use to specific an icon image (assuming column identifier exists)
 NSString *IDEKit_MultiFileResultText = @"IDEKit_MultiFileResultText"; // whatever the text message is
@@ -61,19 +63,12 @@ NSString *IDEKit_MultiFileResultRange = @"IDEKit_MultiFileResultRange";
 	return [super initWithWindowNibName: windowNibName];
     }
 }
-- (void) dealloc
-{
-    [myResults release];
-    [mySnapshots release];
-    [myPreviewFileName release];
-    [super dealloc];
-}
 - (void)windowDidLoad
 {
     [super windowDidLoad];
     NSTableColumn *iconColumn = [myTable tableColumnWithIdentifier: @"icon"];
     if (iconColumn) {
-	id imageCell = [[[NSImageCell alloc] initImageCell: NULL] autorelease];
+	id imageCell = [[NSImageCell alloc] initImageCell: NULL];
 	[imageCell setEditable: NO];
 	[imageCell setImageAlignment: NSImageAlignCenter];
 	[imageCell setImageScaling: NSScaleNone];
@@ -82,7 +77,7 @@ NSString *IDEKit_MultiFileResultRange = @"IDEKit_MultiFileResultRange";
     [myTable setDoubleAction:@selector(openSelectedResult:)];
     [myPreview setContext: self];
     // no splitters - we've only got one now
-    IDEKit_SrcScroller *scroller = [[myPreview allScrollViews] objectAtIndex: 0];
+    IDEKit_SrcScroller *scroller = [myPreview allScrollViews][0];
     [scroller setShowFlags: [scroller showFlags] & (~(IDEKit_kShowSplitter | IDEKit_kShowUnsplitter))];
 }
 
@@ -93,22 +88,22 @@ NSString *IDEKit_MultiFileResultRange = @"IDEKit_MultiFileResultRange";
 - (IDEKit_SnapshotFile *) snapshotForEntry: (NSDictionary *)entry
 {
     // snapshots are stored by fileID or path
-    NSString *fileID = [entry objectForKey: IDEKit_MultiFileResultID];
-    if ([mySnapshots objectForKey: fileID]) {
-	return [mySnapshots objectForKey: fileID];
+    NSString *fileID = entry[IDEKit_MultiFileResultID];
+    if (mySnapshots[fileID]) {
+	return mySnapshots[fileID];
     }
-    return [mySnapshots objectForKey: [entry objectForKey: IDEKit_MultiFileResultPath]];
+    return mySnapshots[entry[IDEKit_MultiFileResultPath]];
 }
 
 - (NSString *) pathForEntry: (NSDictionary *)entry
 {
-    NSString *fileID = [entry objectForKey: IDEKit_MultiFileResultID];
+    NSString *fileID = entry[IDEKit_MultiFileResultID];
     NSString *path = NULL;
     if (fileID) {
 	path = [[IDEKit_UniqueFileIDManager sharedFileIDManager] pathForFileID: [IDEKit_UniqueID uniqueIDFromString: fileID]];
     }
     if (!path) {
-	path = [entry objectForKey: IDEKit_MultiFileResultPath];
+	path = entry[IDEKit_MultiFileResultPath];
     }
     if (!path && fileID) {
 	IDEKit_SrcEditView *view = [IDEKit_SrcEditView srcEditViewAssociatedWith:[IDEKit_UniqueID uniqueIDFromString: fileID]];
@@ -125,36 +120,31 @@ NSString *IDEKit_MultiFileResultRange = @"IDEKit_MultiFileResultRange";
     if (!path)
 	path = @"(Untitled)";
     IDEKit_SnapshotFile *snapshot = [self snapshotForEntry: entry];
-    int lineNum = [[entry objectForKey: IDEKit_MultiFileResultLine] intValue];
+    int lineNum = [entry[IDEKit_MultiFileResultLine] intValue];
     NSString *line = [[snapshot source] substringWithRange: [[snapshot source] nthLineRange: lineNum]];
-    NSMutableAttributedString *retval = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat: @"Line #%d, File: %@\n",lineNum,path] attributes: [NSDictionary dictionaryWithObjectsAndKeys: 
-	[NSFont systemFontOfSize:[NSFont smallSystemFontSize]], NSFontAttributeName, 
-	NULL]] autorelease];
-    [retval appendAttributedString:[[[NSAttributedString alloc] initWithString: line attributes: [myPreview typingAttributes]] autorelease]];
+    NSMutableAttributedString *retval = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat: @"Line #%d, File: %@\n",lineNum,path] attributes: @{NSFontAttributeName: [NSFont systemFontOfSize:[NSFont smallSystemFontSize]]}];
+    [retval appendAttributedString:[[NSAttributedString alloc] initWithString: line attributes: [myPreview->myTextView typingAttributes]]];
     return retval;
 }
 
 - (void) setResults: (NSArray *)results
 {
     //NSLog(@"Results = %@",results);
-    [myResults release];
     myResults = [results copy];
     // build the snapshots
-    [mySnapshots release];
-    mySnapshots = [[NSMutableDictionary dictionary] retain];
-    [myCachedResultStrings release];
-    myCachedResultStrings = [[NSMutableArray arrayWithCapacity: [results count]] retain];
+    mySnapshots = [NSMutableDictionary dictionary];
+    myCachedResultStrings = [NSMutableArray arrayWithCapacity: [results count]];
     NSEnumerator *e = [myResults objectEnumerator];
     NSDictionary *entry;
     while ((entry = [e nextObject]) != NULL) {
-	IDEKit_UniqueID *fileID = [IDEKit_UniqueID uniqueIDFromString:[entry objectForKey: IDEKit_MultiFileResultID]];
+	IDEKit_UniqueID *fileID = [IDEKit_UniqueID uniqueIDFromString:entry[IDEKit_MultiFileResultID]];
 	
 	if ([IDEKit_SrcEditView srcEditViewAssociatedWith:fileID]) { // this is a buffer
-	    [mySnapshots setObject: [IDEKit_SnapshotFile snapshotFileWithBufferID: fileID] forKey:[fileID stringValue]];
+	    mySnapshots[[fileID stringValue]] = [IDEKit_SnapshotFile snapshotFileWithBufferID: fileID];
 	} else {
 	    NSString *path = [self pathForEntry: entry];
 	    if (path) {
-		[mySnapshots setObject: [IDEKit_SnapshotFile snapshotFileWithExternalFile: path] forKey: path];
+		mySnapshots[path] = [IDEKit_SnapshotFile snapshotFileWithExternalFile: path];
 	    }
 	}
 	[myCachedResultStrings addObject: [NSNull null]];
@@ -164,9 +154,9 @@ NSString *IDEKit_MultiFileResultRange = @"IDEKit_MultiFileResultRange";
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    NSDictionary *entry = [myResults objectAtIndex: row];
+    NSDictionary *entry = myResults[row];
     if ([[tableColumn identifier] isEqualToString: @"icon"]) {
-	NSString *icon = [entry objectForKey: IDEKit_MultiFileResultIcon];
+	NSString *icon = entry[IDEKit_MultiFileResultIcon];
 	if (icon)
 	    return [NSImage imageNamed:icon];
 	// otherwise get the icon for the file
@@ -176,36 +166,35 @@ NSString *IDEKit_MultiFileResultRange = @"IDEKit_MultiFileResultRange";
 	}
 	return NULL;
     } else if ([[tableColumn identifier] isEqualToString: @"result"]) {
-	id retval = [myCachedResultStrings objectAtIndex: row];
+	id retval = myCachedResultStrings[row];
 	if (retval == [NSNull null]) {
 	    retval = [self resultForEntry: entry];
-	    [myCachedResultStrings replaceObjectAtIndex: row withObject: retval];
+	    myCachedResultStrings[row] = retval;
 	}
 	return retval;
     } else {
-	return [entry objectForKey: [tableColumn identifier]];
+	return entry[[tableColumn identifier]];
     }
 }
 
 - (void) showSelectedResult: (id) sender
 {
-    NSDictionary *entry = [myResults objectAtIndex:[sender selectedRow]];
+    NSDictionary *entry = myResults[[sender selectedRow]];
     if (entry) {
-	[myPreviewFileName release];
-	myPreviewFileName = [[self pathForEntry:entry] retain];
+	myPreviewFileName = [self pathForEntry:entry];
 	IDEKit_SnapshotFile *snapshot = [self snapshotForEntry:entry];
 	[myPreview setDisplaysSnapshot: snapshot];
 	// should go through mapping here?  Not needed
 	//[myPreview setSelect: [[entry objectForKey: IDEKit_MultiFileResultRange] rangeValue];
-	[myPreview selectNthLine: [[entry objectForKey: IDEKit_MultiFileResultLine] intValue]];
+	[myPreview selectNthLine: [entry[IDEKit_MultiFileResultLine] intValue]];
     }
 }
 
 - (IBAction) openSelectedResult: (id) sender
 {
-    NSDictionary *entry = [myResults objectAtIndex:[sender selectedRow]];
+    NSDictionary *entry = myResults[[sender selectedRow]];
     if (entry) {
-	IDEKit_UniqueID *fileID = [IDEKit_UniqueID uniqueIDFromString:[entry objectForKey: IDEKit_MultiFileResultID]];
+	IDEKit_UniqueID *fileID = [IDEKit_UniqueID uniqueIDFromString:entry[IDEKit_MultiFileResultID]];
 	IDEKit_SrcEditView *view = [IDEKit_SrcEditView srcEditViewAssociatedWith:fileID];
 	if (!view) {
 	    // make the document and open it
@@ -221,7 +210,7 @@ NSString *IDEKit_MultiFileResultRange = @"IDEKit_MultiFileResultRange";
 	    [[view window] makeKeyAndOrderFront:self];
 	    [[view window] makeFirstResponder:view];
 	    IDEKit_SourceMapping *mapping = [[IDEKit_SourceMapping alloc] initMappingFrom: [[self snapshotForEntry: entry] fingerprint] to: [view fingerprint]];
-	    NSRange range = [[entry objectForKey: IDEKit_MultiFileResultRange] rangeValue];
+	    NSRange range = [entry[IDEKit_MultiFileResultRange] rangeValue];
 	    if (![mapping isTrivial]) {
 		NSUInteger endRange = range.location + range.length;
 		range.location = [mapping mapForward:range.location];
@@ -231,9 +220,8 @@ NSString *IDEKit_MultiFileResultRange = @"IDEKit_MultiFileResultRange";
 		else
 		    range.length = endRange - range.location;
 	    }
-	    [mapping release];
-	    [view setSelectedRange: range];
-	    [view scrollRangeToVisible: range];
+	    [view->myTextView setSelectedRange: range];
+	    [view->myTextView scrollRangeToVisible: range];
 	} else {
 	    NSBeep();
 	}
@@ -274,18 +262,15 @@ NSString *IDEKit_MultiFileResultRange = @"IDEKit_MultiFileResultRange";
     NSString *path = [self pathForEntry: entry];
     if (!path)
 	path = @"(Untitled)";
-    NSMutableAttributedString *retval = [[[NSMutableAttributedString alloc] initWithString:path attributes: [NSDictionary dictionaryWithObjectsAndKeys: 
-	[NSFont systemFontOfSize:[NSFont smallSystemFontSize]], NSFontAttributeName, 
-	NULL]] autorelease];
+    NSMutableAttributedString *retval = [[NSMutableAttributedString alloc] initWithString:path attributes: @{NSFontAttributeName: [NSFont systemFontOfSize:[NSFont smallSystemFontSize]]}];
     return retval;
 }
 
 - (void) showSelectedResult: (id) sender
 {
-    NSDictionary *entry = [myResults objectAtIndex:[sender selectedRow]];
+    NSDictionary *entry = myResults[[sender selectedRow]];
     if (entry) {
-	[myPreviewFileName release];
-	myPreviewFileName = [[self pathForEntry:entry] retain];
+	myPreviewFileName = [self pathForEntry:entry];
 	IDEKit_SnapshotFile *snapshot = [self snapshotForEntry:entry];
 	[myPreview setDisplaysSnapshot: snapshot];
     }

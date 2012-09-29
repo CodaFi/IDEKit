@@ -25,22 +25,13 @@
 #import "IDEKit_TextViewExtensions.h"
 
 @implementation IDEKit_Console
-- (void) dealloc
-{
-    [myHistory release];
-    [myStreamAttributes release];
-    [myTypingAttributes release];
-    [myStreamNames release];
-    [myLastStreamOutput release];
-    [myInputSoFar release];
-}
 
 - (void) awakeFromNib
 {
-    myHistory = [[NSMutableArray array] retain];
-    myStreamAttributes = [[NSMutableDictionary dictionary] retain];
-    myStreamNames = [[NSMutableArray array] retain];
-    myLastStreamOutput = [[NSMutableDictionary dictionary] retain];
+    myHistory = [NSMutableArray array];
+    myStreamAttributes = [NSMutableDictionary dictionary];
+    myStreamNames = [NSMutableArray array];
+    myLastStreamOutput = [NSMutableDictionary dictionary];
     myGotCommand = NO;
     myOutputStart = myInputStart = mySelStart = 0;
     [myEditText setDelegate: NULL];
@@ -50,7 +41,7 @@
     myTypingAttributes = [[myEditText typingAttributes] copy];
     //NSLog(@"Typing attributes %@",myTypingAttributes);
     myCurHistoryIndex = 0;
-    myInputSoFar = [[NSMutableString string] retain];
+    myInputSoFar = [NSMutableString string];
 }
 
 - (NSDictionary *)inputAttributes // attributes of text input
@@ -77,32 +68,32 @@
 {
     [myEditText setDelegate: NULL]; // we don't need to be asked about what we are doing
     NSTextStorage *storage = [myEditText textStorage];
-    NSMutableAttributedString *newOutput = [[[NSMutableAttributedString alloc] init] autorelease];
+    NSMutableAttributedString *newOutput = [[NSMutableAttributedString alloc] init];
     NSEnumerator *e = [myStreamNames objectEnumerator];
     NSString *streamName = [e nextObject];
     while (streamName) {
-		NSString *output = [myLastStreamOutput objectForKey: streamName];
+		NSString *output = myLastStreamOutput[streamName];
 		if (output && [output length]) {
-			NSDictionary *attributes = [myStreamAttributes objectForKey: streamName];
+			NSDictionary *attributes = myStreamAttributes[streamName];
 			NSAttributedString *attribOutput;
 			if ([output characterAtIndex:[output length] - 1] != '\n') {
 				// need to append newline at end
-				attribOutput = [[[ NSAttributedString alloc] initWithString: [NSString stringWithFormat: @"%@\n",output] attributes: attributes] autorelease];
+				attribOutput = [[ NSAttributedString alloc] initWithString: [NSString stringWithFormat: @"%@\n",output] attributes: attributes];
 			} else {
-				attribOutput = [[[ NSAttributedString alloc] initWithString: output attributes: attributes] autorelease];
+				attribOutput = [[ NSAttributedString alloc] initWithString: output attributes: attributes];
 			}
 			// toss that attributed string onto the end of our output
 			[newOutput appendAttributedString: attribOutput];
 		}
 		streamName = [e nextObject];
     }
-    NSAssert2(myOutputStart <= myInputStart,@"Output %d needs to be before input %d",myOutputStart,myInputStart);
-    NSAssert2(myInputStart <= [storage length],@"Input %d needs to be before end of text %d",myInputStart,[storage length]);
+    NSAssert2(myOutputStart <= myInputStart,@"Output %ld needs to be before input %ld",myOutputStart,myInputStart);
+    NSAssert2(myInputStart <= [storage length],@"Input %ld needs to be before end of text %ld",myInputStart,[storage length]);
     // newOutput is now attributed text like we want with all the outputs in order
     //NSLog(@"Replacing %d..%d/%d with new string (%d bytes)",myOutputStart,myInputStart,[storage length],[newOutput length]);
     [storage replaceCharactersInRange: NSMakeRange(myOutputStart,myInputStart-myOutputStart) withAttributedString: newOutput];
     // adjust our boundary pointers
-    int outputDeltaLen =[newOutput length]  -(myInputStart-myOutputStart); // how much did the output change length?
+    NSInteger outputDeltaLen =[newOutput length]  -(myInputStart-myOutputStart); // how much did the output change length?
     myInputStart += outputDeltaLen; // our input now starts here
     mySelStart += outputDeltaLen;
     //NSLog(@"My input %d, my sel %d, new len %d",myInputStart,mySelStart,[storage length]);
@@ -116,23 +107,23 @@
     NSString *streamName = [e nextObject];
     while (streamName) {
 		// clear this stream
-		[myLastStreamOutput setObject: [NSMutableString string] forKey: streamName];
+		myLastStreamOutput[streamName] = [NSMutableString string];
 		streamName = [e nextObject];
     }
 }
 
 - (void) addStream: (NSString *) streamName withAttributes: (NSDictionary *)attributes
 {
-    [myStreamAttributes setObject: attributes forKey: streamName];
+    myStreamAttributes[streamName] = attributes;
     [myStreamNames addObject: streamName];
-    [myLastStreamOutput setObject: [NSMutableString string] forKey: streamName];
+    myLastStreamOutput[streamName] = [NSMutableString string];
 }
 
 - (void) writeText: (NSString *) output toStream: (NSString *)streamName
 {
     if ([myStreamNames containsObject: streamName]) {
 		// put it in the correct stream
-		[[myLastStreamOutput objectForKey: streamName] appendString: output];
+		[myLastStreamOutput[streamName] appendString: output];
 		[self redisplayLastOutput];
     }
 }
@@ -140,10 +131,10 @@
 - (void) setCurrentCommand: (NSString *) command
 {
     // split apart into lines, rejoin with appropriate prompts
-    NSMutableArray *components = [[[command componentsSeparatedByString: @"\n"] mutableCopy] autorelease];
+    NSMutableArray *components = [[command componentsSeparatedByString: @"\n"] mutableCopy];
     [components removeObject: @""]; // remove the empty lines
     NSString *prompted = [NSString stringWithFormat: @"%@%@", [self commandPrompt],[components componentsJoinedByString: [NSString stringWithFormat: @"\n%@",[self multiLinePrompt]]]];
-    NSAttributedString *newPrompt = [[[ NSAttributedString alloc] initWithString: prompted attributes: myTypingAttributes] autorelease]; // make sure typing attributes are correct
+    NSAttributedString *newPrompt = [[ NSAttributedString alloc] initWithString: prompted attributes: myTypingAttributes]; // make sure typing attributes are correct
     // replace old input with this
     [myEditText setDelegate: NULL];
     NSTextStorage *storage = [myEditText textStorage];
@@ -152,7 +143,7 @@
     // now the tricky part is fixing mySelStart
     [myInputSoFar setString: command];
     if ([components count]) {
-		int lastLength = [(NSString *)[components objectAtIndex: [components count]-1] length];
+		NSUInteger lastLength = [(NSString *)components[[components count]-1] length];
 		mySelStart = [storage length] - lastLength; // and we can edit the last line worth
 		[myInputSoFar deleteCharactersInRange: NSMakeRange([myInputSoFar length] - lastLength, lastLength)]; // remove the last line here
     } else {
@@ -164,7 +155,7 @@
 
 - (void) promptChanged // dynamic prompt changed
 {
-    [self setCurrentCommand: [[[self currentCommand] copy] autorelease]]; // just redisplay
+    [self setCurrentCommand: [[self currentCommand] copy]]; // just redisplay
 }
 
 - (void) nextHistory: (id) sender
@@ -174,7 +165,7 @@
 		[self setCurrentCommand: @""];
 		myCurHistoryIndex = [myHistory count];
     } else {
-		[self setCurrentCommand: [myHistory objectAtIndex: myCurHistoryIndex]];
+		[self setCurrentCommand: myHistory[myCurHistoryIndex]];
     }
 }
 
@@ -186,7 +177,7 @@
 		[self setCurrentCommand: @""];
 		myCurHistoryIndex = [myHistory count];
     } else {
-		[self setCurrentCommand: [myHistory objectAtIndex: myCurHistoryIndex]];
+		[self setCurrentCommand: myHistory[myCurHistoryIndex]];
     }
 }
 
@@ -239,7 +230,7 @@
     if (autoComplete) {
 		// for now, just use the first item
 		if ([autoComplete count] == 1) {
-			[self completeCompletionWith: [autoComplete objectAtIndex: 0]];
+			[self completeCompletionWith: autoComplete[0]];
 		} else {
 			id completion = [myEditText popupCompletionAtInsertion: autoComplete];
 			if (completion) {
@@ -310,7 +301,6 @@
 							 [[myEditText string] substringWithRange: NSMakeRange(mySelStart,[[myEditText string] length] - mySelStart-1)]]; // don't include eol
 		if ([[myEditText string] length] - mySelStart-1 > 0 && [self isMultiLineCommand: command]) { // empty line - force complete
 			// add this to our input so far
-			[myInputSoFar release];
 			myInputSoFar = [command mutableCopy];
 			[myInputSoFar appendString: @"\n"]; // add back trailing newline
 			// put out our secondary prompt
@@ -333,8 +323,7 @@
 				myCurHistoryIndex = [myHistory count];
 			}
 			myCurHistoryIndex = [myHistory count]; // skip history to end
-			[myInputSoFar release];
-			myInputSoFar = [[NSMutableString string] retain];
+			myInputSoFar = [NSMutableString string];
 			[self performCommand: command];
 			// if there is any output, it will be handled above, and inputStart will be adjusted accordingly
 			// go to end

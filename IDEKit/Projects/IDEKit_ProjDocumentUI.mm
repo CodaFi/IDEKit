@@ -36,13 +36,13 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 {
     if (oldIndex == NSNotFound)
 		return; // not in our list
-    id  entry = [self objectAtIndex: oldIndex];
+    id  entry = self[oldIndex];
     //NSLog(@"Moving %@ from %d to %d",[entry description],oldIndex,index);
     if (newIndex > [self count] || newIndex == NSNotFound)
 		newIndex = [self count]; // put at end of list
     if (oldIndex == newIndex)
 		return; // already there
-    [entry retain]; // so we don't lose it
+     // so we don't lose it
     if (newIndex < oldIndex) {
 		// move up in the list
 		[self removeObjectAtIndex: oldIndex];
@@ -52,7 +52,6 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 		[self removeObjectAtIndex: oldIndex];
 		[self insertObject: entry atIndex: newIndex-1]; // since we were removed, index is smaller
     }
-    [entry release];
 }
 @end
 
@@ -61,8 +60,8 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 {
     if (item == NULL)
 		return NULL;
-    int row = [self rowForItem: item];
-    int level = [self levelForRow: row];
+    NSInteger row = [self rowForItem: item];
+    NSInteger level = [self levelForRow: row];
     if (level == 0)
 		return NULL; // at root already
     row--;
@@ -77,7 +76,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 
 
 @implementation IDEKit_ProjDocument(UI)
-- (BOOL)validateMenuItem:(id <NSMenuItem>)menuItem
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
     // save and revert are not valid for us
     if ([menuItem action] == @selector(saveDocument:) ||
@@ -141,41 +140,41 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 		case IDEKit_kUIFileEntry: {
 			// remove us from our group list and all targets
 			for (NSUInteger i=0;i<[myTargetList count];i++) {
-				id target = [myTargetList objectAtIndex: i];
+				id target = myTargetList[i];
 				// remove from the file entry
-				if ([[target objectForKey: IDEKit_TargetEntryFiles] containsObject: entry]) {
-					[[target objectForKey: IDEKit_TargetEntryFiles] removeObjectIdenticalTo: entry];
+				if ([target[IDEKit_TargetEntryFiles] containsObject: entry]) {
+					[target[IDEKit_TargetEntryFiles] removeObjectIdenticalTo: entry];
 				}
 				// remove from the breakpoints
-				if ([[target objectForKey: IDEKit_TargetBreakPoints] objectForKey: [entry objectForKey: IDEKit_ProjEntryName]]) {
-					[[target objectForKey: IDEKit_TargetBreakPoints] removeObjectForKey: [entry objectForKey: IDEKit_ProjEntryName]];
+				if (target[IDEKit_TargetBreakPoints][entry[IDEKit_ProjEntryName]]) {
+					[target[IDEKit_TargetBreakPoints] removeObjectForKey: entry[IDEKit_ProjEntryName]];
 				}
 			}
 			// now the group list
-			[[parent objectForKey: IDEKit_ProjEntryGroup] removeObjectIdenticalTo: entry];
+			[parent[IDEKit_ProjEntryGroup] removeObjectIdenticalTo: entry];
 			// hopefully that's all the references
 			break;
 		}
 		case IDEKit_kUIGroupEntry: {
 			// remove everything in us recursively, then remove us
-			id groupList = [entry objectForKey: IDEKit_ProjEntryGroup];
+			id groupList = entry[IDEKit_ProjEntryGroup];
 			while ([groupList count]) {
 				// as we remove them from us, this list gets smaller
-				[self removeEntryFromProject: [groupList objectAtIndex: 0] parent: entry];
+				[self removeEntryFromProject: groupList[0] parent: entry];
 			}
-			[[parent objectForKey: IDEKit_ProjEntryGroup] removeObjectIdenticalTo: entry];
+			[parent[IDEKit_ProjEntryGroup] removeObjectIdenticalTo: entry];
 			break;
 		}
 		case IDEKit_kUITargetEntry: {
 			// remove us from target dependancies
 			for (NSUInteger i=0;i<[myTargetList count];i++) {
-				id target = [myTargetList objectAtIndex: i];
+				id target = myTargetList[i];
 				if (target == entry)
 					continue; // skip this
-				id dependancies = [target objectForKey: IDEKit_TargetDependsOnTargets];
+				id dependancies = target[IDEKit_TargetDependsOnTargets];
 				for (NSUInteger j=0;j<[dependancies count];j++) {
-					id dependancy = [dependancies objectAtIndex: j];
-					if ([dependancy objectForKey: IDEKit_DependantOnTarget] == entry) {
+					id dependancy = dependancies[j];
+					if (dependancy[IDEKit_DependantOnTarget] == entry) {
 						// remove this dependancy
 						[dependancies removeObjectAtIndex: j];
 						j--;
@@ -187,7 +186,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 			// update current target to not be us
 			if (myCurrentTarget == entry) {
 				if ([myTargetList count]) {
-					myCurrentTarget = [myTargetList objectAtIndex: 0];
+					myCurrentTarget = myTargetList[0];
 				} else {
 					// removed last target - might be bad?
 					myCurrentTarget = NULL;
@@ -200,11 +199,11 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
     }
 }
 
-- (void) delete: (id) sender
+- (void)delete:(id) sender
 {
     if ([[[myTabView selectedTabViewItem] identifier] isEqualToString: @"targets"]) {
 		if ([myTargetsView numberOfSelectedRows]) {
-			int selRow = [myTargetsView selectedRow];
+			NSInteger selRow = [myTargetsView selectedRow];
 			id sel = [myTargetsView itemAtRow: selRow];
 			if ([sel uiKind] == IDEKit_kUIDependantEntry) {
 				// we are removing a dependancy
@@ -215,12 +214,12 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 #else
 				id parent = [myTargetsView parentItemForItem: sel];
 #endif
-				[[parent objectForKey: IDEKit_TargetDependsOnTargets] removeObjectIdenticalTo: sel];
+				[parent[IDEKit_TargetDependsOnTargets] removeObjectIdenticalTo: sel];
 				[self liveSave];
 			} else if ([sel uiKind] == IDEKit_kUITargetEntry) {
 				if ([myTargetList count] == 1) {
-					NSRunInformationalAlertPanel(@"Can't remove target",@"You can't remove the last target %@ from the project",NULL,NULL,NULL,[sel objectForKey: IDEKit_ProjEntryName]);
-				} else if (NSRunCriticalAlertPanel(@"Remove target",@"Are you sure you want to remove the target %@ from the project?",@"OK",@"Cancel",NULL,[sel objectForKey: IDEKit_ProjEntryName]) == NSAlertDefaultReturn) {
+					NSRunInformationalAlertPanel(@"Can't remove target",@"You can't remove the last target %@ from the project",NULL,NULL,NULL,sel[IDEKit_ProjEntryName]);
+				} else if (NSRunCriticalAlertPanel(@"Remove target",@"Are you sure you want to remove the target %@ from the project?",@"OK",@"Cancel",NULL,sel[IDEKit_ProjEntryName]) == NSAlertDefaultReturn) {
 					[self removeEntryFromProject: sel parent: NULL];
 					[self liveSave];
 				}
@@ -229,9 +228,9 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
     }
     if ([[[myTabView selectedTabViewItem] identifier] isEqualToString: @"fileorder"]) {
 		if ([myOutlineView numberOfSelectedRows]) {
-			int selRow = [myOutlineView selectedRow];
+			NSInteger selRow = [myOutlineView selectedRow];
 			id sel = [myOutlineView itemAtRow: selRow];
-			int myIndent = [myOutlineView levelForRow: selRow];
+			NSInteger myIndent = [myOutlineView levelForRow: selRow];
 			// find the parent
 			id parent;
 			if (myIndent == 0) {
@@ -246,17 +245,17 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 			}
 			
 			if ([sel uiKind] == IDEKit_kUIFileEntry) {
-				if (NSRunCriticalAlertPanel(@"Remove file",@"Are you sure you want to remove the file %@ from the project?",@"OK",@"Cancel",NULL,[sel objectForKey: IDEKit_ProjEntryName]) == NSAlertDefaultReturn) {
+				if (NSRunCriticalAlertPanel(@"Remove file",@"Are you sure you want to remove the file %@ from the project?",@"OK",@"Cancel",NULL,sel[IDEKit_ProjEntryName]) == NSAlertDefaultReturn) {
 					[self removeEntryFromProject: sel parent: parent];
 					[self liveSave];
 				}
 			} else if ([sel uiKind] == IDEKit_kUIGroupEntry) {
-				if ([[sel objectForKey: IDEKit_ProjEntryGroup] count] == 0) {
+				if ([sel[IDEKit_ProjEntryGroup] count] == 0) {
 					// easy
 					[self removeEntryFromProject: sel parent: parent];
 					[self liveSave];
 				} else {
-					if (NSRunCriticalAlertPanel(@"Remove group & files?",@"Are you sure you want to remove the group %@ and all it's files from the project?",@"OK",@"Cancel",NULL,[sel objectForKey: IDEKit_ProjEntryName]) == NSAlertDefaultReturn) {
+					if (NSRunCriticalAlertPanel(@"Remove group & files?",@"Are you sure you want to remove the group %@ and all it's files from the project?",@"OK",@"Cancel",NULL,sel[IDEKit_ProjEntryName]) == NSAlertDefaultReturn) {
 						[self removeEntryFromProject: sel parent: parent];
 						[self liveSave];
 					}
@@ -278,22 +277,16 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
     [super windowControllerDidLoadNib:aController];
     // Add any code here that need to be executed once the windowController has loaded the document's window.
     // so we can drag tokens onto us
-    [myOutlineView registerForDraggedTypes: [NSArray arrayWithObjects:
-											 NSFilenamesPboardType,
-											 PrivateDragPboardType,
-											 NULL]];
-    [myLinkOrderView registerForDraggedTypes: [NSArray arrayWithObjects:
-											   PrivateDragPboardType,
-											   NULL]];
-    [myTargetsView registerForDraggedTypes: [NSArray arrayWithObjects:
-											 PrivateDragPboardType,
-											 NULL]];
+    [myOutlineView registerForDraggedTypes: @[NSFilenamesPboardType,
+											 PrivateDragPboardType]];
+    [myLinkOrderView registerForDraggedTypes: @[PrivateDragPboardType]];
+    [myTargetsView registerForDraggedTypes: @[PrivateDragPboardType]];
     // Don't expand outline column, since it pushes off size column
     [myOutlineView setAutoresizesOutlineColumn: NO];
-    [myOutlineView setAutoresizesAllColumnsToFit: YES];
+	[myOutlineView setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
     // put a checkbox in the first col
     NSTableColumn *col;
-    id checkboxProto = [[[NSButtonCell alloc] initTextCell: @""] autorelease];
+    id checkboxProto = [[NSButtonCell alloc] initTextCell: @""];
     [checkboxProto setEditable: YES];
     [checkboxProto setButtonType: NSSwitchButton];
     [checkboxProto setImagePosition: NSImageOnly];
@@ -308,7 +301,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
     [myOutlineView setTarget: self];
     [myOutlineView setRowHeight: 17.0];
     col = [myOutlineView tableColumnWithIdentifier: @"File"];
-    id aCell = [[[NSBrowserCell alloc] initTextCell: @""] autorelease];
+    id aCell = [[NSBrowserCell alloc] initTextCell: @""];
     [col setDataCell: aCell];
     [aCell setMenu: myFileEntryCMenu];
     [aCell setLeaf: YES];
@@ -345,8 +338,8 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 - (NSString *) isTargetNameValid: (NSString *)name
 {
     for (NSUInteger i=0;i<[myTargetList count];i++) {
-		id entry = [myTargetList objectAtIndex: i];
-		if ([name isEqualToString: [entry objectForKey: IDEKit_ProjEntryName]]) {
+		id entry = myTargetList[i];
+		if ([name isEqualToString: entry[IDEKit_ProjEntryName]]) {
 			return @"That target name already exists - please pick another";
 		}
     }
@@ -376,7 +369,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 		return;
     [self liveSaveTarget]; // make any changes to the current target
     myCurrentTarget = newTarget;
-    [self loadTargetSpecificInfo: [[[NSFileWrapper alloc] initWithPath: [self currentTargetDir]]autorelease]]; // load the specifics
+    [self loadTargetSpecificInfo: [[NSFileWrapper alloc] initWithPath: [self currentTargetDir]]]; // load the specifics
     [self liveSave];
 }
 - (void)newTargetSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
@@ -387,16 +380,16 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 		id newTarget = NULL;
 		if (clone) {
 			newTarget = [NSMutableDictionary dictionaryWithDictionary: clone];
-			[newTarget setObject: [myNewTargetName stringValue] forKey: IDEKit_ProjEntryName];
+			newTarget[IDEKit_ProjEntryName] = [myNewTargetName stringValue];
 			newTarget = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-						 [NSNumber numberWithInt: IDEKit_kUITargetEntry], IDEKit_ProjEntryKind,
+						 @(IDEKit_kUITargetEntry), IDEKit_ProjEntryKind,
 						 [myNewTargetName stringValue], IDEKit_ProjEntryName,
-						 [NSMutableArray arrayWithArray: [clone objectForKey: IDEKit_TargetEntryFiles]], IDEKit_TargetEntryFiles,
-						 [NSMutableArray arrayWithArray: [clone objectForKey: IDEKit_TargetDependsOnTargets]], IDEKit_TargetDependsOnTargets,
+						 [NSMutableArray arrayWithArray: clone[IDEKit_TargetEntryFiles]], IDEKit_TargetEntryFiles,
+						 [NSMutableArray arrayWithArray: clone[IDEKit_TargetDependsOnTargets]], IDEKit_TargetDependsOnTargets,
 						 NULL];
 		} else {
 			newTarget = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-						 [NSNumber numberWithInt: IDEKit_kUITargetEntry], IDEKit_ProjEntryKind,
+						 @(IDEKit_kUITargetEntry), IDEKit_ProjEntryKind,
 						 [myNewTargetName stringValue], IDEKit_ProjEntryName,
 						 [NSMutableArray arrayWithCapacity: 0], IDEKit_TargetEntryFiles,
 						 [NSMutableArray arrayWithCapacity: 0], IDEKit_TargetDependsOnTargets,
@@ -427,7 +420,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
     //NSLog(@"rebuildTargetPopup %@",myTargetPopup);
     [myTargetPopup removeAllItems];
     [self buildMenuOfTargets: [myTargetPopup menu] skipItems: 0 command: @selector(changeCurrentTarget:) target: self];
-    int cur2 = [myTargetPopup indexOfItemWithRepresentedObject: myCurrentTarget];
+    NSInteger cur2 = [myTargetPopup indexOfItemWithRepresentedObject: myCurrentTarget];
     if (cur2 == -1) {
 		//NSLog(@"Couldn't find current target in popup");
     } else {
@@ -440,16 +433,16 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 - (NSInteger) buildMenuOfTargets: (NSMenu *)menu skipItems: (NSInteger) skip command: (SEL) sel target: (id) target;
 {
     // remove the old
-    for (int i=skip;i<[menu numberOfItems];i++) {
+    for (NSInteger i=skip;i<[menu numberOfItems];i++) {
 		[menu removeItemAtIndex: 0];
     }
-    int retval = skip-1;
+    NSInteger retval = skip-1;
     // add the new
     for (NSUInteger i=0;i<[myTargetList count];i++) {
-		id entry = [myTargetList objectAtIndex: i];
+		id entry = myTargetList[i];
 		if (entry == myCurrentTarget)
 			retval = i;
-		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle: [entry objectForKey: IDEKit_ProjEntryName] action: sel keyEquivalent: @""] autorelease];
+		NSMenuItem *item = [[NSMenuItem alloc] initWithTitle: entry[IDEKit_ProjEntryName] action: sel keyEquivalent: @""];
 		[item setTarget: target];
 		[item setRepresentedObject: entry];
 		[menu addItem: item];
@@ -466,7 +459,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 {
     NSArray *targets = [self currentlySelectedFiles];
     for (NSUInteger i=0;i<[targets count];i++) {
-		NSString *path = [[targets objectAtIndex: i] objectForKey: IDEKit_ProjEntryPath];
+		NSString *path = targets[i][IDEKit_ProjEntryPath];
 		if (path) {
 			if ([[NSDocumentController  sharedDocumentController] typeFromFileExtension: [path pathExtension]]) { // we can open it
 				[[NSDocumentController sharedDocumentController] openDocumentWithContentsOfFile: path display: YES];
@@ -479,7 +472,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 
 - (NSUInteger)targetFileIndexForEntry: (NSDictionary *)entry
 {
-    NSArray *targetList = [myCurrentTarget objectForKey: IDEKit_TargetEntryFiles];
+    NSArray *targetList = myCurrentTarget[IDEKit_TargetEntryFiles];
 #ifdef nodef
     for (NSUInteger i=0;i<[targetList count];i++) {
 		if ([[[targetList objectAtIndex: i] objectForKey: IDEKit_ProjEntryName] isEqualToString: [entry objectForKey: IDEKit_ProjEntryName]])
@@ -495,12 +488,12 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 {
     if (outlineView == myLinkOrderView) {
 		//int targetType = [[[self currentTargetDefaults] objectForKey: TargetDefaultsTargetType] intValue];
-		NSArray *targetList = [myCurrentTarget objectForKey: IDEKit_TargetEntryFiles];
+		NSArray *targetList = myCurrentTarget[IDEKit_TargetEntryFiles];
 		//switch (targetType) {
 		//case kTargetTypeSingleSegment: {
 		int count = 0;
 		for (NSUInteger i=0;i<[targetList count];i++) {
-			NSDictionary *entry = [targetList objectAtIndex: i];
+			NSDictionary *entry = targetList[i];
 			if ([self projectEntryIsLinked: entry]) {
 				if (count == index)
 					return entry;
@@ -515,15 +508,15 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 		//NSLog(@"Getting target #%d",index);
 		if (item == NULL) {
 			// return the entire target
-			return [myTargetList objectAtIndex: index];
+			return myTargetList[index];
 		} else {
 			// return the dict
-			return [[item objectForKey: IDEKit_TargetDependsOnTargets] objectAtIndex: index];
+			return item[IDEKit_TargetDependsOnTargets][index];
 		}
     } else  if (outlineView == myOutlineView) {
 		if (item == NULL)
 			item = myRootGroup;
-		return [[item objectForKey: IDEKit_ProjEntryGroup] objectAtIndex: index];
+		return item[IDEKit_ProjEntryGroup][index];
     }
     return NULL;
 }
@@ -552,7 +545,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
     } else  if (outlineView == myOutlineView) {
 		if (item == NULL)
 			return YES;
-		if ([item objectForKey: IDEKit_ProjEntryGroup] != NULL)
+		if (item[IDEKit_ProjEntryGroup] != NULL)
 			return YES;
 		return NO;
     }
@@ -562,13 +555,13 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 {
     if (outlineView == myLinkOrderView) {
 		//int targetType = [[[self currentTargetDefaults] objectForKey: TargetDefaultsTargetType] intValue];
-		NSArray *targetList = [myCurrentTarget objectForKey: IDEKit_TargetEntryFiles];
+		NSArray *targetList = myCurrentTarget[IDEKit_TargetEntryFiles];
 		//switch (targetType) {
 		//case kTargetTypeSingleSegment: {
 		if (item == NULL) {
 			int count = 0;
 			for (NSUInteger i=0;i<[targetList count];i++) {
-				NSDictionary *entry = [targetList objectAtIndex: i];
+				NSDictionary *entry = targetList[i];
 				if ([self projectEntryIsLinked: entry])
 					count++;
 			}
@@ -582,53 +575,53 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
     } else if (outlineView == myTargetsView) {
 		if (item == NULL)
 			return [myTargetList count];
-		return [[item objectForKey: IDEKit_TargetDependsOnTargets] count];
+		return [item[IDEKit_TargetDependsOnTargets] count];
     } else  if (outlineView == myOutlineView) {
 		if (item == NULL)
 			item = myRootGroup;
-		return [[item objectForKey: IDEKit_ProjEntryGroup] count];
+		return [item[IDEKit_ProjEntryGroup] count];
     }
     return 0;
 }
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
     if (outlineView == myLinkOrderView) {
-		return [item objectForKey: IDEKit_ProjEntryName];
+		return item[IDEKit_ProjEntryName];
     } else if (outlineView == myTargetsView) {
 		if ([item uiKind] == IDEKit_kUIDependantEntry)
-			return [NSString stringWithFormat: @"<%@>",[[item objectForKey: IDEKit_DependantOnTarget] objectForKey: IDEKit_ProjEntryName]];
+			return [NSString stringWithFormat: @"<%@>",item[IDEKit_DependantOnTarget][IDEKit_ProjEntryName]];
 		else
-			return [item objectForKey: IDEKit_ProjEntryName]; // just a string
+			return item[IDEKit_ProjEntryName]; // just a string
     } else  if (outlineView == myOutlineView) {
 		if ([[tableColumn identifier] isEqualToString: @"File"]) {
 			//NSLog(@"Table entry %@",[item objectForKey: IDEKit_ProjEntryName]);
 			// what if we want icon and name?
 			id aCell = [tableColumn dataCell];
 			NSImage *image = NULL;
-			if ([item objectForKey: IDEKit_ProjEntryPath] && [item uiKind] == IDEKit_kUIFileEntry) {
-				image = [[NSWorkspace sharedWorkspace] iconForFile: [item objectForKey: IDEKit_ProjEntryPath]];
+			if (item[IDEKit_ProjEntryPath] && [item uiKind] == IDEKit_kUIFileEntry) {
+				image = [[NSWorkspace sharedWorkspace] iconForFile: item[IDEKit_ProjEntryPath]];
 				//[aCell setTitle: [item objectForKey: IDEKit_ProjEntryName]];
 			} else {
 				image = [[NSWorkspace sharedWorkspace] iconForFileType: NSFileTypeForHFSTypeCode('fldr')];
 			}
 			[image setSize: NSMakeSize(16,16)];
 			[aCell setImage: image];
-			return [item objectForKey: IDEKit_ProjEntryName];
+			return item[IDEKit_ProjEntryName];
 		} else if ([[tableColumn identifier] isEqualToString: @"Check"]){
-			if ([item objectForKey: IDEKit_ProjEntryGroup]) {
-				id checkboxProto = [[[NSTextFieldCell alloc] initTextCell: @""] autorelease];
+			if (item[IDEKit_ProjEntryGroup]) {
+				id checkboxProto = [[NSTextFieldCell alloc] initTextCell: @""];
 				[tableColumn setDataCell: checkboxProto];
 				return @""; // nothing for group entry (hopefully)
 			} else {
 				// put a checkbox in the first col
-				id checkboxProto = [[[NSButtonCell alloc] initTextCell: @""] autorelease];
+				id checkboxProto = [[NSButtonCell alloc] initTextCell: @""];
 				[checkboxProto setEditable: YES];
 				[checkboxProto setButtonType: NSSwitchButton];
 				[checkboxProto setImagePosition: NSImageOnly];
 				[checkboxProto setControlSize: NSSmallControlSize];
 				[tableColumn setDataCell: checkboxProto];
 				
-				return [NSNumber numberWithBool: [[myCurrentTarget objectForKey: IDEKit_TargetEntryFiles] containsObject: item]];
+				return @([myCurrentTarget[IDEKit_TargetEntryFiles] containsObject: item]);
 			}
 		} else  {
 			id proto = [self projectListColumnAttributeProto: [tableColumn identifier] forEntry: item];
@@ -651,25 +644,25 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
     if (outlineView == myLinkOrderView) {
 		if ( [[pboard types] containsObject: PrivateDragPboardType]  && myPrivateDrag && [myPrivateDrag uiKind] == IDEKit_kUIFileEntry) {
 			NSDictionary *entry = myPrivateDrag; // but we only support 1 of them
-			[myPrivateDrag autorelease]; myPrivateDrag = NULL;
+			 myPrivateDrag = nil;
 			//int targetType = [[[self currentTargetDefaults] objectForKey: TargetDefaultsTargetType] intValue];
 			// just one thing, index is the new row index
 			// The problem is that our UI only shows "linkable" objects, not everything (i.e., the entire target entry list)
 			// so we need to convert our desination to that index
 			//NSUInteger oldIndex = [self targetFileIndexForEntry: entry];
-			NSUInteger oldIndex = [[myCurrentTarget objectForKey: IDEKit_TargetEntryFiles] indexOfObjectIdenticalTo: entry];
+			NSUInteger oldIndex = [myCurrentTarget[IDEKit_TargetEntryFiles] indexOfObjectIdenticalTo: entry];
 			NSAssert1(oldIndex != NSNotFound,@"Entry %@ wasn't in target list",[entry  description]);
 			// index is in the UI - convert to target entry list index
 			if (index == 0) {
 				// index 0 will always be index 0
 			} else {
 				id oldItemAtIndex = [self outlineView: myLinkOrderView child: index-1 ofItem: NULL];
-				index = [[myCurrentTarget objectForKey: IDEKit_TargetEntryFiles] indexOfObjectIdenticalTo: oldItemAtIndex];
+				index = [myCurrentTarget[IDEKit_TargetEntryFiles] indexOfObjectIdenticalTo: oldItemAtIndex];
 				NSAssert1(index  != NSNotFound,@"Entry %@ wasn't in target list",[oldItemAtIndex  description]);
 				index++; // we want it after this item (so if index = 1 coming in, we find item 0 in the list, and put it after that)
 			}
 			//NSLog(@"Moving %@ from %d to %d",[entry description],oldIndex,index);
-			[[myCurrentTarget objectForKey: IDEKit_TargetEntryFiles] moveItemAt: oldIndex to: index];
+			[myCurrentTarget[IDEKit_TargetEntryFiles] moveItemAt: oldIndex to: index];
 			//[outlineView reloadData];
 			[self liveSave];
 			return YES;
@@ -678,24 +671,24 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
     } else if (outlineView == myTargetsView) {
 		if ( [[pboard types] containsObject: PrivateDragPboardType] && myPrivateDrag ) {
 			NSDictionary *entry = myPrivateDrag; // but we only support 1 of them
-			[myPrivateDrag autorelease]; myPrivateDrag = NULL;
+			myPrivateDrag = nil;
 			switch ([entry uiKind]) {
 				case IDEKit_kUITargetEntry: {
 					if (entry == item)
 						return NO; // can't drop on ourselves
 					// add this our ourselves
-					if ([[item objectForKey: IDEKit_TargetDependsOnTargets] containsObject: entry]) {
+					if ([item[IDEKit_TargetDependsOnTargets] containsObject: entry]) {
 						return NO; // already there - perhaps reorder it?
 					}
 					NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-												 [NSNumber numberWithInt: IDEKit_kUIDependantEntry], IDEKit_ProjEntryKind,
+												 @(IDEKit_kUIDependantEntry), IDEKit_ProjEntryKind,
 												 entry,IDEKit_DependantOnTarget,
 												 NULL];
 					//NSLog(@"Adding %@ to %@",[dict description],[item description]);
-					if (![item objectForKey: IDEKit_TargetDependsOnTargets]) {
-						[item setObject: [NSMutableArray arrayWithObject: dict] forKey: IDEKit_TargetDependsOnTargets];
+					if (!item[IDEKit_TargetDependsOnTargets]) {
+						item[IDEKit_TargetDependsOnTargets] = [NSMutableArray arrayWithObject: dict];
 					} else {
-						[[item objectForKey: IDEKit_TargetDependsOnTargets] addObject: dict];
+						[item[IDEKit_TargetDependsOnTargets] addObject: dict];
 					}
 					[self liveSave];
 					return YES;
@@ -713,7 +706,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 				item = myRootGroup;
 			for (NSUInteger i=0;i<[files count];i++) {
 				// see what kind of file this is
-				id file = [files objectAtIndex: i];
+				id file = files[i];
 				if ([self canAddFileToProject: file]) {
 					// we want it in the project
 					retval = YES;
@@ -732,7 +725,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 			return retval;
 		} else if ([[pboard types] containsObject: PrivateDragPboardType] && myPrivateDrag) {
 			NSDictionary *entry = myPrivateDrag; // but we only support 1 of them
-			[myPrivateDrag autorelease]; myPrivateDrag = NULL;
+			myPrivateDrag = nil;
 			// there are several possibilities - we can reorder an item in the same
 			// container, or we can move it somewhere else.
 			if (index == NSOutlineViewDropOnItemIndex)
@@ -742,16 +735,16 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 			id oldParent = [myOutlineView parentItemForItem: entry];
 			if (oldParent == NULL)
 				oldParent = myRootGroup;
-			NSUInteger startIndex = [[oldParent objectForKey: IDEKit_ProjEntryGroup] indexOfObjectIdenticalTo: entry];
+			NSUInteger startIndex = [oldParent[IDEKit_ProjEntryGroup] indexOfObjectIdenticalTo: entry];
 			NSAssert2(startIndex != NSNotFound, @"Couldn't find %@ in parent group %@",[entry description],[oldParent description]);
 			if (oldParent == item) {
 				// in same parent
-				[[item objectForKey: IDEKit_ProjEntryGroup] moveItemAt: startIndex to: index];
+				[item[IDEKit_ProjEntryGroup] moveItemAt: startIndex to: index];
 			} else {
 				// remove from old
-				[[oldParent objectForKey: IDEKit_ProjEntryGroup] removeObjectAtIndex: startIndex];
+				[oldParent[IDEKit_ProjEntryGroup] removeObjectAtIndex: startIndex];
 				// put in new
-				[[item objectForKey: IDEKit_ProjEntryGroup] insertObject: entry atIndex: index];
+				[item[IDEKit_ProjEntryGroup] insertObject: entry atIndex: index];
 			}
 			[self liveSave];
 			return YES;
@@ -762,10 +755,10 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 
 - (BOOL) target: (id) target isDependantOn: (id) subtarget
 {
-    NSArray *dependants = [target objectForKey: IDEKit_TargetDependsOnTargets];
+    NSArray *dependants = target[IDEKit_TargetDependsOnTargets];
     for (NSUInteger i=0;i<[dependants count];i++) {
-		id rule = [dependants objectAtIndex: i];
-		if ([rule objectForKey: IDEKit_DependantOnTarget] == subtarget) {
+		id rule = dependants[i];
+		if (rule[IDEKit_DependantOnTarget] == subtarget) {
 			return YES;
 		}
     }
@@ -826,7 +819,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 					if ([item uiKind] != IDEKit_kUITargetEntry) {
 						return NSDragOperationNone; // can't drop between anything other than inside the target
 					}
-					if ([[item objectForKey: IDEKit_TargetDependsOnTargets] containsObject: entry] == NO) {
+					if ([item[IDEKit_TargetDependsOnTargets] containsObject: entry] == NO) {
 						return NSDragOperationNone; // don't move to another thing
 					}
 					return NSDragOperationMove; // otherwise it is OK
@@ -844,7 +837,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 			NSArray *files = [pboard propertyListForType:NSFilenamesPboardType];
 			for (NSUInteger i=0;i<[files count];i++) {
 				// see what kind of file this is
-				id file = [files objectAtIndex: i];
+				id file = files[i];
 				if ([self canAddFileToProject: file]) {
 					// we can edit it for sure
 					if (sourceDragMask & NSDragOperationLink) {
@@ -885,21 +878,21 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray*)items toPasteboard:(NSPasteboard*)pboard
 {
-    [myPrivateDrag release]; myPrivateDrag = NULL;
+     myPrivateDrag = NULL;
     if (outlineView == myLinkOrderView) {
-		myPrivateDrag = [[items objectAtIndex: 0] retain];
-		[pboard declareTypes:[NSArray arrayWithObject:PrivateDragPboardType]
+		myPrivateDrag = items[0];
+		[pboard declareTypes:@[PrivateDragPboardType]
 					   owner:self];
 		//[pboard setPropertyList:items forType:LinkOrderEntryPboardType];
 		//if (rowCount == 1) _moveRow = [[rows objectAtIndex:0]intValue];
 		return YES;
     } else if (outlineView == myTargetsView) {
-		myPrivateDrag = [[items objectAtIndex: 0] retain];
-		[pboard declareTypes: [NSArray arrayWithObject:PrivateDragPboardType] owner:self];
+		myPrivateDrag = items[0];
+		[pboard declareTypes: @[PrivateDragPboardType] owner:self];
 		return YES;
     } else if (outlineView == myOutlineView) {
-		myPrivateDrag = [[items objectAtIndex: 0] retain];
-		[pboard declareTypes: [NSArray arrayWithObject:PrivateDragPboardType] owner:self];
+		myPrivateDrag = items[0];
+		[pboard declareTypes: @[PrivateDragPboardType] owner:self];
 		return YES;
     }
     return NO;
@@ -914,7 +907,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
     } else {
 		// only edit if we are a group
 		if ([[tableColumn identifier] isEqualToString: @"File"]) {
-			return [item objectForKey: IDEKit_ProjEntryGroup] != NULL;
+			return item[IDEKit_ProjEntryGroup] != NULL;
 		}
 		return YES;
     }
@@ -926,28 +919,29 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
     } else if (outlineView == myTargetsView) {
 		//return [outlineView levelForItem: item] == 1; // only edit the main entry
 		// see if this new value already exists
-		if ([[item objectForKey: IDEKit_ProjEntryName] isEqualToString: object]) {
+		if ([item[IDEKit_ProjEntryName] isEqualToString: object]) {
 			// we are good
 			return;
 		} else {
 			for (NSUInteger i=0;i<[myTargetList count];i++) {
-				id targ = [myTargetList objectAtIndex: i];
-				if ([[targ objectForKey: IDEKit_ProjEntryName] isEqualToString: object]) {
+				id targ = myTargetList[i];
+				if ([targ[IDEKit_ProjEntryName] isEqualToString: object]) {
 					NSBeep(); // already used
 					return;
 				}
 			}
 			// OK, we can rename this
 			// we should rename the folder as well
-			[[NSFileManager defaultManager] movePath: [[self fileName] stringByAppendingPathComponent: [item objectForKey: IDEKit_ProjEntryName]] toPath: [[self fileName] stringByAppendingPathComponent: object] handler: NULL];
-			[item setObject: object forKey: IDEKit_ProjEntryName];
+			[[NSFileManager defaultManager] moveItemAtURL:[[self fileURL] URLByAppendingPathComponent:item[IDEKit_ProjEntryName]] toURL:[[self fileURL] URLByAppendingPathComponent: object] error:nil];
+			
+			item[IDEKit_ProjEntryName] = object;
 			[self liveSave];
 			return;
 		}
     } else {
 		if ([[tableColumn identifier] isEqualToString: @"File"]) {
 			// we changed the name of a group - pretty simple
-			[item setObject: object forKey: IDEKit_ProjEntryName];
+			item[IDEKit_ProjEntryName] = object;
 			return;
 		} else if ([[tableColumn identifier] isEqualToString: @"Check"]) {
 			if ([object boolValue]) {
@@ -988,8 +982,8 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 			return NULL;
 		}
 		// update the menu for this item
-		NSString *relPath = [item objectForKey: IDEKit_ProjEntryRelative];
-		NSString *fullPath = [item objectForKey: IDEKit_ProjEntryPath];
+		NSString *relPath = item[IDEKit_ProjEntryRelative];
+		NSString *fullPath = item[IDEKit_ProjEntryPath];
 		id pathVars = [self pathVars];
 		for (NSUInteger i=0;i<[myFileEntryCMenu numberOfItems];i++) {
 			id mitem = [myFileEntryCMenu itemAtIndex: i];
@@ -1030,7 +1024,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 					break;
 			}
 			if (name) { // we've got a give name to see if it is relative
-				if ([pathVars objectForKey: name] && [fullPath stringRelativeTo:[pathVars objectForKey: name] name: name withFlags: searchFlags]) {
+				if (pathVars[name] && [fullPath stringRelativeTo:pathVars[name] name: name withFlags: searchFlags]) {
 					enabled = YES;
 					set = [relPath hasPrefix: name];
 				}
@@ -1058,7 +1052,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 				[mitem setTag: IDEKit_kPickFlagsRelativeUser];
 				[mitem setTarget: self];
 				[mitem setRepresentedObject: item];
-				if ([fullPath stringRelativeTo:[pathVars objectForKey: key] name: key withFlags:IDEKit_kPathRelDontAllowUpPath]) {
+				if ([fullPath stringRelativeTo:pathVars[key] name: key withFlags:IDEKit_kPathRelDontAllowUpPath]) {
 					[mitem setEnabled: YES];
 					if ([relPath hasPrefix: key]) {
 						[mitem setState: NSOnState];
@@ -1093,7 +1087,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 			[aCell setFont: [NSFont boldSystemFontOfSize: [NSFont smallSystemFontSize]]];
 		}
     } else if (outlineView == myOutlineView) {
-		if ([item objectForKey: IDEKit_ProjEntryGroup] == NULL) { // an item
+		if (item[IDEKit_ProjEntryGroup] == NULL) { // an item
 			//	    if ([aCell respondsToSelector: @selector(setBackgroundColor:)])
 			//		[aCell setBackgroundColor: [NSColor whiteColor]];
 			[aCell setFont: [NSFont systemFontOfSize: [NSFont smallSystemFontSize]]];
@@ -1102,7 +1096,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 			//		[aCell setBackgroundColor: [NSColor colorWithCalibratedRed: (237.0 / 255.0) green: (243.0 / 255.0) blue: (254.0 / 255.0) alpha: 1.0]];
 			[aCell setFont: [NSFont boldSystemFontOfSize: [NSFont smallSystemFontSize]]];
 		}
-		if ([item objectForKey: IDEKit_ProjEntryPath] && [[tableColumn identifier] isEqualToString: @"File"]) {
+		if (item[IDEKit_ProjEntryPath] && [[tableColumn identifier] isEqualToString: @"File"]) {
 			//[aCell setImage: [[NSWorkspace sharedWorkspace] iconForFile: [item objectForKey: IDEKit_ProjEntryPath]]];
 			//[aCell setTitle: [item objectForKey: IDEKit_ProjEntryName]];
 		}
@@ -1128,7 +1122,7 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 {
     if (![self isRowSelected: row]) {
 		id item = [self itemAtRow: row];
-		NSColor *color = [[self delegate] outlineView: self colorForItem: item];
+		NSColor *color = [(IDEKit_ProjDocument*)[self delegate] outlineView: self colorForItem: item];
 		if (color) {
 			//NSLog(@"Coloring row %d with %@",row,color);
 			//[self setBackgroundColor:color];
@@ -1174,12 +1168,12 @@ static NSString *PrivateDragPboardType = @"PrivateDragPboardType";
 - (NSMenu *)menuForEvent:(NSEvent *)theEvent;
 {
     // just return what is appropriate
-    int row = [self rowAtPoint: [self convertPoint: [theEvent locationInWindow] fromView: nil]];
+    NSInteger row = [self rowAtPoint: [self convertPoint: [theEvent locationInWindow] fromView: nil]];
     if (row != -1) {
-		[self selectRow: row byExtendingSelection: NO];
+		[self selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 		// if we have a selection, we should really be checking to see if we are clicking on it...
 		id item = [self itemAtRow: row];
-		return [[self delegate] outlineView: self menuForItem: item];
+		return [(IDEKit_ProjDocument*)[self delegate] outlineView: self menuForItem: item];
     }
     return [super menu]; // use what we've got
 }

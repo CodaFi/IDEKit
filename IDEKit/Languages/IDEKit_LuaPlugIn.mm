@@ -82,7 +82,7 @@ enum {
     [lex addSingleComment: @"#"];
     [lex setIdentifierChars: [NSCharacterSet characterSetWithCharactersInString: @"_"]];
 
-    return [lex autorelease];
+    return lex;
 }
 - (NSString *) getLinePrefixComment
 {

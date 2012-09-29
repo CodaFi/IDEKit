@@ -41,7 +41,7 @@ IDEKit_LineCache::~IDEKit_LineCache()
 void IDEKit_LineCache::ReleaseLineData()
 {
     for (std::deque<NSMutableDictionary *>::iterator i = fUnfoldedLineData.begin(); i != fUnfoldedLineData.end(); i++) {
-		[(*i) release]; // release any line data
+		(*i); // release any line data
 		(*i) = NULL;
     }
 }
@@ -143,7 +143,7 @@ NSRange IDEKit_LineCache::UnfoldedNthLineRange(NSInteger n)
     return NSMakeRange(start, end-start);
 }
 
-NSInteger IDEKit_LineCache::UnfoldedLineCount()
+NSUInteger IDEKit_LineCache::UnfoldedLineCount()
 {
     return fUnfoldedLineStarts.size();
 }
@@ -266,7 +266,7 @@ void IDEKit_LineCache::RemoveRange(NSRange src)
 			pData++;
 			//NSLog(@"Line #%d unchanged (shouldn't see this)",i - fUnfoldedLineStarts.begin()+1);
 		} else if ((*i) <= src.location + src.length) {
-			[(*iData) release];
+			(*iData);
 			(*iData) = NULL;
 			// this thing will go away - do nothing with it yet
 			//NSLog(@"Line #%d will be removed",i - fUnfoldedLineStarts.begin()+1);
@@ -354,7 +354,7 @@ void IDEKit_LineCache::InsertString(NSUInteger offset, NSString *string)
 			if (contentsEnd != curStart) { // we had some sort of termination, so we need to add this line
 				NSInteger lineNum = p - fUnfoldedLineStarts.begin();
 				fUnfoldedLineStarts.insert(p+1,curStart + offset); // start of next line
-				NSDictionary *nullDict = NULL;
+				__strong NSMutableDictionary *nullDict = NULL;
 				fUnfoldedLineData.insert(fUnfoldedLineData.begin()+lineNum+1,nullDict); // add a blank data here
 				//NSLog(@"Insert at line %d (string subpos %d)",lineNum + 1,curStart);
 				p = fUnfoldedLineStarts.begin() + lineNum + 1;
@@ -461,14 +461,14 @@ void IDEKit_LineCache::SetLineData(NSDictionary *data)
 {
     NSInteger line=1;
     for (std::deque<NSMutableDictionary *>::iterator i = fUnfoldedLineData.begin(); i != fUnfoldedLineData.end(); i++) {
-		id lineData = [data objectForKey:[NSNumber numberWithInteger: line]];
+		id lineData = data[@(line)];
 		if (lineData) {
-			[(*i) release];
+			(*i);
 			(*i) = [lineData mutableCopy];
 		} else {
 			// clear it out
 			if (*i) {
-				[(*i) release];
+				(*i);
 				(*i) = nil;
 			}
 		}
@@ -483,7 +483,7 @@ NSMutableDictionary *IDEKit_LineCache::UnfoldedLineData(NSInteger n, bool create
     if (n >= fUnfoldedLineData.size()) return NULL; //n = fUnfoldedLineData.size() - 1;
     NSMutableDictionary *retval = fUnfoldedLineData[n];
     if (!retval && create) {
-		fUnfoldedLineData[n] = retval = [[NSMutableDictionary dictionary] retain];
+		fUnfoldedLineData[n] = retval = [NSMutableDictionary dictionary];
     }
     return retval;
 }
@@ -494,7 +494,7 @@ NSDictionary *IDEKit_LineCache::GetLineData()
     NSMutableDictionary * retval = [NSMutableDictionary dictionary];
     for (std::deque<NSMutableDictionary *>::iterator i = fUnfoldedLineData.begin(); i != fUnfoldedLineData.end(); i++) {
 		if (*i) {
-			[retval setObject:(*i) forKey:[NSNumber numberWithInteger: line]];
+			retval[@(line)] = (*i);
 		}
 		line++;
     }

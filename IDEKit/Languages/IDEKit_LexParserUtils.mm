@@ -41,7 +41,7 @@
 {
     self = [super init];
     if (self) {
-	mySource = [source retain];
+	mySource = source;
 	myRange = range;
 	myKind = kind;
     }
@@ -122,16 +122,16 @@
 	default:
 	    switch (myKind & IDEKit_kLexKindMask) {
 		case IDEKit_kLexKindOperator:
-		    return [NSString stringWithFormat:@"Operator %C<%@>",myKind & IDEKit_kLexIDMask, tokenStr];
+		    return [NSString stringWithFormat:@"Operator %ld<%@>",myKind & IDEKit_kLexIDMask, tokenStr];
 		    break;
 		case IDEKit_kLexKindKeyword:
-		    return [NSString stringWithFormat:@"Keyword %d<%@>",myKind & IDEKit_kLexIDMask, tokenStr];
+		    return [NSString stringWithFormat:@"Keyword %ld<%@>",myKind & IDEKit_kLexIDMask, tokenStr];
 		    break;
 		case IDEKit_kLexKindPrePro:
-		    return [NSString stringWithFormat:@"PrePro %d<%@>",myKind & IDEKit_kLexIDMask, tokenStr];
+		    return [NSString stringWithFormat:@"PrePro %ld<%@>",myKind & IDEKit_kLexIDMask, tokenStr];
 		    break;
 		default:
-		    return [NSString stringWithFormat:@"Unknown %.8X/%d:%d<%@>",myKind,myKind >> 16, myKind & IDEKit_kLexIDMask, tokenStr];
+		    return [NSString stringWithFormat:@"Unknown %.8lX/%ld:%ld<%@>",myKind,myKind >> 16, myKind & IDEKit_kLexIDMask, tokenStr];
 		    break;
 	    }
     }
@@ -144,30 +144,24 @@
 {
     self = [super init];
     if (self) {
-	mySource = [source retain];
-	myLexer = [lexer retain];
+	mySource = source;
+	myLexer = lexer;
 	[myLexer startParsingString: mySource range: range];
 	myIgnoreWS = ignoreWS;
     }
     return self;
 }
-- (void) dealloc
-{
-    [mySource release];
-    [myLexer release];
-    [super dealloc];
-}
 - (id) nextObject
 {
     NSRange range;
-    int token = [myLexer parseOneToken: &range ignoreWhiteSpace: myIgnoreWS];
+    NSInteger token = [myLexer parseOneToken: &range ignoreWhiteSpace: myIgnoreWS];
     if (token == IDEKit_kLexEOF)
 	return NULL;
-    return [[[IDEKit_LexToken alloc] initWithRange: range inString: mySource kind: token] autorelease];
+    return [[IDEKit_LexToken alloc] initWithRange: range inString: mySource kind: token];
 }
 
 + (IDEKit_LexTokenEnumerator *) tokenEnumeratorForSource: (NSString *)source range: (NSRange) range lexer: (IDEKit_LexParser *)lexer ignoreWhiteSpace: (BOOL) ignoreWS;
 {
-    return [[[self alloc] initWithSource: source lexer: lexer range: range ignoreWhiteSpace: ignoreWS] autorelease];
+    return [[self alloc] initWithSource: source lexer: lexer range: range ignoreWhiteSpace: ignoreWS];
 }
 @end

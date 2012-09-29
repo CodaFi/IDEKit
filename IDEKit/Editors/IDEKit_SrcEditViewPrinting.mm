@@ -30,7 +30,7 @@
     // for now just use a regular text view, and let it
     // print.  Later we'll have headers, and more interesting
     // things
-    return [[self allTextViews] objectAtIndex: 0];
+    return [self allTextViews][0];
 }
 
 @end

@@ -48,7 +48,7 @@
     NSArray *parameters = [self extractParameters: selectedRange];
     if ([parameters count] >= 2) {
 	NSString *laterParams = [[parameters subarrayWithRange: NSMakeRange(1,[parameters count]-1)] componentsJoinedByString: @","];
-	NSString *result = [NSString stringWithFormat: @"%@,%@",laterParams,[parameters objectAtIndex: 0]];
+	NSString *result = [NSString stringWithFormat: @"%@,%@",laterParams,parameters[0]];
 	[myTextView replaceCharactersInRange: selectedRange withString: result];
 	selectedRange.length = [result length];
     }
@@ -73,7 +73,7 @@
     NSArray *parameters = [self extractParameters: selectedRange];
     NSRange parameterRange = NSMakeRange(selectedRange.location,0);
     for (NSUInteger i=0;i<[parameters count];i++) {
-	parameterRange.length = [(NSString *)[parameters objectAtIndex: i] length]+1; // add trailing ','
+	parameterRange.length = [(NSString *)parameters[i] length]+1; // add trailing ','
 	if (NSLocationInRange(targetIndex,parameterRange)) {
 	    parameterRange.length--;
 	    [myTextView setSelectedRange: parameterRange];
@@ -94,7 +94,7 @@
     NSArray *parameters = [self extractParameters: selectedRange];
     NSRange parameterRange = NSMakeRange(selectedRange.location,0);
     for (NSUInteger i=0;i<[parameters count];i++) {
-	parameterRange.length = [(NSString *)[parameters objectAtIndex: i] length]+1; // add trailing ','
+	parameterRange.length = [(NSString *)parameters[i] length]+1; // add trailing ','
 	if (NSLocationInRange(targetIndex,parameterRange)) {
 	    parameterRange.length--;
 	    [myTextView setSelectedRange: NSMakeRange(parameterRange.location,0)];
@@ -115,7 +115,7 @@
     NSArray *parameters = [self extractParameters: selectedRange];
     NSRange parameterRange = NSMakeRange(selectedRange.location,0);
     for (NSUInteger i=0;i<[parameters count];i++) {
-	parameterRange.length = [(NSString *)[parameters objectAtIndex: i] length]+1; // add trailing ','
+	parameterRange.length = [(NSString *)parameters[i] length]+1; // add trailing ','
 	if (NSLocationInRange(targetIndex,parameterRange)) {
 	    [myTextView setSelectedRange: NSMakeRange(parameterRange.location+parameterRange.length-1,0)];
 	    return;
@@ -136,7 +136,7 @@
     NSRange parameterRange = NSMakeRange(selectedRange.location,0);
     NSUInteger paramToSelect = 99999;
     for (NSUInteger i=0;i<[parameters count];i++) {
-	parameterRange.length = [(NSString *)[parameters objectAtIndex: i] length]+1; // add trailing ','
+	parameterRange.length = [(NSString *)parameters[i] length]+1; // add trailing ','
 	if (NSLocationInRange(targetIndex,parameterRange)) {
 	    paramToSelect = (i+1) % ([parameters count]);
 	    break;
@@ -145,7 +145,7 @@
     }
     parameterRange = NSMakeRange(selectedRange.location,0);
     for (NSUInteger i=0;i<[parameters count];i++) {
-	parameterRange.length = [(NSString *)[parameters objectAtIndex: i] length]+1; // add trailing ','
+	parameterRange.length = [(NSString *)parameters[i] length]+1; // add trailing ','
 	if (i == paramToSelect) {
 	    parameterRange.length--;
 	    [myTextView setSelectedRange: parameterRange];
@@ -167,7 +167,7 @@
     NSRange parameterRange = NSMakeRange(selectedRange.location,0);
     NSUInteger paramToSelect = 99999;
     for (NSUInteger i=0;i<[parameters count];i++) {
-	parameterRange.length = [(NSString *)[parameters objectAtIndex: i] length]+1; // add trailing ','
+	parameterRange.length = [(NSString *)parameters[i] length]+1; // add trailing ','
 	if (NSLocationInRange(targetIndex,parameterRange)) {
 	    paramToSelect = (i+[parameters count]-1) % ([parameters count]);
 	    break;
@@ -176,7 +176,7 @@
     }
     parameterRange = NSMakeRange(selectedRange.location,0);
     for (NSUInteger i=0;i<[parameters count];i++) {
-	parameterRange.length = [(NSString *)[parameters objectAtIndex: i] length]+1; // add trailing ','
+	parameterRange.length = [(NSString *)parameters[i] length]+1; // add trailing ','
 	if (i == paramToSelect) {
 	    parameterRange.length--;
 	    [myTextView setSelectedRange: parameterRange];

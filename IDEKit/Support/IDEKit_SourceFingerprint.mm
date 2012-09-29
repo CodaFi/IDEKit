@@ -23,9 +23,9 @@
 #import "IDEKit_SourceFingerprint.h"
 #import "IDEKit_LineCache.h"
 
-NSUInteger short IDEKit_Fingerprint(const NSUInteger char * data, int length) // simple crc-16
+unsigned short IDEKit_Fingerprint(const unsigned char * data, int length) // simple crc-16
 {
-    static NSUInteger short table[256] = {
+    static unsigned short table[256] = {
 	0x0000, 0x1189, 0x2312, 0x329B, 0x4624, 0x57AD, 0x6536, 0x74BF,
 	0x8C48, 0x9DC1, 0xAF5A, 0xBED3, 0xCA6C, 0xDBE5, 0xE97E, 0xF8F7,
 	0x1081, 0x0108, 0x3393, 0x221A, 0x56A5, 0x472C, 0x75B7, 0x643E,
@@ -59,14 +59,14 @@ NSUInteger short IDEKit_Fingerprint(const NSUInteger char * data, int length) //
 	0xF78F, 0xE606, 0xD49D, 0xC514, 0xB1AB, 0xA022, 0x92B9, 0x8330,
 	0x7BC7, 0x6A4E, 0x58D5, 0x495C, 0x3DE3, 0x2C6A, 0x1EF1, 0x0F78
     };
-    NSUInteger short retval = 0;
+    unsigned short retval = 0;
     while ((length--) > 0) {
 	retval = table[(retval ^ (*data++)) & 0x0ff] ^ (retval >> 8);
     }
     return retval;
 }
 
-NSUInteger short IDEKit_FingerprintText(const unichar * data, int length) // will white-strip head & tail
+unsigned short IDEKit_FingerprintText(const unichar * data, int length) // will white-strip head & tail
 {
     NSCharacterSet *ws = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     // strip leading
@@ -79,28 +79,28 @@ NSUInteger short IDEKit_FingerprintText(const unichar * data, int length) // wil
 	length--;
     }
     if (length) {
-	return IDEKit_Fingerprint((const NSUInteger char *)data, length * sizeof(unichar));
+	return IDEKit_Fingerprint((const unsigned char *)data, length * sizeof(unichar));
     } else {
 	return 0; // return 0 for blank lines
     }
 }
 
 @implementation NSString(Fingerprint)
-- (NSUInteger short) fingerprint
+- (unsigned short) fingerprint
 {
     int length = [self length];
     unichar *buffer = (unichar *)malloc(length * sizeof(unichar));
     [self getCharacters:buffer];
-    NSUInteger short retval = IDEKit_Fingerprint((const NSUInteger char *)buffer, length * sizeof(unichar));
+    unsigned short retval = IDEKit_Fingerprint((const unsigned char *)buffer, length * sizeof(unichar));
     free(buffer);
     return retval;
 }
-- (NSUInteger short) trimmedFingerprint
+- (unsigned short) trimmedFingerprint
 {
-    int length = [self length];
+    NSInteger length = [self length];
     unichar *buffer = (unichar *)malloc(length * sizeof(unichar));
     [self getCharacters:buffer];
-    NSUInteger short retval = IDEKit_FingerprintText(buffer, length);
+    unsigned short retval = IDEKit_FingerprintText(buffer, length);
     free(buffer);
     return retval;
 }
@@ -110,15 +110,15 @@ NSUInteger short IDEKit_FingerprintText(const unichar * data, int length) // wil
 - (NSData *)fingerprint
 {
     int numLines = myLineCache->UnfoldedLineCount();
-    NSMutableData *retval = [NSMutableData dataWithLength: sizeof(NSUInteger short) * (numLines + 1)];
+    NSMutableData *retval = [NSMutableData dataWithLength: sizeof(unsigned short) * (numLines + 1)];
     // we make an array of crcs for each line (with a crc for the entire data at the start)
-    NSUInteger short *buffer = (NSUInteger short *)[retval mutableBytes];
+    unsigned short *buffer = (unsigned short *)[retval mutableBytes];
     NSString *source = [self string];
     for (int line=1;line <= numLines; line++) {
 	buffer[line] = [[source substringWithRange: myLineCache->UnfoldedNthLineRange(line)] trimmedFingerprint];
     }
     // and put a crc at the start to make it easy to compare
-    buffer[0] = IDEKit_Fingerprint((const NSUInteger char *)(buffer+1),numLines * sizeof(NSUInteger short));
+    buffer[0] = IDEKit_Fingerprint((const unsigned char *)(buffer+1),numLines * sizeof(unsigned short));
     return retval;
 }
 @end
@@ -145,12 +145,12 @@ static void FillInMapping(int *map, int count)
 	if ([srcFingerprint isEqualToData:dstFingerprint]) { // same, so we do trivial mapping
 	    myForwardMap = myReverseMap = NULL;
 	} else {
-	    int srcCount = [srcFingerprint length] / sizeof(NSUInteger short) - 1;
-	    int dstCount = [dstFingerprint length] / sizeof(NSUInteger short) - 1;
+	    int srcCount = [srcFingerprint length] / sizeof(unsigned short) - 1;
+	    int dstCount = [dstFingerprint length] / sizeof(unsigned short) - 1;
 	    myForwardMap = new int[srcCount]; for (int i=0;i<srcCount;i++) myForwardMap[i] = 0;
 	    myReverseMap = new int[dstCount]; for (int i=0;i<dstCount;i++) myReverseMap[i] = 0;
-	    NSUInteger short *srcPrint = ((NSUInteger short *)[srcFingerprint bytes]);
-	    NSUInteger short *dstPrint = ((NSUInteger short *)[dstFingerprint bytes]);
+	    unsigned short *srcPrint = ((unsigned short *)[srcFingerprint bytes]);
+	    unsigned short *dstPrint = ((unsigned short *)[dstFingerprint bytes]);
 	    // ok, try to keep them in sync (we don't handle text being moved, just added/deleted
 	    int srcLine = 1; // 0 is the composite crc
 	    int dstLine = 1;
@@ -246,11 +246,11 @@ static void FillInMapping(int *map, int count)
     while ((key = [e nextObject]) != NULL) {
 	int dstLine = [key intValue];
 	if ([key isEqualToString: [NSString stringWithFormat: @"%d", dstLine]]) {
-	    int srcLine = [self mapForward: dstLine];
-	    [retval setObject: [dict objectForKey: key] forKey: [NSString stringWithFormat: @"%d", srcLine]];
+	    NSInteger srcLine = [self mapForward: dstLine];
+	    retval[[NSString stringWithFormat: @"%ld", srcLine]] = dict[key];
 	} else {
 	    // not a numeric key
-	    [retval setObject: [dict objectForKey: key] forKey: key];
+	    retval[key] = dict[key];
 	}
     }
     return retval;
@@ -265,11 +265,11 @@ static void FillInMapping(int *map, int count)
     while ((key = [e nextObject]) != NULL) {
 	int dstLine = [key intValue];
 	if ([key isEqualToString: [NSString stringWithFormat: @"%d", dstLine]]) {
-	    int srcLine = [self mapBackward: dstLine];
-	    [retval setObject: [dict objectForKey: key] forKey: [NSString stringWithFormat: @"%d", srcLine]];
+	    NSInteger srcLine = [self mapBackward: dstLine];
+	    retval[[NSString stringWithFormat: @"%ld", srcLine]] = dict[key];
 	} else {
 	    // not a numeric key
-	    [retval setObject: [dict objectForKey: key] forKey: key];
+	    retval[key] = dict[key];
 	}
     }
     return retval;

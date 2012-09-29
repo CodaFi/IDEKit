@@ -53,7 +53,7 @@
 	return retval; // we are already there
     NSMutableArray *value = [NSMutableArray arrayWithCapacity: [self count]];
     for (NSUInteger i=0;i<[self count];i++) {
-	[value addObject: [[self objectAtIndex: i] flattenWithFlattener: flattener]];
+	[value addObject: [self[i] flattenWithFlattener: flattener]];
     }
     [flattener setValue: value forObject: retval];
     return retval;
@@ -62,7 +62,7 @@
 {
     NSMutableArray *value = [NSMutableArray arrayWithCapacity: [self count]];
     for (NSUInteger i=0;i<[self count];i++) {
-	[value addObject: [flattener unflattenObject: [self objectAtIndex: i]]];
+	[value addObject: [flattener unflattenObject: self[i]]];
     }
     return value;
 }
@@ -78,7 +78,7 @@
     NSEnumerator *keyEnumerator = [self keyEnumerator];
     id key;
     while ((key = [keyEnumerator nextObject]) != NULL) {
-	[value setObject: [[self objectForKey: key] flattenWithFlattener: flattener] forKey: key];
+	value[key] = [self[key] flattenWithFlattener: flattener];
     }
     [flattener setValue: value forObject: retval];
     return retval;
@@ -89,7 +89,7 @@
     NSEnumerator *keyEnumerator = [self keyEnumerator];
     id key;
     while ((key = [keyEnumerator nextObject]) != NULL) {
-	[value setObject: [flattener unflattenObject: [self objectForKey: key]] forKey: key];
+	value[key] = [flattener unflattenObject: self[key]];
     }
     return value;
 }
@@ -114,7 +114,7 @@
     NSEnumerator *keyEnumerator = [myObjects keyEnumerator];
     id key;
     while ((key = [keyEnumerator nextObject]) != NULL) {
-	if ([myObjects objectForKey: key] == what) {
+	if (myObjects[key] == what) {
 	    if (found)
 		*found = YES;
 	    return key;
@@ -127,26 +127,21 @@
     time(&clock);
     long checkSum = (clock ^ ((long)(what)));
     id newKey = [NSString stringWithFormat: @"%@%.8lX%.8lX",what,clock,checkSum];
-    [myObjects setObject: [NSNull null] forKey: newKey];
+    myObjects[newKey] = [NSNull null];
     //NSLog(@"Object %.8X is now flattened as %@",what,newKey);
     return newKey;
-}
-- (void) dealloc
-{
-    [myObjects release];
-    [super dealloc];
 }
 - (id) init
 {
     self = [super init];
     if (self) {
-	myObjects = [[NSMutableDictionary dictionary] retain];
+	myObjects = [NSMutableDictionary dictionary];
     }
     return self;
 }
 - (void) setValue: (id) value forObject: (id) what
 {
-    [myObjects setObject: value forKey: what];
+    myObjects[what] = value;
 }
 
 - (void) addRootObject: (id) what
@@ -161,12 +156,9 @@
 
 - (NSDictionary *)asDictionary
 {
-    NSDictionary *retval = [NSDictionary dictionaryWithObjectsAndKeys:
-	myObjects, @"objects",
-	[NSNumber numberWithInt: 1], @"version",
-	myRoot, @"rootObject",
-	NULL
-	];
+    NSDictionary *retval = @{@"objects": myObjects,
+	@"version": @1,
+	@"rootObject": myRoot};
     //NSLog(@"Flattened as %@",[retval description]);
     return retval;
 }
@@ -202,25 +194,18 @@
 {
     self = [super init];
     if (self) {
-	[myObjects release];
-	myObjects = [[flat objectForKey: @"objects"] retain];
-	myUnflattened = [[NSMutableDictionary dictionaryWithCapacity: [myObjects count]] retain];
-	myRoot = [[flat objectForKey: @"rootObject"] retain];
+	myObjects = flat[@"objects"];
+	myUnflattened = [NSMutableDictionary dictionaryWithCapacity: [myObjects count]];
+	myRoot = flat[@"rootObject"];
     }
     return self;
 }
-- (void) dealloc
-{
-    [myUnflattened release];
-    [myRoot release];
-    [super dealloc];
-}
 - (id) unflattenObject: (id) name
 {
-    id retval = [myUnflattened objectForKey: name];
+    id retval = myUnflattened[name];
     if (retval == NULL) {
 	// this one isn't unflattened yet
-	id toUnflatten = [myObjects objectForKey: name];
+	id toUnflatten = myObjects[name];
 	if (toUnflatten == NULL) {
 	    // keep it as a "whatever"
 	    return name;
@@ -228,7 +213,7 @@
 	NSAssert1(toUnflatten,@"No such flattened object %@",name);
 	retval = [toUnflatten unflattenWihtUnflattener: self];
 	NSAssert1(retval,@"Couldn't unflatten %@",name);
-	[myUnflattened setObject: retval forKey: name];
+	myUnflattened[name] = retval;
     }
     return retval;
 }

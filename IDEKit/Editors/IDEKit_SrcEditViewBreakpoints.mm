@@ -48,10 +48,10 @@
     BOOL showBP = [myCurrentLanguage wantsBreakpoints];
     NSArray *scrollViews = [self allScrollViews];
     for (NSUInteger i=0;i<[scrollViews count];i++) {
-		[[scrollViews objectAtIndex: i] setHasHorizontalRuler: NO];
-		[[scrollViews objectAtIndex: i] setHasVerticalRuler: showBP];
+		[scrollViews[i] setHasHorizontalRuler: NO];
+		[scrollViews[i] setHasVerticalRuler: showBP];
 		if (showBP)
-			[[[scrollViews objectAtIndex: i] verticalRulerView] setNeedsDisplay: YES];
+			[[scrollViews[i] verticalRulerView] setNeedsDisplay: YES];
     }
     if (updateClient && myContext) {
 		[myContext srcEditView: self setBreakPoints: [self breakpoints]];
@@ -65,11 +65,11 @@
 - (NSDictionary *) breakpoints
 {
     NSMutableDictionary *retval = [NSMutableDictionary dictionary];
-    int numLines = myLineCache->UnfoldedLineCount();
-    for (int line=1;line <= numLines; line++) {
-		IDEKit_Breakpoint *bp = [myLineCache->UnfoldedLineData(line, false) objectForKey: @"IDEKit_Breakpoint"];
+    NSInteger numLines = myLineCache->UnfoldedLineCount();
+    for (NSInteger line=1;line <= numLines; line++) {
+		IDEKit_Breakpoint *bp = myLineCache->UnfoldedLineData(line, false)[@"IDEKit_Breakpoint"];
 		if (bp) {
-			[retval setObject: [bp asPlist] forKey: [NSString stringWithFormat: @"%d", line]];
+			retval[[NSString stringWithFormat: @"%ld", line]] = [bp asPlist];
 			//[retval setObject: bp forKey: [NSString stringWithFormat: @"%d", line]];
 		}
     }
@@ -77,12 +77,12 @@
 }
 - (void) setBreakpoints: (NSDictionary *)d
 {
-    int numLines = myLineCache->UnfoldedLineCount();
-    for (int line=1;line <= numLines; line++) {
-		NSDictionary *dp = [d objectForKey: [NSString stringWithFormat: @"%d", line]];
+    NSInteger numLines = myLineCache->UnfoldedLineCount();
+    for (NSInteger line=1;line <= numLines; line++) {
+		NSDictionary *dp = d[[NSString stringWithFormat: @"%ld", line]];
 		if (dp) {
 			// this will work even if it already exists
-			[myLineCache->UnfoldedLineData(line, true) setObject: [IDEKit_Breakpoint breakpointFromPlist: dp] forKey: @"IDEKit_Breakpoint"];
+			myLineCache->UnfoldedLineData(line, true)[@"IDEKit_Breakpoint"] = [IDEKit_Breakpoint breakpointFromPlist: dp];
 		} else {
 			[myLineCache->UnfoldedLineData(line, false) removeObjectForKey: @"IDEKit_Breakpoint"];
 		}
@@ -114,8 +114,8 @@
 		return NULL;
     NSMutableDictionary *d = myLineCache->UnfoldedLineData(line, false);
     if (!d) return NULL;
-    if ([d objectForKey: @"IDEKit_ProgramCounter"]) {
-		return [[[IDEKit_Breakpoint alloc] initWithKind: IDEKit_kBreakpointProgramCounter file: myUniqueID  line: line] autorelease];
+    if (d[@"IDEKit_ProgramCounter"]) {
+		return [[IDEKit_Breakpoint alloc] initWithKind: IDEKit_kBreakpointProgramCounter file: myUniqueID  line: line];
     } else {
 		return [self getBreakpoint: line];
     }
@@ -133,7 +133,7 @@
 		return NULL;
     NSMutableDictionary *d = myLineCache->UnfoldedLineData(line, false);
     if (!d) return NULL;
-    return [d objectForKey: @"IDEKit_Breakpoint"];
+    return d[@"IDEKit_Breakpoint"];
 }
 - (NSInteger) getBreakpointCapability: (NSInteger) line // return if there could be a breakpoint here, etc...
 {
@@ -153,7 +153,7 @@
 }
 - (void) removeBreakpoint: (NSInteger) line // user clicked here - turn on/off as default
 {
-    IDEKit_Breakpoint *bp = [myLineCache->UnfoldedLineData(line, false) objectForKey: @"IDEKit_Breakpoint"];
+    IDEKit_Breakpoint *bp = myLineCache->UnfoldedLineData(line, false)[@"IDEKit_Breakpoint"];
     if (bp) {
 		[[IDEKit_BreakpointManager sharedBreakpointManager] removeBreakpoint: bp fromFiles: myUniqueID];
     }
@@ -360,9 +360,9 @@
 
 - (IBAction) clearAllBreakpoints: (id) sender
 {
-    int numLines = myLineCache->UnfoldedLineCount();
-    for (int line=1;line <= numLines; line++) {
-		IDEKit_Breakpoint *bp = [myLineCache->UnfoldedLineData(line, false) objectForKey: @"IDEKit_Breakpoint"];
+    NSInteger numLines = myLineCache->UnfoldedLineCount();
+    for (NSInteger line=1;line <= numLines; line++) {
+		IDEKit_Breakpoint *bp = myLineCache->UnfoldedLineData(line, false)[@"IDEKit_Breakpoint"];
 		[[IDEKit_BreakpointManager sharedBreakpointManager] removeBreakpoint: bp fromFiles: myUniqueID];
     }
 }
@@ -377,9 +377,9 @@
 // Normally these routines are only called by the breakpoint manager (or the breakpoints themselves)
 - (NSInteger) findBreakpoint: (IDEKit_Breakpoint *)breakpoint; // returns  0 if not found
 {
-    int numLines = myLineCache->UnfoldedLineCount();
-    for (int line=1;line <= numLines; line++) {
-		IDEKit_Breakpoint *bp = [myLineCache->UnfoldedLineData(line, false) objectForKey: @"IDEKit_Breakpoint"];
+    NSInteger numLines = myLineCache->UnfoldedLineCount();
+    for (NSInteger line=1;line <= numLines; line++) {
+		IDEKit_Breakpoint *bp = myLineCache->UnfoldedLineData(line, false)[@"IDEKit_Breakpoint"];
 		if (bp == breakpoint) {
 			return line;
 		}
@@ -388,16 +388,16 @@
 }
 - (void) insertBreakpoint: (IDEKit_Breakpoint *)breakpoint atLine: (NSInteger) line
 {
-    [myLineCache->UnfoldedLineData(line, true) setObject: breakpoint forKey: @"IDEKit_Breakpoint"];
+    myLineCache->UnfoldedLineData(line, true)[@"IDEKit_Breakpoint"] = breakpoint;
     [self forceBreakpointRedraw: YES];
     [[IDEKit_BreakpointInspector sharedBreakpointInspector] setBreakpoint: breakpoint];
 }
 
 - (void) deleteBreakpoint: (IDEKit_Breakpoint *)breakpoint // doesn't matter what line it is...
 {
-    int numLines = myLineCache->UnfoldedLineCount();
-    for (int line=1;line <= numLines; line++) {
-		IDEKit_Breakpoint *bp = [myLineCache->UnfoldedLineData(line, false) objectForKey: @"IDEKit_Breakpoint"];
+    NSInteger numLines = myLineCache->UnfoldedLineCount();
+    for (NSInteger line=1;line <= numLines; line++) {
+		IDEKit_Breakpoint *bp = myLineCache->UnfoldedLineData(line, false)[@"IDEKit_Breakpoint"];
 		if (bp == breakpoint) {
 			[myLineCache->UnfoldedLineData(line, false) removeObjectForKey: @"IDEKit_Breakpoint"];
 		}
@@ -408,10 +408,10 @@
 
 - (void) setProgramCounterLine: (NSInteger) pcline
 {
-    int numLines = myLineCache->UnfoldedLineCount();
-    for (int line=1;line <= numLines; line++) {
+    NSInteger numLines = myLineCache->UnfoldedLineCount();
+    for (NSInteger line=1;line <= numLines; line++) {
 		if (line == pcline) {
-			[myLineCache->UnfoldedLineData(line, true) setObject: [NSNumber numberWithBool: YES] forKey: @"IDEKit_ProgramCounter"];
+			myLineCache->UnfoldedLineData(line, true)[@"IDEKit_ProgramCounter"] = @YES;
 		} else {
 			[myLineCache->UnfoldedLineData(line, false) removeObjectForKey: @"IDEKit_ProgramCounter"];
 		}

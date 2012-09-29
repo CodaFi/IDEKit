@@ -59,14 +59,14 @@ enum {
 {
     self = [super  init];
     if (self) {
-		myKeywords = [[NSMutableDictionary dictionary] retain];
-		myOperators = [[NSMutableDictionary dictionary] retain];
+		myKeywords = [NSMutableDictionary dictionary];
+		myOperators = [NSMutableDictionary dictionary];
 		myPreProStart = NULL;
-		myPreProcessor = [[NSMutableArray array] retain];
-		myStrings = [[NSMutableArray array] retain];
-		myCharacters = [[NSMutableArray array] retain];
-		myMultiComments = [[NSMutableArray array] retain];
-		mySingleComments = [[NSMutableArray array] retain];
+		myPreProcessor = [NSMutableArray array];
+		myStrings = [NSMutableArray array];
+		myCharacters = [NSMutableArray array];
+		myMultiComments = [NSMutableArray array];
+		mySingleComments = [NSMutableArray array];
 		myIdentifierChars = NULL;
 		myFirstIdentifierChars = NULL;
 		myCaseSensitive = YES;
@@ -82,36 +82,34 @@ enum {
 
 - (id) addKeyword: (NSString *)string color: (NSInteger) color lexID: (NSInteger) lexID
 {
-    id retval = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithInt: color], IDEKit_LexColorKey, [NSNumber numberWithInt: IDEKit_kLexKindKeyword | lexID], IDEKit_LexIDKey, NULL];
-    [myKeywords setObject: retval forKey: string];
+    id retval = @{IDEKit_LexColorKey: @(color), IDEKit_LexIDKey: @(IDEKit_kLexKindKeyword | lexID)};
+    myKeywords[string] = retval;
     return retval;
 }
 - (id) addOperator: (NSString *)string lexID: (NSInteger) lexID
 {
-    id retval = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithInt: IDEKit_kLexKindKeyword | lexID], IDEKit_LexIDKey, NULL];
-    [myOperators setObject: retval forKey: string];
+    id retval = @{IDEKit_LexIDKey: @(IDEKit_kLexKindKeyword | lexID)};
+    myOperators[string] = retval;
     return retval;
 }
 - (void) addStringStart: (NSString *)start end: (NSString *) end
 {
-    [myStrings addObject: [NSArray arrayWithObjects: start, end, NULL]];
+    [myStrings addObject: @[start, end]];
 }
 - (void) addCharacterStart: (NSString *)start end: (NSString *) end
 {
-    [myCharacters addObject: [NSArray arrayWithObjects: start, end, NULL]];
+    [myCharacters addObject: @[start, end]];
 }
 
 - (void) addMarkupStart: (NSString *)start end: (NSString *) end
 {
-    [myMarkupStart release];
-    [myMarkupEnd release];
-    myMarkupStart = [start retain];
-    myMarkupEnd = [end retain];
+    myMarkupStart = start;
+    myMarkupEnd = end;
 }
 
 - (void) addCommentStart: (NSString *)start end: (NSString *) end
 {
-    [myMultiComments addObject: [NSArray arrayWithObjects: start, end, NULL]];
+    [myMultiComments addObject: @[start, end]];
 }
 
 - (void) addSingleComment: (NSString *)start
@@ -121,21 +119,18 @@ enum {
 
 - (void) setIdentifierChars: (NSCharacterSet *)set
 {
-    [myIdentifierChars autorelease];
-    myIdentifierChars = [set retain];
+    myIdentifierChars = set;
 }
 
 - (void) setFirstIdentifierChars: (NSCharacterSet *)set
 {
-    [myFirstIdentifierChars autorelease];
-    myFirstIdentifierChars = [set retain];
+    myFirstIdentifierChars = set;
 }
 
 
 - (void) setPreProStart: (NSString *)start
 {
-    [myPreProStart autorelease];
-    myPreProStart = [start retain];
+    myPreProStart = start;
 }
 
 - (void) addPreProcessor: (NSString *)token
@@ -171,7 +166,7 @@ enum {
     myStopLoc = range.location + range.length;
     if (myCurLoc >= [string length])
 		return; // nothing to color - at end of string
-    myString = [string retain];
+    myString = string;
     myCurState = IDEKit_kLexStateNormal;
     if (myMarkupStart)
 		myCurState = IDEKit_kLexStateMarkupContent; // if we are a markup language, start in the content area
@@ -226,31 +221,31 @@ enum {
 		return IDEKit_kLexActionAppendTo | (IDEKit_kLexStatePrePro0);
     }
     for (NSUInteger i=0;i<[myStrings count];i++) {
-		if ([self match: myString withPattern: [[myStrings objectAtIndex: i] objectAtIndex: 0]]) {
-			myCloser = [[myStrings objectAtIndex: i] objectAtIndex: 1];
+		if ([self match: myString withPattern: myStrings[i][0]]) {
+			myCloser = myStrings[i][1];
 			mySubColor = IDEKit_kLangColor_Strings;
 			mySubLexID = IDEKit_kLexString;
 			return IDEKit_kLexActionAppendTo | (IDEKit_kLexStateMatching);
 		}
     }
     for (NSUInteger i=0;i<[myCharacters count];i++) {
-		if ([self match: myString withPattern: [[myCharacters objectAtIndex: i] objectAtIndex: 0]]) {
-			myCloser = [[myCharacters objectAtIndex: i] objectAtIndex: 1];
+		if ([self match: myString withPattern: myCharacters[i][0]]) {
+			myCloser = myCharacters[i][1];
 			mySubColor = IDEKit_kLangColor_Constants;
 			mySubLexID = IDEKit_kLexCharacter;
 			return IDEKit_kLexActionAppendTo | (IDEKit_kLexStateMatching);
 		}
     }
     for (NSUInteger i=0;i<[myMultiComments count];i++) {
-		if ([self match: myString withPattern: [[myMultiComments objectAtIndex: i] objectAtIndex: 0]]) {
-			myCloser = [[myMultiComments objectAtIndex: i] objectAtIndex: 1];
+		if ([self match: myString withPattern: myMultiComments[i][0]]) {
+			myCloser = myMultiComments[i][1];
 			mySubColor = IDEKit_kLangColor_Comments;
 			mySubLexID = IDEKit_kLexComment;
 			return IDEKit_kLexActionAppendTo | (IDEKit_kLexStateMatching);
 		}
     }
     for (NSUInteger i=0;i<[mySingleComments count];i++) {
-		if ([self match: myString withPattern: [mySingleComments objectAtIndex: i]]) {
+		if ([self match: myString withPattern: mySingleComments[i]]) {
 			myCloser = @"\n"; // go to EOL
 			mySubColor = IDEKit_kLangColor_Comments;
 			mySubLexID = IDEKit_kLexComment;
@@ -289,10 +284,10 @@ enum {
     NSString *token = [myString substringWithRange: NSIntersectionRange(NSMakeRange(0,[myString length]),NSMakeRange(mySubStart,myCurLoc-mySubStart))];
     //NSLog(@"Token '%@'",token);
     NSString *utoken = (myCaseSensitive ? token : [token lowercaseString]);
-    if ([myKeywords objectForKey: utoken]) {
-		id entry = [myKeywords objectForKey: utoken];
-		if ([[entry objectForKey: IDEKit_LexIDKey] intValue]) {
-			return IDEKit_kLexActionReturn |(IDEKit_kLexActionMask & [[entry objectForKey: IDEKit_LexIDKey] intValue]);
+    if (myKeywords[utoken]) {
+		id entry = myKeywords[utoken];
+		if ([entry[IDEKit_LexIDKey] intValue]) {
+			return IDEKit_kLexActionReturn |(IDEKit_kLexActionMask & [entry[IDEKit_LexIDKey] intValue]);
 		}
 		return IDEKit_kLexActionReturn | (IDEKit_kLexActionMask & IDEKit_kLexToken); // generic token
     }
@@ -324,7 +319,7 @@ enum {
     NSString *token = [myString substringWithRange: NSMakeRange(myTempBackState,myCurLoc-myTempBackState)]; // just grab after the ws
 	//NSLog(@"Checking pre-pro '%@'",token);
     for (NSUInteger i=0;i<[myPreProcessor count];i++) {
-		if ([token isEqualToString: [myPreProcessor objectAtIndex: i]]) {
+		if ([token isEqualToString: myPreProcessor[i]]) {
 			if (peekChar == '\n') {
 				myCurLoc++; // we are at the end of it already
 				mySubColor = IDEKit_kLangColor_Preprocessor;
@@ -397,7 +392,7 @@ enum {
 		case IDEKit_kLexStateMarkupContent:
 			return [self lexStateMarkupContent: peekChar];
 		default:
-			NSLog(@"Lex state %d not handled",state);
+			NSLog(@"Lex state %ld not handled",state);
 			
     }
     return IDEKit_kLexActionReturn | (IDEKit_kLexActionMask & IDEKit_kLexError);
@@ -408,7 +403,7 @@ enum {
 {
     if (myString == NULL)
 		return IDEKit_kLexEOF;
-    int strLength = [myString length];
+    NSInteger strLength = [myString length];
     if (myCurLoc >= strLength) {
 		myString = nil;
 		return IDEKit_kLexEOF;
@@ -421,8 +416,8 @@ enum {
 		}
 		unichar peekChar = 0;
 		if (myCurLoc < strLength) peekChar = [myString characterAtIndex: myCurLoc];
-		int action = [self examineCharacter: peekChar inState: myCurState];
-		int actionParam = (action & IDEKit_kLexActionMask);
+		NSInteger action = [self examineCharacter: peekChar inState: myCurState];
+		NSInteger actionParam = (action & IDEKit_kLexActionMask);
 		action = action & (~IDEKit_kLexActionMask);
 		switch (action) {
 			case IDEKit_kLexActionIgnore:
@@ -449,7 +444,7 @@ enum {
 				myCurState = actionParam;
 				break;
 			default:
-				NSLog(@"Invalid lexical action %.8X",action | actionParam);
+				NSLog(@"Invalid lexical action %.8lX",action | actionParam);
 				myCurLoc++;
 		}
     }
@@ -463,7 +458,7 @@ enum {
 		return; // nothing to color - at end of string
     while (myCurLoc <= myStopLoc+1) { // make sure to go up to the EOL after the selection, just to be safe
 		NSRange tokenRange;
-		int nextToken = [self parseOneToken: &tokenRange ignoreWhiteSpace: YES];
+		NSInteger nextToken = [self parseOneToken: &tokenRange ignoreWhiteSpace: YES];
 		int color = IDEKit_kLangColor_NormalText;
 		NSString *token = [[string string] substringWithRange: tokenRange];
 		//NSLog(@"'%@' = %d",token,nextToken);

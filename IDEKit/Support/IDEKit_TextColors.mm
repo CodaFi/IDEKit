@@ -90,7 +90,7 @@ static NSColor *IDEKit_PrimativeColorForColor(int color)
     }
     return [NSColor blackColor];
 }
-NSString *IDEKit_NameForColor(int color)
+NSString *IDEKit_NameForColor(NSInteger color)
 {
     switch (color) {
 	case IDEKit_kLangColor_Background:
@@ -130,9 +130,9 @@ NSString *IDEKit_NameForColor(int color)
     }
     return nil;
 }
-NSColor *IDEKit_TextColorForColor(int color)
+NSColor *IDEKit_TextColorForColor(NSInteger color)
 {
-    id colorObject = [[[NSUserDefaults standardUserDefaults] dictionaryForKey: IDEKit_TextColorsPrefKey] objectForKey: IDEKit_NameForColor(color)];
+    id colorObject = [[NSUserDefaults standardUserDefaults] dictionaryForKey: IDEKit_TextColorsPrefKey][IDEKit_NameForColor(color)];
     if (colorObject) {
 	return [NSColor colorWithHTML: colorObject]; // better be a color
     } else {
@@ -158,7 +158,7 @@ NSColor *IDEKit_TextColorForColor(int color)
     NSScanner *scanner = [NSScanner scannerWithString: triplet];
     [scanner setCharactersToBeSkipped: [NSCharacterSet characterSetWithCharactersInString: @" ()#,$"]];
     [scanner setCaseSensitive: NO];
-    unsigned int red,green,blue,alpha;
+    int red,green,blue,alpha;
     if ([scanner scanInt: &red] == NO) red = 0;
     if ([scanner scanInt: &green] == NO) green = 0;
     if ([scanner scanInt: &blue] == NO) blue = 0;

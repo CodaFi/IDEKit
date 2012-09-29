@@ -39,7 +39,7 @@ enum {
     IBOutlet id mySplitter;
     IBOutlet id myUnsplitter;
     IBOutlet id myLineButton;
-    int myShowFlags;
+    NSInteger myShowFlags;
 }
 + (id)lastHit; // used for split hit detection
 - (id) initWithFrame: (NSRect) theFrame;

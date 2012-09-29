@@ -57,8 +57,8 @@ NSString *IDEKit_TagsFileName = @"IDEKit_Tags.plist";
 - (NSDictionary *)projectEntryForFile: (NSString *)path
 {
     for (NSUInteger j=0;j<[myFileList count];j++) {
-	NSDictionary *entry = [myFileList objectAtIndex: j];
-	if ([path isEqualToString: [entry objectForKey: IDEKit_ProjEntryPath]])
+	NSDictionary *entry = myFileList[j];
+	if ([path isEqualToString: entry[IDEKit_ProjEntryPath]])
 	    return entry;
     }
     return NULL;
@@ -66,8 +66,8 @@ NSString *IDEKit_TagsFileName = @"IDEKit_Tags.plist";
 - (NSDictionary *)projectEntryForName: (NSString *)name
 {
     for (NSUInteger j=0;j<[myFileList count];j++) {
-	NSDictionary *entry = [myFileList objectAtIndex: j];
-	if ([name isEqualToString: [entry objectForKey: IDEKit_ProjEntryName]])
+	NSDictionary *entry = myFileList[j];
+	if ([name isEqualToString: entry[IDEKit_ProjEntryName]])
 	    return entry;
     }
     return NULL;
@@ -75,8 +75,8 @@ NSString *IDEKit_TagsFileName = @"IDEKit_Tags.plist";
 
 - (NSString *)currentTargetDir
 {
-    NSString *dir = [[self fileName] stringByAppendingPathComponent: [myCurrentTarget objectForKey: IDEKit_ProjEntryName]];
-    [[NSFileManager defaultManager] createDirectoryAtPath: dir attributes: NULL];
+    NSString *dir = [[[self fileURL] absoluteString] stringByAppendingPathComponent: myCurrentTarget[IDEKit_ProjEntryName]];
+	[[NSFileManager defaultManager]createDirectoryAtPath:dir withIntermediateDirectories:nil attributes:NULL error:nil];
     return dir;
 }
 
@@ -92,7 +92,7 @@ NSString *IDEKit_TagsFileName = @"IDEKit_Tags.plist";
 {
     NSString *dir = [self currentTargetDir];
     dir = [dir stringByAppendingPathComponent: subDir];
-    [[NSFileManager defaultManager] createDirectoryAtPath: dir attributes: NULL];
+	[[NSFileManager defaultManager]createDirectoryAtPath:dir withIntermediateDirectories:nil attributes:NULL error:nil];
     return dir;
 }
 
@@ -107,8 +107,8 @@ NSString *IDEKit_TagsFileName = @"IDEKit_Tags.plist";
     // start with the default values from the system
     id retval = [[IDEKit predefinedPathsVars] mutableCopy];
     // add project paths
-    [retval setObject: [[self fileName]stringByDeletingLastPathComponent] forKey: @"{Project}"];
-    [retval setObject: [self currentTargetBuildDir] forKey: @"{BuildDir}"];
+    retval[@"{Project}"] = [[[self fileURL]absoluteString]stringByDeletingLastPathComponent];
+    retval[@"{BuildDir}"] = [self currentTargetBuildDir];
     // and add in the user paths
     id userPaths = [[self currentTargetDefaults] objectForKey: IDEKit_UserPathsKey];
     if (!userPaths) {
@@ -116,8 +116,8 @@ NSString *IDEKit_TagsFileName = @"IDEKit_Tags.plist";
     }
 
     for (NSUInteger i=0;i<[userPaths count];i++) {
-	id entry = [userPaths  objectAtIndex: i];
-	[retval setObject: [entry objectAtIndex: 1] forKey: [entry objectAtIndex: 0]];
+	id entry = userPaths[i];
+	retval[entry[0]] = entry[1];
     }
     return retval;
 }
@@ -136,7 +136,7 @@ NSString *IDEKit_TagsFileName = @"IDEKit_Tags.plist";
 {
     id entry = [sender representedObject];
     id pathVars = [self pathVars];
-    id fullPath = [entry objectForKey: IDEKit_ProjEntryPath];
+    id fullPath = entry[IDEKit_ProjEntryPath];
     id newRelative = NULL;
     NSString *varName = NULL;
     switch ([sender tag]) {
@@ -164,10 +164,10 @@ NSString *IDEKit_TagsFileName = @"IDEKit_Tags.plist";
 	    break;
     }
     if (varName) {
-	newRelative = [fullPath stringRelativeTo:[pathVars objectForKey: varName] name: varName];
+	newRelative = [fullPath stringRelativeTo:pathVars[varName] name: varName];
     }
     if (newRelative) {
-	[entry setObject: newRelative forKey: IDEKit_ProjEntryRelative];
+	entry[IDEKit_ProjEntryRelative] = newRelative;
 	[self liveSave];
     }
 }

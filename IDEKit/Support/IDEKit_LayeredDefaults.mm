@@ -26,34 +26,28 @@
 @implementation IDEKit_LayeredDefaults
 + (IDEKit_LayeredDefaults *) layeredDefaultsWithDict: (NSMutableDictionary *)settings layeredSettings: (NSDictionary *)layeredSettings
 {
-    return [[[self alloc] initWithDict: settings layeredSettings: layeredSettings] autorelease];
+    return [[self alloc] initWithDict: settings layeredSettings: layeredSettings];
 }
 - (id) initWithDict: (NSMutableDictionary *)settings layeredSettings: (NSDictionary *)layeredSettings
 {
     self = [super init];
 
     if (self) {
-	mySettings = [settings retain];
-	myLayeredSettings = [layeredSettings retain];
-	myChangedKeys = [[NSMutableSet set] retain];
+	mySettings = settings;
+	myLayeredSettings = layeredSettings;
+	myChangedKeys = [NSMutableSet set];
     }
     return self;
 }
-- (void) dealloc
-{
-    [mySettings release];
-    [myLayeredSettings release];
-    [myChangedKeys release];
-}
 - (id)objectForKey:(NSString *)defaultName
 {
-    if ([mySettings objectForKey: defaultName]) {
+    if (mySettings[defaultName]) {
 	//NSLog(@"Found setting %@ = %@",defaultName,[[mySettings objectForKey: defaultName] description]);
-	return [mySettings objectForKey: defaultName];
+	return mySettings[defaultName];
     }
-    if (myLayeredSettings && [myLayeredSettings objectForKey: defaultName]) {
+    if (myLayeredSettings && myLayeredSettings[defaultName]) {
 	//NSLog(@"Found layered %@ = %@",defaultName,[[mySettings objectForKey: defaultName] description]);
-	return [myLayeredSettings objectForKey: defaultName];
+	return myLayeredSettings[defaultName];
     }
     //NSLog(@"Requiring super objectForKey %@ = %@",defaultName,[[super objectForKey: defaultName] description]);
     // we want all the defaults that standardUserDefaults has
@@ -61,7 +55,7 @@
 }
 - (void)setObject:(id)value forKey:(NSString *)defaultName
 {
-    [mySettings setObject: value forKey: defaultName];
+    mySettings[defaultName] = value;
     [myChangedKeys addObject: defaultName];
 }
 - (void)removeObjectForKey:(NSString *)defaultName
@@ -78,8 +72,7 @@
 {
     // need to clear everything in mySettings
     [mySettings removeAllObjects];
-    [myChangedKeys autorelease];
-    myChangedKeys = [[NSMutableSet set] retain];
+    myChangedKeys = [NSMutableSet set];
 }
 
 @end

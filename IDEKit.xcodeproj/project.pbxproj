@@ -150,21 +150,6 @@
 		8469FD991616C1E5002AFC0D /* IDEKit_TextColors.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCFC1616C1E4002AFC0D /* IDEKit_TextColors.mm */; };
 		8469FD9A1616C1E5002AFC0D /* IDEKit_UniqueFileIDManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCFD1616C1E4002AFC0D /* IDEKit_UniqueFileIDManager.h */; };
 		8469FD9B1616C1E5002AFC0D /* IDEKit_UniqueFileIDManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCFE1616C1E4002AFC0D /* IDEKit_UniqueFileIDManager.mm */; };
-		8469FD9C1616C1E5002AFC0D /* regc_color.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD001616C1E4002AFC0D /* regc_color.c */; };
-		8469FD9D1616C1E5002AFC0D /* regc_cvec.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD011616C1E4002AFC0D /* regc_cvec.c */; };
-		8469FD9E1616C1E5002AFC0D /* regc_lex.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD021616C1E4002AFC0D /* regc_lex.c */; };
-		8469FD9F1616C1E5002AFC0D /* regc_locale.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD031616C1E4002AFC0D /* regc_locale.c */; };
-		8469FDA01616C1E5002AFC0D /* regc_nfa.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD041616C1E4002AFC0D /* regc_nfa.c */; };
-		8469FDA11616C1E5002AFC0D /* regcomp.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD051616C1E4002AFC0D /* regcomp.c */; };
-		8469FDA21616C1E5002AFC0D /* regcustom.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FD061616C1E4002AFC0D /* regcustom.h */; };
-		8469FDA31616C1E5002AFC0D /* rege_dfa.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD071616C1E4002AFC0D /* rege_dfa.c */; };
-		8469FDA41616C1E5002AFC0D /* regerror.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD081616C1E4002AFC0D /* regerror.c */; };
-		8469FDA51616C1E5002AFC0D /* regerrs.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FD091616C1E4002AFC0D /* regerrs.h */; };
-		8469FDA61616C1E5002AFC0D /* regex.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FD0A1616C1E4002AFC0D /* regex.h */; };
-		8469FDA71616C1E5002AFC0D /* regexec.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD0B1616C1E4002AFC0D /* regexec.c */; };
-		8469FDA81616C1E5002AFC0D /* regfree.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD0C1616C1E4002AFC0D /* regfree.c */; };
-		8469FDA91616C1E5002AFC0D /* regfronts.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FD0D1616C1E4002AFC0D /* regfronts.c */; };
-		8469FDAA1616C1E5002AFC0D /* regguts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FD0E1616C1E4002AFC0D /* regguts.h */; };
 		8469FDBD1616C1EF002AFC0D /* CollapseMarker.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDAC1616C1EF002AFC0D /* CollapseMarker.tiff */; };
 		8469FDBE1616C1EF002AFC0D /* Info-CPlugIn__Upgraded_.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDAD1616C1EF002AFC0D /* Info-CPlugIn__Upgraded_.plist */; };
 		8469FDBF1616C1EF002AFC0D /* Info-GenericPlugIn__Upgraded.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDAE1616C1EF002AFC0D /* Info-GenericPlugIn__Upgraded.plist */; };
@@ -184,6 +169,8 @@
 		8469FDCD1616C1EF002AFC0D /* ReadMe.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8469FDBC1616C1EF002AFC0D /* ReadMe.rtf */; };
 		8469FDCF1616C832002AFC0D /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8469FDCE1616C832002AFC0D /* libobjc.A.dylib */; };
 		8469FDD11616CFA3002AFC0D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8469FDD01616CFA3002AFC0D /* QuartzCore.framework */; };
+		8469FDD31616DCB0002AFC0D /* libobjc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8469FDD21616DCAF002AFC0D /* libobjc.dylib */; };
+		8469FDDA16177239002AFC0D /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8469FDD916177237002AFC0D /* PreferencePanes.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -336,21 +323,6 @@
 		8469FCFC1616C1E4002AFC0D /* IDEKit_TextColors.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_TextColors.mm; sourceTree = "<group>"; };
 		8469FCFD1616C1E4002AFC0D /* IDEKit_UniqueFileIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEKit_UniqueFileIDManager.h; sourceTree = "<group>"; };
 		8469FCFE1616C1E4002AFC0D /* IDEKit_UniqueFileIDManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IDEKit_UniqueFileIDManager.mm; sourceTree = "<group>"; };
-		8469FD001616C1E4002AFC0D /* regc_color.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regc_color.c; sourceTree = "<group>"; };
-		8469FD011616C1E4002AFC0D /* regc_cvec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regc_cvec.c; sourceTree = "<group>"; };
-		8469FD021616C1E4002AFC0D /* regc_lex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regc_lex.c; sourceTree = "<group>"; };
-		8469FD031616C1E4002AFC0D /* regc_locale.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regc_locale.c; sourceTree = "<group>"; };
-		8469FD041616C1E4002AFC0D /* regc_nfa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regc_nfa.c; sourceTree = "<group>"; };
-		8469FD051616C1E4002AFC0D /* regcomp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regcomp.c; sourceTree = "<group>"; };
-		8469FD061616C1E4002AFC0D /* regcustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regcustom.h; sourceTree = "<group>"; };
-		8469FD071616C1E4002AFC0D /* rege_dfa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rege_dfa.c; sourceTree = "<group>"; };
-		8469FD081616C1E4002AFC0D /* regerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regerror.c; sourceTree = "<group>"; };
-		8469FD091616C1E4002AFC0D /* regerrs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regerrs.h; sourceTree = "<group>"; };
-		8469FD0A1616C1E4002AFC0D /* regex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regex.h; sourceTree = "<group>"; };
-		8469FD0B1616C1E4002AFC0D /* regexec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regexec.c; sourceTree = "<group>"; };
-		8469FD0C1616C1E4002AFC0D /* regfree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regfree.c; sourceTree = "<group>"; };
-		8469FD0D1616C1E4002AFC0D /* regfronts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regfronts.c; sourceTree = "<group>"; };
-		8469FD0E1616C1E4002AFC0D /* regguts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regguts.h; sourceTree = "<group>"; };
 		8469FDAC1616C1EF002AFC0D /* CollapseMarker.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = CollapseMarker.tiff; sourceTree = "<group>"; };
 		8469FDAD1616C1EF002AFC0D /* Info-CPlugIn__Upgraded_.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-CPlugIn__Upgraded_.plist"; sourceTree = "<group>"; };
 		8469FDAE1616C1EF002AFC0D /* Info-GenericPlugIn__Upgraded.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-GenericPlugIn__Upgraded.plist"; sourceTree = "<group>"; };
@@ -370,6 +342,8 @@
 		8469FDBC1616C1EF002AFC0D /* ReadMe.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = ReadMe.rtf; sourceTree = "<group>"; };
 		8469FDCE1616C832002AFC0D /* libobjc.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjc.A.dylib; path = usr/lib/libobjc.A.dylib; sourceTree = SDKROOT; };
 		8469FDD01616CFA3002AFC0D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8469FDD21616DCAF002AFC0D /* libobjc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjc.dylib; path = usr/lib/libobjc.dylib; sourceTree = SDKROOT; };
+		8469FDD916177237002AFC0D /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -377,6 +351,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8469FDDA16177239002AFC0D /* PreferencePanes.framework in Frameworks */,
+				8469FDD31616DCB0002AFC0D /* libobjc.dylib in Frameworks */,
 				8469FDD11616CFA3002AFC0D /* QuartzCore.framework in Frameworks */,
 				8469FDCF1616C832002AFC0D /* libobjc.A.dylib in Frameworks */,
 				8469FC561616C1CD002AFC0D /* Cocoa.framework in Frameworks */,
@@ -389,6 +365,8 @@
 		8469FC461616C1CD002AFC0D = {
 			isa = PBXGroup;
 			children = (
+				8469FDD916177237002AFC0D /* PreferencePanes.framework */,
+				8469FDD21616DCAF002AFC0D /* libobjc.dylib */,
 				8469FDD01616CFA3002AFC0D /* QuartzCore.framework */,
 				8469FDCE1616C832002AFC0D /* libobjc.A.dylib */,
 				8469FC5B1616C1CD002AFC0D /* IDEKit */,
@@ -651,7 +629,6 @@
 				8469FCFC1616C1E4002AFC0D /* IDEKit_TextColors.mm */,
 				8469FCFD1616C1E4002AFC0D /* IDEKit_UniqueFileIDManager.h */,
 				8469FCFE1616C1E4002AFC0D /* IDEKit_UniqueFileIDManager.mm */,
-				8469FCFF1616C1E4002AFC0D /* regex */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -663,28 +640,6 @@
 				8469FCDA1616C1E4002AFC0D /* NSString102.mm */,
 			);
 			path = 102Compatibility;
-			sourceTree = "<group>";
-		};
-		8469FCFF1616C1E4002AFC0D /* regex */ = {
-			isa = PBXGroup;
-			children = (
-				8469FD001616C1E4002AFC0D /* regc_color.c */,
-				8469FD011616C1E4002AFC0D /* regc_cvec.c */,
-				8469FD021616C1E4002AFC0D /* regc_lex.c */,
-				8469FD031616C1E4002AFC0D /* regc_locale.c */,
-				8469FD041616C1E4002AFC0D /* regc_nfa.c */,
-				8469FD051616C1E4002AFC0D /* regcomp.c */,
-				8469FD061616C1E4002AFC0D /* regcustom.h */,
-				8469FD071616C1E4002AFC0D /* rege_dfa.c */,
-				8469FD081616C1E4002AFC0D /* regerror.c */,
-				8469FD091616C1E4002AFC0D /* regerrs.h */,
-				8469FD0A1616C1E4002AFC0D /* regex.h */,
-				8469FD0B1616C1E4002AFC0D /* regexec.c */,
-				8469FD0C1616C1E4002AFC0D /* regfree.c */,
-				8469FD0D1616C1E4002AFC0D /* regfronts.c */,
-				8469FD0E1616C1E4002AFC0D /* regguts.h */,
-			);
-			path = regex;
 			sourceTree = "<group>";
 		};
 		8469FDAB1616C1EF002AFC0D /* Images */ = {
@@ -763,10 +718,6 @@
 				8469FD961616C1E5002AFC0D /* IDEKit_SourceFingerprint.h in Headers */,
 				8469FD981616C1E5002AFC0D /* IDEKit_TextColors.h in Headers */,
 				8469FD9A1616C1E5002AFC0D /* IDEKit_UniqueFileIDManager.h in Headers */,
-				8469FDA21616C1E5002AFC0D /* regcustom.h in Headers */,
-				8469FDA51616C1E5002AFC0D /* regerrs.h in Headers */,
-				8469FDA61616C1E5002AFC0D /* regex.h in Headers */,
-				8469FDAA1616C1E5002AFC0D /* regguts.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -930,17 +881,6 @@
 				8469FD971616C1E5002AFC0D /* IDEKit_SourceFingerprint.mm in Sources */,
 				8469FD991616C1E5002AFC0D /* IDEKit_TextColors.mm in Sources */,
 				8469FD9B1616C1E5002AFC0D /* IDEKit_UniqueFileIDManager.mm in Sources */,
-				8469FD9C1616C1E5002AFC0D /* regc_color.c in Sources */,
-				8469FD9D1616C1E5002AFC0D /* regc_cvec.c in Sources */,
-				8469FD9E1616C1E5002AFC0D /* regc_lex.c in Sources */,
-				8469FD9F1616C1E5002AFC0D /* regc_locale.c in Sources */,
-				8469FDA01616C1E5002AFC0D /* regc_nfa.c in Sources */,
-				8469FDA11616C1E5002AFC0D /* regcomp.c in Sources */,
-				8469FDA31616C1E5002AFC0D /* rege_dfa.c in Sources */,
-				8469FDA41616C1E5002AFC0D /* regerror.c in Sources */,
-				8469FDA71616C1E5002AFC0D /* regexec.c in Sources */,
-				8469FDA81616C1E5002AFC0D /* regfree.c in Sources */,
-				8469FDA91616C1E5002AFC0D /* regfronts.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1014,14 +954,18 @@
 		8469FC681616C1CD002AFC0D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IDEKit/IDEKit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = __REG_WIDE_COMPILE;
 				INFOPLIST_FILE = "IDEKit/IDEKit-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -1029,14 +973,18 @@
 		8469FC691616C1CD002AFC0D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IDEKit/IDEKit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = __REG_WIDE_COMPILE;
 				INFOPLIST_FILE = "IDEKit/IDEKit-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
