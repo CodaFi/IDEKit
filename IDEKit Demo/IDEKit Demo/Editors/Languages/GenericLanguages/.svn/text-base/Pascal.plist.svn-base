@@ -1,0 +1,83 @@
+{
+    Name = "Pascal";
+    Extensions = ( "pas", "p" );
+    CaseSensitive = NO;
+    UnicodeSymbols = NO;
+    CommentsCanBeNested = YES;
+    String = (
+	( "'", "'" ),
+    );
+    MultiLineComment = (
+	( "{", "}" ),
+	( "(*", "*)" )
+    );
+    Keywords = (
+	"and",
+	"array",
+	"begin",
+	"case",
+	"const",
+	"div",
+	"do",
+	"downto",
+	"else",
+	"end",
+	"file",
+	"for",
+	"function",
+	"goto",
+	"if",
+	"implementation",
+	"in",
+	"inherited",
+	"inline",
+	"interface",
+	"label",
+	"mod",
+	"nil",
+	"not",
+	"object",
+	"of",
+	"or",
+	"otherwise",
+	"packed",
+	"procedure",
+	"program",
+	"record",
+	"repeat",
+	"set",
+	"string",
+	"then",
+	"to",
+	"type",
+	"unit",
+	"until",
+	"uses",
+	"var",
+	"while",
+	"with"
+    );
+    AltKeywords = (
+	"Byte",
+	"extended",
+	"extended80",
+	"extended96",
+	"Fixed",
+	"Fract",
+	"Handle",
+	"OSErr",
+	"OSType",
+	"Point",
+	"ProcPtr",
+	"Ptr",
+	"RGBColor",
+	"Rect",
+	"ResType",
+	"SignedByte",
+	"StringPtr",
+	"Str255",
+	"Str31",
+	"Str63",
+	"UniversalProcPtr"
+    );
+}

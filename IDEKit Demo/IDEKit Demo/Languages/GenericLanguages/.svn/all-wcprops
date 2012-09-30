@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages
+END
+AppleScript.plist
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/AppleScript.plist
+END
+php.plist
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/php.plist
+END
+CShell.plist
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/CShell.plist
+END
+Fortran.plist
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/Fortran.plist
+END
+Rez.plist
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/Rez.plist
+END
+Java.plist
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/Java.plist
+END
+Ruby.plist
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/Ruby.plist
+END
+BourneShell.plist
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/BourneShell.plist
+END
+Perl.plist
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/Perl.plist
+END
+Ada95.plist
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/Ada95.plist
+END
+Pascal.plist
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/Pascal.plist
+END
+ppd.plist
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/ppd.plist
+END
+GenericShell.plist
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Languages/GenericLanguages/GenericShell.plist
+END

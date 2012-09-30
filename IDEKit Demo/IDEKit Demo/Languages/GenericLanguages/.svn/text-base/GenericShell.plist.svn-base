@@ -1,0 +1,16 @@
+{
+    Name = "Shell Script";
+    MIMETypes = ( "text/x-script" );
+    SingleLineComment = ( "#" );
+    String = (
+	( "\"", "\"" )
+    );
+    Character = (
+	( "'", "'" )
+    );
+    IdentifierStartChars = "_";
+    IdentifierChars = "_";
+    EscapeCharacter = "\\";
+    Keywords = (
+    );
+}

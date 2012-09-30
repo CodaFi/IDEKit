@@ -111,7 +111,7 @@
 		8469FD721616C1E5002AFC0D /* IDEKit_ProjDocumentUI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCD21616C1E4002AFC0D /* IDEKit_ProjDocumentUI.mm */; };
 		8469FD731616C1E5002AFC0D /* IDEKit_ProjSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCD31616C1E4002AFC0D /* IDEKit_ProjSettings.h */; };
 		8469FD741616C1E5002AFC0D /* IDEKit_ProjSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCD41616C1E4002AFC0D /* IDEKit_ProjSettings.mm */; };
-		8469FD751616C1E5002AFC0D /* IDEKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCD61616C1E4002AFC0D /* IDEKit.h */; };
+		8469FD751616C1E5002AFC0D /* IDEKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCD61616C1E4002AFC0D /* IDEKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8469FD761616C1E5002AFC0D /* NSString102.h in Headers */ = {isa = PBXBuildFile; fileRef = 8469FCD91616C1E4002AFC0D /* NSString102.h */; };
 		8469FD771616C1E5002AFC0D /* NSString102.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCDA1616C1E4002AFC0D /* NSString102.mm */; };
 		8469FD781616C1E5002AFC0D /* FakeTCLBridge.c in Sources */ = {isa = PBXBuildFile; fileRef = 8469FCDB1616C1E4002AFC0D /* FakeTCLBridge.c */; };
@@ -365,10 +365,6 @@
 		8469FC461616C1CD002AFC0D = {
 			isa = PBXGroup;
 			children = (
-				8469FDD916177237002AFC0D /* PreferencePanes.framework */,
-				8469FDD21616DCAF002AFC0D /* libobjc.dylib */,
-				8469FDD01616CFA3002AFC0D /* QuartzCore.framework */,
-				8469FDCE1616C832002AFC0D /* libobjc.A.dylib */,
 				8469FC5B1616C1CD002AFC0D /* IDEKit */,
 				8469FC541616C1CD002AFC0D /* Frameworks */,
 				8469FC531616C1CD002AFC0D /* Products */,
@@ -386,6 +382,10 @@
 		8469FC541616C1CD002AFC0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8469FDD916177237002AFC0D /* PreferencePanes.framework */,
+				8469FDD21616DCAF002AFC0D /* libobjc.dylib */,
+				8469FDD01616CFA3002AFC0D /* QuartzCore.framework */,
+				8469FDCE1616C832002AFC0D /* libobjc.A.dylib */,
 				8469FC551616C1CD002AFC0D /* Cocoa.framework */,
 				8469FC571616C1CD002AFC0D /* Other Frameworks */,
 			);
@@ -657,6 +657,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8469FD751616C1E5002AFC0D /* IDEKit.h in Headers */,
 				8469FD0F1616C1E4002AFC0D /* IDEKit_Autocompletion.h in Headers */,
 				8469FD111616C1E4002AFC0D /* IDEKit_Console.h in Headers */,
 				8469FD131616C1E4002AFC0D /* IDEKit_FindPaletteController.h in Headers */,
@@ -698,7 +699,6 @@
 				8469FD6F1616C1E5002AFC0D /* IDEKit_ProjDocumentPaths.h in Headers */,
 				8469FD711616C1E5002AFC0D /* IDEKit_ProjDocumentUI.h in Headers */,
 				8469FD731616C1E5002AFC0D /* IDEKit_ProjSettings.h in Headers */,
-				8469FD751616C1E5002AFC0D /* IDEKit.h in Headers */,
 				8469FD761616C1E5002AFC0D /* NSString102.h in Headers */,
 				8469FD791616C1E5002AFC0D /* FakeTCLBridge.h in Headers */,
 				8469FD7A1616C1E5002AFC0D /* IDEKit_Breakpoint.h in Headers */,
@@ -966,6 +966,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -985,6 +986,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -1008,6 +1010,7 @@
 				8469FC691616C1CD002AFC0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

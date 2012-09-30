@@ -1,0 +1,49 @@
+//
+//  IDEKit_ProjDocumentUI.h
+//  IDEKit
+//
+//  Created by Glenn Andreas on Wed Aug 20 2003.
+//  Copyright (c) 2003, 2004 by Glenn Andreas
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//  
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//  
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+#import "IDEKit_ProjDocument.h"
+
+@interface IDEKit_ProjDocument(UI)
+- (IBAction) singleClickList: (id) sender;
+- (IBAction) doubleClickList: (id) sender;
+- (void) adjustTabTitles;
+- (void) rebuildTargetPopup;
+- (NSInteger) buildMenuOfTargets: (NSMenu *)menu skipItems: (NSInteger) skip command: (SEL) sel target: (id) target;
+- (IBAction) newTarget: (id) sender;
+@end
+
+
+
+// Provide some utility methods we need
+
+@interface NSMutableArray(MovingItems)
+- (void) moveItemAt: (NSUInteger) oldIndex to: (NSUInteger) newIndex;
+@end
+@interface NSOutlineView(Parentage)
+- (id) parentItemForItem: (id) item;
+@end
+
+// and a subclass of NSOutlineView to add row coloring and item specific contextual menus
+@interface IDEKit_ColoredOutlineView : NSOutlineView
+- (void)drawRow:(NSInteger)row clipRect:(NSRect)rect;
+- (NSMenu *)menuForEvent:(NSEvent *)theEvent;
+@end

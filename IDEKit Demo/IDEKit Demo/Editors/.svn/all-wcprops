@@ -1,0 +1,209 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors
+END
+IDEKit_Console.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_Console.h
+END
+IDEKit_SrcEditViewPrinting.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcEditViewPrinting.h
+END
+IDEKit_FindPaletteController.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_FindPaletteController.h
+END
+IDEKit_SrcEditViewExtensions.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcEditViewExtensions.h
+END
+IDEKit_RTFViewer.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_RTFViewer.h
+END
+IDEKit_SrcScroller.mm
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcScroller.mm
+END
+IDEKit_SrcLayoutManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcLayoutManager.h
+END
+IDEKit_TextViewExtensions.mm
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_TextViewExtensions.mm
+END
+IDEKit_RTFViewer.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_RTFViewer.m
+END
+IDEKit_Console.mm
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_Console.mm
+END
+IDEKit_SrcDocument.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcDocument.h
+END
+IDEKit_Snippets.mm
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_Snippets.mm
+END
+IDEKit_SrcEditView.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcEditView.h
+END
+IDEKit_SrcEditViewExtensions.mm
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcEditViewExtensions.mm
+END
+IDEKit_SrcEditViewBreakpoints.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcEditViewBreakpoints.h
+END
+IDEKit_SrcScroller.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcScroller.h
+END
+IDEKit_LineCache.mm
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_LineCache.mm
+END
+IDEKit_TextViewExtensions.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_TextViewExtensions.h
+END
+IDEKit_TextView.mm
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_TextView.mm
+END
+IDEKit_SrcLayoutManager.mm
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcLayoutManager.mm
+END
+IDEKit_Autocompletion.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_Autocompletion.h
+END
+IDEKit_SrcEditViewStatusBar.mm
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcEditViewStatusBar.mm
+END
+IDEKit_Snippets.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_Snippets.h
+END
+IDEKit_SrcDocument.mm
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcDocument.mm
+END
+IDEKit_SrcEditView.mm
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcEditView.mm
+END
+IDEKit_LineCache.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_LineCache.h
+END
+IDEKit_SrcEditViewBreakpoints.mm
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcEditViewBreakpoints.mm
+END
+IDEKit_SrcEditViewFolding.mm
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcEditViewFolding.mm
+END
+IDEKit_TextView.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_TextView.h
+END
+IDEKit_SrcEditViewStatusBar.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcEditViewStatusBar.h
+END
+IDEKit_Autocompletion.mm
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_Autocompletion.mm
+END
+IDEKit_SrcEditViewPrinting.mm
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcEditViewPrinting.mm
+END
+IDEKit_FindPaletteController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_FindPaletteController.mm
+END
+IDEKit_SrcEditViewFolding.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Editors/IDEKit_SrcEditViewFolding.h
+END

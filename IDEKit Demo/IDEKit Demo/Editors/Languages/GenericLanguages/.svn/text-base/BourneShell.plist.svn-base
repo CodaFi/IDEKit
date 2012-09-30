@@ -1,0 +1,45 @@
+{
+    Name = "Bourne Shell Script";
+    Extensions = ( "sh" );
+    MagicWord = (
+	"#!/bin/sh",
+	"#! /bin/sh",
+	"#!/bin/zsh",
+	"#! /bin/zsh",
+	"#!/bin/bash",
+	"#! /bin/bash",
+	"#!/usrlocal/bin/bash",
+	"#! /usrlocal/bin/bash"
+    );
+    MIMETypes = ( "text/x-sh-script" );
+    SingleLineComment = ( "#" );
+    String = (
+	( "\"", "\"" )
+    );
+    Character = (
+	( "'", "'" )
+    );
+    IdentifierStartChars = "_";
+    IdentifierChars = "_";
+    EscapeCharacter = "\\";
+    Keywords = (
+	"break",
+	"case",
+	"continue",
+	"do",
+	"done",
+	"elif",
+	"else",
+	"esac",
+	"exit",
+	"export",
+	"fi",
+	"for",
+	"if",
+	"in",
+	"read",
+	"shift",
+	"then",
+	"while"
+    );
+}

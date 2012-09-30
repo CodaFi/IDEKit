@@ -1,0 +1,56 @@
+{
+    Name = "C Shell Script";
+    Extensions = ( "csh" );
+    MagicWord = (
+	"#!/bin/csh",
+	"#! /bin/csh",
+	"#!/bin/tcsh",
+	"#! /bin/tcsh",
+	"#!/usr/local/tcsh",
+	"#! /usr/local/tcsh",
+	"#!/usr/local/bin/tcsh",
+	"#! /usr/local/bin/tcsh"
+    );
+    MIMETypes = ( "text/x-csh-script" );
+    SingleLineComment = ( "#" );
+    String = (
+	( "\"", "\"" )
+    );
+    Character = (
+	( "'", "'" )
+    );
+    IdentifierStartChars = "_";
+    IdentifierChars = "_";
+    EscapeCharacter = "\\";
+    Keywords = (
+	"alias",
+	"break",
+	"continue",
+	"foreach",
+	"umask",
+	"breaksw",
+	"case",
+	"default",
+	"else",
+	"end",
+	"endif",
+	"endsw",
+	"eval",
+	"exec",
+	"exit",
+	"if",
+	"onintr",
+	"printenv",
+	"set",
+	"setenv",
+	"shift",
+	"source",
+	"switch",
+	"then",
+	"umask",
+	"unlimit",
+	"unset",
+	"unsetenv",
+	"while"
+    );
+}

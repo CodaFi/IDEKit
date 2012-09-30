@@ -1,0 +1,628 @@
+(
+{
+	language="tcl";
+	title="Tcl Cookbook/Data%20structures/Minimal unique procedure for the versionally challanged";
+	tag="Altough the latest Tcl verions have a -unique flag for lsort, older verions do not. So for those ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/147663/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Data%20structures/Gettok";
+	tag="It returns the Xth token in a sentence..
+like: i have a sentence divided by : and i want to get the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/252145/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Data%20structures/Shuffling a list";
+	tag="How to randomly shuffle a list";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/65435/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Data%20structures/Sending mail with attachments";
+	tag="How to send an email using the SMTP and MIME packages in tcllib (part of ActiveTcl).";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/65434/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Data%20structures/Collection of bit manipulation functions.";
+	tag="A collection of simple bit manipulation functions in pure TCL.
+Functions supplied:
+   testbit
+   ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68376/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Data%20structures/Parsing comma separated values";
+	tag="How to parse lines containing comma-separated values.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/65433/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Data%20structures/Dialect for sort by... then by..";
+	tag="In a number of applications it is necessary to sort a list after
+several keys, for example first ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/65432/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Data%20structures/OO Meta-programing: method generation from a template";
+	tag="A straightforward routine to allow easy creation of new methods based on 
+a previous template. The ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68378/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Databases/DB2 - check tablespace status";
+	tag="DB2 tablespaces can become unavailable for various reasons and when they do go off-line the problem ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/208207/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Databases/Generate java structure definitions for DB2 tables.";
+	tag="This tcl script, called from a windows bat file generates java structure definitions for DB2 tables ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/206126/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Distributed%20processing/Socket based communication";
+	tag="Here we write the most simple socket based server application we
+can think of. Starting from this ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/65436/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Distributed%20processing/Minimal SOAP";
+	tag="A minimal example setting up and using SOAP to call to a temperature conversion service. Uses http ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/136604/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Dragon Curve";
+	tag="Origin: http://wiki.tcl.tk/3349
+Author: Keith Vetter
+
+Here's a quick and dirty rendering of the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/132605/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Functional imaging";
+	tag="Origin: http://wiki.tcl.tk/3523
+Author: Richard Suchenwirth
+
+Cameron Laird pointed me to Conal ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/133502/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/CanvasToImg";
+	tag="Save the contents of a canvas to an image file.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68411/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Convert (La)TeX math expressions to Tk Images on the fly";
+	tag="This code takes a TeX or LaTeX math expression and converts it into a Tk image suitable for placing ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68398/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Normally Distributed Random Numbers";
+	tag="This recipe produces random numbers from a normal (bell-shaped) distribution.
+(The rand() command ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/143083/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Converting numbers from arbitrary bases";
+	tag="Origin: http://wiki.tcl.tk/1067
+Author: Michael A. Cleverly
+
+The other day someone on ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/133524/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Octabug, 3D to 2D transformation";
+	tag="Origin: http://wiki.tcl.tk/3494
+Author: Keith Vetter
+
+This is a fun little graphical animation ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/133526/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Convert HSV colorspace to RGB";
+	tag="Author: Jeff Hobbs.
+
+Converts a color specified as Hue, Saturation and Value into an RGB triple. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/133527/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Conversion to Roman Numerals";
+	tag="Takes an integer between 1 and 3999 and converts it to Roman Numerals";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68379/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Generating random intergers within a range of max &amp; min.";
+	tag="Here's an example on how to generate a random number between 2 numbers
+Based on C code, 
+algorithm ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/186512/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Find smallest square to fit input.";
+	tag="A procedure from the bag of utilities used by Jeff Hobbs. Given an integer number it finds the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/146036/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Color Manipulation";
+	tag="Author: Jeff Hobbs
+
+A number of routines to convert and manipluate colors.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/133529/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Largest int supported by a platform, and the number of bits per int";
+	tag="Two procedures from the bag of utilities used by Jeff Hobbs. The first computes the largest integer ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/146035/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Convert HLS colorspace to RGB";
+	tag="Author: Frederic Bonnet
+
+Converts a color in HLS to a RGB triple. The triple can be processed by ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/133528/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Adding numbers in arbitrary bases.";
+	tag="The command adds two numbers in any base that can be expressed as a string of unique symbols. From ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/146222/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Random number in a range";
+	tag="Tcl 8.0 added the rand() expr function.  Here's a simple way to return the random number in a range.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68391/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Mathematics%20and%20Graphics/Inserts thousand separators into a number";
+	tag="This piece of code inserts a thousandth separator into a decimal number, i.e. every 3 digits the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/146220/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Miscellaneous/A read procedure that allows background event processing";
+	tag="Sometimes it is useful to be able to read from a channel but not hang
+while waiting for data to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68419/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Miscellaneous/Simplified mega-widiget creation without class libraries";
+	tag="If you're creating a mega-widget (aka composite widget) that you want to be extensible, but you ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/122547/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Miscellaneous/client%2fserver clipboard application";
+	tag="Script that can be used to create a clipboard connection between two machines. The script can be ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/143899/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Miscellaneous/An example mega-widget widget providing a text widget with X and Y scrollbars.";
+	tag="This is a simple example of a mega-widget based on the \"MegaWidget\" procedure in \"Simplified ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/122548/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Miscellaneous/try ... catch ... finally";
+	tag="The Java try ... catch ... finally construct is really nice for those cases when you want to ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68396/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Miscellaneous/Repeat procedure every X seconds";
+	tag="This is a cheap rescheduler that uses the built-in after command to repeat a command every X ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68393/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Miscellaneous/Obtaining the name of a procedure";
+	tag="How to obtain the name of a procedure from within it.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/65429/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Network%20resources/Simple TCP port blocker.";
+	tag="A very simple TCP port blocker in pure TCL.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68380/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Network%20resources/Socket based communication";
+	tag="Here we write the most simple socket based server application we
+can think of. Starting from this ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/65436/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Network%20resources/PortForwarder - TCL Sockets -";
+	tag="PortForwarder forwards incoming tcp/ip data (defined port and ip address) 
+towards an assigned ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/164989/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Platform%20Interfaces/Printing an existing file on Windows";
+	tag="A small routine to print a given file under Windows (note it blows up if the extension is not ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/284848/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Platform%20Interfaces/Raw Console Input on UNIX Platforms";
+	tag="Get those direct keystrokes here by leveraging the power of stty!";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68397/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Platform%20Interfaces/Largest int supported by a platform, and the number of bits per int";
+	tag="Two procedures from the bag of utilities used by Jeff Hobbs. The first computes the largest integer ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/146035/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Fuzzy Google truth";
+	tag="Origin: http://wiki.tcl.tk/3490
+Author: Richard Suchenwirth
+
+Given some piece of data where it ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/132606/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Flexible string splitting%2fparsing routine";
+	tag="This routine allows you to split a string on multiple characters.  Additionally, you can specify ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/116653/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Getting stock quotes over the internet";
+	tag="Origin: http://wiki.tcl.tk/636
+Author: The original author is unknown.
+
+Here's a simple Tcl ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/132604/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Querying an online dictionary";
+	tag="Origin: http://wiki.tcl.tk/3211
+Author: Reinhard Max.
+
+This little script sends it's command ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/132603/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Text to HTML";
+	tag="Scan the files in the current directory and wrap them into html/body tags so that netscape will ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/65428/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Tail a file";
+	tag="Comp.lang.tcl questioners frequently demand some sort of
+gadget to monitor an ongoing process and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/65437/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Dump a file in hex and ASCII";
+	tag="Origin: http://wiki.tcl.tk/1599
+Author: Original author unknown
+
+Demonstrates the use of the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/133525/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Simple templating routine";
+	tag="This routine performs simple text templating using ASP style code embedding. Useful as Wizards for ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/66450/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Multi-character split";
+	tag="The split command splits a string based on each character that is in the splitString.  This version ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68386/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Parsing comma separated values";
+	tag="How to parse lines containing comma-separated values.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/65433/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Add Commas to a Number";
+	tag="Takes a number and inserts a comma (or separator of your choice) between
+every third digit.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68381/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Raw Console Input on UNIX Platforms";
+	tag="Get those direct keystrokes here by leveraging the power of stty!";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68397/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Bits to Hex, and back";
+	tag="Code to convert a string of '0's and '1's to the corresponding hex number, and back. Note that we ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/146037/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/rot13 filter";
+	tag="Encodes the standard input channel using the rot13 scheme.  
+Output goes to standard output.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68383/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Lexing C";
+	tag="Lexing C sources into a list of tokens. Demonstration of the string processing facilities of Tcl. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/146223/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Adding numbers in arbitrary bases.";
+	tag="The command adds two numbers in any base that can be expressed as a string of unique symbols. From ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/146222/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Check creditcard numbers for wellformed-ness.";
+	tag="The command below checks if the specified creditcard number is syntactically valid. This code does ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/146221/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Text%20Processing/Inserts thousand separators into a number";
+	tag="This piece of code inserts a thousandth separator into a decimal number, i.e. every 3 digits the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/146220/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/LCD Number Display";
+	tag="Display LCD digits in a canvas.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68382/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Supporting mouse wheel on vertical scrollbars";
+	tag="A simple way of adding the mouse's wheel support to a TCL application";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68394/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Simple Toolbar package";
+	tag="One possible way to implement a simple toolbar.
+Should be self-explaining.
+
+See also recipe ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68425/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Creating a read-only text or entry widget";
+	tag="A way to disallow user input in a more user (and programmer) friendly way than setting the widget's ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/120202/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Functional imaging";
+	tag="Origin: http://wiki.tcl.tk/3523
+Author: Richard Suchenwirth
+
+Cameron Laird pointed me to Conal ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/133502/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Example application framework";
+	tag="This script demonstrates how to create a Windows-alike application.
+It may serve as a starting ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68426/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Simple Toolhelp package";
+	tag="One possible way to implement a toolhelp widget.
+Should be self-explaining.
+
+See also recipe ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68414/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/With busy cursor";
+	tag="Tk utility - change the mouse pointer to a watch cursor, execute a script, then restore the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68377/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/inputBox";
+	tag="Create a generic mask that's waiting for user input and returns a list of values.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/169762/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Color gradient image";
+	tag="This little script creates an image with the RGB and cyan, magenta, yellow color gradients.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68392/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Octabug, 3D to 2D transformation";
+	tag="Origin: http://wiki.tcl.tk/3494
+Author: Keith Vetter
+
+This is a fun little graphical animation ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/133526/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Convert HSV colorspace to RGB";
+	tag="Author: Jeff Hobbs.
+
+Converts a color specified as Hue, Saturation and Value into an RGB triple. ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/133527/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Inline GIF image into code";
+	tag="This recipe shows how to inline a GIF image directly into your Tcl code.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/117247/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Tk Window Dump";
+	tag="Dump an arbitrary widget to an image file of (almost) any kind by using XWD and ImageMagick.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68399/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Simple Tkhtml web page displayer";
+	tag="Author: Neil Madden
+Origin: http://wiki.tcl.tk/2993
+
+The application fetches a web page, formats ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/136605/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Convert (La)TeX math expressions to Tk Images on the fly";
+	tag="This code takes a TeX or LaTeX math expression and converts it into a Tk image suitable for placing ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68398/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/VW.TCL -- TK Text File Viewer";
+	tag="A Text File Viewer Program Utilizing a Text Widget With A Vertical Scrollbar.  Menu And Button ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68395/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Scrollable Pane";
+	tag="Implementation of a scrollable pane in pure Tcl/Tk.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68400/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Convert HLS colorspace to RGB";
+	tag="Author: Frederic Bonnet
+
+Converts a color in HLS to a RGB triple. The triple can be processed by ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/133528/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/User%20Interfaces/Color Manipulation";
+	tag="Author: Jeff Hobbs
+
+A number of routines to convert and manipluate colors.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/133529/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Web%20programming/Fuzzy Google truth";
+	tag="Origin: http://wiki.tcl.tk/3490
+Author: Richard Suchenwirth
+
+Given some piece of data where it ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/132606/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Web%20programming/Automated Form Login ";
+	tag="This script performs an automated form login against a site protected by the J2EE j_security_check ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/213028/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Web%20programming/Querying an online dictionary";
+	tag="Origin: http://wiki.tcl.tk/3211
+Author: Reinhard Max.
+
+This little script sends it's command ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/132603/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Web%20programming/Tcl - Babel Fish Translating Web Scraper";
+	tag="Add multiple language real time translating ability to a Tcl/Tk application in only about 100 lines ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/168562/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Web%20programming/HTTP Posting w%2f File Upload";
+	tag="The following script does general http posting and has support for uploading of files as well.  It ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/109363/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Web%20programming/Getting stock quotes over the internet";
+	tag="Origin: http://wiki.tcl.tk/636
+Author: The original author is unknown.
+
+Here's a simple Tcl ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/132604/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Web%20programming/Minimal SOAP";
+	tag="A minimal example setting up and using SOAP to call to a temperature conversion service. Uses http ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/136604/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Web%20programming/Simple Tkhtml web page displayer";
+	tag="Author: Neil Madden
+Origin: http://wiki.tcl.tk/2993
+
+The application fetches a web page, formats ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/136605/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/Web%20programming/Check creditcard numbers for wellformed-ness.";
+	tag="The command below checks if the specified creditcard number is syntactically valid. This code does ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/146221/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/XML/Validate XML Files.";
+	tag="This script validates XML files while recursively traversing a specified directory tree.  It ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/207567/index_txt";
+},
+{
+	language="tcl";
+	title="Tcl Cookbook/XML/Tcl XML drug database demo";
+	tag="Demo using Tcl XML packages by much more talented programmers than myself for a useful XML drug ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/167762/index_txt";
+},
+)

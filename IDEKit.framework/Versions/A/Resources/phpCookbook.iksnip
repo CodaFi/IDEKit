@@ -1,0 +1,145 @@
+(
+{
+	language="php";
+	title="php Cookbook/Data%20Structures/Class Inspection";
+	tag="Simple class introspection using php's class functions.
+This generates a list of classes, and ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/101522/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Databases/Microsoft Access Database Connectivity";
+	tag="This is an example of how you can pull data from a Microsoft Access database through ADO.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/123709/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Databases/PHP MySQL Search Class";
+	tag="This class can perform a full text search over multiple columns of a MySQL database table, matching ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/125901/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Databases/Microsoft Access Database Connectivity (DSN-Less)";
+	tag="An example of connecting to a Microsoft Access database, executing an SQL query, and displaying the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/163447/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Distributed%20Processing/COM based email";
+	tag="One way to work around the lack of a full implementation of sendmail in PHP
+is to use the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/101523/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Graphics%20Processing/thumb.php";
+	tag="This little script create an thumbnail from an jpeg-image. To use it, use an link in form of ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/188440/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Miscellaneous/Making Interactive Welcome Text";
+	tag="In usually we say welcome in our page with simple like \"welcome user\" adn etc
+but I think if we ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/208103/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Miscellaneous/URHere";
+	tag="Displays \"you are here\" (breadcrumbs) information in text, and link form ralative to your path in ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/187851/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Miscellaneous/Selection Box formater";
+	tag="Just a simple class i wrote to save a bit of time when dealing with dynamic selection boxes in HTML.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/123732/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Miscellaneous/iPHP:  Semi-interactive PHP debugging using your browser";
+	tag="A small snippet that allows you to write/paste PHP code in your browser to have the server evaluate ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/148839/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Miscellaneous/PHP Tic Tac Toe";
+	tag="This is a web-based Tic Tac Toe game written in PHP.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/276962/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Miscellaneous/Mayan Calendar";
+	tag="Calculating Mayan Long Dates from Julian Day Counts.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/101524/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Miscellaneous/Check email format";
+	tag="This is a function i used in order to check if an email submitted by the user is in the proper ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/121796/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Network%20Resources/Domain Class";
+	tag="This class returns the whois information an checks the availability of at least  250 different top ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/266624/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Network%20Resources/Connecting to running instances of IE on your computer";
+	tag="This sample connects to the running instances of IE on your computer and prints out the URL, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/302089/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Platform%20Interfaces/Microsoft Access Database Connectivity (DSN-Less)";
+	tag="An example of connecting to a Microsoft Access database, executing an SQL query, and displaying the ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/163447/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Security%20Solutions/php htaccess";
+	tag="The htaccess class manages the htaccess functions of Apache Webservers. Without knowing much ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/108479/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Security%20Solutions/Password Generation";
+	tag="Quite often you need to generate passwords for user authentication systems.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/101526/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Security%20Solutions/Password generation";
+	tag="Improved version of make_password submitted by Shane Caraveo. This one adds options to use upper ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/164739/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Security%20Solutions/LDAP Authentication";
+	tag="A simple LDAP Authentication script.";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/101525/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Security%20Solutions/Protect PHP File that must be include";
+	tag="This Section is describe how we can protect php module that can calling in with include function, ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/207176/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Text%20Processing%20and%20Rx/PHP Commify Function";
+	tag="This function inserts a comma separator into every 3 digits. For example, 100000 will be ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/202051/index_txt";
+},
+{
+	language="php";
+	title="php Cookbook/Text%20Processing%20and%20Rx/PHP Dollarfy Function";
+	tag="Dollarfy Function those the following things to a floating point number:
+
+1. This function ...";
+	url="http://aspn.activestate.com/ASPN/Cookbook/PHP/Recipe/202053/index_txt";
+},
+)

@@ -1,0 +1,508 @@
+//
+//  IDEKit_SrcEditViewFolding.mm
+//  IDEKit
+//
+//  Created by Glenn Andreas on Fri Jan 30 2004.
+//  Copyright (c) 2004 by Glenn Andreas
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//  
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//  
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+#import "IDEKit_SrcEditViewFolding.h"
+#import "IDEKit_TextView.h"
+#import "IDEKit_TextViewExtensions.h"
+#import "IDEKit_PathUtils.h"
+#ifdef qIDEKIT_UseCache
+#define BEGINFOLDINGOP  { \
+    [[myTextView undoManager] disableUndoRegistration]; \
+    myFoldingOperation++; \
+    }
+#define ENDFOLDINGOP { \
+    [[myTextView undoManager] enableUndoRegistration]; \
+    myFoldingOperation--; \
+    }
+#import "IDEKit_LineCache.h"
+#else
+#define BEGINFOLDINGOP
+#define ENDFOLDINGOP
+#endif
+
+
+@implementation IDEKit_FoldedTextAttachment
++ (IDEKit_FoldedTextAttachment *) foldedTextAttachmentWithCollapsedText:(NSAttributedString *)collapsedText
+{
+    return [[[self alloc] initWithCollapsedText: collapsedText] autorelease];
+}
+- (id)initWithCollapsedText:(NSAttributedString *)collapsedText
+{
+    // TODO - make custom NSTextAttachmentCell subclass to draw collapsed text
+    //self = [super initWithFileWrapper: [[[NSFileWrapper alloc] initWithPath: @"/dev/null"] autorelease]];
+    self = [super initWithFileWrapper: [[[NSFileWrapper alloc] init] autorelease]];
+    if (self) {
+	myCollapsedText = [collapsedText copy];
+	// go through and fix the icons
+	static id image = nil;
+	if (!image) {
+	    NSBundle *bundle = [NSBundle bundleForClass: [self class]];
+	    NSString *path = [bundle pathForResource: @"CollapseMarker" ofType: @"tiff"];
+	    image = [[[NSImage alloc] initWithContentsOfFile: path] retain];//[[[NSFileWrapper alloc] initWithPath: path] retain];
+	}
+	[[self fileWrapper] setIcon: image];
+    }
+    return self;
+}
+- (void) dealloc
+{
+    [myCollapsedText release];
+}
+- (NSAttributedString *) collapsedTextInAttachment
+{
+    return myCollapsedText;
+}
+@end
+@implementation NSTextAttachment(IDEKit_Collapsing)
+- (NSAttributedString *) collapsedTextInAttachmentFixIcons: (BOOL) fixIcons
+{
+    id wrapper = [self fileWrapper];
+    id collapsedData = [wrapper regularFileContents];
+    //NSLog(@"got %x",collapsedText);
+    if (collapsedData) {
+	NSAttributedString *uncollapsedText = [NSUnarchiver unarchiveObjectWithData: collapsedData];
+	//NSLog(@"Replacing with %@",uncollapsedText);
+	// go through and fix the icons for embeded Collapsings
+	static id image = nil;
+	if (!image) {
+	    NSBundle *bundle = [NSBundle bundleForClass: [self class]];
+	    NSString *path = [bundle pathForResource: @"CollapseMarker" ofType: @"tiff"];
+	    image = [[[NSImage alloc] initWithContentsOfFile: path] retain];//[[[NSFileWrapper alloc] initWithPath: path] retain];
+	}
+	if (fixIcons && [uncollapsedText containsAttachments]) {
+	    //NSLog(@"need to fix icons...");
+	    for (unsigned int i=0;i<[uncollapsedText length];) {
+		NSRange range;
+		id subattachment = [uncollapsedText attribute: NSAttachmentAttributeName atIndex: i effectiveRange: &range];
+		//NSLog(@"found %@ at %d/%d",subattachment,range.location,range.length);
+		if (subattachment) {
+		    [[subattachment fileWrapper] setIcon: image];
+		}
+		i = range.location + range.length; // move to just past where we were
+	    }
+	}
+	return uncollapsedText;
+    } else {
+	NSLog(@"Danger - lost text for collapsed cell %@",[self attachmentCell]);
+	//NSLog(@"Attributes = %@",[[textView textStorage] attributesAtIndex: charIndex effectiveRange: &range]);
+	NSBeep();
+    }
+    return NULL;
+}
+@end
+
+@implementation IDEKit_SrcEditView(FoldingExtensions)
+
+#pragma mark Collapsing
+// For Collapsing Support
+
+- (void) collapseRange: (NSRange) range
+{
+    if (!range.length)
+	return;
+    // use our folded text attachment
+    IDEKit_FoldedTextAttachment *attachment = [IDEKit_FoldedTextAttachment foldedTextAttachmentWithCollapsedText: [[myTextView textStorage] attributedSubstringFromRange: range]];
+
+    NSAttributedString *collapsed = [NSAttributedString attributedStringWithAttachment: attachment];
+    BEGINFOLDINGOP;
+    [[myTextView textStorage] replaceCharactersInRange: range withAttributedString: collapsed];
+    ENDFOLDINGOP;
+#ifdef qIDEKIT_UseCache
+    myLineCache->FoldRange(range);
+#endif
+}
+
+
+
+// this is the core of uncollapse
+- (int) uncollapseFromAttachment: (NSTextAttachment *)attachment atIndex: (unsigned int) offset selectResult: (BOOL) shouldSelect
+{
+    // get the old attribute here
+    NSAttributedString *uncollapsedText = [attachment collapsedTextInAttachment];
+    if (uncollapsedText) {
+	BEGINFOLDINGOP;
+	if ([myTextView shouldChangeTextInRange:NSMakeRange(offset,1) replacementString: [uncollapsedText string]]) {
+	    [[myTextView textStorage] replaceCharactersInRange: NSMakeRange(offset,1) withAttributedString: uncollapsedText];
+	    if (shouldSelect)
+		[myTextView setSelectedRange: NSMakeRange(offset,[uncollapsedText length])];
+#ifdef qIDEKIT_UseCache
+	    myLineCache->UnfoldLocation(offset);
+#endif
+	    ENDFOLDINGOP;
+	    return [uncollapsedText length]; // how much did we add here?
+	} else {
+	    ENDFOLDINGOP;
+	    return 0; // didn't change it
+	}
+    }
+    return 0; // nothing there
+}
+
+- (int) uncollapseAtIndex: (unsigned int) offset selectResult: (BOOL) shouldSelect
+{
+    NSTextAttachment *attachment = [[myTextView textStorage] attribute: NSAttachmentAttributeName atIndex: offset effectiveRange: NULL];
+    if (attachment) {
+	return [self uncollapseFromAttachment: attachment atIndex: offset selectResult: shouldSelect];
+    }
+    return 0;
+}
+
+// --- Everything else should only call one of the above routine for manipulating the collapsed text
+
+- (int) megaCollapseSelection: (NSRange) range
+{
+    // this really belongs in the language specific stuff...
+    NSString *text = [myTextView string];
+    int shorten = 0;
+    for (unsigned int i=range.location;i<range.location + range.length;) {
+	if ([text characterAtIndex: i] == '{') {
+	    int endParen = [myTextView balanceForwards: i+1 endCharacter: '}'];
+	    if (endParen < range.location + range.length) {
+		int collapseLength = (endParen - i) - 1;
+		shorten += collapseLength-1; // what did we collapse out?
+		range.length -= collapseLength - 1;
+		collapseLength -= [self megaCollapseSelection: NSMakeRange(i+1,collapseLength)];
+		[self collapseRange: NSMakeRange(i+1,collapseLength)];
+		i += 3; // skip to after the closing paren
+	    }
+	    // do we mondocollapse this?
+	} else { // just go to next character
+	    i++;
+	}
+    }
+    return shorten;
+}
+
+- (IBAction) megaCollapse: (id) sender
+{
+    NSRange range = [myTextView selectedRange];
+    if (range.length == 0) {
+	range = NSMakeRange(0,[(NSString *)[myTextView string] length]);
+    }
+    [self megaCollapseSelection: range];
+}
+
+- (IBAction) deepUncollapse: (id) sender
+{
+    id workingCopy = [myTextView textStorage];
+    for (unsigned int i=0;i<[(NSString *)workingCopy length];) {
+	if ([self uncollapseAtIndex: i selectResult: NO] == 0)
+	    i++; // only advance if nothing to uncollapse - if we uncollapsed, might be something else at the start
+    }
+}
+
+- (IBAction) collapseSelection: (id) sender
+{
+    NSRange selection = [myTextView selectedRange];
+    [self collapseRange: selection];
+}
+
+- (void) foldFromOffset: (unsigned) offset
+{
+    // really should be language specific, but for now, do indentation
+    NSRange lineRange = [[myTextView string] lineRangeForRange: NSMakeRange(offset,0)];
+    // start folding the next line
+    lineRange = [[myTextView string] lineRangeForRange: NSMakeRange(lineRange.location + lineRange.length,0)];
+    // see how far we are indented
+    int indent = [myTextView foldableIndentOfRange: lineRange hasFold: NULL atOffset: NULL];
+    // and now see how many further lines are indented at the same or deeper levels
+    while (1) {
+	if (lineRange.location + lineRange.length >= [[myTextView string] length])
+	    break; // off end of page
+	NSRange nextLineRange = [[myTextView string] lineRangeForRange: NSMakeRange(lineRange.location + lineRange.length,0)];
+	int nextIndent = [myTextView foldableIndentOfRange: nextLineRange hasFold: NULL atOffset: NULL];
+	if (nextIndent >= indent || (nextLineRange.length <= 1 && nextIndent == 0)) {
+	    // indented as far or further, or a blank line, so combine and continue
+	    lineRange = NSUnionRange(lineRange,nextLineRange);
+	} else {
+	    break;
+	}
+    }
+    lineRange.length = lineRange.length - 1 - indent; // don't fold the trailing return, nor the starting indent
+    lineRange.location += indent;
+    [self collapseRange: lineRange];
+}
+
+- (IBAction) megaFold: (id) sender
+{
+    NSRange range = [myTextView selectedRange];
+    if (range.length == 0) {
+	range = NSMakeRange(0,[(NSString *)[myTextView string] length]);
+    }
+    [self megaFoldSelection: range];
+}
+- (void) megaFoldSelection: (NSRange) range
+{
+    // walk through the thing backwards, folding up from the bottom (this will also keep our location valid, as
+    // well as nesting the folds)
+    unsigned pointOfFolding = range.location + range.length;
+    while (pointOfFolding >= range.location) {
+	// get the start of this line
+	NSRange lineRange = [[myTextView string] lineRangeForRange: NSMakeRange(pointOfFolding,0)];
+	// and the previous line
+	if (lineRange.location == 0)
+	    break; // at the start of the file
+	NSRange prevRange = [[myTextView string] lineRangeForRange: NSMakeRange(lineRange.location-1,0)];
+	if (lineRange.length && [myTextView foldabilityAtOffset: lineRange.location foldedAtOffset: NULL] < 0) {
+	    [self foldFromOffset: lineRange.location];
+	}
+	// move back to start of previous line
+	pointOfFolding = prevRange.location;
+    }
+}
+
+//- (BOOL)textView:(NSTextView *)textView clickedOnLink:(id)link atIndex:(unsigned)charIndex	// Delegate only.
+//{
+//    NSLog(@"click on Link = %@",link);
+//    return NO;
+//}
+    
+- (void) textView: (NSTextView *)textView doubleClickedOnCell: (id <NSTextAttachmentCell>)attachmentCell inRect:(NSRect)cellFrame atIndex:(unsigned) charIndex
+{
+    // get the old attribute here
+    [self uncollapseFromAttachment: [attachmentCell attachment] atIndex: charIndex selectResult: YES];
+}
+
+//- (void)textView:(NSTextView *)view draggedCell:(id <NSTextAttachmentCell>)cell inRect:(NSRect)rect event:(NSEvent *)event atIndex:(unsigned)charIndex;
+//// Delegate only.  Allows the delegate to take over attachment dragging altogether.
+//{
+//	NSLog(@"Drag Cell");
+//}
+    
+- (NSArray *)textView:(NSTextView *)view writablePasteboardTypesForCell:(id <NSTextAttachmentCell>)cell atIndex:(unsigned)charIndex;
+    // Delegate only.  If the previous method is not used, this method and the next allow the textview to take care
+    // of attachment dragging and pasting, with the delegate responsible only for writing the attachment to the pasteboard.  In this method, the delegate should return an array of types that it can write to the pasteboard for the given attachment
+{
+    //NSLog(@"writablePasteboardTypesForCell %@",cell);
+    return [NSArray arrayWithObjects: NSStringPboardType, nil];
+}
+- (BOOL)textView:(NSTextView *)view writeCell:(id <NSTextAttachmentCell>)cell atIndex:(unsigned)charIndex toPasteboard:(NSPasteboard *)pboard type:(NSString *)type ;	
+    // Delegate only.  In this method, the delegate should attempt to write the given attachment to the pasteboard
+    // with the given type, and return success or failure
+{
+    NSLog(@"Write cell to pasteboard type %@",type);
+    id wrapper = [[cell attachment] fileWrapper];
+    id collapsedText = [wrapper regularFileContents];
+    //NSLog(@"got %x",collapsedText);
+    if (collapsedText) {
+	id uncollapsedText = [NSUnarchiver unarchiveObjectWithData: collapsedText];
+	if ([pboard setString: uncollapsedText forType: type])
+	    NSLog(@"Failed Wrote %@",[collapsedText string]);
+	else
+	    NSLog(@"Wrote %@",[collapsedText string]);
+	return YES;
+    }
+    return NO;
+}
+
+// because of folding, we want to provide a way for clients to get the "real" text
+// and they'd expect real text from [textView string], so rather than forwarding string to
+// our text view (like we'd otherwise do) we'll provide the unfolded version
+- (NSString *) string
+{
+    if ([[myTextView textStorage] containsAttachments])
+	return [[myTextView textStorage] uncollapsedString];
+    else
+	return [myTextView string];
+}
+
+// these are going to be ugly
+- (unsigned int) unfoldedLocation: (unsigned int) offset // convert from unfolded to folded location
+{
+    // go through the text, and find out how large the folded parts before this are
+#ifdef nodef // faster to actually calculate than to see if we can skip it?
+    if (![[myTextView textStorage] containsAttachments]) {
+	return offset;
+    }
+#endif
+    if (offset == NSNotFound) return offset;
+#ifdef qIDEKIT_UseCache
+    return myLineCache->UnfoldedLocation(offset);
+#endif
+    NSString *text = [myTextView string];
+    if (offset >= [text length])
+	return [[self string] length]; // return unfolded length
+    unsigned int retval = 0;
+    for (unsigned int i=0;i<offset;i++) {
+	NSAttributedString *uncollapsedText = [[myTextView textStorage] collapsedTextAtIndex: i];
+	if (uncollapsedText) {
+	    if ([uncollapsedText containsAttachments]) {
+		retval += [[uncollapsedText uncollapsedString] length];
+	    } else {
+		retval += [uncollapsedText length];
+	    }
+	} else {
+	    retval++;
+	}
+    }
+    return retval;
+}
+- (unsigned int) foldedLocation: (unsigned int) offset // convert from unfolded to folded
+{
+#ifndef qIDEKIT_UseCache // faster to look up than check for attachments
+    if (![[myTextView textStorage] containsAttachments]) {
+	return offset;
+    }
+#endif
+    if (offset == NSNotFound) return offset;
+#ifdef qIDEKIT_UseCache
+    return myLineCache->FoldedLocation(offset);
+#endif
+    NSString *text = [myTextView string];
+    for (unsigned int i=0;i<offset;i++) {	
+	NSAttributedString *uncollapsedText = [[myTextView textStorage] collapsedTextAtIndex: i];
+	if (uncollapsedText) {
+	    int partLen = 0;
+	    if ([uncollapsedText containsAttachments]) {
+		partLen = [[uncollapsedText uncollapsedString] length];
+	    } else {
+		partLen = [uncollapsedText length];
+	    }
+	    if (partLen >= offset)
+		return i; // found the location this starts from
+	    offset -= partLen;
+	} else {
+	    if (offset == 0)
+		return i;
+	    offset--;
+	}
+    }
+    return [text length]; // at or past end of string
+}
+- (NSRange) foldedRange: (NSRange) range
+{
+    NSRange foldedLoc;
+    foldedLoc.location = [self foldedLocation: range.location];
+    foldedLoc.length = [self foldedLocation: range.location + range.length] - foldedLoc.location;
+    return foldedLoc;
+}
+- (NSRange) unfoldedRange: (NSRange) range
+{
+    NSRange unfoldedLoc;
+    unfoldedLoc.location = [self unfoldedLocation: range.location];
+    unfoldedLoc.length = [self unfoldedLocation: range.location + range.length] - unfoldedLoc.location;
+    return unfoldedLoc;
+}
+// Folding, of course, screws up line numbers
+// line number support
+- (NSRange) nthLineRange: (int) n
+{
+#ifdef qIDEKIT_UseCache
+    return myLineCache->UnfoldedNthLineRange(n);
+#endif
+    if ([[myTextView textStorage] containsAttachments]) {
+	return [[[myTextView textStorage] uncollapsedString] nthLineRange: n];
+    } else
+	return [myTextView nthLineRange: n];
+}
+
+- (int) lineNumberFromOffset: (unsigned int) offset
+{
+#ifdef qIDEKIT_UseCache
+    int ln =myLineCache->UnfoldedLineNumberFromOffset(offset);
+    //NSLog(@"Line num %d from offset %d",ln,offset);
+    return ln;
+#endif
+    if ([[myTextView textStorage] containsAttachments])
+	return [[[myTextView textStorage] uncollapsedString] lineNumberFromOffset: offset];
+    else
+	return [myTextView lineNumberFromOffset: offset];
+}
+- (int) foldedLineNumberFromOffset: (unsigned int) foldedOffset
+{
+#ifdef qIDEKIT_UseCache
+    int ln =myLineCache->FoldedLineNumberFromOffset(foldedOffset);
+    //NSLog(@"Line num %d from offset %d",ln,offset);
+    return ln;
+#else
+    NSAssert(0,@"foldedLineNumberFromOffset not implemented");
+#endif
+}
+- (NSRange) nthFoldedLineRange: (int) n
+{
+#ifdef qIDEKIT_UseCache
+    return myLineCache->FoldedNthLineRange(n);
+    //NSLog(@"Line num %d from offset %d",ln,offset);
+#else
+    NSAssert(0,@"foldedLineNumberFromOffset not implemented");
+#endif
+}
+
+
+- (void) selectNthLine: (int) line
+{
+    if ([[myTextView textStorage] containsAttachments]) {
+	NSRange unfoldedLineLoc = [self nthLineRange: line];
+	NSRange foldedLoc;
+	foldedLoc.location = [self foldedLocation: unfoldedLineLoc.location];
+	foldedLoc.length = [self foldedLocation: unfoldedLineLoc.location + unfoldedLineLoc.length] - foldedLoc.location;
+	[myTextView setSelectedRange: foldedLoc];
+	[myTextView scrollRangeToVisible: foldedLoc];
+    } else {
+	[myTextView selectNthLine: line];
+    }
+}
+
+-(void) dumpLineCache: (id) sender
+{
+#ifdef qIDEKIT_UseCache
+    return myLineCache->DumpLineCache();
+#endif
+}
+
+@end
+
+
+@implementation NSAttributedString(IDEKit_Collapsing)
+- (NSAttributedString *)collapsedTextAtIndex: (unsigned int) offset // this may be collapsed, so call uncollapsedString on it
+{
+    // don't bother to fix icons?
+    if ([[self string] characterAtIndex: offset] == NSAttachmentCharacter) { 
+	NSTextAttachment *attachment = [self attribute: NSAttachmentAttributeName atIndex: offset effectiveRange: NULL];
+	return [attachment collapsedTextInAttachment];
+    }
+    return NULL;
+}
+
+- (NSString *) uncollapsedString;
+{
+    NSMutableAttributedString *workingCopy = [[[NSMutableAttributedString alloc] initWithAttributedString: self] autorelease];
+    for (unsigned int i=0;i<[(NSString *)workingCopy length];) {
+	NSRange range;
+	id attachment = [workingCopy attribute: NSAttachmentAttributeName atIndex: i effectiveRange: &range];
+	if (attachment) {
+	    // found one - but is it where we are?
+	    NSAttributedString *uncollapsedText = [attachment collapsedTextInAttachment];
+	    
+	    [workingCopy replaceCharactersInRange: NSMakeRange(i,1) withAttributedString: uncollapsedText];
+	    // and start at the beginning of this
+	} else {
+	    i = range.location + range.length; // move to just past where we were
+	}
+    }
+    return [workingCopy string];
+}
+
+
+@end
+
+

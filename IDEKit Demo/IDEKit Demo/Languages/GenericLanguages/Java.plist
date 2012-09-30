@@ -1,0 +1,101 @@
+{
+    Name = "Java";
+    IdentifierStartChars = "_";
+    IdentifierChars = "_$";
+    EscapeCharacter = "\\";
+    String = (
+	( "\"", "\"" )
+    );
+    Character = (
+	( "'", "'" )
+    );
+    MultiLineComment = (
+	( "/*", "*/" )
+    );
+    SingleLineComment = ( "//" );
+    DocComment = "*";
+    DocCommentKeywordStart = "@";
+    DocCommentKeywords = (
+	"author",
+	"beaninfo",
+	"deprecated",
+	"docRoot",
+	"exception",
+	"inheritDoc",
+	"link",
+	"linkplain",
+	"param",
+	"return",
+	"see",
+	"serial",
+	"serialData",
+	"serialField",
+	"since",
+	"throws",
+	"value",
+	"version"
+    );
+    Keywords = (
+	"abstract",
+	"assert",
+	"boolean",
+	"break",
+	"byte",
+	"byvalue",
+	"case",
+	"cast",
+	"catch",
+	"char",
+	"class",
+	"const",
+	"continue",
+	"default",
+	"do",
+	"double",
+	"else",
+	"extends",
+	"false",
+	"final",
+	"finally",
+	"float",
+	"for",
+	"future",
+	"generic",
+	"goto",
+	"if",
+	"implements",
+	"import",
+	"inner",
+	"instanceof",
+	"int",
+	"interface",
+	"long",
+	"native",
+	"new",
+	"null",
+	"operator",
+	"outer",
+	"package",
+	"private",
+	"protected",
+	"public",
+	"rest",
+	"return",
+	"short",
+	"static",
+	"strictfp",
+	"super",
+	"switch",
+	"synchronized",
+	"this",
+	"throw",
+	"throws",
+	"transient",
+	"true",
+	"try",
+	"var",
+	"void",
+	"volatile",
+	"while"
+    );
+}

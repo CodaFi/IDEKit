@@ -1,0 +1,221 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support
+END
+IDEKit_DialogController.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_DialogController.h
+END
+IDEKit_TextColors.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_TextColors.h
+END
+IDEKit_OpenQuicklyController.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_OpenQuicklyController.h
+END
+IDEKit_FileManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_FileManager.h
+END
+IDEKit_Resources.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_Resources.h
+END
+IDEKit_Delegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_Delegate.h
+END
+IDEKit_BreakpointManager.mm
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_BreakpointManager.mm
+END
+IDEKit_MultiFileResults.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_MultiFileResults.h
+END
+IDEKit_UniqueFileIDManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_UniqueFileIDManager.h
+END
+IDEKit_Breakpoint.mm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_Breakpoint.mm
+END
+IDEKit_SnapshotFile.mm
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_SnapshotFile.mm
+END
+IDEKit_TextColors.mm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_TextColors.mm
+END
+FakeTCLBridge.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/FakeTCLBridge.c
+END
+IDEKit_BreakpointManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_BreakpointManager.h
+END
+IDEKit_Delegate.mm
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_Delegate.mm
+END
+IDEKit_FileManager.mm
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_FileManager.mm
+END
+IDEKit_Resources.mm
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_Resources.mm
+END
+FakeTCLBridge.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/FakeTCLBridge.h
+END
+IDEKit_MultiFileResults.mm
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_MultiFileResults.mm
+END
+IDEKit_SnapshotFile.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_SnapshotFile.h
+END
+IDEKit_PathUtils.mm
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_PathUtils.mm
+END
+IDEKit_LayeredDefaults.mm
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_LayeredDefaults.mm
+END
+IDEKit_UniqueFileIDManager.mm
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_UniqueFileIDManager.mm
+END
+IDEKit_Globals.mm
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_Globals.mm
+END
+IDEKit_BreakpointInspector.mm
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_BreakpointInspector.mm
+END
+IDEKit_SourceFingerprint.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_SourceFingerprint.h
+END
+IDEKit_NamedFlattener.mm
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_NamedFlattener.mm
+END
+IDEKit_LayeredDefaults.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_LayeredDefaults.h
+END
+IDEKit_PathUtils.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_PathUtils.h
+END
+IDEKit_Globals.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_Globals.h
+END
+IDEKit_BreakpointInspector.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_BreakpointInspector.h
+END
+IDEKit_DialogController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_DialogController.mm
+END
+IDEKit_NamedFlattener.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_NamedFlattener.h
+END
+IDEKit_OpenQuicklyController.mm
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_OpenQuicklyController.mm
+END
+IDEKit_SourceFingerprint.mm
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_SourceFingerprint.mm
+END
+IDEKit_Breakpoint.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/IDEKit_Breakpoint.h
+END

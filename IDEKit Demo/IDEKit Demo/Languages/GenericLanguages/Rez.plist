@@ -1,0 +1,119 @@
+{
+	Name = Rez;
+	Extensions = (
+		r,
+		rez,
+	);
+	CaseSensitive = YES;
+	UnicodeSymbols = NO;
+	MultiLineComment = (
+		(
+			"/*",
+			"*/",
+		),
+	);
+	String = (
+		(
+			"\"",
+			"\"",
+		),
+	);
+	EscapeCharacter = "\\";
+	SingleLineComment = (
+		"//",
+	);
+	Character = (
+		(
+			"'",
+			"'",
+		),
+	);
+	IdentifierStartChars = "_$";
+	IdentifierChars = "_$";
+	Keywords = (
+		"$$ArrayIndex",
+		"$$Arrayindex",
+		"$$Attributes",
+		"$$BitField",
+		"$$Bitfield",
+		"$$Byte",
+		"$$Countof",
+		"$$CountOf",
+		"$$Date",
+		"$$Day",
+		"$$Format",
+		"$$Hour",
+		"$$ID",
+		"$$Long",
+		"$$Minute",
+		"$$Month",
+		"$$Name",
+		"$$PackedSize",
+		"$$Packedsize",
+		"$$Resource",
+		"$$ResourceSize",
+		"$$Resourcesize",
+		"$$Second",
+		"$$Shell",
+		"$$Time",
+		"$$Type",
+		"$$Version",
+		"$$Weekday",
+		"$$Word",
+		"$$Year",
+		align,
+		array,
+		as,
+		binary,
+		bit,
+		bitstring,
+		boolean,
+		byte,
+		case,
+		char,
+		cstring,
+		data,
+		decimal,
+		fill,
+		hex,
+		include,
+		integer,
+		key,
+		literal,
+		long,
+		longint,
+		nibble,
+		octal,
+		point,
+		pstring,
+		read,
+		rect,
+		resource,
+		string,
+		switch,
+		type,
+		NSUInteger,
+		wide,
+		word,
+		wstring,
+	);
+	"PreprocessorKeywordStart" = "#";
+	PreprocessorKeywords = (
+		error,
+		define,
+		elif,
+		else,
+		endif,
+		error,
+		file,
+		if,
+		ifdef,
+		ifndef,
+		import,
+		include,
+		line,
+		pragma,
+		undef,
+		warning,
+	);
+}

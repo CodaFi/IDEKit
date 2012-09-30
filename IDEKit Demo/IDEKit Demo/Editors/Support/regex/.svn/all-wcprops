@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex
+END
+regc_locale.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regc_locale.c
+END
+regc_nfa.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regc_nfa.c
+END
+regfronts.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regfronts.c
+END
+regcustom.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regcustom.h
+END
+regerrs.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regerrs.h
+END
+regc_color.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regc_color.c
+END
+regfree.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regfree.c
+END
+regex.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regex.h
+END
+regc_cvec.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regc_cvec.c
+END
+regexec.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regexec.c
+END
+regguts.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regguts.h
+END
+regerror.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regerror.c
+END
+regc_lex.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regc_lex.c
+END
+rege_dfa.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/rege_dfa.c
+END
+regcomp.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/bob/!svn/ver/292/pyoxide/trunk/IDEKit/Sources/Support/regex/regcomp.c
+END

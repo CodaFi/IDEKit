@@ -1,0 +1,55 @@
+//
+//  IDEKit_OpenQuicklyController.h
+//  IDEKit
+//
+//  Created by Glenn Andreas on 10/2/04.
+//  Copyright 2004 by Glenn Andreas.
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//  
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//  
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+#import <Cocoa/Cocoa.h>
+
+enum {
+    IDEKit_kFindWithGlobbing = 1,
+    IDEKit_kFindCreatesBrowser = 2,
+    IDEKit_kFindAllFiles = 4, // include files not openable
+};
+
+@protocol IDEKit_OpenQuicklyFinder
+- (NSArray *) findFilesWithPattern: (NSString *)pattern context: (void *) context flags: (int) flags;
+@end
+
+@class IDEKit_SrcEditView;
+@interface IDEKit_OpenQuicklyController : NSWindowController {
+    IBOutlet id myText;
+    id <IDEKit_OpenQuicklyFinder> myHelper;
+    void *myContext;
+    IBOutlet id myDetailsDrawer;
+    IBOutlet id myUseGlobbing;
+    IBOutlet id myCreateBrowser;
+    IBOutlet id myShowAllFiles;
+}
++ (void) openQuicklyWithText: (NSString *) selection helper: (id <IDEKit_OpenQuicklyFinder>) helper context: (void *) context;
+- (IBAction) doOpen: (id) sender;
+- (IBAction) dontOpen: (id) sender;
+@end
+
+
+@interface NSDocumentController(OpenQuickly)
+- (NSArray *)filterOpenableFiles: (NSArray *)candidates;
+- (NSDocument *) openQuicklyWithText: (NSString *) selection helper: (id <IDEKit_OpenQuicklyFinder>) helper context: (void *) context;
+- (NSDocument *) openQuicklyWithText: (NSString *) selection helper: (id <IDEKit_OpenQuicklyFinder>) helper context: (void *) context flags: (int) flags;
+@end

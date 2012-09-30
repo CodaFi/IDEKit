@@ -1,0 +1,133 @@
+//
+//  IDEKit_OpenQuicklyController.mm
+//  IDEKit
+//
+//  Created by Glenn Andreas on 10/2/04.
+//  Copyright 2004 by Glenn Andreas.
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//  
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//  
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+#import "IDEKit_OpenQuicklyController.h"
+#import "IDEKit_Delegate.h"
+#import "IDEKit_MultiFileResults.h"
+
+@implementation IDEKit_OpenQuicklyController
+- (id)initWithWindowNibName:(NSString *)windowNibName;	// will override to look in appropriate places
+{
+    // look in main bundle before  class owners bundle
+    NSString *path = [[NSBundle mainBundle] pathForResource:windowNibName ofType:@"nib"];
+    if ([path length]) {
+	return [self initWithWindowNibPath: path owner: self];
+    } else {
+	return [super initWithWindowNibName: windowNibName];
+    }
+}
+
+- (void)windowDidLoad
+{
+    [super windowDidLoad];
+    // add in setting default values for details
+}
+
+- (void) setHelper: (id <IDEKit_OpenQuicklyFinder>) helper context: (void *) context
+{
+    [(NSObject *)myHelper release];
+    myHelper = [(NSObject *)helper retain];
+    myContext = context; // don't retain, we don't know what it is
+}
+
+- (void) setText: (NSString *)text
+{
+    [myText setStringValue: text];
+}
+
+- (IBAction) dontOpen: (id) sender
+{
+    [NSApp abortModal];
+}
+- (IBAction) doOpen: (id) sender
+{
+    NSString *path = [myText stringValue];
+    if ([path length]) {
+	int flags = 0;
+	if ([myUseGlobbing state] == NSOnState)
+	    flags |= IDEKit_kFindWithGlobbing;
+	if ([[myCreateBrowser selectedItem]tag] == 1)
+	    flags |= IDEKit_kFindCreatesBrowser;
+	if ([myShowAllFiles state] == NSOnState)
+	    flags |= IDEKit_kFindAllFiles;
+	[[NSDocumentController sharedDocumentController] openQuicklyWithText: path helper: myHelper context: myContext flags: flags];
+    }
+    [NSApp stopModal];
+}
+- (IBAction) toggleDetails: (id) sender
+{
+    [myDetailsDrawer toggle:sender];
+}
+
++ (void) openQuicklyWithText: (NSString *) selection helper: (IDEKit_SrcEditView *) helper context: (void *) context
+{
+    id display = [[self alloc] initWithWindowNibName: @"IDEKit_OpenQuickly"];
+    [display setHelper: helper context: context];
+    [display setText: selection];
+    [display showWindow: self];
+    [NSApp runModalForWindow:[display window]];
+    [[display window] orderOut:display];
+    [display setHelper: NULL context: NULL];
+}
+@end
+
+
+@implementation NSDocumentController(OpenQuickly)
+- (NSDocument *) openQuicklyWithText: (NSString *) selection helper: (id <IDEKit_OpenQuicklyFinder>) helper context: (void *) context flags: (int) flags
+{
+    id document = [self openDocumentWithContentsOfFile: selection display: YES]; // see if it is full path
+										  // look in same directory as us?
+										  // should first look in project
+										  // otherwise look in whereever
+    if (!document) {
+	NSArray *candidates = [helper findFilesWithPattern: selection context: context flags: flags];
+	if (!(flags & IDEKit_kFindAllFiles))
+	    candidates = [self filterOpenableFiles: candidates];
+	if ([candidates count]) {
+	    // just use the first one for now
+	    if ((flags & IDEKit_kFindCreatesBrowser) && [candidates count] > 1) {
+		NSMutableArray *browserArray = [NSMutableArray arrayWithCapacity:[candidates count]];
+		NSEnumerator *e = [candidates objectEnumerator];
+		NSString *path;
+		while ((path = [e nextObject]) != NULL) {
+		    [browserArray addObject: [NSDictionary dictionaryWithObject:path forKey:IDEKit_MultiFileResultPath]];
+		}
+		[IDEKit_FileBrowser showResults: browserArray];
+	    } else {
+		document = [self openDocumentWithContentsOfFile: [candidates objectAtIndex: 0] display: YES];
+	    }
+	}
+    }
+    if (document)
+	[self addDocument: document];
+    return document;
+}
+- (NSDocument *) openQuicklyWithText: (NSString *) selection helper: (id <IDEKit_OpenQuicklyFinder>) helper context: (void *) context
+{
+    return [self openQuicklyWithText:selection helper:helper context:context flags: 0];
+}
+- (NSArray *)filterOpenableFiles: (NSArray *)candidates
+{
+    return candidates; // for now
+}
+
+@end

@@ -1,0 +1,452 @@
+//
+//  IDEKit_PythonPlugIn.mm
+//  IDEKit
+//
+//  Created by Glenn Andreas on Sun Mar 09 2003.
+//  Copyright (c) 2003, 2004 by Glenn Andreas
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+#import "IDEKit_PythonPlugIn.h"
+//#import "PythonInterface.h"
+#import "IDEKit_LexParser.h"
+#import "IDEKit_Delegate.h"
+#import "IDEKit_UserSettings.h"
+#import "IDEKit_PathUtils.h"
+
+
+enum {
+    kPython_def = 1,
+    kPython_class = 2,
+    kPython_altKeyword = 3,
+    kPython_from = 4,
+    kPython_import = 5,
+    kPython_as = 6
+};
+
+@implementation IDEKit_PythonLanguage
++ (void)load
+{
+    // since all subclasses end up calling this, we get called multiple times, all nice
+    [IDEKit_GetLanguagePlugIns() addObject: self];
+}
+
++ (NSString *)languageName
+{
+    return @"Python";
+}
++ (IDEKit_LexParser *)makeLexParser
+{
+    IDEKit_LexParser *lex = [[IDEKit_LexParser alloc] init];
+    [lex addKeyword: @"and" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"as" color: IDEKit_kLangColor_Keywords lexID: kPython_as];
+    [lex addKeyword: @"assert" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"break" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"class" color: IDEKit_kLangColor_Keywords lexID: kPython_class];
+    [lex addKeyword: @"continue" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"def" color: IDEKit_kLangColor_Keywords lexID: kPython_def];
+    [lex addKeyword: @"del" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"else" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"elif" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"except" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"exec" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"finally" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"for" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"from" color: IDEKit_kLangColor_Keywords lexID: kPython_from];
+    [lex addKeyword: @"global" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"if" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"import" color: IDEKit_kLangColor_Keywords lexID: kPython_import];
+    [lex addKeyword: @"in" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"is" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"lambda" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"not" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"None" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"or" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"pass" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"print" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"raise" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"return" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"try" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"while" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"yeild" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"True" color: IDEKit_kLangColor_Keywords lexID: 0];
+    [lex addKeyword: @"False" color: IDEKit_kLangColor_Keywords lexID: 0];
+    // and alternates
+    [lex addKeyword: @"__abs__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__add__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__and__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__call__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__cmp__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__coerce__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__contains__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__delattr__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__delitem__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__delslice__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__div__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__divmod__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__eq__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__float__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__floordiv__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__future__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__ge__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__getattribute__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__getitem__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__getslice__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__gt__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__hash__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__hex__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__iadd__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__iand__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__idiv__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__ifloordiv__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__ilshift__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__imul__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__init__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__invert__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__ior__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__isub__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__iter__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__itruediv__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__ixor__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__le__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__len__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__long__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__lshift__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__lt__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__mod__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__mul__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__ne__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__neg__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__new__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__nonzero__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__oct__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__or__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__pos__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__pow__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__radd__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rand__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rdiv__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rdivmod__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__reduce__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__repr__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rfloordiv__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rlshift__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rmod__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rmul__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__ror__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rpow__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rrshift__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rshift__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rsub__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rtruediv__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__rxor__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__setattr__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__setitem__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__setslice__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__str__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__sub__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__truediv__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    [lex addKeyword: @"__xor__" color: IDEKit_kLangColor_AltKeywords lexID: kPython_altKeyword];
+    // common doc attributes
+    [lex addKeyword: @"__doc__" color: IDEKit_kLangColor_DocKeywords lexID: 0];
+    // these are sort of like docs, but set for modules by default
+    [lex addKeyword: @"__file__" color: IDEKit_kLangColor_DocKeywords lexID: 0];
+    [lex addKeyword: @"__name__" color: IDEKit_kLangColor_DocKeywords lexID: 0];
+    [lex addKeyword: @"__path__" color: IDEKit_kLangColor_DocKeywords lexID: 0];
+    [lex addKeyword: @"__version__" color: IDEKit_kLangColor_DocKeywords lexID: 0];
+    // not quite doc, but close (or other predifined __foo__ attributes for built ins)
+    [lex addKeyword: @"__all__" color: IDEKit_kLangColor_DocKeywords lexID: 0];
+    [lex addKeyword: @"__builtins__" color: IDEKit_kLangColor_DocKeywords lexID: 0];
+    [lex addKeyword: @"__class__" color: IDEKit_kLangColor_DocKeywords lexID: 0];
+    [lex addKeyword: @"__dict__" color: IDEKit_kLangColor_DocKeywords lexID: 0];
+    [lex addKeyword: @"__self__" color: IDEKit_kLangColor_DocKeywords lexID: 0];
+    // pre-processor
+    // stuff that lives in __builtins__ - generated from this scripts:
+    // (colors classes and exceptions)
+    //for name,value in x.items():
+    //	try:
+    //		if issubclass(value,object):
+    //			print '[lex addKeyword: @"' + name +'" color: IDEKit_kLangColor_Classes lexID: 0];'
+    //		else:
+    //			print '[lex addKeyword: @"' + name +'" color: IDEKit_kLangColor_Constants lexID: 0];'
+    //	except:
+    //		pass
+    [lex addKeyword: @"SyntaxError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"unicode" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"UnicodeDecodeError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"NameError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"dict" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"SystemExit" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"StandardError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"IndexError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"RuntimeWarning" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"list" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"Warning" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"slice" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"FloatingPointError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"OverflowWarning" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"FutureWarning" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"EOFError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"super" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"TypeError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"KeyboardInterrupt" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"UserWarning" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"staticmethod" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"SystemError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"RuntimeError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"float" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"StopIteration" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"enumerate" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"LookupError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"open" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"basestring" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"UnicodeError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"long" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"ReferenceError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"ImportError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"type" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"Exception" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"tuple" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"UnicodeTranslateError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"UnicodeEncodeError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"IOError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"SyntaxWarning" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"ArithmeticError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"str" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"property" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"MemoryError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"int" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"xrange" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"KeyError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"PendingDeprecationWarning" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"file" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"EnvironmentError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"OSError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"DeprecationWarning" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"complex" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"bool" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"ValueError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"buffer" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"object" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"TabError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"ZeroDivisionError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"IndentationError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"AssertionError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"classmethod" color: IDEKit_kLangColor_Classes lexID: 0];
+    [lex addKeyword: @"UnboundLocalError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"NotImplementedError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"AttributeError" color: IDEKit_kLangColor_Constants lexID: 0];
+    [lex addKeyword: @"OverflowError" color: IDEKit_kLangColor_Constants lexID: 0];
+    // now the rest of the info
+    [lex addStringStart: @"\"\"\"" end: @"\"\"\""];
+    [lex addStringStart: @"\"" end: @"\""];
+    [lex addStringStart: @"'''" end: @"'''"];
+    [lex addStringStart: @"'" end: @"'"];
+    [lex addSingleComment: @"#"];
+    [lex setIdentifierChars: [NSCharacterSet characterSetWithCharactersInString: @"_"]];
+	
+    return lex;
+}
+- (NSString *) getLinePrefixComment
+{
+    return @"##"; // use modified comment
+}
+
++ (BOOL)isYourFile: (NSString *)name
+{
+    if ([[name pathExtension] isEqualToString: @"py"])
+		return YES;
+    return NO;
+}
+- (BOOL)wantsBreakpoints
+{
+    // we are a programming language, let IDE delegate determine if debugger available for us
+    return [IDEKit languageSupportDebugging: self];
+}
+- (NSInteger) autoIndentLine: (NSString *)thisList last: (NSString *)lastLine
+{
+    if ([[lastLine stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]] hasSuffix: @":"]) {
+		return IDEKit_kIndentAction_Indent;
+    }
+    return IDEKit_kIndentAction_None;
+}
+
+- (NSArray *)functionList: (NSString *)source // for popup funcs - return a list of TextFunctionMarkers
+{
+    int pattern[] = {
+		IDEKit_kMarkerBeginPattern, IDEKit_kMarkerIsMethod, IDEKit_kMarkerBOL,IDEKit_kLexKindKeyword|kPython_def,IDEKit_kLexIdentifier,IDEKit_kMarkerTextEnd,'(',IDEKit_kMarkerEndPattern,
+		IDEKit_kMarkerBeginPattern, IDEKit_kMarkerIsMethod, IDEKit_kMarkerBOL,IDEKit_kLexKindKeyword|kPython_def,IDEKit_kLexKindKeyword|kPython_altKeyword,IDEKit_kMarkerTextEnd,'(',IDEKit_kMarkerEndPattern,
+		IDEKit_kMarkerBeginPattern, IDEKit_kMarkerIsClass, IDEKit_kMarkerBOL,IDEKit_kLexKindKeyword|kPython_class,IDEKit_kLexIdentifier,IDEKit_kMarkerTextEnd,'(',IDEKit_kMarkerEndPattern,
+		IDEKit_kMarkerBeginPattern, IDEKit_kMarkerIsClass, IDEKit_kMarkerBOL,IDEKit_kLexKindKeyword|kPython_class,IDEKit_kLexIdentifier,IDEKit_kMarkerTextEnd,':',IDEKit_kMarkerEndPattern,
+		IDEKit_kMarkerEndList
+    };
+    return [IDEKit_TextFunctionMarkers makeAllMarks: source inArray: nil fromPattern: pattern withLex: myParser];
+}
+
+- (NSDictionary *)headersList: (NSString *)source
+{
+    int pattern[] = {
+		IDEKit_kMarkerBeginPattern, IDEKit_kMarkerBOL, IDEKit_kLexKindKeyword|kPython_import, IDEKit_kMarkerTextStart,IDEKit_kLexIdentifier, IDEKit_kMarkerTextEnd,IDEKit_kMarkerEndPattern,
+		IDEKit_kMarkerBeginPattern, IDEKit_kMarkerBOL, IDEKit_kLexKindKeyword|kPython_from, IDEKit_kMarkerTextStart,IDEKit_kLexIdentifier, IDEKit_kMarkerTextEnd,IDEKit_kLexKindKeyword|kPython_import,IDEKit_kMarkerEndPattern,
+		IDEKit_kMarkerEndList
+    };
+    NSArray *marks = [IDEKit_TextFunctionMarkers makeAllMarks: source inArray: nil fromPattern: pattern withLex: myParser];
+    if ([marks count] == 0)
+		return NULL;
+    NSEnumerator *e = [marks objectEnumerator];
+    NSMutableDictionary *retval = [NSMutableDictionary dictionary];
+    IDEKit_TextFunctionMarkers *mark;
+    while ((mark = [e nextObject]) != NULL) {
+		retval[[mark name]] = [mark name];
+    }
+    return retval;
+}
+- (NSArray *)includedFileSuffixCandidates // if we have "import foo", foo might be foo.bar or foo.inc
+{
+    return @[@"py",@"PY"];
+}
+
+- (NSString *) complete: (NSString *)name withParams: (NSArray *)array
+{
+    if ([name isEqualToString: @"if"]) {
+		return @"if $<condition$>:$+$<#true block$>$-";
+    } else if ([name isEqualToString: @"ife"]) {
+		return @"if $<condition$>:$+$<#true block$>$- else: $+$<#true block$>$-";
+    } else if ([name isEqualToString: @"while"]) {
+		return @"while $<condition$>:$+$<# loop block$>$-";
+    } else if ([name isEqualToString: @"for"]) {
+		return @"for $<variable$> in $<value$>:$+$<#loop block$>$-";
+    }
+    return nil;
+}
+
+- (NSCharacterSet *) characterSetForAutoCompletion // go back using these characters to form auto-complete string
+{
+    static NSMutableCharacterSet *set = NULL;
+    if (!set) {
+		set = [[NSMutableCharacterSet alloc] init];
+		[set formUnionWithCharacterSet: [NSCharacterSet alphanumericCharacterSet]];
+		[set addCharactersInString: @"_."];
+    }
+    return set;
+}
+
+// Our philosophy is "if the python interp can run it, we can display it"
+#define kMAXINDENT 100	/* Max indentation level */
+#define kALTTABSIZE	1
+#define kTABSIZE	8
+- (NSString *) cleanUpStringFromFile: (NSString *)source
+{
+    // we not only want to convert tabs/spaces, we want to clean up indent/dedent (i.e., pretty print)
+    // Note that python interp assumes that a tab is 8 spaces (but has the ability to detect alternate tab sizes)
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //NSString *retabbed = [string convertTabsFrom: [defaults integerForKey: IDEKit_TabSizeKey] to: [defaults integerForKey: IDEKit_TabIndentSizeKey] removeTrailing: YES];
+    NSArray *lines = [[source sanitizeLineFeeds: IDEKit_kUnixEOL] componentsSeparatedByString: @"\n"];
+    NSMutableString *retval = [NSMutableString stringWithCapacity: [source length]];
+    NSInteger indent = 0;
+    NSInteger indstack[kMAXINDENT];	/* Stack of indents */
+    indstack[0] = 0;
+    NSInteger altindstack[kMAXINDENT];	/* Stack of alternate indents */
+    altindstack[0] = 0;
+    NSInteger alttabsize = kALTTABSIZE;
+    NSInteger tabsize = kTABSIZE;
+    NSInteger usertabsize = [defaults integerForKey: IDEKit_TabSizeKey];
+    NSUInteger indentSize = [defaults integerForKey: IDEKit_TabIndentSizeKey];
+    if (indentSize < 2) indentSize = 4; // use the cannonical indentation
+    NSMutableString *indentString = [NSMutableString stringWithCapacity: indentSize];
+    for (NSUInteger i=0;i<indentSize;i++) {
+		[indentString appendString: @" "];
+    }
+    for (NSUInteger i=0;i<[lines count];i++) {
+		NSString *line = lines[i];
+		NSInteger col = 0;
+		NSInteger altcol = 0;
+		NSInteger usercol = 0;
+		BOOL isBlank = YES;
+		BOOL isComment = NO;
+		NSUInteger j = 0; // need to keep first NWS character found
+		for (;j<[line length];j++) {
+			unichar c = [line characterAtIndex: j];
+			if (c == ' ') {
+				col++;
+				altcol++;
+				usercol++;
+			} else if (c == '\t') {
+				col = (col/tabsize + 1) * tabsize;
+				altcol = (altcol/alttabsize + 1) * alttabsize;
+				usercol = (usercol/usertabsize + 1) * usercol;
+			} else if (c == '#') {
+				isComment = YES;
+				break;
+			} else {
+				isBlank = NO;
+				break;
+			}
+		}
+		// blank lines don't impact indentation, so need to treat special (Python ignores them)
+		// We indent them like the would appear, but we don't actually change the current indentation level
+		// Comments are similar
+		if (isComment || isBlank) {
+			// need to treat special, since it may be different, but that isn't an error (and instead, we rely on usercol if needed)
+			NSInteger tempIndent = indent;
+			if (col == indstack[indent]) {
+				// it is the same, this is good
+			} else if (col > indstack[indent]) {
+				// we are indented by some amount
+				tempIndent++;
+			} else {
+				// we need to dendent - see how far
+				while (tempIndent > 0 && col < indstack[tempIndent]) {
+					tempIndent--;
+				}
+			}
+			// put in the indent
+			for (int k = 0;k<tempIndent;k++) {
+				[retval appendString: indentString];
+			}
+			if (isComment) {
+				[retval appendString: [line substringFromIndex: j]]; // add the rest of the string
+			}
+			[retval appendString: @"\n"]; // and the end of line
+		} else {
+			if (col == indstack[indent]) {
+				// no change (and we don't worry about inconsistent errors yet)
+			} else if (col > indstack[indent]) {
+				// indent by one
+				indent++;
+				indstack[indent] = col;
+				altindstack[indent] = altcol;
+			} else {
+				// dedent
+				while (indent > 0 && col < indstack[indent]) {
+					indent--;
+				}
+				// if we didn't exactly line up, that should be an error, btw
+			}
+			// put in the indent
+			for (int k = 0;k<indent;k++) {
+				[retval appendString: indentString];
+			}
+			[retval appendString: [line substringFromIndex: j]]; // add the rest of the string
+			[retval appendString: @"\n"]; // and the end of line
+		}
+    }
+    // at this point, all the indentation that was at the start of the line has been cleaned up, but there are still potentially tabs
+    // in the rest of the line
+    return [retval convertTabsFrom: [defaults integerForKey: IDEKit_TabSizeKey] to: indentSize removeTrailing: YES];
+}
+
+@end

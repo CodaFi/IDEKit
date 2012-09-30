@@ -1,0 +1,457 @@
+//
+//  IDEKit_Delegate.mm
+//  IDEKit
+//
+//  Created by Glenn Andreas on Wed Aug 13 2003.
+//  Copyright (c) 2003, 2004 by Glenn Andreas
+//
+//  This library is free software; you can redistribute it and/or
+//  modify it under the terms of the GNU Library General Public
+//  License as published by the Free Software Foundation; either
+//  version 2 of the License, or (at your option) any later version.
+//
+//  This library is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//  Library General Public License for more details.
+//
+//  You should have received a copy of the GNU Library General Public
+//  License along with this library; if not, write to the Free
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+
+#import "IDEKit_Delegate.h"
+#import "IDEKit_PlainTextPlugins.h"
+#import "IDEKit_UserSettings.h"
+#import "IDEKit_SrcEditViewBreakpoints.h"
+#import "IDEKit_UniqueFileIDManager.h"
+#import "IDEKit_SourceFingerprint.h"
+#import <mach-o/dyld.h>
+@implementation IDEKit_Delegate
+
++ (IDEKit_Delegate *) sharedDelegate;
+{
+	static dispatch_once_t pred = 0;
+	__strong static id _sharedObject = nil;
+	dispatch_once(&pred, ^{
+		_sharedObject = [[self alloc] init]; // or some other init method
+	});
+	return _sharedObject;
+}
+
+- (NSString *) appPathName	// @"{App}"
+{
+    return @"{IDE}";
+}
+
+- (NSString *) bundlePathName	// @"{Bundle}"
+{
+    return @"{IDEBundle}";
+}
+
+- (NSString *) sdkPathName	// @"{SDK}"
+{
+    return @"{SDK}";
+}
+
+- (NSString *) sdkLocation	// @"/" - should be defined
+{
+    return @"/";
+}
+
+- (NSString *) toolchainPathName	// @"{Tools}"
+{
+    return @"{Tools}";
+}
+
+- (NSString *) toolchainLocation	// @"/" - should be defined
+{
+    return @"/";
+}
+
+- (NSArray *) predefinedPathsList // return a list of "names" that are in a file popup for relative location bases
+{
+    return @[@"{Project}",
+	[self appPathName],
+	[self toolchainPathName],
+	[self sdkPathName],
+	@"{Home}",
+	@"{BuildDir}"];
+}
+
+- (NSDictionary *) predefinedPathsVars // a dictionary of the default path variables and their values
+{
+    return [NSMutableDictionary dictionaryWithObjectsAndKeys:
+			//[[self POSEPath]stringByDeletingLastPathComponent],@"{POSE}",
+			[self toolchainLocation],[self toolchainPathName],
+			[self sdkLocation],[self sdkPathName],
+			//[[self fileName]stringByDeletingLastPathComponent],@"{Project}",
+			[[NSBundle mainBundle] bundlePath],[self bundlePathName],
+			[[[NSBundle mainBundle] bundlePath]stringByDeletingLastPathComponent],[self appPathName],
+			NSHomeDirectory(),@"{Home}",
+			NULL
+			];
+}
+
+- (NSDictionary *) fileTypeToLanguage // return a dictionary mapping file type to language plug ins
+{
+    /* one might return something like:
+	 return [NSDictionary dictionaryWithObjectsAndKeys:
+	 @"CSourceType", [IDEKit_CLanguage class],
+	 @"CHeaderType", [IDEKit_CPPLanguage class],
+	 @"ObjCSourceType", [IDEKit_ObjectiveCPPLanguage class],
+	 NULL];
+	 where those keys are the document types in the application plist
+	 */
+    return NULL;
+}
+
+- (void) loadPlugIn: (NSBundle *)bundle
+{
+    [bundle load]; // get all the categories found here, if any
+    NSArray *languages = [bundle infoDictionary][@"IDEKit_Languages"];
+    for (NSUInteger i=0;i<[languages count];i++) {
+		NSString *className = languages[i];
+		Class c = [bundle classNamed: className];
+		if (!c) {
+			NSLog(@"Couldn't load class %@ from bundle %@",className,[bundle description]);
+			continue;
+		}
+		NSLog(@"Loaded language plugin %@",c);
+		[IDEKit_GetLanguagePlugIns() addObject: c];
+    }
+}
+
+- (NSArray *) findFilesFromImport: (NSString *) importCommand forLanguage: (IDEKit_LanguagePlugin *) language  flags: (NSInteger)flags
+{
+    return NULL; // can't find it
+}
+
+- (void) loadPlugIns
+{
+    NSArray *plugins = [NSBundle pathsForResourcesOfType: @"plugin" inDirectory: [[NSBundle mainBundle] builtInPlugInsPath]];
+    for (NSUInteger i=0;i<[plugins count];i++) {
+		NSBundle *pluginbundle = [NSBundle bundleWithPath: plugins[i]];
+		[self loadPlugIn: pluginbundle];
+    }
+}
+
+- (Class) languageFromFileName: (NSString *)fileName
+{
+    // depricated
+    return [self languageFromFileName:fileName withContents: NULL];
+}
+- (Class) languageFromFileName: (NSString *)fileName withContents: (NSString *)source
+{
+    NSString *type = [[NSDocumentController sharedDocumentController] typeFromFileExtension: [fileName pathExtension]];
+    if (type) {
+		// look up our mapping
+		NSDictionary *dict = [self fileTypeToLanguage];
+		Class retval = dict[type];
+		if (retval)
+			return retval;
+    }
+    NSEnumerator *languages = [IDEKit_GetLanguagePlugIns() objectEnumerator];
+    id language = NULL;
+    Class retval = NULL;
+    // get the _last_ language that says "yes" under the premise that it is the most specific
+    while ((language = [languages nextObject]) != NULL) {
+		if ([language isYourFile: fileName withContents: source])
+			retval = language;
+    }
+    if (retval)
+		return retval;
+    // otherwise return whaterver we can
+    return [self defaultLanguage];
+}
+
+- (Class) defaultLanguage
+{
+    // if you IDE only does one language, provide it here
+    return [IDEKit_PlainTextLanguage class]; // use something at least OK
+}
+
+- (BOOL) languageSupportDebugging: (IDEKit_LanguagePlugin *) language
+{
+    // if the IDE has a built in debugger, return YES for those languages that this
+    // makes sense for (note that things like plain text files, by default, don't do debugging,
+    // so this is only called if the language plug in claims to be a programming language)
+    return NO;
+}
+
+- (BOOL) languageSupportFolding: (IDEKit_LanguagePlugin *) language
+{
+    // do we enable the experimental folding support? Eventually, this will be moved
+    // to the language plugin itself (since folding isn't a property of the environment like
+    // breakpoints are)
+    return YES; // not brave enough yet
+}
+
+- (NSDictionary *) factoryDefaultUserSettings
+{
+    return IDEKit_DefaultUserSettings();
+}
+
+- (NSDictionary *) appSnippets // return a dictionary of app specific snippets
+{
+    return NULL;
+}
+
+- (NSParagraphStyle *) defaultParagraphStyle
+{
+    NSMutableParagraphStyle *m = [[NSMutableParagraphStyle alloc] init];
+    //[m setFirstLineHeadIndent:100];
+    // make the space between lines that are wrapped be less than between separate (hard) lines
+    // Saddly, these are all 0 by default, unless we tweak line height, which requires the font itself
+    // which we should be able to get (but it would be potentially per-window)
+	
+    [m setHeadIndent: 25.0];
+    [m setFirstLineHeadIndent: 0.0];
+    
+    //[m setLineSpacing: 2.0 /*[m paragraphSpacing] / 2.0*/];
+    //[m setParagraphSpacing: 3.0]; // extra space betweeen the lines, not the wrapped one
+    //NSLog(@"Default paragraph style %@",[m description]);
+    return m;
+}
+
+#pragma mark Customized dropping of files
+
+- (NSString *) directoryListEntryForFile: (NSString *)path
+{
+    // for now, just provide the path
+    return path;
+}
+
+- (NSString *) directoryListEntryForDir: (NSString *)path
+{
+    NSMutableArray *eachFile = [NSMutableArray array];
+    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
+    [eachFile addObject: path];
+    for (NSUInteger i = 0; i < [files count]; i++) {
+		[eachFile addObject: [self directoryListEntryForFile: files[i]]];
+    }
+    return [eachFile componentsJoinedByString: @"\n"];
+}
+
+- (NSString *) representationOfDropFiles: (NSArray *)files forOperation: (NSDragOperation) operation
+{
+    if ([files count] == 0) return @"";
+    if ([files count] == 1) {
+		NSString *filePath = files[0];
+		BOOL isDir;
+		if ([[NSFileManager defaultManager] fileExistsAtPath: filePath isDirectory: &isDir]) {
+			if (isDir) {
+				return [self directoryListEntryForDir: filePath];
+			} else {
+				if (operation == NSDragOperationLink) {
+					return [self directoryListEntryForFile: filePath];
+				} else {
+					return [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+				}
+			}
+		} else {
+			return @""; // file doesn't exist
+		}
+    }
+    NSMutableArray *eachFile = [NSMutableArray array];
+    for (NSUInteger i = 0; i < [files count]; i++) {
+		[eachFile addObject: [self directoryListEntryForFile: files[i]]];
+    }
+    return [eachFile componentsJoinedByString: @"\n"];
+}
+
+// customized breakpoints
+#define kBPCharSize 10.0
+#define kBPLineSize 8.0
+#define kBPOvalSize 8.0
+
+static NSMutableDictionary *gCustomBreakpointImages = NULL;
+- (void) drawBreakpointChar: (unichar) c x: (float) midx y: (float) midy color: (NSColor *)color;
+{
+    NSString *str = [NSString stringWithCharacters: &c length:1];
+    NSRect bounds = NSMakeRect(midx - kBPCharSize / 2.0,midy - kBPCharSize/2.0,kBPCharSize,kBPCharSize);
+    [str drawInRect:bounds withAttributes:@{NSForegroundColorAttributeName: color}];
+}
+
+- (void) drawBreakpointKind: (NSInteger) kind x: (float) midx y: (float) midy
+{
+    NSImage *image = gCustomBreakpointImages[@(kind)];
+    if (image) {
+		NSSize size = [image size];
+		NSRect srcRect = NSZeroRect;
+		srcRect.size = size;
+		NSRect dstRect = srcRect;
+		dstRect.origin = NSMakePoint(midx - size.width / 2.0, midy - size.height / 2.0);
+		[image drawInRect:dstRect fromRect:srcRect operation:NSCompositeCopy fraction:1.0];
+    } else {
+		NSColor  *frameColor = (kind & IDEKit_kDisabledBreakpointFlag) ? [NSColor grayColor] : [NSColor blackColor];
+		switch (kind & IDEKit_kBreakPointKindMask) {
+			case IDEKit_kNoBreakPoint:
+				[[NSColor lightGrayColor] set];
+				[NSBezierPath strokeLineFromPoint: NSMakePoint(midx - kBPLineSize / 2.0,midy) toPoint: NSMakePoint(midx + kBPLineSize/2.0,midy)];
+				break;
+			case IDEKit_kBreakPoint: {
+				if (kind & IDEKit_kDisabledBreakpointFlag)
+					[frameColor set];
+				else
+					[[NSColor redColor] set];
+				NSBezierPath* oval = [NSBezierPath bezierPathWithOvalInRect: NSMakeRect(midx - kBPOvalSize / 2.0,midy - kBPOvalSize/2.0,kBPOvalSize,kBPOvalSize)];
+				[oval fill];
+				[frameColor set];
+				[oval stroke];
+				break;
+			}
+			case IDEKit_kBreakPointNotPossible:
+				[[NSColor grayColor] set];
+				[NSBezierPath strokeLineFromPoint: NSMakePoint(midx - 1.0,midy) toPoint: NSMakePoint(midx + 1.0,midy)];
+				break; // don't draw anything there - no possible breakpoint
+			case IDEKit_kBeyondBreakPoint:
+				break;
+			case IDEKit_kBreakPointTracePoint:  {
+				if (kind & IDEKit_kDisabledBreakpointFlag)
+					[frameColor set];
+				else
+					[[NSColor greenColor] set];
+#ifdef nomore
+				[NSBezierPath fillRect:NSMakeRect(midx - kBPOvalSize / 2.0,midy - kBPOvalSize/2.0,kBPOvalSize,kBPOvalSize)];
+				[frameColor set];
+				[NSBezierPath strokeRect:NSMakeRect(midx - kBPOvalSize / 2.0,midy - kBPOvalSize/2.0,kBPOvalSize,kBPOvalSize)];
+				[NSBezierPath strokeLineFromPoint:NSMakePoint(midx, midy - kBPOvalSize / 2.0 + 0.5) toPoint:NSMakePoint(midx, midy + kBPOvalSize / 2.0 - 0.5)];
+				[NSBezierPath strokeLineFromPoint:NSMakePoint(midx - kBPOvalSize / 2.0 + 0.5, midy) toPoint:NSMakePoint(midx + kBPOvalSize / 2.0 - 0.5, midy)];
+#else
+				NSBezierPath *path = [[NSBezierPath alloc] init];
+				[path moveToPoint:NSMakePoint(midx, midy - kBPOvalSize/2.0)];
+				[path lineToPoint:NSMakePoint(midx + kBPOvalSize/2.0, midy)];
+				[path lineToPoint:NSMakePoint(midx, midy + kBPOvalSize/2.0)];
+				[path lineToPoint:NSMakePoint(midx - kBPOvalSize/2.0, midy)];
+				[path lineToPoint:NSMakePoint(midx, midy - kBPOvalSize/2.0)];
+				[path closePath];
+				[path fill];
+				[frameColor set];
+				[path stroke];
+#endif
+				break;
+			}
+			case IDEKit_kBreakPointPause: {
+				if (kind & IDEKit_kDisabledBreakpointFlag)
+					[frameColor set];
+				else
+					[[NSColor cyanColor] set];
+				NSRect bounds1 = NSMakeRect(midx - kBPOvalSize / 2.0, midy - kBPOvalSize / 2.0, kBPOvalSize / 3.0, kBPOvalSize);
+				NSRect bounds2 = NSMakeRect(midx + kBPOvalSize / 2.0 - kBPOvalSize/ 3.0, midy - kBPOvalSize / 2.0, kBPOvalSize / 3.0, kBPOvalSize);
+				[NSBezierPath fillRect:bounds1];
+				[NSBezierPath fillRect:bounds2];
+				[frameColor set];
+				[NSBezierPath strokeRect:bounds1];
+				[NSBezierPath strokeRect:bounds2];
+				break;
+			}
+			case IDEKit_kBreakPointConditional: {
+				if (kind & IDEKit_kDisabledBreakpointFlag)
+					[frameColor set];
+				else
+					[[NSColor yellowColor] set];
+				NSRect bounds = NSMakeRect(midx - kBPOvalSize / 2.0, midy - kBPOvalSize / 4.0, kBPOvalSize, kBPOvalSize / 2.0);
+				[NSBezierPath fillRect:bounds];
+				[frameColor set];
+				[NSBezierPath strokeRect:bounds];
+				break;
+			}
+			case IDEKit_kBreakPointSoundPoint: {// play a sound and continue
+				if (kind & IDEKit_kDisabledBreakpointFlag)
+					[frameColor set];
+				else
+					[[NSColor magentaColor] set];
+				NSBezierPath *path = [[NSBezierPath alloc] init];
+				[path moveToPoint:NSMakePoint(midx + kBPOvalSize/2.0 - kBPOvalSize/6.0, midy - kBPOvalSize/2.0)];
+				[path lineToPoint:NSMakePoint(midx - kBPOvalSize/6.0, midy)];
+				//[path lineToPoint: NSMakePoint(midx + kBPOvalSize / 4.0 - kBPOvalSize/6.0, midy - kBPOvalSize / 4.0)];
+				//[path lineToPoint: NSMakePoint(midx - kBPOvalSize / 2.0 + kBPOvalSize/6.0, midy - kBPOvalSize / 4.0)];
+				//[path lineToPoint: NSMakePoint(midx - kBPOvalSize / 2.0 + kBPOvalSize/6.0, midy + kBPOvalSize / 4.0)];
+				//[path lineToPoint: NSMakePoint(midx + kBPOvalSize / 4.0 - kBPOvalSize/6.0, midy + kBPOvalSize / 4.0)];
+				[path lineToPoint:NSMakePoint(midx + kBPOvalSize/2.0 - kBPOvalSize/6.0, midy + kBPOvalSize/2.0)];
+				//[path lineToPoint:NSMakePoint(midx + kBPOvalSize/2.0 - kBPOvalSize/6.0, midy - kBPOvalSize/2.0)];
+				//[path closePath];
+				[path fill];
+				[frameColor set];
+				
+				[path stroke];
+				// back part is solid
+				NSRect bounds = NSMakeRect(midx - kBPOvalSize / 2.0 + kBPOvalSize/6.0, midy - kBPOvalSize / 4.0, kBPOvalSize / 2.0, kBPOvalSize / 2.0);
+				[NSBezierPath fillRect:bounds];
+				break;
+			}
+			case IDEKit_kBreakPointSkipPoint: {
+				if (kind & IDEKit_kDisabledBreakpointFlag)
+					[frameColor set];
+				else
+					[[NSColor blueColor] set];
+				NSBezierPath *path = [[NSBezierPath alloc] init];
+				[path moveToPoint:NSMakePoint(midx - kBPOvalSize/2.0 + kBPOvalSize/6.0, midy - kBPOvalSize/2.0)];
+				[path lineToPoint:NSMakePoint(midx, midy - kBPOvalSize/6.0)];
+				[path lineToPoint:NSMakePoint(midx + kBPOvalSize/2.0 - kBPOvalSize/6.0, midy - kBPOvalSize/2.0)];
+				[path lineToPoint:NSMakePoint(midx + kBPOvalSize/2.0, midy - kBPOvalSize/2.0 + kBPOvalSize/6.0)];
+				[path lineToPoint:NSMakePoint(midx + kBPOvalSize/6.0, midy)];
+				[path lineToPoint:NSMakePoint(midx + kBPOvalSize/2.0, midy + kBPOvalSize/2.0 - kBPOvalSize/6.0)];
+				[path lineToPoint:NSMakePoint(midx + kBPOvalSize/2.0 - kBPOvalSize/6.0, midy + kBPOvalSize/2.0)];
+				[path lineToPoint:NSMakePoint(midx, midy + kBPOvalSize/6.0)];
+				[path lineToPoint:NSMakePoint(midx - kBPOvalSize/2.0 + kBPOvalSize/6.0, midy + kBPOvalSize/2.0)];
+				[path lineToPoint:NSMakePoint(midx - kBPOvalSize/2.0, midy + kBPOvalSize/2.0 - kBPOvalSize/6.0)];
+				[path lineToPoint:NSMakePoint(midx - kBPOvalSize/6.0, midy)];
+				[path lineToPoint:NSMakePoint(midx - kBPOvalSize/2.0, midy - kBPOvalSize/2.0 + kBPOvalSize/6.0)];
+				[path lineToPoint:NSMakePoint(midx - kBPOvalSize/2.0 + kBPOvalSize/6.0, midy - kBPOvalSize/2.0)];
+				[path closePath];
+				[path fill];
+				[frameColor set];
+				[path stroke];
+				break;
+			}
+			case IDEKit_kBreakpointProgramCounter: {
+				[[NSColor brownColor] set];
+				NSBezierPath *path = [[NSBezierPath alloc] init];
+				[path moveToPoint:NSMakePoint(midx + kBPOvalSize/2.0, midy)];
+				[path lineToPoint:NSMakePoint(midx, midy - kBPOvalSize/2.0)];
+				[path lineToPoint:NSMakePoint(midx - kBPOvalSize/2.0, midy - kBPOvalSize/2.0)];
+				[path lineToPoint:NSMakePoint(midx - kBPOvalSize/2.0, midy + kBPOvalSize/2.0)];
+				[path lineToPoint:NSMakePoint(midx, midy + kBPOvalSize/2.0)];
+				[path lineToPoint:NSMakePoint(midx + kBPOvalSize/2.0, midy)];
+				[path closePath];
+				[path fill];
+				[frameColor set];
+				[path stroke];
+			}
+		}
+    }
+}
+
+- (void) registerCustomBreakpointKind: (NSInteger) kind image: (NSImage *)image // image should be around 8x8 (and definitely not larger than 16x16)
+{
+    if (!gCustomBreakpointImages) gCustomBreakpointImages = [NSMutableDictionary dictionary];
+    gCustomBreakpointImages[@(kind)] = image;
+}
+
+- (NSInteger) breakpointStoragePolicy;
+{
+    return IDEKit_kStoreBreakpointsInApp; // IDEKit_kStoreBreakpointsNone
+}
+// user defaults may not be the best place to store them, but that's why this can
+// be replaced
+- (NSDictionary *) loadApplicationBreakpointsForFile: (IDEKit_UniqueID *)fileID
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat: @"IDEKit_Breakpoints/%@",[fileID stringValue]]];
+}
+
+- (void) saveApplicationStoredBreakpoints: (NSDictionary *) breakpoints forFile: (IDEKit_UniqueID *)fileID
+{
+    if (breakpoints) {
+		[[NSUserDefaults standardUserDefaults] setObject: breakpoints forKey: [NSString stringWithFormat: @"IDEKit_Breakpoints/%@",[fileID stringValue]]];
+		// save the fingerprint when we store the breakpoints
+		NSData *fingerprint = [(IDEKit_SrcEditView *)[fileID representedObjectForKey: @"IDEKit_SrcEditView"] fingerprint];
+		if (fingerprint)
+			[[NSUserDefaults standardUserDefaults] setObject: fingerprint forKey: [NSString stringWithFormat: @"IDEKit_Fingerprint/%@",[fileID stringValue]]];
+    } else {
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey: [NSString stringWithFormat: @"IDEKit_Breakpoints/%@",[fileID stringValue]]];
+    }
+}
+
+@end

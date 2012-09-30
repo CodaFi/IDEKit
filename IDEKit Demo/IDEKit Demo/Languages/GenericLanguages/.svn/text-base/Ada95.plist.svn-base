@@ -1,0 +1,87 @@
+{
+    Name = "Ada";
+    Extensions = ( "ada", "adb", "ads" );
+    CaseSensitive = NO;
+    IdentifierStartChars = "_"; // not really sure about these
+    IdentifierChars = "_";	// not really sure about these
+    String = (
+	( "\"", "\"" )
+    );
+    //Character = (			// don't do character constants since it conflicts with pointer operator
+    //	  ( "'", "'" )
+    //);
+    SingleLineComment = (
+	"--"
+    );
+    Keywords = (
+	"abort",
+	"abs",
+	"abstract",
+	"accept",
+	"access",
+	"aliased",
+	"all",
+	"and",
+	"array",
+	"at",
+	"begin",
+	"body",
+	"case",
+	"constant",
+	"declare",
+	"delay",
+	"delta",
+	"digits",
+	"do",
+	"else",
+	"elsif",
+	"end",
+	"entry",
+	"exception",
+	"exit",
+	"for",
+	"function",
+	"generic",
+	"goto",
+	"if",
+	"in",
+	"is",
+	"limited",
+	"loop",
+	"mod",
+	"new",
+	"not",
+	"null",
+	"of",
+	"or",
+	"others",
+	"out",
+	"package",
+	"pragma",
+	"private",
+	"procedure",
+	"protected",
+	"raise",
+	"range",
+	"record",
+	"rem",
+	"renames",
+	"requeue",
+	"return",
+	"reverse",
+	"select",
+	"separate",
+	"subtype",
+	"tagged",
+	"task",
+	"terminate",
+	"then",
+	"type",
+	"until",
+	"use",
+	"when",
+	"while",
+	"with",
+	"xor"
+    );
+}

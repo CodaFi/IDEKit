@@ -10,6 +10,10 @@ It was designed to work with both 10.2 and 10.3 originally, and was built using 
 
 This version aims to provide stable ARC integration, upgraded Objective-C 2.0 style syntax, and a higher release target (most likely 10.5+).
 
+#Demo
+
+A simple demo is included with this project.  As of yet, it does not support completion or syntax highlighting (TBI at a later date), however it does show the simplicity of the framework itself.  
+
 #Notes
 This is not a 1.0 release (there are both bugs as well as missing features), but is still quite usable as is.
 

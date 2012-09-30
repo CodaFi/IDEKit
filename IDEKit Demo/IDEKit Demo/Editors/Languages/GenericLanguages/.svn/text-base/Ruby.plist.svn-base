@@ -1,0 +1,66 @@
+{
+    Name = "Ruby";
+    Extensions = ( "rb" );
+    CaseSensitive = NO;
+    UnicodeSymbols = NO;
+    String = (
+	( "\"", "\"" )
+    );
+    EscapeCharacter = "\\";
+    SingleLineComment = (
+	"#"
+    );
+    Character = (
+	( "'", "'" )
+    );
+    IdentifierStartChars = "_";
+    IdentifierChars = "_";
+    Keywords = (
+	"BEGIN",
+	"END",
+	"alias",
+	"and",
+	"begin",
+	"break",
+	"case",
+	"class",
+	"def",
+	"defined",
+	"do",
+	"else",
+	"elsif",
+	"end",
+	"ensure",
+	"for",
+	"if",
+	"in",
+	"module",
+	"next",
+	"nil",
+	"or",
+	"redo",
+	"rescue",
+	"retry",
+	"return",
+	"then",
+	"undef",
+	"unless",
+	"until",
+	"when",
+	"while",
+	"yeild",
+    );
+    AltKeywords = (
+	"require",
+	"include",
+	"short",
+	"void",
+	"not",
+	"super",
+	"self",
+	"false",
+	"true",
+	"__FILE__",
+	"__LINE__",
+    );
+}
