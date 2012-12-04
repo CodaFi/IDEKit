@@ -8,7 +8,15 @@ It was designed to work with both 10.2 and 10.3 originally, and was built using 
 
 #What's New
 
-This version provides stable ARC integration, upgraded Objective-C 2.0 style syntax, and a higher release target (most likely 10.5+).
+This version provides stable ARC integration, upgraded Objective-C 2.0 style syntax, and a higher release target (most likely 10.5+).  I'd also like to keep development of the active and involved.  
+
+#Contributing
+
+We will gladly accept Pull Requests that meet one of the following criteria:
+
+1. It fixes something that is already in IDEKit.  This might be a bug, or something that doesn't work as expected.
+2. It's something so basic or important that IDEKit really should have it.
+3. Documentation!
 
 #Demo
 
