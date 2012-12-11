@@ -174,6 +174,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8462FE8D161FBAEE005449C4 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		8469FC521616C1CD002AFC0D /* IDEKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IDEKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8469FC551616C1CD002AFC0D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8469FC581616C1CD002AFC0D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -344,6 +345,7 @@
 		8469FDD01616CFA3002AFC0D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8469FDD21616DCAF002AFC0D /* libobjc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjc.dylib; path = usr/lib/libobjc.dylib; sourceTree = SDKROOT; };
 		8469FDD916177237002AFC0D /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
+		8481D087165DD015004FA6B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,6 +389,8 @@
 				8469FDD01616CFA3002AFC0D /* QuartzCore.framework */,
 				8469FDCE1616C832002AFC0D /* libobjc.A.dylib */,
 				8469FC551616C1CD002AFC0D /* Cocoa.framework */,
+				8462FE8D161FBAEE005449C4 /* CoreFoundation.framework */,
+				8481D087165DD015004FA6B5 /* Foundation.framework */,
 				8469FC571616C1CD002AFC0D /* Other Frameworks */,
 			);
 			name = Frameworks;

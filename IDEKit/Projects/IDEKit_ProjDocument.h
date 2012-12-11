@@ -9,12 +9,12 @@
 //  modify it under the terms of the GNU Library General Public
 //  License as published by the Free Software Foundation; either
 //  version 2 of the License, or (at your option) any later version.
-//  
+//
 //  This library is distributed in the hope that it will be useful,
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //  Library General Public License for more details.
-//  
+//
 //  You should have received a copy of the GNU Library General Public
 //  License along with this library; if not, write to the Free
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -55,30 +55,30 @@ enum {
     NSMutableDictionary *myRootGroup;	// an array of objects/arrays for the groups
     NSMutableArray *myTargetList;	// all targets in the project
     NSMutableDictionary *myCurrentTarget;	// all targets in the project
-					  // these items are non-critical, and wouldn't be checked in (since they are regenerated with
-       // the build, or otherwise transitory).  They are stored in separate files, and, if project
-       // dependant, are stored in the that target directory.  These files aren't versioned, but rather
-       // if their version changes we wipe them and schedule the target for re-building
+											// these items are non-critical, and wouldn't be checked in (since they are regenerated with
+											// the build, or otherwise transitory).  They are stored in separate files, and, if project
+											// dependant, are stored in the that target directory.  These files aren't versioned, but rather
+											// if their version changes we wipe them and schedule the target for re-building
     NSMutableDictionary *myTargetDepends;	// what are the depedancies for files->headers for this project
     NSMutableDictionary *myTargetBrowser;	// symbols, etc for current target
-//    ETagsFile *myTargetTags;	// etags format for target, works with  browser
+											//    ETagsFile *myTargetTags;	// etags format for target, works with  browser
     NSMutableArray *myTargetBreakpoints;	// breakpoint for current target
-
+	
     // and these are for our UI, etc...
-
+	
     IBOutlet NSOutlineView *myOutlineView;
     IBOutlet NSOutlineView *myLinkOrderView;
     IBOutlet NSOutlineView *myTargetsView;
     IBOutlet NSTabView *myTabView;
     IBOutlet id myTargetPopup;
     id myPrivateDrag;
-
+	
     id myEdittedSettings;
-
+	
     IBOutlet id myNewTargetSheet;
     IBOutlet id myNewTargetName;
     IBOutlet id myNewTargetClone;
-
+	
     IBOutlet id myFileEntryCMenu;
 }
 
@@ -108,7 +108,7 @@ enum {
 - (BOOL) canAddFileToProject: (NSString *)filePath; // can this specific file be added?
 - (BOOL) projectEntryIsLinked: (NSDictionary *)entry; // is this project entry shown in "link order"?
 - (NSMutableDictionary *)defaultTargetDefaults; // provide default defaults for the target
-// possible attributes values include the identifiers of columns such as "CodeSize" or "DataSize" or other custom columns
+												// possible attributes values include the identifiers of columns such as "CodeSize" or "DataSize" or other custom columns
 - (id) projectListColumnAttributeValue: (NSString *)attribute forEntry: (NSDictionary *)entry proto: (id) cell;
 - (id) projectListColumnAttributeProto: (NSString *)attribute forEntry: (NSDictionary *)entry; // to change the cell shown there
 - (void) projectListColumnSetValue: (id) value forAttribute: (NSString *)attribute forEntry: (NSDictionary *)entry; // to change the cell shown there
